@@ -334,20 +334,27 @@ function renderQuiz() {
         <div class="qt">${q.q}</div>
         <div class="opts">
           ${shuffledOpts.map((x, i) =>
-    `<button class="opt" id="o${i}" onclick="checkAns(${i},${newCorrect},'${encodeURIComponent(q.ex)}','${encodeURIComponent(shuffledOpts[newCorrect].o)}')">${x.o}</button>`
+    `<button class="opt" id="o${i}" data-idx="${i}" data-correct="${newCorrect}" data-ex="${encodeURIComponent(q.ex)}" data-ans="${encodeURIComponent(shuffledOpts[newCorrect].o)}">${x.o}</button>`
   ).join("")}
         </div>
         <div class="fb" id="fb"></div>
         <button class="nxt" id="nxt" onclick="nextQ()">${qIdx < shuffledQuiz.length - 1 ? "Sonraki soru →" : "Sonuçları gör →"}</button>
       </div>
     </div>`;
+  document.querySelectorAll('.opt').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const idx = parseInt(this.dataset.idx);
+      const correct = parseInt(this.dataset.correct);
+      const ex = decodeURIComponent(this.dataset.ex);
+      const ans = decodeURIComponent(this.dataset.ans);
+      checkAns(idx, correct, ex, ans);
+    });
+  });
 }
 
-function checkAns(idx, correct, exEnc, ansEnc) {
+function checkAns(idx, correct, ex, ans) {
   if (answered) return;
   answered = true;
-  const ex = decodeURIComponent(exEnc);
-  const ans = decodeURIComponent(ansEnc);
   document.querySelectorAll(".opt").forEach((b, i) => {
     if (i === correct) b.classList.add("reveal");
     else if (i === idx && idx !== correct) b.classList.add("wrong");
@@ -357,12 +364,14 @@ function checkAns(idx, correct, exEnc, ansEnc) {
     score++;
     document.getElementById("sc").textContent = score;
     fb.className = "fb show ok";
-    fb.innerHTML = ex + `<br><button class="sbtn" style="margin-top:6px" onclick="speak(${JSON.stringify(ans)})">🔊 Dinle</button>`;
+    fb.innerHTML = ex + `<br><button class="sbtn" style="margin-top:6px" id="speak-ans">🔊 Dinle</button>`;
   } else {
     fb.className = "fb show no";
-    fb.innerHTML = `✗ Doğru cevap: <strong>${ans}</strong><br>${ex}<br><button class="sbtn" style="margin-top:6px" onclick="speak(${JSON.stringify(ans)})">🔊 Dinle</button>`;
+    fb.innerHTML = `✗ Doğru cevap: <strong>${ans}</strong><br>${ex}<br><button class="sbtn" style="margin-top:6px" id="speak-ans">🔊 Dinle</button>`;
   }
   document.getElementById("nxt").classList.add("show");
+  const speakBtn = document.getElementById("speak-ans");
+  if (speakBtn) speakBtn.addEventListener("click", () => speak(ans));
 }
 
 function nextQ() { qIdx++; renderQuiz(); }
