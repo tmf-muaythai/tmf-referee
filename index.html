@@ -3,22 +3,34 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IFMA Muaythai – Hakem İngilizcesi</title>
+<title>TMF Muaythai – Hakem İngilizcesi Eğitim Modülü</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f5;color:#1a1a1a}
-.top-bar{background:#185FA5;color:#fff;padding:14px 16px;position:sticky;top:0;z-index:100}
-.top-bar h1{font-size:15px;font-weight:600}
-.top-bar p{font-size:11px;opacity:.8;margin-top:2px}
-.day-nav{display:flex;gap:6px;overflow-x:auto;padding:10px 12px;background:#fff;border-bottom:1px solid #e5e5e5;scrollbar-width:none}
-.day-nav::-webkit-scrollbar{display:none}
-.day-btn{padding:7px 14px;font-size:12px;white-space:nowrap;border:1.5px solid #185FA5;border-radius:20px;background:#fff;color:#185FA5;cursor:pointer;font-weight:500;flex-shrink:0}
-.day-btn.active{background:#185FA5;color:#fff}
-.sec-nav{display:flex;gap:5px;overflow-x:auto;padding:8px 12px;background:#f0f4f9;border-bottom:1px solid #e5e5e5;scrollbar-width:none}
-.sec-nav::-webkit-scrollbar{display:none}
-.sec-btn{padding:5px 11px;font-size:11px;white-space:nowrap;border:1px solid #c5d5e8;border-radius:20px;background:#fff;color:#444;cursor:pointer;flex-shrink:0}
-.sec-btn.active{background:#185FA5;border-color:#185FA5;color:#fff;font-weight:500}
-.content{padding:12px;max-width:600px;margin:0 auto}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f0f4f9;color:#1a1a1a;min-height:100vh;display:flex;flex-direction:column}
+
+/* TOP HEADER */
+.top-bar{background:#185FA5;color:#fff;padding:16px 12px 0;text-align:center}
+.top-bar h1{font-size:15px;font-weight:700;line-height:1.4;letter-spacing:0.01em}
+.top-bar p{font-size:11px;opacity:.75;margin-top:3px;padding-bottom:12px}
+
+/* MAIN DAY TABS - centered */
+.day-nav{display:flex;justify-content:center;gap:10px;padding:12px 16px;background:#185FA5;border-top:1px solid rgba(255,255,255,0.2)}
+.day-btn{padding:9px 24px;font-size:13px;font-weight:600;border:2px solid rgba(255,255,255,0.7);border-radius:22px;background:transparent;color:#fff;cursor:pointer;transition:all .2s;flex-shrink:0}
+.day-btn.active{background:#fff;color:#185FA5;border-color:#fff}
+
+/* DAY2 MAIN TABS - 5 ana sekme */
+.main-sec-nav{display:flex;justify-content:center;gap:6px;padding:10px 12px;background:#e8f0fb;border-bottom:1px solid #ccddf0;flex-wrap:wrap}
+.main-sec-btn{padding:7px 14px;font-size:12px;font-weight:600;border:1.5px solid #185FA5;border-radius:16px;background:#fff;color:#185FA5;cursor:pointer;transition:all .15s}
+.main-sec-btn.active{background:#185FA5;color:#fff}
+
+/* SUB SECTION NAV - 2 column grid */
+.sec-nav{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:10px 12px;background:#fff;border-bottom:1px solid #e0e8f0}
+.sec-btn{padding:8px 10px;font-size:11px;text-align:center;border:1px solid #c5d5e8;border-radius:8px;background:#f8fafc;color:#444;cursor:pointer;line-height:1.3;transition:all .15s}
+.sec-btn.active{background:#185FA5;border-color:#185FA5;color:#fff;font-weight:600}
+
+.content{padding:12px;max-width:600px;margin:0 auto;width:100%;flex:1}
+
+/* PHRASE CARDS */
 .phrase-card{background:#fff;border:1px solid #e8e8e8;border-radius:12px;padding:13px 14px;margin-bottom:8px}
 .p-en{font-size:14px;font-weight:600;color:#1a1a1a;line-height:1.45;margin-bottom:3px}
 .p-alt{font-size:12px;color:#185FA5;font-style:italic;margin-bottom:3px}
@@ -28,8 +40,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .sbtn{display:flex;align-items:center;gap:4px;padding:5px 11px;font-size:11px;border:1px solid #ddd;border-radius:8px;background:#f8f8f8;color:#333;cursor:pointer;font-weight:500}
 .sbtn:active{background:#e8e8e8}
 .sbtn-alt{display:flex;align-items:center;gap:4px;padding:5px 11px;font-size:11px;border:1px solid #c5d5e8;border-radius:8px;background:#f0f4f9;color:#185FA5;cursor:pointer}
-.sbtn-alt:active{background:#dce8f5}
-.sec-label{font-size:10px;padding:3px 8px;border-radius:20px;background:#e8f0fb;color:#0c447c;font-weight:500}
+
+/* QUIZ */
 .q-bar{display:flex;gap:6px;align-items:center;margin-bottom:10px}
 .q-pill{padding:4px 10px;font-size:11px;border-radius:20px;background:#fff;color:#555;border:1px solid #ddd;font-weight:500}
 .q-pill b{color:#185FA5}
@@ -57,41 +69,93 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .done-pct{font-size:48px;font-weight:700;color:#185FA5}
 .done-sub{font-size:14px;color:#555;margin:.5rem 0 1.5rem;line-height:1.6}
 .rbtn{padding:10px 24px;font-size:14px;font-weight:600;border:none;border-radius:9px;background:#185FA5;color:#fff;cursor:pointer}
-.rbtn:active{background:#0f4a8a}
+.empty-msg{padding:2rem;text-align:center;color:#888;font-size:13px;background:#fff;border-radius:12px;border:1px solid #e8e8e8}
+
+/* FOOTER */
+.footer{text-align:center;padding:16px 12px;font-size:11px;color:#888;background:#fff;border-top:1px solid #e8e8e8;margin-top:12px}
+.footer a{color:#185FA5;text-decoration:none}
+.footer a:hover{text-decoration:underline}
 </style>
 </head>
 <body>
 
 <div class="top-bar">
-  <h1>🥊 IFMA Muaythai – Hakem İngilizcesi</h1>
-  <p>Görev İngilizcesi Eğitim Modülü</p>
+  <h1>TMF Muaythai – Hakem İngilizcesi Eğitim Modülü</h1>
+  <p>Görev İngilizcesi · Referee English Training</p>
 </div>
-
 <div class="day-nav" id="day-nav"></div>
+<div id="day2-main-nav"></div>
 <div class="sec-nav" id="sec-nav"></div>
 <div class="content" id="content"></div>
 
+<div class="footer">
+  Designed &amp; Developed by <strong>Afra UZ</strong><br>
+  For feedback and suggestions: <a href="mailto:afrauz@outlook.com">afrauz@outlook.com</a>
+</div>
+
 <script>
 const DAYS = [
-  { id: "day1", label: "📋 Kayıt ve Tartı Günü" },
-  { id: "day2", label: "🥊 Müsabaka Alanı" }
+  { id: "day1", label: "Tartı ve Kayıt" },
+  { id: "day2", label: "Müsabaka Alanı" }
 ];
 
-const SECTIONS = {
-  day2: [],
-  day1: [
-    { id: "kayit",   label: "Kayıt & Belge" },
-    { id: "cagirma", label: "Tartıya Çağırma" },
-    { id: "kimlik",  label: "Kimlik & Belge" },
-    { id: "giyim",   label: "Giyim & Hazırlık" },
-    { id: "tartim",  label: "Tartım" },
-    { id: "sonuc",   label: "Tartı Sonucu" },
-    { id: "sistem",  label: "Sistemsel Sorunlar" },
-    { id: "baskul",  label: "Baskül Sorunları" },
-    { id: "rapor",   label: "Tartı Sonu Raporu" },
-    { id: "sosyal",  label: "Sosyal İletişim" },
-    { id: "senaryo", label: "▶ Senaryo Pratiği" },
-  ]
+// Day1 sections
+const DAY1_SECTIONS = [
+  { id: "kayit",   label: "Kayıt & Belge (Registration)" },
+  { id: "cagirma", label: "Tartıya Çağırma (Weigh-In Call)" },
+  { id: "kimlik",  label: "Kimlik & Belge (ID & Documents)" },
+  { id: "giyim",   label: "Giyim & Hazırlık (Clothing)" },
+  { id: "tartim",  label: "Tartım (Weighing)" },
+  { id: "sonuc",   label: "Tartı Sonucu (Result)" },
+  { id: "sistem",  label: "Sistemsel Sorunlar (System)" },
+  { id: "baskul",  label: "Baskül Sorunları (Scale)" },
+  { id: "rapor",   label: "Tartı Sonu Raporu (Report)" },
+  { id: "sosyal",  label: "Sosyal İletişim (Social)" },
+  { id: "senaryo", label: "▶ Senaryo Pratiği" },
+];
+
+// Day2 main tabs
+const DAY2_MAIN = [
+  { id: "jury",      label: "Jury" },
+  { id: "equipment", label: "Equipment" },
+  { id: "referee",   label: "Referee" },
+  { id: "judge",     label: "Judge" },
+  { id: "timekeeper",label: "Timekeeper" },
+  { id: "announcer", label: "Announcer" },
+  { id: "d2_senaryo",label: "▶ Scenario" },
+];
+
+// Day2 sub-sections per main tab
+const DAY2_SUBS = {
+  jury: [
+    { id: "d2_juri_rap", label: "Raporlama (Reporting)" },
+    { id: "d2_juri_diy", label: "Genel İletişim (Communication)" },
+    { id: "d2_juri_gov", label: "Görevlendirme (Assignment)" },
+    { id: "d2_hakem",    label: "Hakem Sağlık (Referee Health)" },
+    { id: "d2_ring",     label: "Ring" },
+  ],
+  equipment: [
+    { id: "d2_ekipman", label: "Ekipman Kontrolü (Equipment Check)" },
+    { id: "d2_kose",    label: "Köşe Görevlisi (Second)" },
+  ],
+  referee: [
+    { id: "d2_orta",   label: "Komutlar (Referee Commands)" },
+    { id: "d2_uyari",  label: "Uyarılar (Cautions)" },
+    { id: "d2_ceza",   label: "Cezalar (Warnings)" },
+    { id: "d2_karar",  label: "Kararlar (Decisions)" },
+    { id: "d2_doktor", label: "Doktor (Doctor)" },
+    { id: "d2_tayca",  label: "Tayca Sayma (Thai Count)" },
+  ],
+  judge: [
+    { id: "d2_yan",  label: "Yan Hakem (Judge)" },
+    { id: "d2_skor", label: "Skorlama (Scoring System)" },
+  ],
+  timekeeper: [
+    { id: "d2_zaman", label: "Zaman Hakemi (Timekeeper)" },
+  ],
+  announcer: [
+    { id: "d2_anons", label: "Anons Hakemi (Announcer)" },
+  ],
 };
 
 const PHRASES = {
@@ -237,6 +301,7 @@ const QUIZ = [
 
 let curDay = "day1";
 let curSec = "kayit";
+let curDay2Main = "jury";
 let qIdx = 0;
 let score = 0;
 let answered = false;
@@ -267,27 +332,77 @@ function buildDayNav() {
   ).join("");
 }
 
-function buildSecNav() {
+function buildDay1SecNav() {
   const nav = document.getElementById("sec-nav");
-  nav.innerHTML = (SECTIONS[curDay] || []).map(s =>
+  nav.style.display = "grid";
+  nav.innerHTML = DAY1_SECTIONS.map(s =>
+    `<button class="sec-btn${s.id === curSec ? " active" : ""}" onclick="switchSec('${s.id}')">${s.label}</button>`
+  ).join("");
+}
+
+function buildDay2MainNav() {
+  const nav = document.getElementById("day2-main-nav");
+  nav.innerHTML = `<div class="main-sec-nav">${DAY2_MAIN.map(m =>
+    `<button class="main-sec-btn${m.id === curDay2Main ? " active" : ""}" onclick="switchDay2Main('${m.id}')">${m.label}</button>`
+  ).join("")}</div>`;
+}
+
+function buildDay2SubNav() {
+  const nav = document.getElementById("sec-nav");
+  if (curDay2Main === "d2_senaryo") {
+    nav.style.display = "none";
+    return;
+  }
+  const subs = DAY2_SUBS[curDay2Main] || [];
+  nav.style.display = "grid";
+  nav.innerHTML = subs.map(s =>
     `<button class="sec-btn${s.id === curSec ? " active" : ""}" onclick="switchSec('${s.id}')">${s.label}</button>`
   ).join("");
 }
 
 function switchDay(id) {
   curDay = id;
-  curSec = SECTIONS[id][0].id;
   shuffledQuiz = [];
   score = 0;
   qIdx = 0;
+  document.getElementById("day2-main-nav").innerHTML = "";
+  if (id === "day1") {
+    curSec = "kayit";
+    buildDay1SecNav();
+  } else {
+    curDay2Main = "jury";
+    const jurySubs = DAY2_SUBS["jury"];
+    curSec = jurySubs[0].id;
+    buildDay2MainNav();
+    buildDay2SubNav();
+  }
   buildDayNav();
-  buildSecNav();
+  render();
+}
+
+function switchDay2Main(id) {
+  curDay2Main = id;
+  shuffledQuiz = [];
+  score = 0;
+  qIdx = 0;
+  if (id === "d2_senaryo") {
+    curSec = "d2_senaryo";
+  } else {
+    const subs = DAY2_SUBS[id] || [];
+    curSec = subs.length > 0 ? subs[0].id : "";
+  }
+  buildDay2MainNav();
+  buildDay2SubNav();
   render();
 }
 
 function switchSec(id) {
   curSec = id;
-  buildSecNav();
+  if (curDay === "day1") {
+    buildDay1SecNav();
+  } else {
+    buildDay2SubNav();
+  }
   render();
 }
 
@@ -300,34 +415,37 @@ function render() {
 }
 
 function renderPhrases() {
-  const allPhrases = Object.assign({}, PHRASES, (typeof DAY2_PHRASES !== "undefined" ? DAY2_PHRASES : {}));
+  const allPhrases = Object.assign({}, PHRASES, (typeof window.DAY2_PHRASES !== "undefined" ? window.DAY2_PHRASES : {}));
   const list = allPhrases[curSec] || [];
   const c = document.getElementById("content");
+  if (!list.length) {
+    c.innerHTML = `<div class="empty-msg">Bu bölüm yakında eklenecek. 🔜</div>`;
+    return;
+  }
   c.innerHTML = list.map(p => `
     <div class="phrase-card">
       <div class="p-en">${p.en}</div>
       ${p.alt && p.alt !== p.en ? `<div class="p-alt">↳ Kısa: ${p.alt}</div>` : ""}
-      <div class="p-ph">${p.ph}</div>
+      <div class="p-ph">${p.ph || (p.phs ? "Kısa: " + p.phs : "")}</div>
       <div class="p-tr">${p.tr}</div>
       <div class="btn-row">
         <button class="sbtn" onclick="speak(${JSON.stringify(p.en)})">🔊 Tam</button>
         ${p.alt && p.alt !== p.en ? `<button class="sbtn-alt" onclick="speak(${JSON.stringify(p.alt)})">🔊 Kısa</button>` : ""}
       </div>
-    </div>
-  `).join("");
+    </div>`).join("");
 }
 
 function renderQuiz() {
   const c = document.getElementById("content");
-  const activeQuiz = (curDay === "day2" && typeof DAY2_QUIZ !== "undefined") ? DAY2_QUIZ : QUIZ;
+  const activeQuiz = (curDay === "day2" && typeof window.DAY2_QUIZ !== "undefined") ? window.DAY2_QUIZ : QUIZ;
   if (shuffledQuiz.length === 0) shuffledQuiz = shuffle(activeQuiz);
   if (qIdx >= shuffledQuiz.length) { showDone(); return; }
 
   const q = shuffledQuiz[qIdx];
   const shuffledOpts = shuffle(q.opts.map((o, i) => ({ o, orig: i })));
   const newCorrect = shuffledOpts.findIndex(x => x.orig === q.c);
-
   answered = false;
+
   c.innerHTML = `
     <div class="q-bar">
       <div class="q-pill">Skor: <b id="sc">${score}</b></div>
@@ -348,13 +466,11 @@ function renderQuiz() {
         <button class="nxt" id="nxt" onclick="nextQ()">${qIdx < shuffledQuiz.length - 1 ? "Sonraki soru →" : "Sonuçları gör →"}</button>
       </div>
     </div>`;
-  document.querySelectorAll('.opt').forEach(btn => {
-    btn.addEventListener('click', function() {
-      const idx = parseInt(this.dataset.idx);
-      const correct = parseInt(this.dataset.correct);
-      const ex = decodeURIComponent(this.dataset.ex);
-      const ans = decodeURIComponent(this.dataset.ans);
-      checkAns(idx, correct, ex, ans);
+
+  document.querySelectorAll(".opt").forEach(btn => {
+    btn.addEventListener("click", function() {
+      checkAns(parseInt(this.dataset.idx), parseInt(this.dataset.correct),
+        decodeURIComponent(this.dataset.ex), decodeURIComponent(this.dataset.ans));
     });
   });
 }
@@ -374,11 +490,11 @@ function checkAns(idx, correct, ex, ans) {
     fb.innerHTML = ex + `<br><button class="sbtn" style="margin-top:6px" id="speak-ans">🔊 Dinle</button>`;
   } else {
     fb.className = "fb show no";
-    fb.innerHTML = `✗ Doğru cevap: <strong>${ans}</strong><br>${ex}<br><button class="sbtn" style="margin-top:6px" id="speak-ans">🔊 Dinle</button>`;
+    fb.innerHTML = `✗ Doğru: <strong>${ans}</strong><br>${ex}<br><button class="sbtn" style="margin-top:6px" id="speak-ans">🔊 Dinle</button>`;
   }
   document.getElementById("nxt").classList.add("show");
-  const speakBtn = document.getElementById("speak-ans");
-  if (speakBtn) speakBtn.addEventListener("click", () => speak(ans));
+  const sb = document.getElementById("speak-ans");
+  if (sb) sb.addEventListener("click", () => speak(ans));
 }
 
 function nextQ() { qIdx++; renderQuiz(); }
@@ -389,7 +505,7 @@ function showDone() {
     <div class="done-box">
       <div class="done-pct">${pct}%</div>
       <div class="done-sub">${shuffledQuiz.length} sorudan <strong>${score}</strong> doğru.<br>
-      ${pct >= 80 ? "🏆 Harika! Sahaya hazırsın." : pct >= 60 ? "👍 İyi gidiyor — bir kez daha dene." : "📚 Cümleler bölümünü tekrar çalış ve yeniden dene."}</div>
+      ${pct >= 80 ? "🏆 Harika! Sahaya hazırsın." : pct >= 60 ? "👍 İyi gidiyor — bir kez daha dene." : "📚 Cümleleri tekrar çalış ve yeniden dene."}</div>
       <button class="rbtn" onclick="restartQuiz()">↺ Tekrar Başla</button>
     </div>`;
 }
@@ -400,10 +516,12 @@ function restartQuiz() { qIdx = 0; score = 0; shuffledQuiz = []; renderQuiz(); }
 <script src="day2.js"></script>
 <script>
 if (typeof window.DAY2_SECTIONS !== "undefined") {
-  SECTIONS["day2"] = window.DAY2_SECTIONS;
+  // day2 data loaded via day2.js
 }
 buildDayNav();
-buildSecNav();
+// Start on day1
+curSec = "kayit";
+buildDay1SecNav();
 render();
 </script>
 </body>
