@@ -392,7 +392,12 @@ function renderPhrases() {
 
 function renderQuiz() {
   const c = document.getElementById("content");
-  const activeQuiz = (curDay === "day2" && window.DAY2_QUIZ) ? window.DAY2_QUIZ : QUIZ;
+  // Section-specific quiz selection
+  let activeQuiz = QUIZ;
+  if (curDay === "day2") {
+    if (curSec === "d2_senaryo_jury" && window.QUIZ_JURY) activeQuiz = window.QUIZ_JURY;
+    else if (window.DAY2_QUIZ) activeQuiz = window.DAY2_QUIZ;
+  }
   if (!shuffledQuiz.length) shuffledQuiz = shuffle(activeQuiz);
   if (qIdx >= shuffledQuiz.length) { showDone(); return; }
 
