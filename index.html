@@ -58,7 +58,7 @@ body{
 .p-alt{font-size:12px;color:#185FA5;font-style:italic;margin-bottom:3px}
 .p-ph{font-size:11px;color:#4a90c4;font-style:italic;margin-bottom:5px}
 .p-tr{font-size:12px;color:#555;line-height:1.4;margin-bottom:9px}
-.btn-row{display:flex;gap:6px;flex-wrap:wrap;align-items:center;justify-content:between;}
+.btn-row{display:flex;gap:6px;flex-wrap:wrap;align-items:center;justify-content:space-between;}
 
 .sbtn{display:flex;align-items:center;gap:4px;padding:5px 11px;font-size:11px;border:1px solid #ddd;border-radius:8px;background:#f8f8f8;color:#333;cursor:pointer;font-weight:500}
 .sbtn:active{background:#e8e8e8}
@@ -74,7 +74,6 @@ body{
 .q-pill b{color:#185FA5}
 .prog-wrap{flex:1;height:4px;background:#ddd;border-radius:2px;overflow:hidden}
 .prog-fill{height:100%;background:#185FA5;border-radius:2px;transition:width .3s}
-.qcard{background:#fff;border:1px solid #e8e8e8;border-radius:12px;overflow:hidden;margin-bottom:8px}
 .qcard{background:#fff;border:1px solid #e8e8e8;border-radius:12px;overflow:hidden;margin-bottom:8px}
 .qhead{padding:10px 14px;background:#f0f4f9;border-bottom:1px solid #e5e5e5}
 .qnum{font-size:11px;color:#666}
@@ -123,7 +122,310 @@ body{
 </div>
 
 <script>
-// ─── STATE & CONFIG FIRST ──────────────────────────────────────────
+// ─── 1. GLOBAL STATE DEFINITIONS ─────────────────────────────────
+let curDay = "day1";
+let curL2  = "registration";
+let curL3  = null;
+let curL4  = null;
+let curSec = "kayit";
+let qIdx = 0, score = 0, answered = false, shuffledQuiz = [];
+
+// ─── 2. ALL FUNCTIONS (En Başa Alındı - Tanımsızlık Hatalarını Çözer) ───
+function isScenario(id) {
+  return id && (id === "senaryo" || id.startsWith("senaryo_") || id.startsWith("d2_senaryo"));
+}
+
+function playElevenLabsVoice(fileCode, selectElementId) {
+  if (!fileCode) return;
+  const speedSelect = document.getElementById(selectElementId);
+  const targetSpeed = speedSelect ? parseFloat(speedSelect.value) : 0.8;
+
+  const audioPath = `assets/audio/${fileCode}.mp3`;
+  const audio = new Audio(audioPath);
+  audio.playbackRate = targetSpeed;
+  
+  audio.play().catch(err => {
+    console.log("Özel ses bulunamadı, Web Speech API devralıyor...");
+    fallbackSpeak(fileCode, targetSpeed);
+  });
+}
+
+function fallbackSpeak(txt, targetSpeed) {
+  if (!window.speechSynthesis) return;
+  let cleanText = txt;
+  if(txt.includes('_')) {
+     const currentList = investorsFindListByCode();
+     if(currentList && currentList.length) {
+        const indexStr = txt.split('_').pop();
+        const numericIdx = parseInt(indexStr) - 1;
+        if(currentList[numericIdx]) {
+           cleanText = txt.includes('short') && currentList[numericIdx].alt ? currentList[numericIdx].alt : currentList[currentList[numericIdx] ? numericIdx : 0].en;
+        }
+     }
+  }
+  const u = new SpeechSynthesisUtterance(cleanText);
+  u.lang = "en-US"; 
+  u.rate = targetSpeed;
+  speechSynthesis.cancel(); 
+  speechSynthesis.speak(u);
+}
+
+function investorsFindListByCode() {
+  const allP = Object.assign({}, PHRASES, (window.DAY2_PHRASES || {}));
+  return allP[curSec] || [];
+}
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length-1; i > 0; i--) {
+    const j = Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+
+function resetQuiz() { qIdx = 0; score = 0; shuffledQuiz = []; }
+
+// ─── NAV BUILDERS ───
+function buildDayNav() {
+  document.getElementById("day-nav").innerHTML =
+    Object.entries(NAV).map(([id, d]) =>
+      `<button class="day-btn${curDay===id?" active":""}" onclick="switchDay('${id}')">${d.label}</button>`
+    ).join("");
+}
+
+function buildL2() {
+  const day = NAV[curDay];
+  document.getElementById("l2-nav-wrap").innerHTML =
+    `<div class="l2-nav">${day.l2.map(n =>
+      `<button class="l2-btn${curL2===n.id?" active":""}" onclick="switchL2('${n.id}')">${n.label}</button>`
+    ).join("")}</div>`;
+}
+
+function buildL3() {
+  const l2node = getL2Node();
+  if (!l2node || l2node.isQuiz || !l2node.l3 || l2node.l3.length === 0) {
+    document.getElementById("l3-nav-wrap").innerHTML = "";
+    document.getElementById("l4-nav-wrap").innerHTML = "";
+    return;
+  }
+  document.getElementById("l3-nav-wrap").innerHTML =
+    `<div class="l3-nav">${l2node.l3.map(n =>
+      `<button class="l3-btn${curL3===n.id?" active":""}" onclick="switchL3('${n.id}')">${n.label}</button>`
+    ).join("")}</div>`;
+  buildL4();
+}
+
+function buildL4() {
+  const l3node = getL3Node();
+  if (!l3node || l3node.leaf || !l3node.l4 || l3node.l4.length === 0) {
+    document.getElementById("l4-nav-wrap").innerHTML = "";
+    return;
+  }
+  document.getElementById("l4-nav-wrap").innerHTML =
+    `<div class="l4-nav">${l3node.l4.map(n =>
+      `<button class="l4-btn${curL4===n.id?" active":""}" onclick="switchL4('${n.id}')">${n.label}</button>`
+    ).join("")}</div>`;
+}
+
+function getL2Node() { return NAV[curDay].l2.find(n => n.id === curL2); }
+function getL3Node() {
+  const l2 = getL2Node();
+  if (!l2 || !l2.l3) return null;
+  return l2.l3.find(n => n.id === curL3);
+}
+
+// ─── SWITCHERS ───
+function switchDay(id) {
+  curDay = id;
+  resetQuiz();
+  const firstL2 = NAV[id].l2[0];
+  curL2 = firstL2.id;
+  initL2(firstL2);
+  buildDayNav(); buildL2();
+}
+
+// Güvenli düğüm kontrolü
+function switchL2(id) {
+  curL2 = id;
+  resetQuiz();
+  const l2 = getL2Node();
+  if (l2) initL2(l2);
+  buildL2();
+}
+
+function initL2(l2) {
+  if (!l2) return;
+  if (l2.isQuiz) {
+    curL3 = null; curL4 = null; curSec = l2.quizId;
+    document.getElementById("l3-nav-wrap").innerHTML = "";
+    document.getElementById("l4-nav-wrap").innerHTML = "";
+    render(); return;
+  }
+  if (!l2.l3 || l2.l3.length === 0) {
+    curL3 = null; curL4 = null; curSec = l2.id;
+    document.getElementById("l3-nav-wrap").innerHTML = "";
+    document.getElementById("l4-nav-wrap").innerHTML = "";
+    render(); return;
+  }
+  const firstL3 = l2.l3[0];
+  curL3 = firstL3.id;
+  initL3(firstL3);
+  buildL3();
+}
+
+function switchL3(id) {
+  curL3 = id;
+  resetQuiz();
+  const l3 = getL3Node();
+  initL3(l3);
+  buildL3();
+}
+
+function initL3(l3) {
+  if (!l3) return;
+  if (l3.leaf) {
+    curL4 = null; curSec = l3.id;
+    document.getElementById("l4-nav-wrap").innerHTML = "";
+    render(); return;
+  }
+  if (l3.l4 && l3.l4.length > 0) {
+    const firstL4 = l3.l4[0];
+    curL4 = firstL4.id; curSec = firstL4.id;
+    buildL4(); render(); return;
+  }
+  curL4 = null; curSec = l3.id;
+  render();
+}
+
+function switchL4(id) {
+  curL4 = id; curSec = id;
+  resetQuiz();
+  buildL4(); render();
+}
+
+// ─── RENDER ───
+function render() {
+  if (isScenario(curSec)) renderQuiz();
+  else renderPhrases();
+}
+
+function renderPhrases() {
+  const allP = Object.assign({}, PHRASES, (window.DAY2_PHRASES || {}));
+  const list = allP[curSec] || [];
+  const c = document.getElementById("content");
+  if (!list.length) {
+    c.innerHTML = `<div class="empty-msg">Bu bölüm yakında eklenecek. 🔜</div>`; return;
+  }
+  
+  c.innerHTML = list.map((p, idx) => {
+    const hasAlt = p.alt && p.alt.trim() !== "";
+    const phonShort = p.phs && p.phs.trim() !== "" ? p.phs : "";
+    const tamSesKodu = `${curSec}_${idx + 1}`;
+    const kisaSesKodu = `${curSec}_${idx + 1}_short`;
+    const selectId = `speed_sel_${curSec}_${idx}`;
+
+    return `
+    <div class="phrase-card">
+      <div class="p-en">${p.en}</div>
+      ${hasAlt ? `<div class="p-alt">↳ Kısa: ${p.alt}</div>` : ""}
+      <div class="p-ph">${p.ph || ""}</div>
+      ${hasAlt && phonShort ? `<div class="p-ph" style="color:#7ab0d4">↳ ${phonShort}</div>` : ""}
+      <div class="p-tr">${p.tr}</div>
+      <div class="btn-row">
+        <button class="sbtn" onclick="playElevenLabsVoice('${tamSesKodu}', '${selectId}')">🔊 Tam</button>
+        ${hasAlt ? `<button class="sbtn-alt" onclick="playElevenLabsVoice('${kisaSesKodu}', '${selectId}')">🔊 Kısa</button>` : ""}
+        
+        <div class="card-speed-wrapper">
+          <span class="card-speed-label">HIZ:</span>
+          <select class="card-speed-select" id="${selectId}">
+            <option value="0.6">0.6x (Tane Tane)</option>
+            <option value="0.8" selected>0.8x (Dengeli)</option>
+            <option value="1.0">1.0x (Normal)</option>
+          </select>
+        </div>
+      </div>
+    </div>`;
+  }).join("");
+}
+
+function renderQuiz() {
+  const c = document.getElementById("content");
+  let activeQuiz = QUIZ;
+  if (curDay === "day2") {
+    if (curSec === "d2_senaryo_jury" && window.QUIZ_JURY) activeQuiz = window.QUIZ_JURY;
+    else if (window.DAY2_QUIZ) activeQuiz = window.DAY2_QUIZ;
+  }
+  if (!shuffledQuiz.length) shuffledQuiz = shuffle(activeQuiz);
+  if (qIdx >= shuffledQuiz.length) { showDone(); return; }
+
+  const q = shuffledQuiz[qIdx];
+  const sOpts = shuffle(q.opts.map((o,i) => ({o, orig:i})));
+  const newC = sOpts.findIndex(x => x.orig === q.c);
+  answered = false;
+  const quizSesKodu = `quiz_${curSec}_${qIdx + 1}`;
+  const quizSelectId = `speed_sel_quiz_${curSec}_${qIdx}`;
+
+  c.innerHTML = `
+    <div class="q-bar">
+      <div class="q-pill">Skor: <b id="sc">${score}</b></div>
+      <div class="q-pill">Soru: <b>${qIdx+1}</b>/${shuffledQuiz.length}</div>
+      <div class="prog-wrap"><div class="prog-fill" style="width:${Math.round(qIdx/shuffledQuiz.length*100)}%"></div></div>
+    </div>
+    <div class="qcard">
+      <div class="qhead"><div class="qnum">Soru ${qIdx+1} / ${shuffledQuiz.length}</div></div>
+      <div class="qbody">
+        <div class="sit">${q.sit}</div>
+        <div class="qt">${q.q}</div>
+        <div class="opts">
+          ${sOpts.map((x,i) =>
+            `<button class="opt" data-idx="${i}" data-correct="${newC}" data-ex="${encodeURIComponent(q.ex)}" data-ans="${encodeURIComponent(sOpts[newC].o)}" data-ses="${quizSesKodu}">${x.o}</button>`
+          ).join("")}
+        </div>
+        <div class="fb" id="fb"></div>
+        <button class="nxt" id="nxt" onclick="nextQ()">${qIdx < shuffledQuiz.length-1 ? "Sonraki →" : "Sonuçları gör →"}</button>
+      </div>
+    </div>`;
+
+  c.querySelectorAll(".opt").forEach(btn => btn.addEventListener("click", function() {
+    checkAns(+this.dataset.idx, +this.dataset.correct,
+      decodeURIComponent(this.dataset.ex), decodeURIComponent(this.dataset.ans), this.dataset.ses, quizSelectId);
+  }));
+}
+
+function checkAns(idx, correct, ex, ans, sesKodu, quizSelectId) {
+  if (answered) return;
+  answered = true;
+  document.querySelectorAll(".opt").forEach((b,i) => {
+    if (i===correct) b.classList.add("reveal");
+    else if (i===idx && idx!==correct) b.classList.add("wrong");
+  });
+  const fb = document.getElementById("fb");
+  
+  const fbContent = idx===correct ? 
+    `${ex}<br>` : 
+    `✗ Doğru: <strong>${ans}</strong><br>${ex}<br>`;
+
+  fb.className = idx===correct ? "fb show ok" : "fb show no";
+  fb.innerHTML = fbContent + `
+    <div style="display:flex; align-items:center; gap:8px; margin-top:6px;">
+      <button class="sbtn" id="sp-ans">🔊 Doğru Cevabı Dinle</button>
+      <div class="card-speed-wrapper" style="margin-left:0;">
+        <span class="card-speed-label">HIZ:</span>
+        <select class="card-speed-select" id="${quizSelectId}">
+          <option value="0.6">0.6x (Tane Tane)</option>
+          <option value="0.8" selected>0.8x (Dengeli)</option>
+          <option value="1.0">1.0x (Normal)</option>
+        </select>
+      </div>
+    </div>`;
+    
+  document.getElementById("nxt").classList.add("show");
+  
+  const sb = document.getElementById("sp-ans");
+  if (sb) sb.addEventListener("click", () => playElevenLabsVoice(sesKodu, quizSelectId));
+}
+
+// ─── 3. NAVIGATION TREE DATA STRUCTURE ─────────────────────────────
 const NAV = {
   day1: {
     label: "Tartı ve Kayıt",
@@ -231,321 +533,6 @@ const NAV = {
   }
 };
 
-let curDay = "day1";
-let curL2  = "registration";
-let curL3  = null;
-let curL4  = null;
-let curSec = "kayit";
-let qIdx = 0, score = 0, answered = false, shuffledQuiz = [];
-
-// ─── AUDIO ENGINE (Dinamik ve Kart Bazlı Hız Enjeksiyonu) ───────────
-function playElevenLabsVoice(fileCode, selectElementId) {
-  if (!fileCode) return;
-  
-  // İlgili kartın kendi içindeki hız seçicisinden anlık değeri alıyoruz
-  const speedSelect = document.getElementById(selectElementId);
-  const targetSpeed = speedSelect ? parseFloat(speedSelect.value) : 0.8;
-
-  const audioPath = `assets/audio/${fileCode}.mp3`;
-  const audio = new Audio(audioPath);
-  audio.playbackRate = targetSpeed;
-  
-  audio.play().catch(err => {
-    console.log("Özel ses bulunamadı, Web Speech API devralıyor...");
-    fallbackSpeak(fileCode, targetSpeed);
-  });
-}
-
-function fallbackSpeak(txt, targetSpeed) {
-  if (!window.speechSynthesis) return;
-  let cleanText = txt;
-  if(txt.includes('_')) {
-     const currentList = investorsFindListByCode();
-     if(currentList && currentList.length) {
-        const indexStr = txt.split('_').pop();
-        const numericIdx = parseInt(indexStr) - 1;
-        if(currentList[numericIdx]) {
-           cleanText = txt.includes('short') && currentList[numericIdx].alt ? currentList[numericIdx].alt : currentList[currentList[numericIdx] ? numericIdx : 0].en;
-        }
-     }
-  }
-  const u = new SpeechSynthesisUtterance(cleanText);
-  u.lang = "en-US"; 
-  u.rate = targetSpeed;
-  speechSynthesis.cancel(); 
-  speechSynthesis.speak(u);
-}
-
-function investorsFindListByCode() {
-  const allP = Object.assign({}, PHRASES, (window.DAY2_PHRASES || {}));
-  return allP[curSec] || [];
-}
-
-function shuffle(arr) {
-  const a = [...arr];
-  for (let i = a.length-1; i > 0; i--) {
-    const j = Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]];
-  }
-  return a;
-}
-
-// ─── NAV BUILDERS ───
-function buildDayNav() {
-  document.getElementById("day-nav").innerHTML =
-    Object.entries(NAV).map(([id, d]) =>
-      `<button class="day-btn${curDay===id?" active":""}" onclick="switchDay('${id}')">${d.label}</button>`
-    ).join("");
-}
-
-function buildL2() {
-  const day = NAV[curDay];
-  document.getElementById("l2-nav-wrap").innerHTML =
-    `<div class="l2-nav">${day.l2.map(n =>
-      `<button class="l2-btn${curL2===n.id?" active":""}" onclick="switchL2('${n.id}')">${n.label}</button>`
-    ).join("")}</div>`;
-}
-
-function buildL3() {
-  const l2node = getL2Node();
-  if (!l2node || l2node.isQuiz || !l2node.l3 || l2node.l3.length === 0) {
-    document.getElementById("l3-nav-wrap").innerHTML = "";
-    document.getElementById("l4-nav-wrap").innerHTML = "";
-    return;
-  }
-  document.getElementById("l3-nav-wrap").innerHTML =
-    `<div class="l3-nav">${l2node.l3.map(n =>
-      `<button class="l3-btn${curL3===n.id?" active":""}" onclick="switchL3('${n.id}')">${n.label}</button>`
-    ).join("")}</div>`;
-  buildL4();
-}
-
-function buildL4() {
-  const l3node = getL3Node();
-  if (!l3node || l3node.leaf || !l3node.l4 || l3node.l4.length === 0) {
-    document.getElementById("l4-nav-wrap").innerHTML = "";
-    return;
-  }
-  document.getElementById("l4-nav-wrap").innerHTML =
-    `<div class="l4-nav">${l3node.l4.map(n =>
-      `<button class="l4-btn${curL4===n.id?" active":""}" onclick="switchL4('${n.id}')">${n.label}</button>`
-    ).join("")}</div>`;
-}
-
-function getL2Node() { return NAV[curDay].l2.find(n => n.id === curL2); }
-function getL3Node() {
-  const l2 = getL2Node();
-  if (!l2 || !l2.l3) return null;
-  return l2.l3.find(n => n.id === curL3);
-}
-
-// ─── SWITCHERS ───
-function switchDay(id) {
-  curDay = id;
-  qIdx = 0; score = 0; shuffledQuiz = [];
-  const firstL2 = NAV[id].l2[0];
-  curL2 = firstL2.id;
-  initL2(firstL2);
-  buildDayNav(); buildL2();
-}
-
-function switchL2(id) {
-  curL2 = id;
-  qIdx = 0; score = 0; shuffledQuiz = [];
-  const l2 = getL2Node();
-  if (l2) initL2(l2);
-  buildL2();
-}
-
-function initL2(l2) {
-  if (!l2) return;
-  if (l2.isQuiz) {
-    curL3 = null; curL4 = null; curSec = l2.quizId;
-    document.getElementById("l3-nav-wrap").innerHTML = "";
-    document.getElementById("l4-nav-wrap").innerHTML = "";
-    render(); return;
-  }
-  if (!l2.l3 || l2.l3.length === 0) {
-    curL3 = null; curL4 = null; curSec = l2.id;
-    document.getElementById("l3-nav-wrap").innerHTML = "";
-    document.getElementById("l4-nav-wrap").innerHTML = "";
-    render(); return;
-  }
-  const firstL3 = l2.l3[0];
-  curL3 = firstL3.id;
-  initL3(firstL3);
-  buildL3();
-}
-
-function switchL3(id) {
-  curL3 = id;
-  qIdx = 0; score = 0; shuffledQuiz = [];
-  const l3 = getL3Node();
-  initL3(l3);
-  buildL3();
-}
-
-function initL3(l3) {
-  if (!l3) return;
-  if (l3.leaf) {
-    curL4 = null; curSec = l3.id;
-    document.getElementById("l4-nav-wrap").innerHTML = "";
-    render(); return;
-  }
-  if (l3.l4 && l3.l4.length > 0) {
-    const firstL4 = l3.l4[0];
-    curL4 = firstL4.id; curSec = firstL4.id;
-    buildL4(); render(); return;
-  }
-  curL4 = null; curSec = l3.id;
-  render();
-}
-
-function switchL4(id) {
-  curL4 = id; curSec = id;
-  qIdx = 0; score = 0; shuffledQuiz = [];
-  buildL4(); render();
-}
-
-// ─── RENDER ───
-function render() {
-  if (isScenario(curSec)) renderQuiz();
-  else renderPhrases();
-}
-
-function renderPhrases() {
-  const allP = Object.assign({}, PHRASES, (window.DAY2_PHRASES || {}));
-  const list = allP[curSec] || [];
-  const c = document.getElementById("content");
-  if (!list.length) {
-    c.innerHTML = `<div class="empty-msg">Bu bölüm yakında eklenecek. 🔜</div>`; return;
-  }
-  
-  c.innerHTML = list.map((p, idx) => {
-    const hasAlt = p.alt && p.alt.trim() !== "";
-    const phonShort = p.phs && p.phs.trim() !== "" ? p.phs : "";
-    const tamSesKodu = `${curSec}_${idx + 1}`;
-    const kisaSesKodu = `${curSec}_${idx + 1}_short`;
-    
-    // Her bilet/kart için benzersiz bir hız seçici ID'si üretiyoruz
-    const selectId = `speed_sel_${curSec}_${idx}`;
-
-    return `
-    <div class="phrase-card">
-      <div class="p-en">${p.en}</div>
-      ${hasAlt ? `<div class="p-alt">↳ Kısa: ${p.alt}</div>` : ""}
-      <div class="p-ph">${p.ph || ""}</div>
-      ${hasAlt && phonShort ? `<div class="p-ph" style="color:#7ab0d4">↳ ${phonShort}</div>` : ""}
-      <div class="p-tr">${p.tr}</div>
-      <div class="btn-row">
-        <button class="sbtn" onclick="playElevenLabsVoice('${tamSesKodu}', '${selectId}')">🔊 Tam</button>
-        ${hasAlt ? `<button class="sbtn-alt" onclick="playElevenLabsVoice('${kisaSesKodu}', '${selectId}')">🔊 Kısa</button>` : ""}
-        
-        <!-- ⏱️ Kart İçi Hız Kontrolü (0.6x, 0.8x, 1.0x) -->
-        <div class="card-speed-wrapper">
-          <span class="card-speed-label">HIZ:</span>
-          <select class="card-speed-select" id="${selectId}">
-            <option value="0.6">0.6x (Tane Tane)</option>
-            <option value="0.8" selected>0.8x (Dengeli)</option>
-            <option value="1.0">1.0x (Normal)</option>
-          </select>
-        </div>
-      </div>
-    </div>`;
-  }).join("");
-}
-
-function renderQuiz() {
-  const c = document.getElementById("content");
-  let activeQuiz = QUIZ;
-  if (curDay === "day2") {
-    if (curSec === "d2_senaryo_jury" && window.QUIZ_JURY) activeQuiz = window.QUIZ_JURY;
-    else if (window.DAY2_QUIZ) activeQuiz = window.DAY2_QUIZ;
-  }
-  if (!shuffledQuiz.length) shuffledQuiz = shuffle(activeQuiz);
-  if (qIdx >= shuffledQuiz.length) { showDone(); return; }
-
-  const q = shuffledQuiz[qIdx];
-  const sOpts = shuffle(q.opts.map((o,i) => ({o, orig:i})));
-  const newC = sOpts.findIndex(x => x.orig === q.c);
-  answered = false;
-  const quizSesKodu = `quiz_${curSec}_${qIdx + 1}`;
-  const quizSelectId = `speed_sel_quiz_${curSec}_${qIdx}`;
-
-  c.innerHTML = `
-    <div class="q-bar">
-      <div class="q-pill">Skor: <b id="sc">${score}</b></div>
-      <div class="q-pill">Soru: <b>${qIdx+1}</b>/${shuffledQuiz.length}</div>
-      <div class="prog-wrap"><div class="prog-fill" style="width:${Math.round(qIdx/shuffledQuiz.length*100)}%"></div></div>
-    </div>
-    <div class="qcard">
-      <div class="qhead"><div class="qnum">Soru ${qIdx+1} / ${shuffledQuiz.length}</div></div>
-      <div class="qbody">
-        <div class="sit">${q.sit}</div>
-        <div class="qt">${q.q}</div>
-        <div class="opts">
-          ${sOpts.map((x,i) =>
-            `<button class="opt" data-idx="${i}" data-correct="${newC}" data-ex="${encodeURIComponent(q.ex)}" data-ans="${encodeURIComponent(sOpts[newC].o)}" data-ses="${quizSesKodu}">${x.o}</button>`
-          ).join("")}
-        </div>
-        <div class="fb" id="fb"></div>
-        <button class="nxt" id="nxt" onclick="nextQ()">${qIdx < shuffledQuiz.length-1 ? "Sonraki →" : "Sonuçları gör →"}</button>
-      </div>
-    </div>`;
-
-  c.querySelectorAll(".opt").forEach(btn => btn.addEventListener("click", function() {
-    checkAns(+this.dataset.idx, +this.dataset.correct,
-      decodeURIComponent(this.dataset.ex), decodeURIComponent(this.dataset.ans), this.dataset.ses, quizSelectId);
-  }));
-}
-
-function checkAns(idx, correct, ex, ans, sesKodu, quizSelectId) {
-  if (answered) return;
-  answered = true;
-  document.querySelectorAll(".opt").forEach((b,i) => {
-    if (i===correct) b.classList.add("reveal");
-    else if (i===idx && idx!==correct) b.classList.add("wrong");
-  });
-  const fb = document.getElementById("fb");
-  
-  const fbContent = idx===correct ? 
-    `${ex}<br>` : 
-    `✗ Doğru: <strong>${ans}</strong><br>${ex}<br>`;
-
-  fb.className = idx===correct ? "fb show ok" : "fb show no";
-  fb.innerHTML = fbContent + `
-    <div style="display:flex; align-items:center; gap:8px; margin-top:6px;">
-      <button class="sbtn" id="sp-ans">🔊 Doğru Cevabı Dinle</button>
-      <div class="card-speed-wrapper" style="margin-left:0;">
-        <span class="card-speed-label">HIZ:</span>
-        <select class="card-speed-select" id="${quizSelectId}">
-          <option value="0.6">0.6x (Tane Tane)</option>
-          <option value="0.8" selected>0.8x (Dengeli)</option>
-          <option value="1.0">1.0x (Normal)</option>
-        </select>
-      </div>
-    </div>`;
-    
-  document.getElementById("nxt").classList.add("show");
-  
-  const sb = document.getElementById("sp-ans");
-  if (sb) sb.addEventListener("click", () => playElevenLabsVoice(sesKodu, quizSelectId));
-}
-
-function nextQ() { qIdx++; renderQuiz(); }
-
-function showDone() {
-  const pct = Math.round(score/shuffledQuiz.length*100);
-  document.getElementById("content").innerHTML = `
-    <div class="done-box">
-      <div class="done-pct">${pct}%</div>
-      <div class="done-sub">${shuffledQuiz.length} sorudan <strong>${score}</strong> doğru.<br>
-      ${pct>=80?"🏆 Harika! Sahaya hazırsın.":pct>=60?"👍 İyi gidiyor — tekrar dene.":"📚 Cümleleri tekrar çalış."}</div>
-      <button class="rbtn" onclick="restartQuiz()">↺ Tekrar Başla</button>
-    </div>`;
-}
-
-function restartQuiz() { qIdx = 0; score = 0; shuffledQuiz = []; renderQuiz(); }
-
 // ─── PHRASES DATA (Day 1) ───
 const PHRASES = {
   kayit: [
@@ -632,7 +619,7 @@ const PHRASES = {
 };
 
 const QUIZ = [
-  { sit: "Bir antrenör kayıt masasında oturuyor. Selamlıyor ve hangi ülkeyi temsil ettiğini soruyorsun.", q: "Ne söylersin?", opts: ["Hello, welcome. Which country are you representing?", "Passport only, please.", "Male weigh-in starts now.", "May I see your documents?"], c: 0, ex: "✓ 'Hello, welcome. Which country are you representing?' — standart karşılama og ülke sorgulama." },
+  { sit: "Bir antrenör kayıt masasında oturuyor. Selamlıyor ve hangi ülkeyi temsil ettiğini soruyorsun.", q: "Ne söylersin?", opts: ["Hello, welcome. Which country are you representing?", "Passport only, please.", "Male weigh-in starts now.", "May I see your documents?"], c: 0, ex: "✓ 'Hello, welcome. Which country are you representing?' — standart karşılama ve ülke sorgulama." },
   { sit: "Kayıt için gerekli belgeleri antrenörden istiyorsun.", q: "Ne söylersin?", opts: ["Please present the required documents.", "Please step on the scale once.", "Please call your doctor first.", "Please remove your socks."], c: 0, ex: "✓ 'Please present the required documents.' — tüm belgeler için genel istek cümlesi." },
   { sit: "Bir sporcunun IFMA Tıbbi Beyan Formu eksik.", q: "Ne dersin?", opts: ["Athlete's medical declaration is missing.", "Athlete's passport is missing.", "Athlete's name is not on the list.", "Passport, please."], c: 0, ex: "✓ 'Athlete's medical declaration is missing.' — tıbbi beyan formu eksikliği." },
   { sit: "Bir sporcunun Hamile Olmama Beyanı eksik.", q: "Ne dersin?", opts: ["Athlete's non-pregnancy declaration is missing.", "Athlete's athlete's book is missing.", "Athlete's medical declaration is missing.", "The list is not up to date."], c: 0, ex: "✓ 'Athlete's non-pregnancy declaration is missing.' — hamile olmama beyanı eksikliği." },
@@ -683,10 +670,11 @@ const QUIZ = [
   { sit: "Lavaboya gitmek için izin istiyorsun.", q: "Ne söylersin?", opts: ["Can I go to the bathroom?", "I need to make a call.", "I am tired.", "Where is the weigh-in room?"], c: 0, ex: "✓ 'Can I go to the bathroom?' — tuvalet izni alma." },
 ];
 
-// ─── INIT EXECUTION AT THE VERY END ───
+// ─── 4. RUNNING APPLICATION INITIALIZATION ───────────────────────
 </script>
 <script src="day2.js"></script>
 <script>
+// Ağaç yapısı ve bağımlılıklar yüklendikten sonra güvenli tetikleme
 buildDayNav();
 if(NAV[curDay] && NAV[curDay].l2 && NAV[curDay].l2.length > 0) {
   const firstL2 = NAV[curDay].l2[0];
