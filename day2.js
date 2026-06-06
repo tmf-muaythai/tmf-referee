@@ -1,8 +1,95 @@
 // =================================================================
-// ─── TMF MUAYTHAI HAKEM EGİTİM MODÜLÜ - DAY 2 VERİ HAVUZU ────────
+// ─── TMF MUAYTHAI HAKEM EĞİTİM MODÜLÜ - DAY 2 VERİ HAVUZU ────────
 // =================================================================
 
-// ─── 1. JURY SENARYO PRATİĞİ SORULARI (39 ADET) ───────────────────
+window.DAY2_PHRASES = {
+  // ─── JURY SEKMELERİ ────────────────────────────────────────────
+  d2_juri_rap: [
+    { en: "The protest has been officially rejected by the Jury.", ph: "Dı protest hes bin ofisıli ricektid bay dı curi.", tr: "İtiraz, Jüri tarafından resmi olarak reddedilmiştir." },
+    { en: "The decision of the Referee is sustained.", ph: "Dı desizın ov dı referi iz sasteynd.", tr: "Orta hakemin kararı onanmıştır (geçerlidir)." },
+    { en: "Please review the official scorecards from the last round.", ph: "Pliz rivyû dı ofisıl skorkards fram dı last raund.", tr: "Lütfen son raundun resmi puan kartlarını inceleyin." }
+  ],
+  d2_juri_diy: [
+    { en: "Jury, are all judges ready for the next bout?", ph: "Curi, ar ol cadcız redi for dı nekst baut?", tr: "Jüri, sonraki maç için tüm yan hakemler hazır mı?" },
+    { en: "We need a final clarification on this technical issue.", ph: "Vi nid a faynıl klerifikeysın on dis teknik isyû.", tr: "Bu teknik konuda son bir netleştirmeye ihtiyacımız var." }
+  ],
+  d2_juri_gov: [
+    { en: "You are assigned as the Referee for bout number five.", ph: "Yu ar esaynd ez dı referi for baut nambır fayv.", phs: "Esaynd ez referi for baut fayv.", alt: "Assigned as Referee for bout five.", tr: "Beş numaralı maç için orta hakem olarak görevlendirildiniz." },
+    { en: "Please check your seat number on the duty list.", ph: "Pliz cek yor sit nambır on dı dyûti list.", tr: "Lütfen görev listesindeki koltuk numaranızı kontrol edin." }
+  ],
+  d2_hakem: [
+    { en: "The referee requires medical attention. Call the doctor.", ph: "Dı referi rikuayırz medikıl atenşın. Kol dı doktır.", tr: "Hakemin tıbbi müdahaleye ihtiyacı var. Doktoru çağırın." },
+    { en: "I am feeling dizzy and cannot continue my duty.", ph: "Ay em filing dizi end kennot kontinye mi dyûti.", tr: "Başım dönüyor ve görevime devam edemiyorum." }
+  ],
+  d2_ring: [
+    { en: "The canvas is too slippery. It must be wiped immediately.", ph: "Dı kenvıs iz tû slipıri. İt mast bi vaypt imidyıtli.", tr: "Ring zemini çok kaygan. Derhal silinmesi gerekiyor." },
+    { en: "The ring ropes are loose. Please tighten them.", ph: "Dı ring rops ar lûs. Pliz taytın dem.", tr: "Ring ipleri gevşek. Lütfen onları sıkılaştırın." }
+  ],
+
+  // ─── EQUIPMENT SEKMELERİ ───────────────────────────────────────
+  d2_ekipman: [
+    { en: "Show me your hand wraps and bandage, please.", ph: "Şov mi yor hend reps end bendıc, pliz.", alt: "Show me your bandage.", phs: "Şov mi yor bendıc.", tr: "Lütfen el sargılarınızı (bandajlarınızı) bana gösterin." },
+    { en: "The groin guard is mandatory for this category.", ph: "Dı groyn gard iz mendıtori for dis kategri.", tr: "Bu kategori için kasık koruyucu (kupa) zorunludur." },
+    { en: "Your headguard is too loose. Please adjust it.", ph: "Yor hedgard iz tû lûs. Pliz ecast it.", alt: "Adjust the headguard.", phs: "Ecast dı hedgard.", tr: "Kaskınız çok gevşek. Lütfen ayarlayın." },
+    { en: "The shin guards must be IFMA approved.", ph: "Dı şin gards mast bi ifma apruvd.", tr: "Kaval koruyucular IFMA onaylı olmak zorundadır." }
+  ],
+  d2_kose: [
+    { en: "Only two seconds are allowed in the corner.", ph: "Onli tû sekınds ar alavd in dı kornır.", tr: "Köşede sadece iki yardımcı antrenöre izin verilir." },
+    { en: "Seconds, step down! Outside the ring, please.", ph: "Sekınds, step davn! Autsayd dı ring, pliz.", alt: "Seconds out!", phs: "Sekınds aut!", tr: "Yardımcılar aşağı insin! Ring dışına lütfen." },
+    { en: "Do not touch the ropes during the round.", ph: "Du not tac dı rops dürink dı raund.", tr: "Raund boyunca iplere dokunmayın." }
+  ],
+
+  // ─── REFEREE SEKMELERİ ─────────────────────────────────────────
+  d2_orta: [
+    { en: "Chok! Clear out and separate!", ph: "Cok! Klir aut end sepıreyt!", alt: "Chok!", phs: "Cok!", tr: "Çok! Ayrılın ve geri çekilin! (Boksörleri ayırma komutu)" },
+    { en: "Yut! Stop fighting immediately!", ph: "Yut! Stop faytink imidyıtli.", alt: "Yut!", phs: "Yut!", tr: "Yut! Dövüşü derhal durdurun!" },
+    { en: "Chok! Break the clinch and fight!", ph: "Cok! Breyk dı klinc end fayt!", alt: "Chok!", phs: "Cok!", tr: "Çok! Sarılmayı bırakın ve dövüşün!" }
+  ],
+  d2_uyari: [
+    { en: "Caution! No holding the ropes!", ph: "Kooşın! No holdink dı rops!", alt: "No holding ropes!", phs: "No holdink rops!", tr: "Sözlü Uyarı! İpleri tutmak yasak!" },
+    { en: "Caution! Keep your head up down there!", ph: "Kooşın! Kip yor hed ap davn der.", alt: "Head up!", phs: "Hed ap!", tr: "Sözlü Uyarı! Kafanı aşağı eğme, yukarıda tut!" },
+    { en: "Caution! No low strikes, keep it clean.", ph: "Kooşın! No lo strayks, kip it klir.", alt: "No low blows!", phs: "No lo blos!", tr: "Sözlü Uyarı! Bel altı (alçak) vuruş yok, temiz dövüşün." }
+  ],
+  d2_ceza: [
+    { en: "Warning for the red corner! Headbutting is illegal.", ph: "Vornink for dı red kornır! Hedbatink iz iligıl.", alt: "Warning, red corner!", phs: "Vornink, red kornır!", tr: "Kırmızı köşeye resmi ceza (ihtar)! Kafa atmak yasaktır." },
+    { en: "Warning for the blue corner! No striking after the command.", ph: "Vornink for dı blû kornır! No straykink aftır dı komend.", alt: "Warning, blue corner!", phs: "Vornink, blû kornır!", tr: "Mavi köşeye resmi ceza! Komuttan sonra vurmak yasaktır." }
+  ],
+  d2_karar: [
+    { en: "The winner by Technical Knockout, in the blue corner!", ph: "Dı vinır bay teknik nakaut, in dı blû kornır!", alt: "Winner by TKO, blue corner!", phs: "Vinır bay ti-key-o, blû kornır!", tr: "Teknik Nakavt ile kazanan, mavi köşede!" },
+    { en: "The winner by Unanimous Decision, red corner!", ph: "Dı vinır bay yûnenimıs desizın, red kornır!", alt: "Winner by decision, red!", phs: "Vinır bay desizın, red!", tr: "Oy birliği kararıyla kazanan, kırmızı köşe!" }
+  ],
+  d2_doktor: [
+    { en: "Doctor, please check the cut on the athlete's eyebrow.", ph: "Doktır, pliz cek dı kat on dı etlits aybrau.", alt: "Doctor, check the cut.", phs: "Doktır, cek dı kat.", tr: "Doktor, lütfen sporcunun kaşındaki açılmayı (kesiği) kontrol edin." },
+    { en: "The doctor declares the athlete unfit to continue.", ph: "Dı doktır deklers dı etlit unfit tu kontinye.", tr: "Doktor, sporcunun devam etmek için uygun olmadığını (dövüşemeyeceğini) bildiriyor." }
+  ],
+  d2_tayca: [
+    { en: "Nueng, Song, Sam, Si, Ha, Hok, Chet, Paet, Kao, Sip.", ph: "Nıng, Song, Sam, Si, Ha, Hok, Cet, Pet, Kao, Sip.", tr: "1, 2, 3, 4, 5, 6, 7, 8, 9, 10. (Tayca Sayma Düzeni)" }
+  ],
+
+  // ─── JUDGE SEKMELERİ ───────────────────────────────────────────
+  d2_yan: [
+    { en: "The score for this round is ten to nine.", ph: "Dı skor for dis raund iz ten tu nayn.", tr: "Bu raundun skoru ona dokuzdur (10-9)." },
+    { en: "Red corner dominated the round with effective knee strikes.", ph: "Red kornır domineytid dı raund vit efektiv ni strayks.", tr: "Kırmızı köşe, etkili diz vuruşlarıyla raundu domine etti." }
+  ],
+  d2_skor: [
+    { en: "Please enter the points into the electronic scoring system.", ph: "Pliz entır dı poynts intu dı elektronik skorink sistım.", tr: "Lütfen puanları elektronik skor sistemine girin." },
+    { en: "The score sheets must be signed before submission.", ph: "Dı skor sits mast bi saynd bifor sabmisın.", tr: "Skor kağıtları teslim edilmeden önce imzalanmalıdır." }
+  ],
+
+  // ─── TIMEKEEPER SEKMELERİ ──────────────────────────────────────
+  d2_zaman: [
+    { en: "Ring the bell to start the first round.", ph: "Rink dı bel tu start dı först raund.", tr: "Birinci raundu başlatmak için zili çalın." },
+    { en: "Stop the clock! Time out requested by the Referee.", ph: "Stop dı klok! Taym aut rikuayrstid bay dı referi.", tr: "Süreyi durdurun! Orta hakem mola talep etti." }
+  ],
+
+  // ─── ANNOUNCER SEKMELERİ ───────────────────────────────────────
+  d2_anons: [
+    { en: "Ladies and gentlemen, welcome to the IFMA World Championships.", ph: "Leydiz end centılmın, velkam tu dı ifma vörld cempıyonsips.", tr: "Bayanlar baylar, IFMA Dünya Şampiyonası'na hoş geldiniz." },
+    { en: "Representing the red corner, from Thailand!", ph: "Reprizentink dı red kornır, fram taylend!", tr: "Kırmızı köşeyi temsil ediyor, Tayland'dan!" }
+  ]
+};
+
+// ─── 3. JURY SENARYO PRATİĞİ SORULARI (39 ADET) ───────────────────
 window.QUIZ_JURY = [
   { en: "During a round, you gave a knock-down count to the same athlete two times. If requested, you report the count status to the Jury.", tr: "Bir raund içinde aynı sporcuya iki kez nakavt sayımı (knock-down count) yaptın. Talep edildiği takdirde; sayma durumunu jüriye rapor ediyorsun.", q: "Ne söylersin?", opts: ["I counted twice in the same round/ Two counts, same round.", "I counted twice in total/ Two counts total.", "I counted once in the same round/One count, same round.", "I gave two cautions."], c: 0, ex: "✓ 'Two counts, same round.' — Aynı raund içinde iki kez saydım." },
   { en: "An athlete receives their third count within a single round. If requested, you report the count status to the jury.", tr: "Bir sporcu tek bir raund içinde üçüncü kez sayma aldı. Talep edildiği takdirde; sayma durumunu jüriye rapor ediyorsun.", q: "Ne söylersin?", opts: ["I counted three times in the same round.", "I counted three times in total.", "Three counts total.", "I gave three cautions."], c: 0, ex: "✓ 'I counted three times in the same round.' — Aynı raund içinde üç kez saydım." },
@@ -31,7 +118,7 @@ window.QUIZ_JURY = [
   { en: "An athlete takes a heavy knockout blow and loses consciousness completely on the floor. While the medical team is responding, report the status to the Jury.", tr: "Bir sporcu ağır bir nakavt darbesi alıyor ve yerde bilincini tamamen kaybediyor (bayılıyor). Sağlık ekibi müdahale ederken Jüriye durumu rapor ediyorsunuz.", q: "Ne söylersin?", opts: ["The athlete fainted.", "Nose bleeding.", "The athlete vomited.", "Heavy head strike."], c: 0, ex: "✓ 'The athlete fainted.' — Sporcu bayıldı/bilincini yitirdi." },
   { en: "You start feeling unwell during a long session and need to step away from your duty to rest. Inform the Jury.", tr: "Uzun bir seans sırasında kendinizi kötü hissetmeye başladınız ve dinlenmek için görevinizden kısa bir süre ayrılmanız gerekiyor. Jüriye durumu bildiriyorsunuz.", q: "Ne söylersin?", opts: ["I don't feel well. May I rest?", "Can you help me?", "I need to change.", "I lost my bow tie."], c: 0, ex: "✓ 'I don't feel well. May I rest?' — İyi hissetmiyorum. Dinlenebilir miyim?" },
   { en: "You experience a sudden, severe medical issue at the ring side and require professional medical assistance. State your need clearly.", tr: "Ring kenarında ani ve ciddi bir sağlık sorunu yaşadınız ve profesyonel tıbbi yardıma ihtiyacınız var. İhtiyacınızı jüriye net bir şekilde belirtiyorsunuz.", q: "Ne söylersin?", opts: ["I need to see a doctor.", "My leg hurts.", "My blood pressure is low.", "I have a migraine."], c: 0, ex: "✓ 'I need to see a doctor.' — Doktor görmem gerekiyor." },
-  { en: "Your head spin, and you feel unstable on your feet. Report this specific sensation.", tr: "Başınız dönüyor ve ayakta durmakta zorlanıyorsunuz. Bu özel durumu jüriye rapor ediyorsunuz.", q: "Ne söylersin?", opts: ["I feel dizzy.", "I feel nauseous.", "My leg hurts.", "I have a migraine."], c: 0, ex: "✓ 'I feel dizzy.' — Başım dönüyor." },
+  { en: "Your head spin, and you feel unstable on your feet. Report this specific sensation.", tr: "Başınız döndürüyor ve ayakta durmakta zorlanıyorsunuz. Bu özel durumu jüriye rapor ediyorsunuz.", q: "Ne söylersin?", opts: ["I feel dizzy.", "I feel nauseous.", "My leg hurts.", "I have a migraine."], c: 0, ex: "✓ 'I feel dizzy.' — Başım dönüyor." },
   { en: "After a close exchange where you had to split the athletes, you feel a sharp pain in your upper extremity and can’t continue to your duty. Inform the Jury.", tr: "Sporcuları ayırırken üst uzvunuzda (kolunuzda) keskin bir ağrı hissettiniz ve göreve devam edemiyorsunuz. Jüriye bilgi veriyorsunuz.", q: "Ne söylersin?", opts: ["My arm hurts. I can’t continue.", "My leg hurts. I can’t continue.", "Arm hurts. I can’t continue.", "My hand hurts. I can’t continue."], c: 0, ex: "✓ 'My arm hurts. I can't continue.' — Kolum ağrıyor, devam edemiyorum." },
   { en: "You start feeling dynamic stomach discomfort and feel like you might throw up. Inform the Jury immediately.", tr: "Dinamik bir mide rahatsızlığı hissetmeye başladınız ve kusacak gibi oluyorsunuz. Gözlemciye derhal bilgi veriyorsunuz.", q: "Ne söylersin?", opts: ["I feel nauseous.", "Arm hurts. I can’t continue.", "I feel dizzy.", "The athlete vomited."], c: 0, ex: "✓ 'I feel nauseous.' — Midem bulanıyor." },
   { en: "Your lower limb or foot is causing you severe pain. Report it.", tr: "Ayağınız size ciddi acı veriyor. Bunu rapor ediyorsunuz.", q: "Ne söylersin?", opts: ["My foot hurts.", "My leg hurts.", "I feel dizzy.", "My hand hurts."], c: 0, ex: "✓ 'My foot hurts.' — Ayağım ağrıyor." },
@@ -45,7 +132,7 @@ window.QUIZ_JURY = [
   { en: "The seconds poured too much water during the break, and now there is a large puddle on the floor causing athletes to lose traction. Request maintenance.", tr: "Yardımcılar mola esnasında çok fazla su döktü ve şu an yerde sporcuların kaymasına neden olan büyük bir su birikintisi var. Görevlilerden temizlik talep ediyorsunuz.", q: "Ne söylersin?", opts: ["The canvas is too wet and slippery.", "The canvas needs to be fixed.", "The ropes are loose.", "Canvas is dirty."], c: 0, ex: "✓ 'The canvas is too wet and slippery.' — Branda çok ıslak ve kaygan." }
 ];
 
-// ─── 2. EQUIPMENT SENARYO PRATİĞİ SORULARI (27 ADET) ───────────────
+// ─── 4. EQUIPMENT SENARYO PRATİĞİ SORULARI (27 ADET) ───────────────
 window.QUIZ_EQUIPMENT = [
   { sit: "Bir sporcu onaylı olmayan eldivenlerle geliyor. Ona IFMA kuralını bildiriyorsun.", q: "Ne söylersin?", opts: ["Only IFMA approved gloves are allowed.", "Ankle protection is not allowed.", "The gloves must be 10 oz.", "Can I see your gloves?"], c: 0, ex: "✓ 'Only IFMA approved gloves are allowed.'" },
   { sit: "Sporcunun kaval koruyucularını inceliyorsun ve uygun olmadığını görüyorsun. Değiştirmesini söylüyorsun.", q: "Ne söylersin?", opts: ["These shin guards are not acceptable. Please change them.", "The shin guards are loose. Please tape them.", "Can I see your gloves?", "Ankle protection is not allowed."], c: 0, ex: "✓ 'These shin guards are not acceptable. Please change them.'" },
