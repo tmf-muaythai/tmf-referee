@@ -2,6 +2,7 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TMF Muaythai – Hakem İngilizcesi Eğitim Modülü</title>
 <style>
@@ -36,17 +37,17 @@ body{
 .day-btn{padding:9px 20px;font-size:13px;font-weight:600;border:2px solid rgba(255,255,255,0.7);border-radius:22px;background:transparent;color:#fff;cursor:pointer;transition:all .2s}
 .day-btn.active{background:#fff;color:#185FA5;border-color:#fff}
 
-/* LEVEL 2 - Day1: Kayıt/Tartı/Sosyal/Quiz | Day2: Jury/Equipment/... */
+/* LEVEL 2 - Day1 | Day2 */
 .l2-nav{display:flex;justify-content:center;gap:7px;padding:10px 12px;background:#1a6fbc;border-bottom:1px solid rgba(255,255,255,0.15);flex-wrap:wrap}
 .l2-btn{padding:7px 14px;font-size:12px;font-weight:600;border:1.5px solid rgba(255,255,255,0.6);border-radius:16px;background:transparent;color:#fff;cursor:pointer;transition:all .15s;white-space:nowrap}
 .l2-btn.active{background:#fff;color:#185FA5;border-color:#fff}
 
-/* LEVEL 3 - Day1 sub-groups | Day2 sub-sections */
+/* LEVEL 3 */
 .l3-nav{display:flex;justify-content:center;gap:6px;padding:8px 12px;background:#e8f0fb;border-bottom:1px solid #cdddf0;flex-wrap:wrap}
 .l3-btn{padding:6px 12px;font-size:11px;font-weight:500;border:1px solid #185FA5;border-radius:14px;background:#fff;color:#185FA5;cursor:pointer;transition:all .15s;white-space:nowrap}
 .l3-btn.active{background:#185FA5;color:#fff}
 
-/* LEVEL 4 - leaf sections */
+/* LEVEL 4 */
 .l4-nav{display:flex;justify-content:center;gap:5px;padding:7px 12px;background:#fff;border-bottom:1px solid #e0e8f0;flex-wrap:wrap}
 .l4-btn{padding:5px 11px;font-size:11px;border:1px solid #c5d5e8;border-radius:12px;background:#f8fafc;color:#444;cursor:pointer;transition:all .15s;white-space:nowrap}
 .l4-btn.active{background:#185FA5;border-color:#185FA5;color:#fff;font-weight:600}
@@ -130,7 +131,7 @@ let curL4  = null;
 let curSec = "kayit";
 let qIdx = 0, score = 0, answered = false, shuffledQuiz = [];
 
-// ─── 2. ALL FUNCTIONS (En Başa Alındı - Tanımsızlık Hatalarını Çözer) ───
+// ─── 2. CORE AUDIO AND UTILITY FUNCTIONS ─────────────────────────
 function isScenario(id) {
   return id && (id === "senaryo" || id.startsWith("senaryo_") || id.startsWith("d2_senaryo"));
 }
@@ -164,10 +165,8 @@ function fallbackSpeak(txt, targetSpeed) {
      }
   }
   const u = new SpeechSynthesisUtterance(cleanText);
-  u.lang = "en-US"; 
-  u.rate = targetSpeed;
-  speechSynthesis.cancel(); 
-  speechSynthesis.speak(u);
+  u.lang = "en-US"; u.rate = targetSpeed;
+  speechSynthesis.cancel(); speechSynthesis.speak(u);
 }
 
 function investorsFindListByCode() {
@@ -185,7 +184,7 @@ function shuffle(arr) {
 
 function resetQuiz() { qIdx = 0; score = 0; shuffledQuiz = []; }
 
-// ─── NAV BUILDERS ───
+// ─── 3. NAV BUILDERS & SWITCHERS ──────────────────────────────────
 function buildDayNav() {
   document.getElementById("day-nav").innerHTML =
     Object.entries(NAV).map(([id, d]) =>
@@ -215,6 +214,7 @@ function buildL3() {
   buildL4();
 }
 
+// Türkçe Dil Kodlaması için Karakter Sabitlemesi Eklenmiş Çıktı Motoru
 function buildL4() {
   const l3node = getL3Node();
   if (!l3node || l3node.leaf || !l3node.l4 || l3node.l4.length === 0) {
@@ -229,27 +229,19 @@ function buildL4() {
 
 function getL2Node() { return NAV[curDay].l2.find(n => n.id === curL2); }
 function getL3Node() {
-  const l2 = getL2Node();
-  if (!l2 || !l2.l3) return null;
+  const l2 = getL2Node(); if (!l2 || !l2.l3) return null;
   return l2.l3.find(n => n.id === curL3);
 }
 
-// ─── SWITCHERS ───
 function switchDay(id) {
-  curDay = id;
-  resetQuiz();
-  const firstL2 = NAV[id].l2[0];
-  curL2 = firstL2.id;
-  initL2(firstL2);
-  buildDayNav(); buildL2();
+  curDay = id; resetQuiz();
+  const firstL2 = NAV[id].l2[0]; curL2 = firstL2.id;
+  initL2(firstL2); buildDayNav(); buildL2();
 }
 
-// Güvenli düğüm kontrolü
 function switchL2(id) {
-  curL2 = id;
-  resetQuiz();
-  const l2 = getL2Node();
-  if (l2) initL2(l2);
+  curL2 = id; resetQuiz();
+  const l2 = getL2Node(); if (l2) initL2(l2);
   buildL2();
 }
 
@@ -267,20 +259,17 @@ function initL2(l2) {
     document.getElementById("l4-nav-wrap").innerHTML = "";
     render(); return;
   }
-  const firstL3 = l2.l3[0];
-  curL3 = firstL3.id;
-  initL3(firstL3);
-  buildL3();
+  const firstL3 = l2.l3[0]; curL3 = firstL3.id;
+  initL3(firstL3); buildL3();
 }
 
 function switchL3(id) {
-  curL3 = id;
-  resetQuiz();
-  const l3 = getL3Node();
-  initL3(l3);
+  curL3 = id; resetQuiz();
+  const l3 = getL3Node(); initL3(l3);
   buildL3();
 }
 
+// Karakter kırılmalarını önleyen render bloğu
 function initL3(l3) {
   if (!l3) return;
   if (l3.leaf) {
@@ -289,8 +278,7 @@ function initL3(l3) {
     render(); return;
   }
   if (l3.l4 && l3.l4.length > 0) {
-    const firstL4 = l3.l4[0];
-    curL4 = firstL4.id; curSec = firstL4.id;
+    const firstL4 = l3.l4[0]; curL4 = firstL4.id; curSec = firstL4.id;
     buildL4(); render(); return;
   }
   curL4 = null; curSec = l3.id;
@@ -298,12 +286,11 @@ function initL3(l3) {
 }
 
 function switchL4(id) {
-  curL4 = id; curSec = id;
-  resetQuiz();
+  curL4 = id; curSec = id; resetQuiz();
   buildL4(); render();
 }
 
-// ─── RENDER ───
+// ─── 4. RENDERING ENGINE ──────────────────────────────────────────
 function render() {
   if (isScenario(curSec)) renderQuiz();
   else renderPhrases();
@@ -351,10 +338,13 @@ function renderPhrases() {
 function renderQuiz() {
   const c = document.getElementById("content");
   let activeQuiz = QUIZ;
+  
   if (curDay === "day2") {
     if (curSec === "d2_senaryo_jury" && window.QUIZ_JURY) activeQuiz = window.QUIZ_JURY;
+    else if (curSec === "d2_senaryo_equipment" && window.QUIZ_EQUIPMENT) activeQuiz = window.QUIZ_EQUIPMENT;
     else if (window.DAY2_QUIZ) activeQuiz = window.DAY2_QUIZ;
   }
+  
   if (!shuffledQuiz.length) shuffledQuiz = shuffle(activeQuiz);
   if (qIdx >= shuffledQuiz.length) { showDone(); return; }
 
@@ -375,10 +365,10 @@ function renderQuiz() {
       <div class="qhead"><div class="qnum">Soru ${qIdx+1} / ${shuffledQuiz.length}</div></div>
       <div class="qbody">
         <div class="sit">${q.sit}</div>
-        <div class="qt">${q.q}</div>
+        <div class="qt">${q.qt || q.q}</div>
         <div class="opts">
           ${sOpts.map((x,i) =>
-            `<button class="opt" data-idx="${i}" data-correct="${newC}" data-ex="${encodeURIComponent(q.ex)}" data-ans="${encodeURIComponent(sOpts[newC].o)}" data-ses="${quizSesKodu}">${x.o}</button>`
+            `<button class="opt" data-idx="${i}" data-correct="${newC}" data-ex="${encodeURIComponent(q.ex)}" data-ans="${encodeURIComponent(q.opts[q.c])}" data-ses="${quizSesKodu}">${x.o}</button>`
           ).join("")}
         </div>
         <div class="fb" id="fb"></div>
@@ -393,17 +383,13 @@ function renderQuiz() {
 }
 
 function checkAns(idx, correct, ex, ans, sesKodu, quizSelectId) {
-  if (answered) return;
-  answered = true;
+  if (answered) return; answered = true;
   document.querySelectorAll(".opt").forEach((b,i) => {
     if (i===correct) b.classList.add("reveal");
     else if (i===idx && idx!==correct) b.classList.add("wrong");
   });
   const fb = document.getElementById("fb");
-  
-  const fbContent = idx===correct ? 
-    `${ex}<br>` : 
-    `✗ Doğru: <strong>${ans}</strong><br>${ex}<br>`;
+  const fbContent = idx===correct ? `${ex}<br>` : `✗ Doğru: <strong>${ans}</strong><br>${ex}<br>`;
 
   fb.className = idx===correct ? "fb show ok" : "fb show no";
   fb.innerHTML = fbContent + `
@@ -420,21 +406,31 @@ function checkAns(idx, correct, ex, ans, sesKodu, quizSelectId) {
     </div>`;
     
   document.getElementById("nxt").classList.add("show");
-  
   const sb = document.getElementById("sp-ans");
   if (sb) sb.addEventListener("click", () => playElevenLabsVoice(sesKodu, quizSelectId));
 }
 
-// ─── 3. NAVIGATION TREE DATA STRUCTURE ─────────────────────────────
+function nextQ() { qIdx++; renderQuiz(); }
+function showDone() {
+  const pct = Math.round(score/shuffledQuiz.length*100);
+  document.getElementById("content").innerHTML = `
+    <div class="done-box">
+      <div class="done-pct">${pct}%</div>
+      <div class="done-sub">${shuffledQuiz.length} sorudan <strong>${score}</strong> doğru.<br>
+      ${pct>=80?"🏆 Harika! Sahaya hazırsın.":pct>=60?"👍 İyi gidiyor — tekrar dene.":"📚 Cümleleri tekrar çalış."}</div>
+      <button class="rbtn" onclick="restartQuiz()">↺ Tekrar Başla</button>
+    </div>`;
+}
+function restartQuiz() { qIdx = 0; score = 0; shuffledQuiz = []; renderQuiz(); }
+
+// ─── 5. NAVIGATION TREE DATA STRUCTURE ─────────────────────────────
 const NAV = {
   day1: {
     label: "Tartı ve Kayıt",
     l2: [
       {
         id: "registration", label: "Kayıt (Registration)",
-        l3: [
-          { id: "kayit",   label: "Kayıt & Belge (Registration & Documents)", leaf: true }
-        ]
+        l3: [ { id: "kayit", label: "Kayıt & Belge (Registration & Documents)", leaf: true } ]
       },
       {
         id: "weighin", label: "Tartı (Weigh-In)",
@@ -461,16 +457,9 @@ const NAV = {
       },
       {
         id: "social", label: "Sosyal İletişim (Socializing)",
-        l3: [
-          { id: "sosyal", label: "Sosyal İletişim", leaf: true }
-        ]
+        l3: [ { id: "sosyal", label: "Sosyal İletişim", leaf: true } ]
       },
-      {
-        id: "masterquiz", label: "▶ Senaryo Pratiği",
-        l3: [],
-        isQuiz: true,
-        quizId: "senaryo"
-      },
+      { id: "masterquiz", label: "▶ Senaryo Pratiği", l3: [], isQuiz: true, quizId: "senaryo" },
     ]
   },
   day2: {
@@ -533,7 +522,7 @@ const NAV = {
   }
 };
 
-// ─── PHRASES DATA (Day 1) ───
+// ─── PHRASES DATA (Day 1) ──────────────────────────────────────────
 const PHRASES = {
   kayit: [
     { en: "Hello, welcome. Which country are you representing?", alt: "Welcome! Your country?", ph: "Helô, velkım. Viç kantri âr yu reprizenting?", tr: "Merhaba, hoş geldiniz. Hangi ülkeyi temsil ediyorsunuz?" },
@@ -612,7 +601,7 @@ const PHRASES = {
     { en: "The total number of disqualifications is…", alt: "Disqualifications: …", ph: "Ðı totıl nambır ov diskvolifıkeyşınz iz…", tr: "Toplam diskalifiye sayısı…" },
     { en: "The total number of walkovers is…", alt: "Walkovers: …", ph: "Ðı totıl nambır ov vôkovırz iz…", tr: "Toplam walkover sayısı…" },
   ],
-  sosyal: [
+  social: [
     { en: "Can I come in?", alt: "May I come in?", ph: "Kân ay kam in?", tr: "İçeri girebilir miyim?" },
     { en: "Can I go to the bathroom?", alt: "Bathroom, please.", ph: "Kân ay gô tu ðı bathrûm?", tr: "Tuvalete gidebilir miyim?" },
   ],
@@ -650,7 +639,7 @@ const QUIZ = [
   { sit: "Sporcu kilo limitinin altında.", q: "Ne dersin?", opts: ["You are under the weight limit.", "You are disqualified due to weight.", "You are over the weight limit.", "The list is not updated."], c: 0, ex: "✓ 'You are under the weight limit.' — kilo eksik bildirimi." },
   { sit: "Sporcuya kilo nedeniyle diskalifiye olduğunu söylüyorsun.", q: "Ne söylersin?", opts: ["You are disqualified due to weight.", "You are below the weight limit.", "You are over the weight limit.", "The scale is not working."], c: 0, ex: "✓ 'You are disqualified due to weight.' — resmi diskalifiye bildirimi." },
   { sit: "Cihazında internet bağlantısı yok, yardım istiyorsun.", q: "Ne söylersin?", opts: ["I am having internet connection issues. Can you assist me, please?", "The athlete's name does not appear on the list.", "I cannot enter data into the list.", "The list is not up to date."], c: 0, ex: "✓ 'I am having internet connection issues. Can you assist me, please?' — teknik destek talebi." },
-  { sit: "Online liste güncellenmemiş.", q: "Ne söylersin?", opts: ["The list is not up to date.", "The scale is over-reading.", "You must see the doctor first.", "Please present your passport."], c: 0, ex: "✓ 'The list is not up to date.' — liste güncellenmemiş bildirimi." },
+  { sit: "Online liste güncellenmemiş.", q: "Ne söylersin?", opts: ["The list is not up to date.", "The scale is over-reading.", "You must see the door first.", "Please present your passport."], c: 0, ex: "✓ 'The list is not up to date.' — liste güncellenmemiş bildirimi." },
   { sit: "Listeye veri girişi yapamıyorsun.", q: "Ne söylersin?", opts: ["I cannot enter data into the list.", "I cannot see the doctor's approval.", "The athlete is under the weight limit.", "Please remove your necklace."], c: 0, ex: "✓ 'I cannot enter data into the list.' — veri girişi problemi bildirimi." },
   { sit: "Listede sporcunun adı gözükmüyor.", q: "Ne söylersin?", opts: ["The athlete's name does not appear on the list.", "The athlete is over the weight limit.", "The test scale is in the corridor.", "The scale is over-reading."], c: 0, ex: "✓ 'The athlete's name does not appear on the list.' — listede isim bulunamadı." },
   { sit: "Listede sporcunun adı yanlış yazıyor.", q: "Ne söylersin?", opts: ["The athlete's name is incorrect.", "The athlete's country is missing.", "The athlete's weight class is incorrect.", "The medical form is complete."], c: 0, ex: "✓ 'The athlete's name is incorrect.' — yanlış isim bildirimi." },
@@ -670,18 +659,13 @@ const QUIZ = [
   { sit: "Lavaboya gitmek için izin istiyorsun.", q: "Ne söylersin?", opts: ["Can I go to the bathroom?", "I need to make a call.", "I am tired.", "Where is the weigh-in room?"], c: 0, ex: "✓ 'Can I go to the bathroom?' — tuvalet izni alma." },
 ];
 
-// ─── 4. RUNNING APPLICATION INITIALIZATION ───────────────────────
-</script>
-<script src="day2.js"></script>
-<script>
-// Ağaç yapısı ve bağımlılıklar yüklendikten sonra güvenli tetikleme
+// ─── 6. RUNNING APPLICATION INITIALIZATION ───────────────────────
 buildDayNav();
 if(NAV[curDay] && NAV[curDay].l2 && NAV[curDay].l2.length > 0) {
-  const firstL2 = NAV[curDay].l2[0];
-  curL2 = firstL2.id;
-  buildL2();
-  initL2(firstL2);
+  const firstL2 = NAV[curDay].l2[0]; curL2 = firstL2.id;
+  buildL2(); initL2(firstL2);
 }
 </script>
+<script src="day2.js" charset="UTF-8"></script>
 </body>
 </html>
