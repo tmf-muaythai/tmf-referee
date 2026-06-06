@@ -23,7 +23,7 @@ body{
     background-attachment: fixed;
     background-position: left 5% center, right 5% center;
     background-size: 300px;
-    opacity: 0.99; /* Sayfa bütünlüğü için gövde opaklık koruması */
+    opacity: 0.99;
   }
 }
 
@@ -115,6 +115,7 @@ body{
 <div id="l3-nav-wrap"></div>
 <div id="l4-nav-wrap"></div>
 
+<!-- 🎛️ Küresel Ses Hızı Kontrol Paneli -->
 <div class="content" style="padding-bottom:0; margin-top:8px;">
   <div class="speed-panel">
     <div class="speed-title">⏱️ Ses Çalma Hızı (Audio Speed):</div>
@@ -134,7 +135,7 @@ body{
 </div>
 
 <script>
-// ─── NAVIGATION TREE ───────────────────────────────────────────────
+// ─── STATE & CONFIG FIRST (Hataları önlemek için en başa aldık) ───
 const NAV = {
   day1: {
     label: "Tartı ve Kayıt",
@@ -246,48 +247,60 @@ const NAV = {
   }
 };
 
-// ─── STATE ─────────────────────────────────────────────────────────
 let curDay = "day1";
 let curL2  = "registration";
 let curL3  = null;
 let curL4  = null;
 let curSec = "kayit";
 let qIdx = 0, score = 0, answered = false, shuffledQuiz = [];
-let currentPlaybackSpeed = 0.92; // Varsayılan dengeli hız
+let currentPlaybackSpeed = 0.92;
 
-// ─── AUDIO ENGINE (ELEVENLABS INTEGRATION) ─────────────────────────
+// ─── HELPERS ───
+function isScenario(id) {
+  return id && (id === "senaryo" || id.startsWith("senaryo_") || id.startsWith("d2_senaryo"));
+}
+
 function setGlobalSpeed(speed) {
   currentPlaybackSpeed = speed;
   document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
   document.getElementById(`sp-${speed}`).classList.add('active');
 }
 
-// Dinamik olarak s1, s2 veya foul_1 gibi ses dosyalarını tetikler
 function playElevenLabsVoice(fileCode) {
   if (!fileCode) return;
-  
-  // Audacity'den çıkarttığın mp3 dosyasının tam yolu
   const audioPath = `assets/audio/${fileCode}.mp3`;
   const audio = new Audio(audioPath);
-  
-  // Kullanıcının seçtiği hızı anlık enjekte ediyoruz (Ses detone olmaz)
   audio.playbackRate = currentPlaybackSpeed;
-  
   audio.play().catch(err => {
-    console.log("Ses dosyası bulunamadı veya oynatılamadı. Web Speech API'ye devrediliyor...");
-    // Eğer sunucuda dosya eksikse sistem çökmesin, robot asistan seslendirsin:
+    console.log("Ses dosyası yerelde bulunamadı, Web Speech API devrede.");
     fallbackSpeak(fileCode);
   });
 }
 
-// Eğer ses dosyası sunucuda henüz yoksa çalışacak B Planı fonksiyonu
 function fallbackSpeak(txt) {
   if (!window.speechSynthesis) return;
-  const u = new SpeechSynthesisUtterance(txt);
-  u.lang = "en-US"; 
-  u.rate = currentPlaybackSpeed;
-  speechSynthesis.cancel(); 
-  speechSynthesis.speak(u);
+  // Eğer parametre olarak gelen değer düz bir cümle değil de dosya adı kodlaması ise, onun yerine temiz en-US seslendirme yapılsın
+  let cleanText = txt;
+  if(txt.includes('_')) {
+     const allP = Object.assign({}, PHRASES, (window.DAY2_PHRASES || {}));
+     const currentList = investorsFindListByCode();
+     if(currentList && currentList.length) {
+        // Kodlama yapısına göre tam metni bulmaya çalışıyoruz
+        const indexStr = txt.split('_').pop();
+        const numericIdx = parseInt(indexStr) - 1;
+        if(currentList[numericIdx]) {
+           cleanText = txt.includes('short') && currentList[numericIdx].alt ? currentList[numericIdx].alt : currentList[currentList[numericIdx] ? numericIdx : 0].en;
+        }
+     }
+  }
+  const u = new SpeechSynthesisUtterance(cleanText);
+  u.lang = "en-US"; u.rate = currentPlaybackSpeed;
+  speechSynthesis.cancel(); speechSynthesis.speak(u);
+}
+
+function investorsFindListByCode() {
+  const allP = Object.assign({}, PHRASES, (window.DAY2_PHRASES || {}));
+  return allP[curSec] || [];
 }
 
 function shuffle(arr) {
@@ -300,7 +313,7 @@ function shuffle(arr) {
 
 function resetQuiz() { qIdx = 0; score = 0; shuffledQuiz = []; }
 
-// ─── NAV BUILDERS ──────────────────────────────────────────────────
+// ─── NAV BUILDERS ───
 function buildDayNav() {
   document.getElementById("day-nav").innerHTML =
     Object.entries(NAV).map(([id, d]) =>
@@ -342,7 +355,6 @@ function buildL4() {
     ).join("")}</div>`;
 }
 
-// ─── NODE FINDERS ──────────────────────────────────────────────────
 function getL2Node() { return NAV[curDay].l2.find(n => n.id === curL2); }
 function getL3Node() {
   const l2 = getL2Node();
@@ -350,7 +362,7 @@ function getL3Node() {
   return l2.l3.find(n => n.id === curL3);
 }
 
-// ─── SWITCHERS ─────────────────────────────────────────────────────
+// ─── SWITCHERS ───
 function switchDay(id) {
   curDay = id;
   resetQuiz();
@@ -360,15 +372,17 @@ function switchDay(id) {
   buildDayNav(); buildL2();
 }
 
+// Buradaki 'isQuiz' okuma hatasını önlemek için güvenli düğüm kontrolü eklendi
 function switchL2(id) {
   curL2 = id;
   resetQuiz();
   const l2 = getL2Node();
-  initL2(l2);
+  if (l2) initL2(l2);
   buildL2();
 }
 
 function initL2(l2) {
+  if (!l2) return;
   if (l2.isQuiz) {
     curL3 = null; curL4 = null;
     curSec = l2.quizId;
@@ -421,7 +435,7 @@ function switchL4(id) {
   render();
 }
 
-// ─── RENDER ────────────────────────────────────────────────────────
+// ─── RENDER ───
 function render() {
   if (isScenario(curSec)) renderQuiz();
   else renderPhrases();
@@ -435,12 +449,9 @@ function renderPhrases() {
     c.innerHTML = `<div class="empty-msg">Bu bölüm yakında eklenecek. 🔜</div>`; return;
   }
   
-  // Liste görünümünde ElevenLabs seslerini tetiklemek için benzersiz ID türetiyoruz
   c.innerHTML = list.map((p, idx) => {
     const hasAlt = p.alt && p.alt.trim() !== "";
     const phonShort = p.phs && p.phs.trim() !== "" ? p.phs : "";
-    
-    // Klasördeki ses adını otomatik eşleştiriyoruz (Örn: kayit_1, kayit_2 veya d2_orta_1)
     const tamSesKodu = `${curSec}_${idx + 1}`;
     const kisaSesKodu = `${curSec}_${idx + 1}_short`;
 
@@ -473,8 +484,6 @@ function renderQuiz() {
   const sOpts = shuffle(q.opts.map((o,i) => ({o, orig:i})));
   const newC = sOpts.findIndex(x => x.orig === q.c);
   answered = false;
-
-  // Soru kodunu quiz sekmelerine göre dinamik üretiyoruz (Örn: quiz_reg_1 veya quiz_jury_3)
   const quizSesKodu = `quiz_${curSec}_${qIdx + 1}`;
 
   c.innerHTML = `
@@ -523,7 +532,6 @@ function checkAns(idx, correct, ex, ans, sesKodu) {
   }
   document.getElementById("nxt").classList.add("show");
   
-  // Hakem doğru cevabın sesini stüdyo kalitesinde dinlesin:
   const sb = document.getElementById("sp-ans");
   if (sb) sb.addEventListener("click", () => playElevenLabsVoice(sesKodu));
 }
@@ -543,7 +551,7 @@ function showDone() {
 
 function restartQuiz() { resetQuiz(); renderQuiz(); }
 
-// ─── PHRASES DATA (Day 1) ──────────────────────────────────────────
+// ─── PHRASES DATA (Day 1) ───
 const PHRASES = {
   kayit: [
     { en: "Hello, welcome. Which country are you representing?", alt: "Welcome! Your country?", ph: "Helô, velkım. Viç kantri âr yu reprizenting?", tr: "Merhaba, hoş geldiniz. Hangi ülkeyi temsil ediyorsunuz?" },
@@ -685,15 +693,18 @@ const QUIZ = [
   { sit: "Lavaboya gitmek için izin istiyorsun.", q: "Ne söylersin?", opts: ["Can I go to the bathroom?", "I need to make a call.", "I am tired.", "Where is the weigh-in room?"], c: 0, ex: "✓ 'Can I go to the bathroom?' — tuvalet izni alma." },
 ];
 
-// ─── INIT ──────────────────────────────────────────────────────────
+// ─── INIT EXECUTION AT THE VERY END (Sıralama Hatasını çözen yer) ───
 </script>
 <script src="day2.js"></script>
 <script>
+// Sayfa hazır olduğunda tüm elementleri sırayla ayağa kaldırıyoruz
 buildDayNav();
-const firstL2 = NAV[curDay].l2[0];
-curL2 = firstL2.id;
-buildL2();
-initL2(firstL2);
+if(NAV[curDay] && NAV[curDay].l2 && NAV[curDay].l2.length > 0) {
+  const firstL2 = NAV[curDay].l2[0];
+  curL2 = firstL2.id;
+  buildL2();
+  initL2(firstL2);
+}
 </script>
 </body>
 </html>
