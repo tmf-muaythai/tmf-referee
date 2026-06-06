@@ -36,7 +36,7 @@ body{
 .day-btn{padding:9px 20px;font-size:13px;font-weight:600;border:2px solid rgba(255,255,255,0.7);border-radius:22px;background:transparent;color:#fff;cursor:pointer;transition:all .2s}
 .day-btn.active{background:#fff;color:#185FA5;border-color:#fff}
 
-/* LEVEL 2 - Day1: Kayıt/Tartı/Sosyal/MasterQuiz | Day2: Jury/Equipment/... */
+/* LEVEL 2 - Day1: Kayıt/Tartı/Sosyal/Quiz | Day2: Jury/Equipment/... */
 .l2-nav{display:flex;justify-content:center;gap:7px;padding:10px 12px;background:#1a6fbc;border-bottom:1px solid rgba(255,255,255,0.15);flex-wrap:wrap}
 .l2-btn{padding:7px 14px;font-size:12px;font-weight:600;border:1.5px solid rgba(255,255,255,0.6);border-radius:16px;background:transparent;color:#fff;cursor:pointer;transition:all .15s;white-space:nowrap}
 .l2-btn.active{background:#fff;color:#185FA5;border-color:#fff}
@@ -135,7 +135,7 @@ body{
 </div>
 
 <script>
-// ─── STATE & CONFIG FIRST (Hataları önlemek için en başa aldık) ───
+// ─── STATE & CONFIG FIRST (Ağaç Yapısı Yenilendi) ───────────────────
 const NAV = {
   day1: {
     label: "Tartı ve Kayıt",
@@ -143,9 +143,7 @@ const NAV = {
       {
         id: "registration", label: "Kayıt (Registration)",
         l3: [
-          { id: "kayit",   label: "Kayıt & Belge (Registration & Documents)", leaf: true },
-          { id: "kimlik", label: "Kimlik & Belge (ID & Documents)", leaf: true },
-          { id: "senaryo_reg", label: "▶ Senaryo Pratiği", leaf: true },
+          { id: "kayit",   label: "Kayıt & Belge (Registration & Documents)", leaf: true }
         ]
       },
       {
@@ -155,19 +153,18 @@ const NAV = {
             id: "weighin_process", label: "Tartım Süreci (Weigh-In Process)",
             l4: [
               { id: "cagirma", label: "Tartıya Çağırma (Calling for Weigh-In)", leaf: true },
+              { id: "kimlik",  label: "Kimlik & Belge (ID & Documents)", leaf: true },
               { id: "giyim",   label: "Giyim & Hazırlık (Dress & Preparation)", leaf: true },
               { id: "tartim",  label: "Tartım (Weighing)", leaf: true },
               { id: "sonuc",   label: "Tartı Sonucu (Weigh-In Results)", leaf: true },
-              { id: "rapor",   label: "Tartı Sonu Raporu (Final Report)", leaf: true },
-              { id: "senaryo_process", label: "▶ Senaryo Pratiği", leaf: true },
+              { id: "rapor",   label: "Tartı Sonu Raporu (Final Report)", leaf: true }
             ]
           },
           {
             id: "weighin_tech", label: "Teknik Sorunlar (Technical Issues)",
             l4: [
               { id: "sistem", label: "Sistemsel Sorunlar (System Errors)", leaf: true },
-              { id: "baskul", label: "Baskül Sorunları (Scale Issues)", leaf: true },
-              { id: "senaryo_tech", label: "▶ Senaryo Pratiği", leaf: true },
+              { id: "baskul", label: "Baskül Sorunları (Scale Issues)", leaf: true }
             ]
           },
         ]
@@ -175,12 +172,11 @@ const NAV = {
       {
         id: "social", label: "Sosyal İletişim (Socializing)",
         l3: [
-          { id: "sosyal", label: "Sosyal İletişim", leaf: true },
-          { id: "senaryo_social", label: "▶ Senaryo Pratiği", leaf: true },
+          { id: "sosyal", label: "Sosyal İletişim", leaf: true }
         ]
       },
       {
-        id: "masterquiz", label: "▶ Tartı Günü Master Quiz",
+        id: "masterquiz", label: "▶ Senaryo Pratiği",
         l3: [],
         isQuiz: true,
         quizId: "senaryo"
@@ -279,13 +275,10 @@ function playElevenLabsVoice(fileCode) {
 
 function fallbackSpeak(txt) {
   if (!window.speechSynthesis) return;
-  // Eğer parametre olarak gelen değer düz bir cümle değil de dosya adı kodlaması ise, onun yerine temiz en-US seslendirme yapılsın
   let cleanText = txt;
   if(txt.includes('_')) {
-     const allP = Object.assign({}, PHRASES, (window.DAY2_PHRASES || {}));
      const currentList = investorsFindListByCode();
      if(currentList && currentList.length) {
-        // Kodlama yapısına göre tam metni bulmaya çalışıyoruz
         const indexStr = txt.split('_').pop();
         const numericIdx = parseInt(indexStr) - 1;
         if(currentList[numericIdx]) {
@@ -372,7 +365,6 @@ function switchDay(id) {
   buildDayNav(); buildL2();
 }
 
-// Buradaki 'isQuiz' okuma hatasını önlemek için güvenli düğüm kontrolü eklendi
 function switchL2(id) {
   curL2 = id;
   resetQuiz();
@@ -693,11 +685,10 @@ const QUIZ = [
   { sit: "Lavaboya gitmek için izin istiyorsun.", q: "Ne söylersin?", opts: ["Can I go to the bathroom?", "I need to make a call.", "I am tired.", "Where is the weigh-in room?"], c: 0, ex: "✓ 'Can I go to the bathroom?' — tuvalet izni alma." },
 ];
 
-// ─── INIT EXECUTION AT THE VERY END (Sıralama Hatasını çözen yer) ───
+// ─── INIT EXECUTION AT THE VERY END ───
 </script>
 <script src="day2.js"></script>
 <script>
-// Sayfa hazır olduğunda tüm elementleri sırayla ayağa kaldırıyoruz
 buildDayNav();
 if(NAV[curDay] && NAV[curDay].l2 && NAV[curDay].l2.length > 0) {
   const firstL2 = NAV[curDay].l2[0];
