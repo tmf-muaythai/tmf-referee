@@ -24,8 +24,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .main-sec-btn.active{background:#185FA5;color:#fff}
 
 /* SUB SECTION NAV - 2 column grid */
-.sec-nav{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:10px 12px;background:#fff;border-bottom:1px solid #e0e8f0}
-.sec-btn{padding:8px 10px;font-size:11px;text-align:center;border:1px solid #c5d5e8;border-radius:8px;background:#f8fafc;color:#444;cursor:pointer;line-height:1.3;transition:all .15s}
+.sec-nav{display:flex;flex-wrap:wrap;gap:6px;padding:10px 12px;background:#fff;border-bottom:1px solid #e0e8f0;justify-content:center}
+.sec-btn{padding:7px 12px;font-size:11px;text-align:center;border:1px solid #c5d5e8;border-radius:8px;background:#f8fafc;color:#444;cursor:pointer;line-height:1.3;transition:all .15s;white-space:nowrap}
 .sec-btn.active{background:#185FA5;border-color:#185FA5;color:#fff;font-weight:600}
 
 .content{padding:12px;max-width:600px;margin:0 auto;width:100%;flex:1}
@@ -101,16 +101,16 @@ const DAYS = [
 
 // Day1 sections
 const DAY1_SECTIONS = [
-  { id: "kayit",   label: "Kayıt & Belge (Registration)" },
-  { id: "cagirma", label: "Tartıya Çağırma (Weigh-In Call)" },
-  { id: "kimlik",  label: "Kimlik & Belge (ID & Documents)" },
-  { id: "giyim",   label: "Giyim & Hazırlık (Clothing)" },
-  { id: "tartim",  label: "Tartım (Weighing)" },
-  { id: "sonuc",   label: "Tartı Sonucu (Result)" },
-  { id: "sistem",  label: "Sistemsel Sorunlar (System)" },
-  { id: "baskul",  label: "Baskül Sorunları (Scale)" },
-  { id: "rapor",   label: "Tartı Sonu Raporu (Report)" },
-  { id: "sosyal",  label: "Sosyal İletişim (Social)" },
+  { id: "kayit",   label: "Kayıt & Belge" },
+  { id: "cagirma", label: "Tartıya Çağırma" },
+  { id: "kimlik",  label: "Kimlik & Belge" },
+  { id: "giyim",   label: "Giyim & Hazırlık" },
+  { id: "tartim",  label: "Tartım" },
+  { id: "sonuc",   label: "Tartı Sonucu" },
+  { id: "sistem",  label: "Sistemsel Sorunlar" },
+  { id: "baskul",  label: "Baskül Sorunları" },
+  { id: "rapor",   label: "Tartı Sonu Raporu" },
+  { id: "sosyal",  label: "Sosyal İletişim" },
   { id: "senaryo", label: "▶ Senaryo Pratiği" },
 ];
 
@@ -122,7 +122,6 @@ const DAY2_MAIN = [
   { id: "judge",     label: "Judge" },
   { id: "timekeeper",label: "Timekeeper" },
   { id: "announcer", label: "Announcer" },
-  { id: "d2_senaryo",label: "▶ Scenario" },
 ];
 
 // Day2 sub-sections per main tab
@@ -133,10 +132,12 @@ const DAY2_SUBS = {
     { id: "d2_juri_gov", label: "Görevlendirme (Assignment)" },
     { id: "d2_hakem",    label: "Hakem Sağlık (Referee Health)" },
     { id: "d2_ring",     label: "Ring" },
+    { id: "d2_senaryo_jury", label: "▶ Senaryo Pratiği" },
   ],
   equipment: [
     { id: "d2_ekipman", label: "Ekipman Kontrolü (Equipment Check)" },
     { id: "d2_kose",    label: "Köşe Görevlisi (Second)" },
+    { id: "d2_senaryo_equipment", label: "▶ Senaryo Pratiği" },
   ],
   referee: [
     { id: "d2_orta",   label: "Komutlar (Referee Commands)" },
@@ -145,16 +146,20 @@ const DAY2_SUBS = {
     { id: "d2_karar",  label: "Kararlar (Decisions)" },
     { id: "d2_doktor", label: "Doktor (Doctor)" },
     { id: "d2_tayca",  label: "Tayca Sayma (Thai Count)" },
+    { id: "d2_senaryo_referee", label: "▶ Senaryo Pratiği" },
   ],
   judge: [
     { id: "d2_yan",  label: "Yan Hakem (Judge)" },
     { id: "d2_skor", label: "Skorlama (Scoring System)" },
+    { id: "d2_senaryo_judge", label: "▶ Senaryo Pratiği" },
   ],
   timekeeper: [
     { id: "d2_zaman", label: "Zaman Hakemi (Timekeeper)" },
+    { id: "d2_senaryo_timekeeper", label: "▶ Senaryo Pratiği" },
   ],
   announcer: [
     { id: "d2_anons", label: "Anons Hakemi (Announcer)" },
+    { id: "d2_senaryo_announcer", label: "▶ Senaryo Pratiği" },
   ],
 };
 
@@ -162,14 +167,14 @@ const PHRASES = {
   kayit: [
     { en: "Hello, welcome. Which country are you representing?", alt: "Welcome! Your country?", ph: "Helô, velkım. Viç kantri âr yu reprizenting?", tr: "Merhaba, hoş geldiniz. Hangi ülkeyi temsil ediyorsunuz?" },
     { en: "Please present the required documents.", alt: "Required documents, please.", ph: "Plîz prızent ðı rikuayırd dokyımınts.", tr: "Lütfen gerekli belgeleri gösterin." },
+    { en: "Please present your passports.", alt: "Passports, please.", ph: "Plîz prızent yör pâspörts.", tr: "Lütfen pasaportlarınızı gösterin." },
+    { en: "Please come back after the documents are complete.", alt: "Come back when documents are ready.", ph: "Plîz kam bak âftır ðı dokyımınts âr kımplît.", tr: "Belgelerinizi tamamladıktan sonra lütfen tekrar gelin." },
     { en: "Athlete's medical declaration is missing.", alt: "Medical declaration missing.", ph: "Atlet's mediköl deklıreyşın iz mising.", tr: "Sporcunun tıbbi beyan formu eksik." },
     { en: "Athlete's non-pregnancy declaration is missing.", alt: "Non-pregnancy declaration missing.", ph: "Atlet's non-pregnınsi deklıreyşın iz mising.", tr: "Sporcunun hamile olmama beyanı eksik." },
     { en: "Athlete's anti-doping consent is missing.", alt: "Anti-doping consent missing.", ph: "Atlet's anti-dôping konsent iz mising.", tr: "Sporcunun anti-doping onayı eksik." },
     { en: "Athlete's HIV test result is missing.", alt: "HIV result missing.", ph: "Atlet's eytç-ay-vî test rizalt iz mising.", tr: "Sporcunun HIV kan testi sonucu eksik." },
     { en: "Athlete's HBV test result is missing.", alt: "HBV result missing.", ph: "Atlet's eytç-bî-vî test rizalt iz mising.", tr: "Sporcunun HBV kan testi sonucu eksik." },
     { en: "Athlete's HCV test result is missing.", alt: "HCV result missing.", ph: "Atlet's eytç-sî-vî test rizalt iz mising.", tr: "Sporcunun HCV kan testi sonucu eksik." },
-    { en: "Please come back after the documents are complete.", alt: "Come back when documents are ready.", ph: "Plîz kam bak âftır ðı dokyımınts âr kımplît.", tr: "Belgelerinizi tamamladıktan sonra lütfen tekrar gelin." },
-    { en: "Please present your passports.", alt: "Passports, please.", ph: "Plîz prızent yör pâspörts.", tr: "Lütfen pasaportlarınızı gösterin." },
   ],
   cagirma: [
     { en: "Male weigh-in starts now. You can come in. Only one athlete please!", alt: "Males, please come in — one at a time.", ph: "Meyl vey-in stârts nau. Yu kân kam in. Only van atlet plîz!", tr: "Erkek tartısı şimdi başlıyor. İçeri gelebilirsiniz. Sadece bir sporcu lütfen." },
@@ -209,6 +214,8 @@ const PHRASES = {
     { en: "You are over the weight limit.", alt: "Overweight.", ph: "Yu âr ovır ðı veyt limit.", tr: "Kilo limitinin üzerindesiniz." },
     { en: "You are under the weight limit.", alt: "Underweight.", ph: "Yu âr andır ðı veyt limit.", tr: "Kilo limitinin altındasınız." },
     { en: "You are disqualified due to weight.", alt: "DSQ — weight.", ph: "Yu âr diskvolifayd dyû tu veyt.", tr: "Kilo nedeniyle diskalifiye edildiniz." },
+    { en: "All done. Good luck.", alt: "Good luck!", ph: "Ôl dan. Gud lak.", tr: "Her şey tamam. Başarılar." },
+    { en: "Have a nice day.", alt: "Have a good day.", ph: "Hav ı nays dey.", tr: "İyi günler." },
   ],
   sistem: [
     { en: "I am having internet connection issues. Can you assist me, please?", alt: "Internet problem — can you help?", ph: "Ay âm heving inturnet kınekşın işûz. Kân yu ısist mi, plîz?", tr: "İnternet bağlantı problemi yaşıyorum. Yardımcı olabilir misiniz?" },
@@ -235,8 +242,6 @@ const PHRASES = {
     { en: "The total number of walkovers is…", alt: "Walkovers: …", ph: "Ðı totıl nambır ov vôkovırz iz…", tr: "Toplam walkover sayısı…" },
   ],
   sosyal: [
-    { en: "All done. Good luck.", alt: "Good luck!", ph: "Ôl dan. Gud lak.", tr: "Her şey tamam. Başarılar." },
-    { en: "Have a nice day.", alt: "Have a good day.", ph: "Hav ı nays dey.", tr: "İyi günler." },
     { en: "Can I come in?", alt: "May I come in?", ph: "Kân ay kam in?", tr: "İçeri girebilir miyim?" },
     { en: "Can I go to the bathroom?", alt: "Bathroom, please.", ph: "Kân ay gô tu ðı bathrûm?", tr: "Tuvalete gidebilir miyim?" },
   ],
@@ -385,12 +390,8 @@ function switchDay2Main(id) {
   shuffledQuiz = [];
   score = 0;
   qIdx = 0;
-  if (id === "d2_senaryo") {
-    curSec = "d2_senaryo";
-  } else {
-    const subs = DAY2_SUBS[id] || [];
-    curSec = subs.length > 0 ? subs[0].id : "";
-  }
+  const subs = DAY2_SUBS[id] || [];
+  curSec = subs.length > 0 ? subs[0].id : "";
   buildDay2MainNav();
   buildDay2SubNav();
   render();
@@ -407,7 +408,7 @@ function switchSec(id) {
 }
 
 function render() {
-  if (curSec === "senaryo" || curSec === "d2_senaryo") {
+  if (curSec === "senaryo" || curSec.startsWith("d2_senaryo")) {
     renderQuiz();
   } else {
     renderPhrases();
@@ -438,6 +439,7 @@ function renderPhrases() {
 function renderQuiz() {
   const c = document.getElementById("content");
   const activeQuiz = (curDay === "day2" && typeof window.DAY2_QUIZ !== "undefined") ? window.DAY2_QUIZ : QUIZ;
+  // future: filter by curDay2Main for section-specific quizzes
   if (shuffledQuiz.length === 0) shuffledQuiz = shuffle(activeQuiz);
   if (qIdx >= shuffledQuiz.length) { showDone(); return; }
 
