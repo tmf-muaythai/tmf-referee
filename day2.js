@@ -1,4 +1,3 @@
-// day2.js dosyanın en başına bu satırı ekle
 window.QUIZ_JURY = window.QUIZ_JURY || [];
 window.QUIZ_TIMEKEEPER = window.QUIZ_TIMEKEEPER || [];
 window.QUIZ_ANNOUNCER = window.QUIZ_ANNOUNCER || [];
