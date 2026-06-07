@@ -262,30 +262,7 @@ window.DAY2_PHRASES = {
   ],
 };
 
-window.DAY2_QUIZ = [
-  { sit: "Bir sporcunun eldivenleri hem onaysız hem de yıpranmış görünüyor.", q: "Ne söylersin?", opts: ["These gloves are not acceptable. Please change them.", "The gloves are loose. Please tape them.", "Only IFMA approved gloves are allowed.", "Can I see your gloves?"], c: 0, ex: "✓ 'These gloves are not acceptable. Please change them.'" },
-  { sit: "Sporcu kaskını takmadan ringe çıkmaya hazırlanıyor.", q: "Ne söylersin?", opts: ["Put on your headguard.", "Remove your headguard.", "Can I see your headguard?", "Fix the headguard."], c: 0, ex: "✓ 'Put on your headguard.' — kask takma komutu." },
-  { sit: "Çok fazla vazelin sürülmüş, kurallara aykırı.", q: "Ne söylersin?", opts: ["Too much Vaseline. Please wipe it off.", "The gloves are loose. Please tape them.", "Please remove your jewelry.", "Show me your bandage."], c: 0, ex: "✓ 'Too much Vaseline. Please wipe it off.'" },
-  { sit: "Köşe görevlisi ceketiyle görev yerine geliyor.", q: "Ne söylersin?", opts: ["Please remove your jacket.", "Only sports shoes are allowed.", "Do not remove the gloves.", "Please take the water bottle."], c: 0, ex: "✓ 'Please remove your jacket.'" },
-  { sit: "Köşe görevlisi havluyu almayı unuttu.", q: "Ne söylersin?", opts: ["Please remove the towel.", "Please lean over the ropes.", "Do not remove the gloves.", "Fix the headguard."], c: 0, ex: "✓ 'Please remove the towel.'" },
-  { sit: "Aynı raundda 2 kere saydın, Başhakeme bildiriyorsun.", q: "Ne söylersin?", opts: ["I counted twice in the same round.", "I counted twice in total.", "I geyv two cautions.", "I counted three times in total."], c: 0, ex: "✓ 'I counted twice in the same round.'" },
-  { sit: "Sporcunun kasık koruyucusu yok.", q: "Ne bildirirsin?", opts: ["The athlete has no groin guard.", "The athlete has no chest protector.", "The athlete has no bandage.", "The headguard is not approved."], c: 0, ex: "✓ 'The athlete has no groin guard.'" },
-  { sit: "Hangi ringde görev yapacağını öğrenmek istiyorsun.", q: "Ne sorarsın?", opts: ["Which ring is it?", "Which bout number is it?", "What is my duty?", "Which weight division is it?"], c: 0, ex: "✓ 'Which ring is it?'" },
-  { sit: "Skor kartın bitti.", q: "Ne söylersin?", opts: ["The scorecard is finished.", "I need a pen, please.", "Please step back.", "I pressed the wrong button."], c: 0, ex: "✓ 'The scorecard is finished.'" },
-  { sit: "Yanlış köşeye puan verdiğini fark ettin.", q: "Ne söylersin?", opts: ["I geyv the point to the wrong corner.", "I pressed the wrong button.", "I reset the score by mistake.", "I did not press the button."], c: 0, ex: "✓ 'I geyv the point to the wrong corner.'" },
-  { sit: "Zaman hakemi olarak sistem durdu.", q: "Ne söylersin?", opts: ["The system has stopped.", "There is no sound.", "I stopped the time.", "I started the time."], c: 0, ex: "✓ 'The system has stopped.'" },
-  { sit: "Sporcu ringe gelmedi, son kez çağırıyorsun.", q: "Ne söylersin?", opts: ["This is the final call!", "Seconds out!", "The bouts are paused for one hour.", "Next bout, get ready."], c: 0, ex: "✓ 'This is the final call!'" },
-  { sit: "Maç başlamadan önce sporcuları ortaya çağırıyorsun.", q: "Ne söylersin?", opts: ["Red, Blue, come to the center. Shake hands. Good luck. To your corners.", "Put on your headguard. Listen to my commands.", "This is your first caution.", "Will you continue?"], c: 0, ex: "✓ 'Red, Blue, come to the center. Shake hands. Good luck. To your corners.'" },
-  { sit: "Sporcu son kez kurala aykırı hareket yaptı.", q: "Ne söylersin?", opts: ["This is your last caution.", "This is your second caution.", "This is your first caution.", "Warning for unsportsmanlike behaviour."], c: 0, ex: "✓ 'This is your last caution.'" },
-  { sit: "Sporcu kasıtlı olarak dişliğini çıkarttı, ceza veriyorsun.", q: "Jüriye ne bildirirsin?", opts: ["Warning for removing the gum shield.", "Warning for spitting.", "Warning for wrestling.", "Warning for biting."], c: 0, ex: "✓ 'Warning for removing the gum shield.'" },
-  { sit: "Yoot komutundan sonra sporcu vuruşuna devam etti.", q: "Ne söylersin?", opts: ["Striking after the YOOT is not allowed.", "You must follow my commands immediately.", "No shaking hands during the fight.", "Intentionally falling to avoid a hit is not allowed. Fight!"], c: 0, ex: "✓ 'Striking after the YOOT is not allowed.'" },
-  { sit: "Maç puanla sonuçlandı, kırmızı köşe kazandı.", q: "Karar kısaltması hangisi?", opts: ["WP — Winner is Red corner.", "RSC-S — Winner is Red corner.", "KO-H — Winner is Red corner.", "DQ — Winner is Red corner."], c: 0, ex: "✓ WP — Win on Points. Puanla kazanma." },
-  { sit: "Sporcu başına ağır darbe aldı, hakem maçı durdurdu.", q: "Karar kısaltması hangisi?", opts: ["RSC-H", "RSC-B", "RSC-I", "KO-B"], c: 0, ex: "✓ RSC-H — Referee Stops Contest, Head Strike." },
-  { sit: "Maç berabere sonuçlandı.", q: "Karar hangisi?", opts: ["DRAW", "WP", "NC", "WO"], c: 0, ex: "✓ DRAW — Beraberlik, kazanan yok." },
-  { sit: "Doktor ringe girmek istiyor ama henüz izin verilmedi.", q: "Ne söylersin?", opts: ["Please do not enter the ring.", "You may enter the ring.", "Can the athlete continue?", "What is the situation?"], c: 0, ex: "✓ 'Please do not enter the ring.'" },
-  { sit: "Ring zemini kayıyor.", q: "Ne söylersin?", opts: ["The canvas is too wet and slippery.", "The canvas needs to be cleaned.", "The ropes are loose.", "The canvas needs to be fixed."], c: 0, ex: "✓ 'The canvas is too wet and slippery.'" },
-  { sit: "Başın dönüyor.", q: "Ne söylersin?", opts: ["I feel dizzy.", "I don't feel well. May I rest?", "I need to see a doctor.", "My blood pressure is high."], c: 0, ex: "✓ 'I feel dizzy.'" },
-];
+
 
 window.DAY2_SECTIONS = [
   { id: "d2_juri_rap", label: "Raporlama (Reporting)" },
