@@ -337,21 +337,17 @@ function renderPhrases() {
 }
 
 function renderQuiz() {
-  // renderQuiz fonksiyonunun en başına şunu ekle:
-if (curSec === "d2_senaryo_jury") activeQuiz = window.QUIZ_JURY;
-else if (curSec === "d2_senaryo_judge") activeQuiz = window.QUIZ_JUDGE;
-else if (curSec === "d2_senaryo_timekeeper") activeQuiz = window.QUIZ_TIMEKEEPER;
-else if (curSec === "d2_senaryo_announcer") activeQuiz = window.QUIZ_ANNOUNCER;
-else if (curSec === "d2_senaryo_equipment") activeQuiz = window.QUIZ_EQUIPMENT;
-else activeQuiz = window.DAY2_QUIZ; // Yedek
-  const c = document.getElementById("content");
-  let activeQuiz = QUIZ;
-  
-  if (curDay === "day2") {
-    if (curSec === "d2_senaryo_jury" && window.QUIZ_JURY) activeQuiz = window.QUIZ_JURY;
-    else if (curSec === "d2_senaryo_equipment" && window.QUIZ_EQUIPMENT) activeQuiz = window.QUIZ_EQUIPMENT;
-    else if (window.DAY2_QUIZ) activeQuiz = window.DAY2_QUIZ;
-  }
+    const c = document.getElementById("content");
+    let activeQuiz = window.DAY2_QUIZ;
+
+    if (curSec === "d2_senaryo_jury") activeQuiz = window.QUIZ_JURY;
+    else if (curSec === "d2_senaryo_judge") activeQuiz = window.QUIZ_JUDGE;
+    else if (curSec === "d2_senaryo_timekeeper") activeQuiz = window.QUIZ_TIMEKEEPER;
+    else if (curSec === "d2_senaryo_announcer") activeQuiz = window.QUIZ_ANNOUNCER;
+    else if (curSec === "d2_senaryo_equipment") activeQuiz = window.QUIZ_EQUIPMENT;
+
+    if (!shuffledQuiz || shuffledQuiz.length === 0) shuffledQuiz = shuffle(activeQuiz);
+    if (qIdx >= shuffledQuiz.length) { showDone(); return; }
   
   if (!shuffledQuiz.length) shuffledQuiz = shuffle(activeQuiz);
   if (qIdx >= shuffledQuiz.length) { showDone(); return; }
