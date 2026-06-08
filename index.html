@@ -345,6 +345,7 @@ function renderQuiz() {
     else if (curSec === "d2_senaryo_timekeeper") activeQuiz = window.QUIZ_TIMEKEEPER;
     else if (curSec === "d2_senaryo_announcer") activeQuiz = window.QUIZ_ANNOUNCER;
     else if (curSec === "d2_senaryo_equipment") activeQuiz = window.QUIZ_EQUIPMENT;
+    else if (curSec === "d2_senaryo_referee") activeQuiz = window.QUIZ_REFEREE;
 
     if (!shuffledQuiz || shuffledQuiz.length === 0) shuffledQuiz = shuffle(activeQuiz);
     if (qIdx >= shuffledQuiz.length) { showDone(); return; }
@@ -464,7 +465,7 @@ const NAV = {
         id: "social", label: "Sosyal İletişim (Socializing)",
         l3: [ { id: "sosyal", label: "Sosyal İletişim", leaf: true } ]
       },
-      { id: "masterquiz", label: "▶ Senaryo Pratiği", l3: [], isQuiz: true, quizId: "senaryo" },
+      
     ]
   },
   day2: {
@@ -613,7 +614,7 @@ const PHRASES = {
 };
 
 
-window.QUIZ = [
+window.QUIZ_TARTI = [
   {    en: "An athlete does not have a medical declaration form.", tr: "Bir sporcunun IFMA Tıbbi Beyan Formu eksik.", q: "Ne söylersin?", opts: ["Athlete’s medical declaration is missing.", "Athlete’s passport is missing.", "Athlete’s name is not on the list.", "Passport, please."], c: 0, ex: "✓ 'Athlete’s medical declaration is missing.'" },
   {    en: "Ask the athlete to show their accreditation card.", tr: "Sporcudan akreditasyon kartını göstermesini istiyorsun.", q: "Ne söylersin?", opts: ["Please show your accreditation card.", "Please show your athlete’s book.", "Please show your medical declaration.", "Please present your documents."], c: 0, ex: "✓ 'Please show your accreditation card.'" },
   {    en: "The online list is not updated.", tr: "Online liste güncellenmiyor.", q: "Ne söylersin?", opts: ["The list is not up to date.", "The scale is over-reading.", "You must see the doctor first.", "Please present your passport."],    c: 0,    ex: "✓ 'The list is not up to date.'" },
