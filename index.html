@@ -427,6 +427,7 @@ function tcTick(){
   
 }
 }
+}
 
 function renderQuiz() {
     const c = document.getElementById("content");
@@ -520,7 +521,7 @@ function showDone() {
       <button class="rbtn" onclick="restartQuiz()">↺ Tekrar Başla</button>
     </div>`;
 }
-}
+
 function restartQuiz() { qIdx = 0; score = 0; shuffledQuiz = []; renderQuiz(); }
 
 // ─── 5. NAVIGATION TREE DATA STRUCTURE ─────────────────────────────
