@@ -212,7 +212,7 @@ window.DAY2_PHRASES = {
   d2_yan: [
     { en: "The scorecard is finished.", alt: "No scorecards left.", ph: "Dı skoorkard iz finişt.", phs: "Noo skoorkard left.", tr: "Skor kartı bitti." },
     { en: "I need a pen, please.", alt: "Pen, please.", ph: "Ay niid ey pen, pliiz.", phs: "Pen, pliiz.", tr: "Kaleme ihtiyacım var." },
-    { en: "Please step back.", alt: "Step back.", ph: "Pliiz step bek.", phs: "Step bek.", tr: "Lütfen geriye gidiniz." },
+    { en: "Please step back/move", alt: "Step back/move", ph: "Pliiz step bek/muv.", phs: "Step bek/muv.", tr: "Lütfen geriye gidiniz." },
   ],
   d2_skor: [
     { en: "I am pressing the button.", alt: "I'm pressing.", ph: "Ay em presıng dı batın.", phs: "Aym presıng.", tr: "Butona basıyorum." },
