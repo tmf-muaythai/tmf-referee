@@ -376,7 +376,6 @@ function renderPhrases() {
       tcRunning=true;
       document.getElementById('tc-start').textContent='⏸ Durdur';
       tcTick();
-      tcTimer = setInterval(tcTick, 1000);
     }
   };
 
@@ -391,33 +390,41 @@ function renderPhrases() {
     document.getElementById('tc-start').textContent='▶ Başlat';
   };
 
-  function tcTick(){
-    if(tcIdx >= TC_DATA.length){
-      clearInterval(tcTimer); clearInterval(tcProgTimer);
-      tcRunning=false;
-      document.getElementById('tc-fill').style.width='100%';
-      document.getElementById('tc-start').textContent='▶ Başlat';
-      if(document.getElementById('tc-loop').checked){
-        setTimeout(()=>{tcIdx=0; window.tcToggle();}, 800);
-      }
-      return;
-    }
-    const d = TC_DATA[tcIdx];
-    document.getElementById('tc-num').textContent = d.num;
-    document.getElementById('tc-thai').textContent = d.thai;
-    document.getElementById('tc-phonetic').textContent = d.ph;
-    document.getElementById('tc-meaning').textContent = d.tr;
-    const a = new Audio(`assets/audio/d2_tayca_${tcIdx+4}.mp3`);
-    a.play().catch(()=>{});
-    tcElapsed=0;
+function tcTick(){
+  if(tcIdx >= TC_DATA.length){
     clearInterval(tcProgTimer);
-    document.getElementById('tc-fill').style.width='0%';
-    tcProgTimer = setInterval(()=>{
-      tcElapsed+=50;
-      document.getElementById('tc-fill').style.width = Math.min(100,Math.round(tcElapsed/1000*100))+'%';
-    },50);
-    tcIdx++;
+    tcRunning=false;
+    document.getElementById('tc-fill').style.width='100%';
+    document.getElementById('tc-start').textContent='▶ Başlat';
+    if(document.getElementById('tc-loop').checked){
+      setTimeout(()=>{tcIdx=0; window.tcToggle();}, 800);
+    }
+    return;
   }
+  const d = TC_DATA[tcIdx];
+  document.getElementById('tc-num').textContent = d.num;
+  document.getElementById('tc-thai').textContent = d.thai;
+  document.getElementById('tc-phonetic').textContent = d.ph;
+  document.getElementById('tc-meaning').textContent = d.tr;
+  
+  const a = new Audio(`assets/audio/d2_tayca_${tcIdx+4}.mp3`);
+  
+  tcElapsed=0;
+  clearInterval(tcProgTimer);
+  document.getElementById('tc-fill').style.width='0%';
+  
+  a.play().catch(()=>{});
+  
+  a.onended = function(){        // ← ses bitince sonrakine geç
+    tcIdx++;
+    if(tcRunning) tcTick();
+  };
+  
+  tcProgTimer = setInterval(()=>{
+    tcElapsed+=50;
+    document.getElementById('tc-fill').style.width = Math.min(100,Math.round(tcElapsed/1000*100))+'%';
+  },50);
+  
 }
 }
 
@@ -762,7 +769,7 @@ window.QUIZ_TARTI = [
   {    en: "Ask the staff to check the scales.", tr: "Görevliden tartıları kontrol etmesini rica edeceksin.", q: "Ne söylersin?", opts: ["Could you please check the scales?", "Could you please present your passport?", "Could you please step on the scale once?", "Could you please change the schales?"], c: 0, ex: "✓ 'Could you please check the scales?'" }
 ];
 
-
+}
 </script>
 
 <script src="./day2.js" charset="UTF-8"></script>
