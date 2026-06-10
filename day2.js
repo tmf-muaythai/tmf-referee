@@ -218,7 +218,7 @@ window.DAY2_PHRASES = {
   ],
   d2_skor: [
     { en: "I am pressing the button.", alt: "I'm pressing.", ph: "Ay em presıng dı batın.", phs: "Aym presıng.", tr: "Butona basıyorum." },
-    { en: "I did not press the button.", alt: "I didn’t press the button.", ph: "Ay did not pres dı batın.", phs: "Aym didn’t pres dı batın.", tr: "Butona basmadım." },
+    { en: "I did not press the button.", alt: "I didn’t press.", ph: "Ay did not pres dı batın.", phs: "Aym didn’t pres.", tr: "Butona basmadım." },
     { en: "I pressed the wrong button.", alt: "", ph: "Ay prest dı rong batın.", phs: "", tr: "Butona yanlış bastım." },
     { en: "I reset the score by mistake.", alt: "", ph: "Ay riiset dı skoor bay misteyk.", phs: "", tr: "Yanlışlıkla skoru resetledim." },
     { en: "The cable came out.", alt: "Cable unplugged.", ph: "Dı keybıl keym aut.", phs: "Keybıl anplagd.", tr: "Kablo çıktı." },
