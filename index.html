@@ -520,6 +520,7 @@ function showDone() {
       <button class="rbtn" onclick="restartQuiz()">↺ Tekrar Başla</button>
     </div>`;
 }
+}
 function restartQuiz() { qIdx = 0; score = 0; shuffledQuiz = []; renderQuiz(); }
 
 // ─── 5. NAVIGATION TREE DATA STRUCTURE ─────────────────────────────
@@ -769,7 +770,7 @@ window.QUIZ_TARTI = [
   {    en: "Ask the staff to check the scales.", tr: "Görevliden tartıları kontrol etmesini rica edeceksin.", q: "Ne söylersin?", opts: ["Could you please check the scales?", "Could you please present your passport?", "Could you please step on the scale once?", "Could you please change the schales?"], c: 0, ex: "✓ 'Could you please check the scales?'" }
 ];
 
-}
+
 </script>
 
 <script src="./day2.js" charset="UTF-8"></script>
