@@ -367,17 +367,18 @@ function renderPhrases() {
 
   let tcIdx=0, tcRunning=false, tcTimer=null, tcProgTimer=null, tcElapsed=0;
 
-  window.tcToggle = function(){
-    if(tcRunning){
-      clearInterval(tcTimer); clearInterval(tcProgTimer);
-      tcRunning=false;
-      document.getElementById('tc-start').textContent='▶ Devam';
-    } else {
-      tcRunning=true;
-      document.getElementById('tc-start').textContent='⏸ Durdur';
-      tcTick();
-    }
-  };
+window.tcToggle = function(){
+  if(tcRunning){
+    clearInterval(tcProgTimer);
+    tcRunning=false;
+    document.getElementById('tc-start').textContent='▶ Devam';
+  } else {
+    if(tcIdx >= TC_DATA.length) tcIdx=0;   // ← bitti ise başa dön
+    tcRunning=true;
+    document.getElementById('tc-start').textContent='⏸ Durdur';
+    tcTick();
+  }
+};
 
 window.tcReset = function(){
   clearInterval(tcTimer); clearInterval(tcProgTimer);
