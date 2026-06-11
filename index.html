@@ -407,23 +407,18 @@ function tcTick(){
   document.getElementById('tc-phonetic').textContent = d.ph;
   document.getElementById('tc-meaning').textContent = d.tr;
   
-  const a = new Audio(`assets/audio/d2_tayca_${tcIdx+4}.mp3`);
-  
-  tcElapsed=0;
-  clearInterval(tcProgTimer);
-  document.getElementById('tc-fill').style.width='0%';
-  
-  a.play().catch(()=>{});
-  
-  a.onended = function(){        // ← ses bitince sonrakine geç
-    tcIdx++;
-    if(tcRunning) tcTick();
-  };
-  
-  tcProgTimer = setInterval(()=>{
-    tcElapsed+=50;
-    document.getElementById('tc-fill').style.width = Math.min(100,Math.round(tcElapsed/1000*100))+'%';
-  },50);
+tcIdx++;
+setTimeout(tcTick, 1000);
+ tcIdx++;
+tcElapsed = 0;
+document.getElementById('tc-fill').style.width = '0%';
+clearInterval(tcProgTimer);
+tcProgTimer = setInterval(()=>{
+  tcElapsed += 50;
+  document.getElementById('tc-fill').style.width = Math.min(100, Math.round(tcElapsed/1000*100))+'%';
+  if(tcElapsed >= 1000) clearInterval(tcProgTimer);
+}, 50);
+setTimeout(tcTick, 1000);
   
 }
 }
