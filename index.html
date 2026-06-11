@@ -487,22 +487,94 @@ function checkAns(idx, correct, ex, ans, sesKodu, quizSelectId) {
   const fbContent = `${ex}`;
 
   fb.className = idx===correct ? "fb show ok" : "fb show no";
-  fb.innerHTML = fbContent + `
-    <div style="display:flex; align-items:center; gap:8px; margin-top:6px;">
-      <button class="sbtn" id="sp-ans">🔊 Doğru Cevabı Dinle</button>
-      <div class="card-speed-wrapper">
-        <span class="card-speed-label">HIZ:</span>
-        <select class="card-speed-select" id="${quizSelectId}">
-          <option value="0.6">0.6x (Tane Tane)</option>
-          <option value="0.8" selected>0.8x (Dengeli)</option>
-          <option value="1.0">1.0x (Normal)</option>
-        </select>
-      </div>
-    </div>`;
+fb.innerHTML = fbContent + `
+  <div style="display:flex; align-items:center; gap:8px; margin-top:6px;">
+    <div class="card-speed-wrapper">
+      <span class="card-speed-label">HIZ:</span>
+      <select class="card-speed-select" id="${quizSelectId}">
+        <option value="0.6">0.6x (Tane Tane)</option>
+        <option value="0.8" selected>0.8x (Dengeli)</option>
+        <option value="1.0">1.0x (Normal)</option>
+      </select>
+    </div>
+  </div>
+  ${idx===correct ? `
+  <div style="margin-top:12px;background:#f0f4f9;border-radius:10px;padding:12px;border:1px solid #cdddf0">
+    <div style="font-size:12px;font-weight:600;color:#185FA5;margin-bottom:10px">🎧 Telaffuz Pratiği</div>
+    <div style="font-size:11px;color:#555;margin-bottom:8px">1. Önce dinle:</div>
+    <button class="sbtn" id="sp-ans">🔊 Cevabı Dinle</button>
+    <div style="font-size:11px;color:#555;margin:10px 0 8px">2. Şimdi sen söyle:</div>
+    <button class="sbtn" id="mic-btn" onclick="startSpeech('${encodeURIComponent(ans)}', '${quizSelectId}')">🎤 Mikrofonu Aç</button>
+    <div id="speech-result" style="margin-top:8px;font-size:12px;min-height:20px"></div>
+  </div>` : ""}`;
     
   document.getElementById("nxt").classList.add("show");
   const sb = document.getElementById("sp-ans");
-  if (sb) sb.addEventListener("click", () => playElevenLabsVoice(sesKodu, quizSelectId));
+if (sb) sb.addEventListener("click", () => playElevenLabsVoice(sesKodu, quizSelectId));
+}
+
+function startSpeech(encodedAns, quizSelectId) {
+  const ans = decodeURIComponent(encodedAns).toLowerCase();
+  const btn = document.getElementById('mic-btn');
+  const result = document.getElementById('speech-result');
+  
+  if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+    result.innerHTML = '<span style="color:#A32D2D">⚠ Tarayıcın mikrofonu desteklemiyor.</span>';
+    return;
+  }
+
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const recognition = new SR();
+  recognition.lang = 'en-US';
+  recognition.interimResults = false;
+  recognition.maxAlternatives = 1;
+
+  btn.textContent = '🔴 Dinleniyor...';
+  btn.style.background = '#FCEBEB';
+  btn.style.borderColor = '#A32D2D';
+  btn.style.color = '#A32D2D';
+  result.innerHTML = '';
+
+  recognition.start();
+
+  recognition.onresult = function(e) {
+    const said = e.results[0][0].transcript.toLowerCase();
+    result.innerHTML = `<span style="color:#555">Söylediğin: "<em>${said}</em>"</span><br>`;
+    
+    const keywords = ans.replace(/[^a-z\s]/g, '').split(' ').filter(w => w.length > 2);
+    const matched = keywords.filter(w => said.includes(w));
+    const pct = Math.round(matched.length / keywords.length * 100);
+    
+    if (pct >= 70) {
+      result.innerHTML += `<span style="color:#3B6D11">✓ Harika! %${pct} doğru</span>`;
+    } else if (pct >= 40) {
+      result.innerHTML += `<span style="color:#BA7517">~ Yakın! %${pct} — tekrar dene</span>`;
+    } else {
+      result.innerHTML += `<span style="color:#A32D2D">✗ %${pct} — önce dinle, tekrar dene</span>`;
+    }
+    
+    btn.textContent = '🎤 Tekrar Dene';
+    btn.style.background = '';
+    btn.style.borderColor = '';
+    btn.style.color = '';
+  };
+
+  recognition.onerror = function() {
+    result.innerHTML = '<span style="color:#A32D2D">⚠ Mikrofon hatası — izin verdin mi?</span>';
+    btn.textContent = '🎤 Mikrofonu Aç';
+    btn.style.background = '';
+    btn.style.borderColor = '';
+    btn.style.color = '';
+  };
+
+  recognition.onend = function() {
+    if(btn.textContent === '🔴 Dinleniyor...') {
+      btn.textContent = '🎤 Mikrofonu Aç';
+      btn.style.background = '';
+      btn.style.borderColor = '';
+      btn.style.color = '';
+    }
+  };
 }
 
 function nextQ() { qIdx++; renderQuiz(); }
