@@ -445,7 +445,8 @@ function renderQuiz() {
   const sOpts = shuffle(q.opts.map((o,i) => ({o, orig:i})));
   const newC = sOpts.findIndex(x => x.orig === q.c);
   answered = false;
-  const quizSesKodu = `quiz_${curSec}_${qIdx + 1}`;
+  const origIdx = shuffledQuiz.indexOf(q);
+const quizSesKodu = `quiz_${curSec}_${origIdx + 1}`;
   const quizSelectId = `speed_sel_quiz_${curSec}_${qIdx}`;
 
   c.innerHTML = `
