@@ -406,19 +406,17 @@ function tcTick(){
   document.getElementById('tc-thai').textContent = d.thai;
   document.getElementById('tc-phonetic').textContent = d.ph;
   document.getElementById('tc-meaning').textContent = d.tr;
-  
-setTimeout(tcTick, 1000);
- tcIdx++;
-tcElapsed = 0;
-document.getElementById('tc-fill').style.width = '0%';
-clearInterval(tcProgTimer);
-tcProgTimer = setInterval(()=>{
-  tcElapsed += 50;
-  document.getElementById('tc-fill').style.width = Math.min(100, Math.round(tcElapsed/1000*100))+'%';
-  if(tcElapsed >= 1000) clearInterval(tcProgTimer);
-}, 50);
-setTimeout(tcTick, 1000);
-  
+  tcIdx++;
+  tcElapsed = 0;
+  document.getElementById('tc-fill').style.width = '0%';
+  clearInterval(tcProgTimer);
+  tcProgTimer = setInterval(()=>{
+    tcElapsed += 50;
+    document.getElementById('tc-fill').style.width = Math.min(100, Math.round(tcElapsed/1000*100))+'%';
+    if(tcElapsed >= 1000) clearInterval(tcProgTimer);
+  }, 50);
+  setTimeout(tcTick, 1000);
+}
 }
 }
 }
