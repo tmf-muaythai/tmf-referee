@@ -379,16 +379,17 @@ function renderPhrases() {
     }
   };
 
-  window.tcReset = function(){
-    clearInterval(tcTimer); clearInterval(tcProgTimer);
-    tcRunning=false; tcIdx=0;
-    document.getElementById('tc-num').textContent='—';
-    document.getElementById('tc-thai').textContent='Başlamak için ▶ bas';
-    document.getElementById('tc-phonetic').textContent='';
-    document.getElementById('tc-meaning').textContent='';
-    document.getElementById('tc-fill').style.width='0%';
-    document.getElementById('tc-start').textContent='▶ Başlat';
-  };
+window.tcReset = function(){
+  clearInterval(tcTimer); clearInterval(tcProgTimer);
+  tcRunning=false; tcIdx=0;
+  document.getElementById('tc-num').textContent='—';
+  document.getElementById('tc-thai').textContent='Başlamak için ▶ bas';
+  document.getElementById('tc-phonetic').textContent='';
+  document.getElementById('tc-meaning').textContent='';
+  document.getElementById('tc-fill').style.width='0%';
+  document.getElementById('tc-start').textContent='▶ Başlat';
+  window.tcToggle();    // ← bu satırı ekle
+};
 
 function tcTick(){
   if(tcIdx >= TC_DATA.length){
