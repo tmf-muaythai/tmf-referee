@@ -472,22 +472,6 @@ function resetQuiz() {
   clearQuizState(); // 🔄 Manuel sıfırlamada hafızayı da temizliyoruz
 }
 
-// 💾 Durumu ve Karıştırılmış Listeyi Hafızaya Kilitler
-function saveQuizState() {
-  localStorage.setItem('tmf_qIdx', qIdx);
-  localStorage.setItem('tmf_score', score);
-  localStorage.setItem('tmf_curSec', curSec);
-  localStorage.setItem('tmf_shuffledQuiz', JSON.stringify(shuffledQuiz)); // 🧠 Listenin sırasını unutma!
-}
-
-// 🧼 Quiz Bittiğinde veya Sıfırlandığında Hafızayı Pırıl Pırıl Yapar
-function clearQuizState() {
-  localStorage.removeItem('tmf_qIdx');
-  localStorage.removeItem('tmf_score');
-  localStorage.removeItem('tmf_curSec');
-  localStorage.removeItem('tmf_shuffledQuiz');
-}
-
 // ─── 3. NAV BUILDERS & SWITCHERS ──────────────────────────────────
 function buildDayNav() {
   document.getElementById("day-nav").innerHTML =
@@ -599,11 +583,11 @@ function render() {
     searchWrap.style.display = isScenario(curSec) ? 'none' : 'block';
     document.getElementById('search-input').value = '';
   }
-    if (isScenario(curSec)) renderQuiz();
+  if (isScenario(curSec)) renderQuiz();
   else renderPhrases();
-  }
-  
-  function searchPhrases(query) {
+}
+
+function searchPhrases(query) {
   const wrap = document.getElementById('search-wrap');
   const allP = Object.assign({}, PHRASES, (window.DAY2_PHRASES || {}));
   const list = allP[curSec] || [];
@@ -1005,6 +989,19 @@ function restartQuiz() {
   clearQuizState(); // 🧼 "Tekrar Başla" butonuna basıldığında da hafızayı sıfırlıyoruz
   renderQuiz(); 
 }
+function saveQuizState() {
+  localStorage.setItem('tmf_qIdx', qIdx);
+  localStorage.setItem('tmf_score', score);
+  localStorage.setItem('tmf_curSec', curSec);
+  localStorage.setItem('tmf_shuffledQuiz', JSON.stringify(shuffledQuiz));
+}
+
+function clearQuizState() {
+  localStorage.removeItem('tmf_qIdx');
+  localStorage.removeItem('tmf_score');
+  localStorage.removeItem('tmf_curSec');
+  localStorage.removeItem('tmf_shuffledQuiz');
+}
 
 // ─── 5. NAVIGATION TREE DATA STRUCTURE ─────────────────────────────
 const NAV = {
@@ -1256,7 +1253,7 @@ window.QUIZ_TARTI = [
 
 </script>
 
-<script src="./day2.js?v=23" charset="UTF-23"></script>
+<script src="./day2.js?v=24" charset="UTF-24"></script>
 
 <script>
   // ─── 6. RUNNING APPLICATION INITIALIZATION ───────────────────────
