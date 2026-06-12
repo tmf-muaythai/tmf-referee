@@ -781,16 +781,19 @@ function renderQuiz() {
     const savedSec = localStorage.getItem('tmf_curSec');
     const savedQuizList = localStorage.getItem('tmf_shuffledQuiz');
 
-    // Eğer hafızada 0'dan büyük bir soru indeksi varsa;
-    // Sistem hangi sekmeden gelirse gelsin, burayı zorla o kategoriye ve o soruya eşitliyoruz!
+    // Eğer hafızada 0'dan büyük bir soru indeksi kalmışsa;
+    // Yan sekmelerin ne yaptığı umurumuzda değil, hafızadaki durumu zorla dayatıyoruz!
     if (savedIdx && parseInt(savedIdx) > 0) {
         qIdx = parseInt(savedIdx);
         score = parseInt(localStorage.getItem('tmf_score')) || 0;
-        if (savedSec) curSec = savedSec; // 💥 Navigasyonun bozduğu kategoriyi hafızadan geri tamir ediyoruz!
+        
+        // Navigasyon butonlarının bozduğu kategoriyi hafızadan geri tamir ediyoruz:
+        if (savedSec) curSec = savedSec; 
+        
         if (savedQuizList) {
             shuffledQuiz = JSON.parse(savedQuizList);
         }
-        console.log("Navigasyon engeli aşıldı! Hafıza başarıyla dayatıldı. Kategori:", curSec, "Soru indeksi:", qIdx);
+        console.log("Navigasyon engeli aşıldı! Hafıza zorla yüklendi. Soru indeksi:", qIdx);
     }
 
     let activeQuiz = window.DAY2_QUIZ;
@@ -802,13 +805,12 @@ function renderQuiz() {
     else if (curSec === "d2_senaryo_equipment") activeQuiz = window.QUIZ_EQUIPMENT;
     else if (curSec === "d2_senaryo_referee") activeQuiz = window.QUIZ_REFEREE;
 
-  // 🔥 LİSTE KONTROLÜ
+    // 🔥 LİSTE KONTROLÜ
     if (!shuffledQuiz || shuffledQuiz.length === 0) {
         shuffledQuiz = shuffle(activeQuiz);
     }
 
-    // 🎯 SİHİRLİ DOKUNUŞ: Ekrana her yeni soru geldiğinde (veya soru değiştiğinde) 
-    // güncel soru numarasını ve skoru ANINDA otomatik olarak hafızaya yazıyoruz!
+    // Ekrana her yeni soru geldiğinde hafızayı anında tazele:
     if (qIdx < shuffledQuiz.length) {
         saveQuizState(); 
     }
@@ -1268,7 +1270,7 @@ window.QUIZ_TARTI = [
 
 </script>
 
-<script src="./day2.js?v=28" charset="UTF-28"></script>
+<script src="./day2.js?v=29" charset="UTF-29"></script>
 
 <script>
   // ─── 6. RUNNING APPLICATION INITIALIZATION ───────────────────────
