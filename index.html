@@ -361,36 +361,43 @@ if (localStorage.getItem('darkMode') === 'true') {
 }
 // ─── 1. GLOBAL STATE DEFINITIONS ─────────────────────────────────
 
-// 💾 1. SAYFA AÇILDIĞINDA ESKİ KAYIT KONTROLÜ (LOCAL STORAGE)
+// 💾 1. SAYFA AÇILDIĞINDA ESKİ KAYIT KONTROLÜ
 document.addEventListener("DOMContentLoaded", () => {
   const savedIdx = localStorage.getItem('tmf_qIdx');
   const resumeBtn = document.getElementById('resume-quiz-btn');
-  
-  // Eğer hafızada 0'dan büyük bir soru numarası kalmışsa yeşil butonu görünür yap
   if (savedIdx && parseInt(savedIdx) > 0) {
     if (resumeBtn) resumeBtn.style.display = 'block';
   }
 });
 
-// 💾 2. BUTONA TIKLANDIĞINDA ESKİ VERİLERİ YÜKLEYEN RESUME FONKSİYONU
+// 💾 2. TAM KORUMALI RESUME FONKSİYONU
 window.resumeQuiz = function() {
-  qIdx = parseInt(localStorage.getItem('tmf_qIdx')) || 0;
-  score = parseInt(localStorage.getItem('tmf_score')) || 0;
-  curSec = localStorage.getItem('tmf_curSec') || "kayit";
+  const savedIdx = localStorage.getItem('tmf_qIdx');
+  const savedSec = localStorage.getItem('tmf_curSec');
+  const savedList = localStorage.getItem('tmf_shuffledQuiz');
 
-  // Butonu kullandıktan sonra ekrandan gizle
-  const resumeBtn = document.getElementById('resume-quiz-btn');
-  if (resumeBtn) resumeBtn.style.display = 'none';
-  
-  // Hafızadan gelen kategoriye göre soruları çek ve ekrana çiz
-  shuffledQuiz = investorsFindListByCode(); 
-  
-  if (typeof renderQuiz === "function") {
-    renderQuiz(); 
+  if (savedIdx && savedSec) {
+    qIdx = parseInt(savedIdx);
+    score = parseInt(localStorage.getItem('tmf_score')) || 0;
+    curSec = savedSec;
+
+    // 🔥 EN KRİTİK NOKTA: Eski karıştırılmış listeyi harfiyen geri yüklüyoruz!
+    if (savedList) {
+      shuffledQuiz = JSON.parse(savedList);
+    } else {
+      shuffledQuiz = investorsFindListByCode();
+    }
+
+    const resumeBtn = document.getElementById('resume-quiz-btn');
+    if (resumeBtn) resumeBtn.style.display = 'none';
+    
+    if (typeof renderQuiz === "function") {
+      renderQuiz(); 
+    }
   }
 };
 
-let currentPlayingAudio = null; // 📲 Arka arkaya basıldığında donmayı engelleyen değişken
+let currentPlayingAudio = null; 
 let curDay = "day1";
 let curL2  = "registration";
 let curL3  = null;
@@ -465,19 +472,20 @@ function resetQuiz() {
   clearQuizState(); // 🔄 Manuel sıfırlamada hafızayı da temizliyoruz
 }
 
+// 💾 Durumu ve Karıştırılmış Listeyi Hafızaya Kilitler
 function saveQuizState() {
   localStorage.setItem('tmf_qIdx', qIdx);
   localStorage.setItem('tmf_score', score);
   localStorage.setItem('tmf_curSec', curSec);
-  // 🎯 Listeyi de yazıya çevirip hafızaya gömüyoruz:
-  localStorage.setItem('tmf_shuffledQuiz', JSON.stringify(shuffledQuiz));
+  localStorage.setItem('tmf_shuffledQuiz', JSON.stringify(shuffledQuiz)); // 🧠 Listenin sırasını unutma!
 }
 
+// 🧼 Quiz Bittiğinde veya Sıfırlandığında Hafızayı Pırıl Pırıl Yapar
 function clearQuizState() {
   localStorage.removeItem('tmf_qIdx');
   localStorage.removeItem('tmf_score');
   localStorage.removeItem('tmf_curSec');
-  localStorage.removeItem('tmf_shuffledQuiz'); // 🧼 Listeyi de temizle
+  localStorage.removeItem('tmf_shuffledQuiz');
 }
 
 // ─── 3. NAV BUILDERS & SWITCHERS ──────────────────────────────────
@@ -799,19 +807,21 @@ function tcTick(){
 function renderQuiz() {
     const c = document.getElementById("content");
 
-  // 🎯 HAFIZADAN KURTARMA SİSTEMİ (LİSTE DAHİL TAM KORUMA)
+    // ─── 🎯 HAFIZADAN TAM KORUMALI VERİ KURTARMA ───
     const savedIdx = localStorage.getItem('tmf_qIdx');
     const savedSec = localStorage.getItem('tmf_curSec');
     const savedQuizList = localStorage.getItem('tmf_shuffledQuiz');
-    
-    if (savedIdx && savedSec === curSec && parseInt(savedIdx) > 0) {
+
+    // Eğer kullanıcı menüden tıkladığı için qIdx 0 geldiyse ama hafızada bu kategoriye ait kayıt varsa kurtar:
+    if (qIdx === 0 && savedIdx && savedSec === curSec && parseInt(savedIdx) > 0) {
         qIdx = parseInt(savedIdx);
         score = parseInt(localStorage.getItem('tmf_score')) || 0;
         if (savedQuizList) {
-            shuffledQuiz = JSON.parse(savedQuizList); // 🔥 Eski karıştırılmış sırayı aynen geri yüklüyoruz!
+            shuffledQuiz = JSON.parse(savedQuizList);
         }
-        console.log("Hafızadan liste ve soru başarıyla kurtarıldı. Soru:", qIdx);
+        console.log("Sekme geçişi sonrası hafızadan başarıyla kurtarıldı. Soru:", qIdx);
     }
+
     let activeQuiz = window.DAY2_QUIZ;
     if (curSec === "senaryo") activeQuiz = window.QUIZ_TARTI;
     else if (curSec === "d2_senaryo_jury") activeQuiz = window.QUIZ_JURY;
@@ -821,14 +831,14 @@ function renderQuiz() {
     else if (curSec === "d2_senaryo_equipment") activeQuiz = window.QUIZ_EQUIPMENT;
     else if (curSec === "d2_senaryo_referee") activeQuiz = window.QUIZ_REFEREE;
 
+    // 🔥 LİSTE KONTROLÜ VE İLK ANDA KAYDETME
+    if (!shuffledQuiz || shuffledQuiz.length === 0) {
+        shuffledQuiz = shuffle(activeQuiz);
+        saveQuizState(); // İlk karıştırmada listeyi hemen hafızaya kilitle!
+    }
 
-  
-  if (!shuffledQuiz.length) shuffledQuiz = shuffle(activeQuiz);
-  if (qIdx >= shuffledQuiz.length) { showDone(); return; }
-  if (!shuffledQuiz.length || shuffledQuiz.length === 0) {
-    shuffledQuiz = shuffle(activeQuiz);
-    saveQuizState(); // 🎯 İlk karıştırma yapıldığı an listeyi hafızaya kilitle!
-}
+    if (qIdx >= shuffledQuiz.length) { showDone(); return; }
+    
 
   const q = shuffledQuiz[qIdx];
   const sOpts = shuffle(q.opts.map((o,i) => ({o, orig:i})));
@@ -1261,7 +1271,7 @@ window.QUIZ_TARTI = [
 
 </script>
 
-<script src="./day2.js?v=20" charset="UTF-20"></script>
+<script src="./day2.js?v=21" charset="UTF-21"></script>
 
 <script>
   // ─── 6. RUNNING APPLICATION INITIALIZATION ───────────────────────
