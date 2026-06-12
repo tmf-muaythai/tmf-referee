@@ -277,6 +277,9 @@ body.dark .footer-btn {
 <div class="search-wrap" id="search-wrap" style="display:none">
   <input class="search-input" id="search-input" type="text" placeholder="🔍 Cümle veya kelime ara..." oninput="searchPhrases(this.value)">
 </div>
+<button id="resume-quiz-btn" style="display: none; background: #28a745; color: white; border: none; padding: 12px 20px; border-radius: 10px; font-weight: bold; margin-bottom: 15px; width: 100%; cursor: pointer;" onclick="resumeQuiz()">
+  🔄 Kaldığın Yerden Devam Et
+</button>
 <div class="content" id="content"></div>
 
 <div class="footer">
@@ -357,6 +360,36 @@ if (localStorage.getItem('darkMode') === 'true') {
   });
 }
 // ─── 1. GLOBAL STATE DEFINITIONS ─────────────────────────────────
+
+// 💾 1. SAYFA AÇILDIĞINDA ESKİ KAYIT KONTROLÜ (LOCAL STORAGE)
+document.addEventListener("DOMContentLoaded", () => {
+  const savedIdx = localStorage.getItem('tmf_qIdx');
+  const resumeBtn = document.getElementById('resume-quiz-btn');
+  
+  // Eğer hafızada 0'dan büyük bir soru numarası kalmışsa yeşil butonu görünür yap
+  if (savedIdx && parseInt(savedIdx) > 0) {
+    if (resumeBtn) resumeBtn.style.display = 'block';
+  }
+});
+
+// 💾 2. BUTONA TIKLANDIĞINDA ESKİ VERİLERİ YÜKLEYEN RESUME FONKSİYONU
+window.resumeQuiz = function() {
+  qIdx = parseInt(localStorage.getItem('tmf_qIdx')) || 0;
+  score = parseInt(localStorage.getItem('tmf_score')) || 0;
+  curSec = localStorage.getItem('tmf_curSec') || "kayit";
+
+  // Butonu kullandıktan sonra ekrandan gizle
+  const resumeBtn = document.getElementById('resume-quiz-btn');
+  if (resumeBtn) resumeBtn.style.display = 'none';
+  
+  // Hafızadan gelen kategoriye göre soruları çek ve ekrana çiz
+  shuffledQuiz = investorsFindListByCode(); 
+  
+  if (typeof renderQuiz === "function") {
+    renderQuiz(); 
+  }
+};
+
 let currentPlayingAudio = null; // 📲 Arka arkaya basıldığında donmayı engelleyen değişken
 let curDay = "day1";
 let curL2  = "registration";
@@ -425,7 +458,26 @@ function shuffle(arr) {
   return a;
 }
 
-function resetQuiz() { qIdx = 0; score = 0; shuffledQuiz = []; }
+function resetQuiz() { 
+  qIdx = 0; 
+  score = 0; 
+  shuffledQuiz = []; 
+  clearQuizState(); // 🔄 Manuel sıfırlamada hafızayı da temizliyoruz
+}
+
+// 💾 Güncel durumu hafızaya kaydeden fonksiyon
+function saveQuizState() {
+  localStorage.setItem('tmf_qIdx', qIdx);
+  localStorage.setItem('tmf_score', score);
+  localStorage.setItem('tmf_curSec', curSec);
+}
+
+// 🧼 Quiz bittiğinde veya sıfırlandığında hafızayı temizleyen fonksiyon
+function clearQuizState() {
+  localStorage.removeItem('tmf_qIdx');
+  localStorage.removeItem('tmf_score');
+  localStorage.removeItem('tmf_curSec');
+}
 
 // ─── 3. NAV BUILDERS & SWITCHERS ──────────────────────────────────
 function buildDayNav() {
@@ -917,8 +969,14 @@ recognition.onerror = function(event) {
   };
 }
 
-function nextQ() { qIdx++; renderQuiz(); }
+function nextQ() { 
+  qIdx++; 
+  saveQuizState(); // 💾 Sonraki soruya geçildiğinde güncel soru numarasını ve skoru hafızaya kaydediyoruz
+  renderQuiz(); 
+}
+
 function showDone() {
+  clearQuizState(); // 🧼 Quiz başarıyla bittiği için hafızayı temizliyoruz (ertesi gün sıfırdan başlasın)
   const pct = Math.round(score/shuffledQuiz.length*100);
   document.getElementById("content").innerHTML = `
     <div class="done-box">
@@ -928,7 +986,13 @@ function showDone() {
     </div>`;
 }
 
-function restartQuiz() { qIdx = 0; score = 0; shuffledQuiz = []; renderQuiz(); }
+function restartQuiz() { 
+  qIdx = 0; 
+  score = 0; 
+  shuffledQuiz = []; 
+  clearQuizState(); // 🧼 "Tekrar Başla" butonuna basıldığında da hafızayı sıfırlıyoruz
+  renderQuiz(); 
+}
 
 // ─── 5. NAVIGATION TREE DATA STRUCTURE ─────────────────────────────
 const NAV = {
@@ -1180,7 +1244,7 @@ window.QUIZ_TARTI = [
 
 </script>
 
-<script src="./day2.js?v=16" charset="UTF-16"></script>
+<script src="./day2.js?v=17" charset="UTF-17"></script>
 
 <script>
   // ─── 6. RUNNING APPLICATION INITIALIZATION ───────────────────────
