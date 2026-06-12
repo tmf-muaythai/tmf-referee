@@ -797,8 +797,17 @@ function tcTick(){
 
 function renderQuiz() {
     const c = document.getElementById("content");
-    let activeQuiz = window.DAY2_QUIZ;
 
+    // 🎯 HAFIZADAN KURTARMA SİSTEMİ (SEKME DEĞİŞTİRİLSE BİLE ÇALIŞIR)
+    const savedIdx = localStorage.getItem('tmf_qIdx');
+    const savedSec = localStorage.getItem('tmf_curSec');
+    
+    if (qIdx === 0 && savedIdx && savedSec === curSec && parseInt(savedIdx) > 0) {
+        qIdx = parseInt(savedIdx);
+        score = parseInt(localStorage.getItem('tmf_score')) || 0;
+        console.log("Sekme değiştirildi, hafızadan kurtarılan soru indeksi:", qIdx);
+    }
+    let activeQuiz = window.DAY2_QUIZ;
     if (curSec === "senaryo") activeQuiz = window.QUIZ_TARTI;
     else if (curSec === "d2_senaryo_jury") activeQuiz = window.QUIZ_JURY;
     else if (curSec === "d2_senaryo_judge") activeQuiz = window.QUIZ_JUDGE;
@@ -807,8 +816,7 @@ function renderQuiz() {
     else if (curSec === "d2_senaryo_equipment") activeQuiz = window.QUIZ_EQUIPMENT;
     else if (curSec === "d2_senaryo_referee") activeQuiz = window.QUIZ_REFEREE;
 
-    if (!shuffledQuiz || shuffledQuiz.length === 0) shuffledQuiz = shuffle(activeQuiz);
-    if (qIdx >= shuffledQuiz.length) { showDone(); return; }
+
   
   if (!shuffledQuiz.length) shuffledQuiz = shuffle(activeQuiz);
   if (qIdx >= shuffledQuiz.length) { showDone(); return; }
@@ -1244,7 +1252,7 @@ window.QUIZ_TARTI = [
 
 </script>
 
-<script src="./day2.js?v=17" charset="UTF-17"></script>
+<script src="./day2.js?v=18" charset="UTF-18"></script>
 
 <script>
   // ─── 6. RUNNING APPLICATION INITIALIZATION ───────────────────────
