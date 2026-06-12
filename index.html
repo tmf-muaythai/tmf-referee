@@ -288,9 +288,9 @@ body.dark .footer-btn {
   <div class="footer-links">
     <a href="privacy.html" class="footer-btn">🛡️ Gizlilik Politikası</a>
     <a href="#" class="footer-btn" id="talimat-link">📋 Güncel Talimat</a>
-    <button class="footer-btn" onclick="openQR()">📲 QR Kod ile Paylaş</button>
+    <button class="footer-btn" id="pwa-install-btn" style="display: none;" onclick="triggerInstall()">📲 Uygulamayı Yükle</button>
+    <button class="footer-btn" onclick="openQR()">🔗 QR Kod ile Paylaş</button>
   </div>
-</div>
 
 <div id="qrModal" class="qr-modal" onclick="closeQR(event)">
   <div class="qr-modal-content" onclick="event.stopPropagation()">
@@ -312,15 +312,42 @@ body.dark .footer-btn {
     localStorage.setItem('darkMode', isDark);
   }
 
-  // QR Kod Açma ve Kapatma Fonksiyonları
-  function openQR() {
-    document.getElementById('qrModal').style.display = 'flex';
+// QR Kod Açma ve Kapatma Fonksiyonları
+function openQR() {
+  document.getElementById('qrModal').style.display = 'flex';
+}
+function closeQR(e) {
+  if(e.target.id === 'qrModal') {
+    document.getElementById('qrModal').style.display = 'none';
   }
-  function closeQR(e) {
-    if(e.target.id === 'qrModal') {
-      document.getElementById('qrModal').style.display = 'none';
+}
+
+// 📲 PWA Uygulamayı Yükleme Kodları (Tam Bu Araya Ekledik)
+let deferredPrompt;
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  const installBtn = document.getElementById('pwa-install-btn');
+  if (installBtn) installBtn.style.display = 'inline-flex';
+});
+
+function triggerInstall() {
+  if (!deferredPrompt) return;
+  deferredPrompt.prompt();
+  deferredPrompt.userChoice.then((choiceResult) => {
+    if (choiceResult.outcome === 'accepted') {
+      document.getElementById('pwa-install-btn').style.display = 'none';
     }
-  }
+    deferredPrompt = null;
+  });
+}
+
+window.addEventListener('appinstalled', () => {
+  const installBtn = document.getElementById('pwa-install-btn');
+  if (installBtn) installBtn.style.display = 'none';
+  deferredPrompt = null;
+});
 
 if (localStorage.getItem('darkMode') === 'true') {
   document.body.classList.add('dark');
@@ -1119,7 +1146,7 @@ window.QUIZ_TARTI = [
 
 </script>
 
-<script src="./day2.js?v=10" charset="UTF-10"></script>
+<script src="./day2.js?v=11" charset="UTF-11"></script>
 
 <script>
   // ─── 6. RUNNING APPLICATION INITIALIZATION ───────────────────────
