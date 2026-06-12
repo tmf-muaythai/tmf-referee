@@ -776,21 +776,21 @@ function tcTick(){
 function renderQuiz() {
     const c = document.getElementById("content");
 
-    // ─── 🎯 HAFIZADAN TAM KORUMALI VERİ KURTARMA ───
+    // ─── 🎯 HAFIZADAN TAM KORUMALI VERİ KURTARMA (AŞILMAZ KALKAN) ───
     const savedIdx = localStorage.getItem('tmf_qIdx');
     const savedSec = localStorage.getItem('tmf_curSec');
     const savedQuizList = localStorage.getItem('tmf_shuffledQuiz');
 
-    // 🔥 DEĞİŞEN KRİTİK ŞART: qIdx === 0 zorunluluğunu kaldırdık!
-    // Eğer hafızada bu kategoriye ait bir ilerleme varsa ve şu anki shuffledQuiz boşalmışsa
-    // veya qIdx bir şekilde senkronize değilse, hafızayı zorla yükle!
-    if (savedIdx && savedSec === curSec && parseInt(savedIdx) > 0 && (!shuffledQuiz || shuffledQuiz.length === 0 || qIdx !== parseInt(savedIdx))) {
+    // Eğer hafızada 0'dan büyük bir soru indeksi varsa;
+    // Sistem hangi sekmeden gelirse gelsin, burayı zorla o kategoriye ve o soruya eşitliyoruz!
+    if (savedIdx && parseInt(savedIdx) > 0) {
         qIdx = parseInt(savedIdx);
         score = parseInt(localStorage.getItem('tmf_score')) || 0;
+        if (savedSec) curSec = savedSec; // 💥 Navigasyonun bozduğu kategoriyi hafızadan geri tamir ediyoruz!
         if (savedQuizList) {
             shuffledQuiz = JSON.parse(savedQuizList);
         }
-        console.log("Sekme geçişi algılandı! Hafızadaki durum zorla geri yüklendi. Soru indeksi:", qIdx);
+        console.log("Navigasyon engeli aşıldı! Hafıza başarıyla dayatıldı. Kategori:", curSec, "Soru indeksi:", qIdx);
     }
 
     let activeQuiz = window.DAY2_QUIZ;
@@ -1264,7 +1264,7 @@ window.QUIZ_TARTI = [
 
 </script>
 
-<script src="./day2.js?v=26" charset="UTF-26"></script>
+<script src="./day2.js?v=27" charset="UTF-27"></script>
 
 <script>
   // ─── 6. RUNNING APPLICATION INITIALIZATION ───────────────────────
