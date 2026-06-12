@@ -7,7 +7,7 @@
 
 ---
 
-## v1.0 — Mayıs 2025
+## v1.0 — 3 Haziran 2026
 - Proje fikri ve müfredat planlaması
 - Uygulama mimarisi tasarlandı
 - Day 1: Tartı ve Kayıt bölümü tamamlandı
@@ -15,7 +15,7 @@
 - Türkçe fonetik transkripsiyon sistemi geliştirildi
 - GitHub Pages üzerinde yayınlandı
 
-## v2.0 — Haziran 2025
+## v2.0 — Haziran 2026
 - Day 2: Müsabaka Alanı bölümü eklendi
 - Jury, Equipment, Referee, Judge, Timekeeper, Announcer sekmeleri
 - ElevenLabs yapay zeka ses entegrasyonu
@@ -29,6 +29,9 @@
 - Telaffuz Pratiği özelliği (Web Speech API mikrofon)
 - Tayca Komut ve Sayma pratiği (animasyonlu sayaç)
 - Offline çalışma desteği (Service Worker cache)
+- Karanlık mod eklendi
+- Arama özelliği eklendi
+- QR Kod sayfası eklendi
 - Gizlilik Politikası sayfası eklendi
 - Tüm fikri mülkiyet hakları Afra UZ'a aittir
 
