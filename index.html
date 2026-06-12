@@ -465,18 +465,19 @@ function resetQuiz() {
   clearQuizState(); // 🔄 Manuel sıfırlamada hafızayı da temizliyoruz
 }
 
-// 💾 Güncel durumu hafızaya kaydeden fonksiyon
 function saveQuizState() {
   localStorage.setItem('tmf_qIdx', qIdx);
   localStorage.setItem('tmf_score', score);
   localStorage.setItem('tmf_curSec', curSec);
+  // 🎯 Listeyi de yazıya çevirip hafızaya gömüyoruz:
+  localStorage.setItem('tmf_shuffledQuiz', JSON.stringify(shuffledQuiz));
 }
 
-// 🧼 Quiz bittiğinde veya sıfırlandığında hafızayı temizleyen fonksiyon
 function clearQuizState() {
   localStorage.removeItem('tmf_qIdx');
   localStorage.removeItem('tmf_score');
   localStorage.removeItem('tmf_curSec');
+  localStorage.removeItem('tmf_shuffledQuiz'); // 🧼 Listeyi de temizle
 }
 
 // ─── 3. NAV BUILDERS & SWITCHERS ──────────────────────────────────
@@ -798,14 +799,18 @@ function tcTick(){
 function renderQuiz() {
     const c = document.getElementById("content");
 
-    // 🎯 HAFIZADAN KURTARMA SİSTEMİ (SEKME DEĞİŞTİRİLSE BİLE ÇALIŞIR)
+  // 🎯 HAFIZADAN KURTARMA SİSTEMİ (LİSTE DAHİL TAM KORUMA)
     const savedIdx = localStorage.getItem('tmf_qIdx');
     const savedSec = localStorage.getItem('tmf_curSec');
+    const savedQuizList = localStorage.getItem('tmf_shuffledQuiz');
     
-    if (qIdx === 0 && savedIdx && savedSec === curSec && parseInt(savedIdx) > 0) {
+    if (savedIdx && savedSec === curSec && parseInt(savedIdx) > 0) {
         qIdx = parseInt(savedIdx);
         score = parseInt(localStorage.getItem('tmf_score')) || 0;
-        console.log("Sekme değiştirildi, hafızadan kurtarılan soru indeksi:", qIdx);
+        if (savedQuizList) {
+            shuffledQuiz = JSON.parse(savedQuizList); // 🔥 Eski karıştırılmış sırayı aynen geri yüklüyoruz!
+        }
+        console.log("Hafızadan liste ve soru başarıyla kurtarıldı. Soru:", qIdx);
     }
     let activeQuiz = window.DAY2_QUIZ;
     if (curSec === "senaryo") activeQuiz = window.QUIZ_TARTI;
@@ -1252,7 +1257,7 @@ window.QUIZ_TARTI = [
 
 </script>
 
-<script src="./day2.js?v=18" charset="UTF-18"></script>
+<script src="./day2.js?v=19" charset="UTF-19"></script>
 
 <script>
   // ─── 6. RUNNING APPLICATION INITIALIZATION ───────────────────────
