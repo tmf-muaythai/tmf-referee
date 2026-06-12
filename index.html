@@ -825,6 +825,10 @@ function renderQuiz() {
   
   if (!shuffledQuiz.length) shuffledQuiz = shuffle(activeQuiz);
   if (qIdx >= shuffledQuiz.length) { showDone(); return; }
+  if (!shuffledQuiz.length || shuffledQuiz.length === 0) {
+    shuffledQuiz = shuffle(activeQuiz);
+    saveQuizState(); // 🎯 İlk karıştırma yapıldığı an listeyi hafızaya kilitle!
+}
 
   const q = shuffledQuiz[qIdx];
   const sOpts = shuffle(q.opts.map((o,i) => ({o, orig:i})));
@@ -1257,7 +1261,7 @@ window.QUIZ_TARTI = [
 
 </script>
 
-<script src="./day2.js?v=19" charset="UTF-19"></script>
+<script src="./day2.js?v=20" charset="UTF-20"></script>
 
 <script>
   // ─── 6. RUNNING APPLICATION INITIALIZATION ───────────────────────
