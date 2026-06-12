@@ -781,14 +781,16 @@ function renderQuiz() {
     const savedSec = localStorage.getItem('tmf_curSec');
     const savedQuizList = localStorage.getItem('tmf_shuffledQuiz');
 
-    // Eğer kullanıcı menüden tıkladığı için qIdx 0 geldiyse ama hafızada bu kategoriye ait kayıt varsa kurtar:
-    if (qIdx === 0 && savedIdx && savedSec === curSec && parseInt(savedIdx) > 0) {
+    // 🔥 DEĞİŞEN KRİTİK ŞART: qIdx === 0 zorunluluğunu kaldırdık!
+    // Eğer hafızada bu kategoriye ait bir ilerleme varsa ve şu anki shuffledQuiz boşalmışsa
+    // veya qIdx bir şekilde senkronize değilse, hafızayı zorla yükle!
+    if (savedIdx && savedSec === curSec && parseInt(savedIdx) > 0 && (!shuffledQuiz || shuffledQuiz.length === 0 || qIdx !== parseInt(savedIdx))) {
         qIdx = parseInt(savedIdx);
         score = parseInt(localStorage.getItem('tmf_score')) || 0;
         if (savedQuizList) {
             shuffledQuiz = JSON.parse(savedQuizList);
         }
-        console.log("Sekme geçişi sonrası hafızadan başarıyla kurtarıldı. Soru:", qIdx);
+        console.log("Sekme geçişi algılandı! Hafızadaki durum zorla geri yüklendi. Soru indeksi:", qIdx);
     }
 
     let activeQuiz = window.DAY2_QUIZ;
@@ -826,6 +828,9 @@ const quizSesKodu = `quiz_${curSec}_${origIdx + 1}`;
     <div class="q-bar">
       <div class="q-pill">Skor: <b id="sc">${score}</b></div>
       <div class="q-pill">Soru: <b>${qIdx+1}</b>/${shuffledQuiz.length}</div>
+      <button class="q-pill" onclick="if(confirm('Mevcut ilerlemeniz silinecektir. En baştan başlamak istediğinize emin misiniz?')) restartQuiz();" style="background: #dc3545; color: white; border: none; cursor: pointer; border-radius: 20px; padding: 4px 10px; font-weight: bold; margin-left: 5px;">
+        🗑️ Sıfırla
+      </button>
       <div class="prog-wrap"><div class="prog-fill" style="width:${Math.round(qIdx/shuffledQuiz.length*100)}%"></div></div>
     </div>
     <div class="qcard">
@@ -1259,7 +1264,7 @@ window.QUIZ_TARTI = [
 
 </script>
 
-<script src="./day2.js?v=25" charset="UTF-25"></script>
+<script src="./day2.js?v=26" charset="UTF-26"></script>
 
 <script>
   // ─── 6. RUNNING APPLICATION INITIALIZATION ───────────────────────
