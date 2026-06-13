@@ -95,7 +95,14 @@ body {
 .l4-btn{padding:5px 11px;font-size:11px;border:1px solid #c5d5e8;border-radius:12px;background:#f8fafc;color:#444;cursor:pointer;transition:all .15s;white-space:nowrap}
 .l4-btn.active{background:#185FA5;border-color:#185FA5;color:#fff;font-weight:600}
 
-.content{padding:12px;max-width:600px;margin:0 auto;width:100%;flex:1}
+.content {
+  padding: 12px;
+  max-width: 600px;
+  margin: 0 auto;
+  width: 100%;
+  flex: 1;
+}
+
 
 .phrase-card{background:#fff;border:1px solid #e8e8e8;border-radius:12px;padding:13px 14px;margin-bottom:8px}
 .p-en{font-size:14px;font-weight:600;color:#1a1a1a;line-height:1.45;margin-bottom:3px}
@@ -605,10 +612,12 @@ function switchL4(id) {
 // ─── 4. RENDERING ENGINE ──────────────────────────────────────────
 function render() {
   const searchWrap = document.getElementById('search-wrap');
+  const resumeBtn = document.getElementById('resume-quiz-btn');
   if (searchWrap) {
     searchWrap.style.display = isScenario(curSec) ? 'none' : 'block';
     document.getElementById('search-input').value = '';
   }
+  if (resumeBtn) resumeBtn.style.display = 'none';
   if (isScenario(curSec)) renderQuiz();
   else renderPhrases();
 }
@@ -1340,7 +1349,7 @@ window.QUIZ_TARTI = [
 
 </script>
 
-<script src="./day2.js?v=37" charset="UTF-37"></script>
+<script src="./day2.js?v=38" charset="UTF-38"></script>
 
 <script>
   // ─── 6. RUNNING APPLICATION INITIALIZATION ───────────────────────
