@@ -1139,6 +1139,23 @@ const NAV = {
         ]
       },
     ]
+  },
+  social: {
+    label: "Sosyal İletişim",
+    l2: [
+      {
+        id: "s_selamlasma_l2", label: "Selamlaşma (Greetings & Small Talk)",
+        l3: [ { id: "s_selamlasma", label: "Selamlaşma ve Hal Hatır Sorma", leaf: true } ]
+      },
+      {
+        id: "s_tanitma_l2", label: "Kendini Tanıtma (Introduction & Networking)",
+        l3: [ { id: "s_tanitma", label: "Kendini Tanıtma ve Çevre Edinme", leaf: true } ]
+      },
+      {
+        id: "s_ulasim_l2", label: "Ulaşım & Yemek (Transport & Meals)",
+        l3: [ { id: "s_ulasim", label: "Ulaşım, Servis ve Yemek Durumları", leaf: true } ]
+      },
+    ]
   }
 };
 
@@ -1225,6 +1242,34 @@ const PHRASES = {
     { en: "Can I come in?", alt: "May I come in?", ph: "Kan ay kam in?", tr: "İçeri girebilir miyim?" },
     { en: "Can I go to the bathroom?", alt: "Bathroom, please.", ph: "Kan ay go tu di bathrum?", tr: "Tuvalete gidebilir miyim?" },
   ],
+  s_selamlasma: [
+    { en: "Good morning, how are you today?", alt: "Morning, how are you?", ph: "Gud morning, hav ar yu tudey?", phs: "Morning, hav ar yu?", tr: "Günaydın, bugün nasılsın?" },
+    { en: "I am fine, thank you. And you?", alt: "Good, thanks. You?", ph: "Ay em fayn, thenk yu. End yu?", phs: "Gud, thenks. Yu?", tr: "İyiyim, teşekkür ederim. Ya sen?" },
+    { en: "How was your flight?", alt: "", ph: "Hav voz yor flayt?", phs: "", tr: "Yolculuk / uçuş nasıl geçti?" },
+    { en: "Did you have breakfast?", alt: "Have breakfast?", ph: "Did yu hev brekfıst?", phs: "Hev brekfıst?", tr: "Kahvaltı yaptın mı?" },
+    { en: "Have a nice day. Good luck today.", alt: "Have a nice day.", ph: "Hev ey nays dey. Gud lak tudey.", phs: "Hev ey nays dey.", tr: "İyi günler. Bugün başarılar dilerim." },
+    { en: "See you tomorrow morning.", alt: "See you tomorrow.", ph: "Sii yu tumoroo morning.", phs: "Sii yu tumoroo.", tr: "Yarın sabah görüşürüz." },
+    { en: "Good night, see you tomorrow.", alt: "Good night.", ph: "Gud nayt, sii yu tumoroo.", phs: "Gud nayt.", tr: "İyi geceler, yarın görüşürüz." },
+  ],
+
+  s_tanitma: [
+    { en: "My name is...", alt: "I am...", ph: "May neym iz...", phs: "Ay em...", tr: "Benim adım..." },
+    { en: "I am a referee from Türkiye.", alt: "Referee from Türkiye.", ph: "Ay em ey refırii fram Türkiye.", phs: "Refırii fram Türkiye.", tr: "Türkiye hakemiyim." },
+    { en: "My city is... / I live in...", alt: "From [City Name]", ph: "May siti iz... / Ay liv in...", phs: "Fram [Siti Neym]", tr: "Şehrim... / ...'da yaşıyorum." },
+    { en: "Where are you from?", alt: "", ph: "Ver ar yu from?", phs: "", tr: "Nerelisin?" },
+    { en: "Let's have a coffee together.", alt: "Coffee together?", ph: "Lets hev ey kofi tugedir.", phs: "Kofi tugedir?", tr: "Birlikte bir kahve içelim." },
+    { en: "This is my first international assignment.", alt: "My first international.", ph: "Dis iz may ferst intırneyşınıl esaynmınt.", phs: "May ferst intırneyşınıl.", tr: "İlk uluslararası görevim bu." },
+    { en: "How many years have you been refereeing?", alt: "Years of refereeing?", ph: "Hav meni yiırz hev yu biin refıriing?", phs: "Yiırz ov refıriing?", tr: "Kaç yıldır hakemlik yapıyorsunuz?" },
+  ],
+
+  s_ulasim: [
+    { en: "When will the shuttle arrive?", alt: "When is the bus arriving?", ph: "Ven vil dı şatıl ırayv?", phs: "Ven iz dı bas ırayving?", tr: "Servis ne zaman gelecek?" },
+    { en: "When is the first shuttle?", alt: "When is the first bus?", ph: "Ven iz dı ferst şatıl?", phs: "Ven iz dı ferst bas?", tr: "İlk servis ne zaman?" },
+    { en: "When is the last shuttle?", alt: "Last bus?", ph: "Ven iz dı lest şatıl?", phs: "Ven iz dı lest bas?", tr: "Son servis ne zaman?" },
+    { en: "When is the lunch break?", alt: "", ph: "Ven iz dı lanç breyk?", phs: "", tr: "Öğle arası ne zaman?" },
+    { en: "Where will we eat lunch / dinner?", alt: "", ph: "Ver vil vi iyt lanç / dinır?", phs: "", tr: "Yemeği nerede yiyeceğiz?" },
+    { en: "Are you staying at this hotel?", alt: "Same hotel?", ph: "Ar yu steying et dis hootel?", phs: "Seym hootel?", tr: "Bu otelde mi kalıyorsunuz?" },
+  ],
 };
 
 
@@ -1289,7 +1334,7 @@ window.QUIZ_TARTI = [
 
 </script>
 
-<script src="./day2.js?v=32" charset="UTF-32"></script>
+<script src="./day2.js?v=33" charset="UTF-33"></script>
 
 <script>
   // ─── 6. RUNNING APPLICATION INITIALIZATION ───────────────────────
