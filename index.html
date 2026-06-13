@@ -469,7 +469,6 @@ function resetQuiz() {
   qIdx = 0; 
   score = 0; 
   shuffledQuiz = []; 
-  clearQuizState(); // 🔄 Manuel sıfırlamada hafızayı da temizliyoruz
 }
 
 // ─── 3. NAV BUILDERS & SWITCHERS ──────────────────────────────────
@@ -521,13 +520,19 @@ function getL3Node() {
 }
 
 function switchDay(id) {
-  curDay = id; resetQuiz();
+  curDay = id;
+  const activeQuizSave = localStorage.getItem('tmf_qIdx');
+  if (!activeQuizSave || parseInt(activeQuizSave) === 0) clearQuizState();
+  resetQuiz();
   const firstL2 = NAV[id].l2[0]; curL2 = firstL2.id;
   initL2(firstL2); buildDayNav(); buildL2();
 }
 
 function switchL2(id) {
-  curL2 = id; resetQuiz();
+  curL2 = id;
+  const activeQuizSave = localStorage.getItem('tmf_qIdx');
+  if (!activeQuizSave || parseInt(activeQuizSave) === 0) clearQuizState();
+  resetQuiz();
   const l2 = getL2Node(); if (l2) initL2(l2);
   buildL2();
 }
@@ -551,7 +556,10 @@ function initL2(l2) {
 }
 
 function switchL3(id) {
-  curL3 = id; resetQuiz();
+  curL3 = id;
+  const activeQuizSave = localStorage.getItem('tmf_qIdx');
+  if (!activeQuizSave || parseInt(activeQuizSave) === 0) clearQuizState();
+  resetQuiz();
   const l3 = getL3Node(); initL3(l3);
   buildL3();
 }
@@ -572,7 +580,10 @@ function initL3(l3) {
 }
 
 function switchL4(id) {
-  curL4 = id; curSec = id; resetQuiz();
+  curL4 = id; curSec = id;
+  const activeQuizSave = localStorage.getItem('tmf_qIdx');
+  if (!activeQuizSave || parseInt(activeQuizSave) === 0) clearQuizState();
+  resetQuiz();
   buildL4(); render();
 }
 
@@ -1278,7 +1289,7 @@ window.QUIZ_TARTI = [
 
 </script>
 
-<script src="./day2.js?v=31" charset="UTF-31"></script>
+<script src="./day2.js?v=32" charset="UTF-32"></script>
 
 <script>
   // ─── 6. RUNNING APPLICATION INITIALIZATION ───────────────────────
