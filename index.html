@@ -203,7 +203,6 @@ body.dark .footer-btn {
 }
 
 #resume-quiz-btn {
-  display: none;
   background: #28a745;
   color: white;
   border: none;
@@ -214,7 +213,7 @@ body.dark .footer-btn {
   cursor: pointer;
   margin: 8px auto;
   width: fit-content;
-  text-align: center;
+  display: none;
 }
 /* QR Kod Açılır Pencere Tasarımı (Modal) */
 .qr-modal {
@@ -291,7 +290,7 @@ body.dark .footer-btn {
 <div class="search-wrap" id="search-wrap" style="display:none">
   <input class="search-input" id="search-input" type="text" placeholder="🔍 Cümle veya kelime ara..." oninput="searchPhrases(this.value)">
 </div>
-<button id="resume-quiz-btn" onclick="resumeQuiz()">
+<button id="resume-quiz-btn" style="display:none" onclick="resumeQuiz()">
   🔄 Kaldığın Yerden Devam Et
 </button>
 <div class="content" id="content"></div>
@@ -380,8 +379,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const savedIdx = localStorage.getItem('tmf_qIdx');
   const resumeBtn = document.getElementById('resume-quiz-btn');
   if (savedIdx && parseInt(savedIdx) > 0) {
-    if (resumeBtn) resumeBtn.style.display = 'block';
+  if (resumeBtn) {
+    resumeBtn.style.cssText = 'display:block !important; background:#28a745; color:white; border:none; padding:8px 20px; border-radius:10px; font-weight:bold; font-size:13px; cursor:pointer; margin:8px auto; width:fit-content;';
   }
+}
 });
 
 // 💾 2. TAM KORUMALI RESUME FONKSİYONU
@@ -1339,7 +1340,7 @@ window.QUIZ_TARTI = [
 
 </script>
 
-<script src="./day2.js?v=36" charset="UTF-36"></script>
+<script src="./day2.js?v=37" charset="UTF-37"></script>
 
 <script>
   // ─── 6. RUNNING APPLICATION INITIALIZATION ───────────────────────
