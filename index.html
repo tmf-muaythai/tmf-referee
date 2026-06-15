@@ -256,6 +256,21 @@ body.dark .footer-btn {
   cursor: pointer;
   font-weight: 600;
 }
+/* Telaffuz pratiği kutusunu küçültüyoruz */
+.practice-box {
+  margin-top: 8px !important;
+  background: #f8faff !important; /* Mavi tonu daha hafifletildi */
+  border-radius: 8px !important;
+  padding: 8px !important;
+  border: 1px solid #e1e8f5 !important;
+}
+
+.practice-title {
+  font-size: 10px !important; 
+  font-weight: 700 !important; 
+  color: #185FA5 !important; 
+  margin-bottom: 6px !important;
+}
 
 /* Mobil Ekranlar İçin Gece Modu Butonunu ve Başlığı Düzenleme */
 @media (max-width: 480px) {
@@ -722,6 +737,14 @@ function searchPhrases(query) {
             <option value="1.0" selected>1.0x (Normal)</option>
           </select>
         </div>
+        <div class="practice-box">
+        <div class="practice-title">🗣️ TELAFFUZ PRATİĞİ</div>
+        <div style="display:flex; gap:5px; flex-wrap:wrap;">
+          <button class="sbtn" id="mic_btn_search_tam_${idx}" onclick="startPhraseSpeech('${encodeURIComponent(p.en)}', 'mic_btn_search_tam_${idx}', 'result_search_${idx}')">🎤 Tam</button>
+          ${hasAlt ? `<button class="sbtn-alt" style="font-size:10px; padding:4px 8px;" id="mic_btn_kisa_${curSec}_${idx}" onclick="startPhraseSpeech('${encodeURIComponent(p.alt)}', 'mic_btn_kisa_${curSec}_${idx}', 'result_${curSec}_${idx}')">🎤 Kısa</button>` : ""}
+        </div>
+        <div id="result_${curSec}_${idx}" style="margin-top:4px; font-size:10px; min-height:14px;"></div>
+      </div>
       </div>
 
       <!-- 🔍 Arama Sonuçlarındaki Telaffuz Alanı -->
@@ -772,6 +795,14 @@ function renderPhrases() {
             <option value="0.8">0.8x (Dengeli)</option>
             <option value="1.0" selected>1.0x (Normal)</option>
           </select>
+          <div class="practice-box">
+        <div class="practice-title">🗣️ TELAFFUZ PRATİĞİ</div>
+        <div style="display:flex; gap:5px; flex-wrap:wrap;">
+          <button class="sbtn" id="mic_btn_tam_${curSec}_${idx}" onclick="startPhraseSpeech('${encodeURIComponent(p.en)}', 'mic_btn_tam_${curSec}_${idx}', 'result_${curSec}_${idx}')">🎤 Tam</button>
+          ${hasAlt ? `<button class="sbtn-alt" style="font-size:10px; padding:4px 8px;" id="mic_btn_kisa_${curSec}_${idx}" onclick="startPhraseSpeech('${encodeURIComponent(p.alt)}', 'mic_btn_kisa_${curSec}_${idx}', 'result_${curSec}_${idx}')">🎤 Kısa</button>` : ""}
+        </div>
+        <div id="result_${curSec}_${idx}" style="margin-top:4px; font-size:10px; min-height:14px;"></div>
+      </div>
         </div>
       </div>
 
@@ -1559,7 +1590,7 @@ window.QUIZ_TARTI = [
 
 </script>
 
-<script src="./day2.js?v=46" charset="UTF-8"></script>
+<script src="./day2.js?v=47" charset="UTF-8"></script>
 
 <script>
   // ─── 6. RUNNING APPLICATION INITIALIZATION ───────────────────────
