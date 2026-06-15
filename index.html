@@ -263,6 +263,8 @@ body.dark .footer-btn {
   border-radius: 6px !important;
   padding: 6px 8px !important;
   border: 1px solid #e1e8f5 !important;
+  width: fit-content; 
+  min-width: 140px;   
 }
 .practice-title {
   font-size: 8px !important; 
@@ -790,8 +792,8 @@ function renderPhrases() {
       <div class="practice-box">
         <div class="practice-title">🗣️ TELAFFUZ PRATİĞİ</div>
         <div style="display:flex; gap:4px;">
-          <button class="sbtn" style="padding:2px 8px; font-size:10px;" id="mic_btn_tam_${curSec}_${idx}" onclick="startPhraseSpeech('${encodeURIComponent(p.en)}', 'mic_btn_tam_${curSec}_${idx}', 'result_${curSec}_${idx}')">🎤 Tam</button>
-          ${hasAlt ? `<button class="sbtn-alt" style="padding:2px 8px; font-size:10px;" id="mic_btn_kisa_${curSec}_${idx}" onclick="startPhraseSpeech('${encodeURIComponent(p.alt)}', 'mic_btn_kisa_${curSec}_${idx}', 'result_${curSec}_${idx}')">🎤 Kısa</button>` : ""}
+          <button class="sbtn" id="mic_btn_tam_${curSec}_${idx}" onclick="startPhraseSpeech('${encodeURIComponent(p.en)}', 'mic_btn_tam_${curSec}_${idx}', 'result_${curSec}_${idx}')">🎤 Tam</button>
+          ${hasAlt ? `<button class="sbtn-alt" id="mic_btn_kisa_${curSec}_${idx}" onclick="startPhraseSpeech('${encodeURIComponent(p.alt)}', 'mic_btn_kisa_${curSec}_${idx}', 'result_${curSec}_${idx}')">🎤 Kısa</button>` : ""}
         </div>
         <div id="result_${curSec}_${idx}" style="margin-top:2px; font-size:9px; min-height:10px;"></div>
       </div>
@@ -1518,7 +1520,7 @@ window.QUIZ_TARTI = [
 
 </script>
 
-<script src="./day2.js?v=53" charset="UTF-8"></script>
+<script src="./day2.js?v=54" charset="UTF-8"></script>
 
 <script>
   // ─── 6. RUNNING APPLICATION INITIALIZATION ───────────────────────
