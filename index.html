@@ -1037,19 +1037,19 @@ const quizSesKodu = `quiz_${curSec}_${origIdx + 1}`;
         <div class="sit-tr">${q.tr || "Senaryo açıklaması yukarıdadır."}</div>
         <div class="qt">${q.q || "What do you say? / Ne söylersin?"}</div>
         <div class="opts">
-          ${sOpts.map((x,i) =>
-            `<button class="opt" data-idx="${i}" data-correct="${newC}" data-ex="${encodeURIComponent(q.ex)}" data-ans="${encodeURIComponent(q.opts[q.c])}" data-ses="${q.audioId}" data-cat="${q.category}">${x.o}</button>`
-          ).join("")}
-        </div>
+  ${sOpts.map((x,i) =>
+    `<button class="opt" data-idx="${i}" data-correct="${newC}" data-ex="${encodeURIComponent(q.ex)}" data-ans="${encodeURIComponent(q.opts[q.c])}" data-ses="${q.audioId}" data-cat="${q.category}">${x.o}</button>`
+  ).join("")}
+</div>
         <div class="fb" id="fb"></div>
         <button class="nxt" id="nxt" onclick="nextQ()">${qIdx < shuffledQuiz.length-1 ? "Sonraki →" : "Sonuçları gör →"}</button>
       </div>
     </div>`;
 
  c.querySelectorAll(".opt").forEach(btn => btn.addEventListener("click", function() {
-    checkAns(+this.dataset.idx, +this.dataset.correct,
-      decodeURIComponent(this.dataset.ex), decodeURIComponent(this.dataset.ans), this.dataset.ses, quizSelectId, this.dataset.cat);
-  }));
+  checkAns(+this.dataset.idx, +this.dataset.correct,
+    decodeURIComponent(this.dataset.ex), decodeURIComponent(this.dataset.ans), this.dataset.ses, quizSelectId, this.dataset.cat);
+}));
   
   // ─── 🥊 İŞTE MENÜ KODLARINI NAKAVT EDEN SON DOKUNUŞ ───
   // Fonksiyon biterken global değişkenlerin dışarıdan sıfırlanmasını engellemek için hafızayı bir kez daha mühürlüyoruz!
@@ -1644,7 +1644,7 @@ window.QUIZ_TARTI = [
 
 </script>
 
-<script src="./day2.js?v=56" charset="UTF-8"></script>
+<script src="./day2.js?v=57" charset="UTF-8"></script>
 
 <script>
   // ─── 6. RUNNING APPLICATION INITIALIZATION ───────────────────────
