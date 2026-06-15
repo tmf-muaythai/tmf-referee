@@ -709,8 +709,7 @@ function searchPhrases(query) {
     return;
   }
   
-// searchPhrases içindeki map fonksiyonunun yeni hali
-  c.innerHTML = filtered.map((item, idx) => {
+c.innerHTML = filtered.map((item, idx) => {
     const p = item.phrase;
     const hasAlt = p.alt && p.alt.trim() !== "";
     const phonShort = p.phs && p.phs.trim() !== "" ? p.phs : "";
@@ -718,6 +717,9 @@ function searchPhrases(query) {
     const tamSesKodu = `${item.secCode}_${item.originalIdx + 1}`;
     const kisaSesKodu = `${item.secCode}_${item.originalIdx + 1}_short`;
     const selectId = `speed_sel_search_${idx}`;
+    const micTamId = `mic_btn_search_tam_${idx}`;
+    const micKisaId = `mic_btn_search_kisa_${idx}`;
+    const resultId = `result_search_${idx}`;
     
     return `
     <div class="phrase-card">
@@ -737,29 +739,18 @@ function searchPhrases(query) {
             <option value="1.0" selected>1.0x (Normal)</option>
           </select>
         </div>
-        <div class="practice-box">
-        <div class="practice-title">🗣️ TELAFFUZ PRATİĞİ</div>
-        <div style="display:flex; gap:5px; flex-wrap:wrap;">
-          <button class="sbtn" id="mic_btn_search_tam_${idx}" onclick="startPhraseSpeech('${encodeURIComponent(p.en)}', 'mic_btn_search_tam_${idx}', 'result_search_${idx}')">🎤 Tam</button>
-          ${hasAlt ? `<button class="sbtn-alt" style="font-size:10px; padding:4px 8px;" id="mic_btn_kisa_${curSec}_${idx}" onclick="startPhraseSpeech('${encodeURIComponent(p.alt)}', 'mic_btn_kisa_${curSec}_${idx}', 'result_${curSec}_${idx}')">🎤 Kısa</button>` : ""}
-        </div>
-        <div id="result_${curSec}_${idx}" style="margin-top:4px; font-size:10px; min-height:14px;"></div>
       </div>
-      </div>
-
-      <!-- 🔍 Arama Sonuçlarındaki Telaffuz Alanı -->
       <div style="margin-top:12px; background:var(--l3-bg); border-radius:10px; padding:10px; border:1px solid var(--border)">
         <div style="font-size:11px; font-weight:600; color:#185FA5; margin-bottom:6px;">🗣️ Telaffuz Pratiği Yap</div>
         <div style="display:flex; gap:6px; flex-wrap:wrap;">
-          <button class="sbtn" id="mic_btn_search_tam_${idx}" onclick="startPhraseSpeech('${encodeURIComponent(p.en)}', 'mic_btn_search_tam_${idx}', 'result_search_${idx}')">🎤 Tam Versiyonu Söyle</button>
-          ${hasAlt ? `<button class="sbtn-alt" id="mic_btn_search_kisa_${idx}" onclick="startPhraseSpeech('${encodeURIComponent(p.alt)}', 'mic_btn_search_kisa_${idx}', 'result_search_${idx}')">🎤 Kısa Versiyonu Söyle</button>` : ""}
+          <button class="sbtn" id="${micTamId}" onclick="startPhraseSpeech('${encodeURIComponent(p.en)}', '${micTamId}', '${resultId}')">🎤 Tam Versiyonu Söyle</button>
+          ${hasAlt ? `<button class="sbtn-alt" id="${micKisaId}" onclick="startPhraseSpeech('${encodeURIComponent(p.alt)}', '${micKisaId}', '${resultId}')">🎤 Kısa Versiyonu Söyle</button>` : ""}
         </div>
-        <div id="result_search_${idx}" style="margin-top:6px; font-size:11px; min-height:16px;"></div>
+        <div id="${resultId}" style="margin-top:6px; font-size:11px; min-height:16px;"></div>
       </div>
     </div>`;
   }).join("");
-}
-
+}  
 
 function renderPhrases() {
   const allP = Object.assign({}, PHRASES, (window.DAY2_PHRASES || {}));
@@ -1529,7 +1520,7 @@ window.QUIZ_TARTI = [
 
 </script>
 
-<script src="./day2.js?v=49" charset="UTF-8"></script>
+<script src="./day2.js?v=50" charset="UTF-8"></script>
 
 <script>
   // ─── 6. RUNNING APPLICATION INITIALIZATION ───────────────────────
