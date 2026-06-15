@@ -256,19 +256,19 @@ body.dark .footer-btn {
   cursor: pointer;
   font-weight: 600;
 }
-/* Telaffuz pratiği kutusunu küçültüyoruz */
+
 .practice-box {
-  margin-top: 10px !important;
-  background: var(--l3-bg) !important;
-  border-radius: 8px !important;
-  padding: 8px !important;
-  border: 1px solid var(--border) !important;
+  margin-top: 8px !important;
+  background: #f8faff !important;
+  border-radius: 6px !important;
+  padding: 6px 8px !important;
+  border: 1px solid #e1e8f5 !important;
 }
 .practice-title {
-  font-size: 9px !important; 
+  font-size: 8px !important; 
   font-weight: 800 !important; 
   color: #185FA5 !important; 
-  margin-bottom: 5px !important;
+  margin-bottom: 4px !important;
   text-transform: uppercase;
 }
 
@@ -762,7 +762,6 @@ function renderPhrases() {
   
   c.innerHTML = list.map((p, idx) => {
     const hasAlt = p.alt && p.alt.trim() !== "";
-    const phonShort = p.phs && p.phs.trim() !== "" ? p.phs : "";
     const tamSesKodu = `${curSec}_${idx + 1}`;
     const kisaSesKodu = `${curSec}_${idx + 1}_short`;
     const selectId = `speed_sel_${curSec}_${idx}`;
@@ -772,7 +771,6 @@ function renderPhrases() {
       <div class="p-en">${p.en}</div>
       ${hasAlt ? `<div class="p-alt">↳ Kısa: ${p.alt}</div>` : ""}
       <div class="p-ph">${p.ph || ""}</div>
-      ${hasAlt && phonShort ? `<div class="p-ph" style="color:#7ab0d4">↳ ${phonShort}</div>` : ""}
       <div class="p-tr">${p.tr}</div>
       
       <div class="btn-row">
@@ -789,13 +787,13 @@ function renderPhrases() {
         </div>
       </div>
 
-      <div style="margin-top:12px; background:var(--l3-bg); border-radius:10px; padding:10px; border:1px solid var(--border)">
-        <div style="font-size:11px; font-weight:600; color:#185FA5; margin-bottom:6px;">🗣️ Telaffuz Pratiği Yap</div>
-        <div style="display:flex; gap:6px; flex-wrap:wrap;">
-          <button class="sbtn" id="mic_btn_tam_${curSec}_${idx}" onclick="startPhraseSpeech('${encodeURIComponent(p.en)}', 'mic_btn_tam_${curSec}_${idx}', 'result_${curSec}_${idx}')">🎤 Tam Versiyonu Söyle</button>
-          ${hasAlt ? `<button class="sbtn-alt" id="mic_btn_kisa_${curSec}_${idx}" onclick="startPhraseSpeech('${encodeURIComponent(p.alt)}', 'mic_btn_kisa_${curSec}_${idx}', 'result_${curSec}_${idx}')">🎤 Kısa Versiyonu Söyle</button>` : ""}
+      <div class="practice-box">
+        <div class="practice-title">🗣️ TELAFFUZ PRATİĞİ</div>
+        <div style="display:flex; gap:4px;">
+          <button class="sbtn" style="padding:2px 8px; font-size:10px;" id="mic_btn_tam_${curSec}_${idx}" onclick="startPhraseSpeech('${encodeURIComponent(p.en)}', 'mic_btn_tam_${curSec}_${idx}', 'result_${curSec}_${idx}')">🎤 Tam</button>
+          ${hasAlt ? `<button class="sbtn-alt" style="padding:2px 8px; font-size:10px;" id="mic_btn_kisa_${curSec}_${idx}" onclick="startPhraseSpeech('${encodeURIComponent(p.alt)}', 'mic_btn_kisa_${curSec}_${idx}', 'result_${curSec}_${idx}')">🎤 Kısa</button>` : ""}
         </div>
-        <div id="result_${curSec}_${idx}" style="margin-top:6px; font-size:11px; min-height:16px;"></div>
+        <div id="result_${curSec}_${idx}" style="margin-top:2px; font-size:9px; min-height:10px;"></div>
       </div>
     </div>`;
   }).join("");
@@ -1520,7 +1518,7 @@ window.QUIZ_TARTI = [
 
 </script>
 
-<script src="./day2.js?v=51" charset="UTF-8"></script>
+<script src="./day2.js?v=52" charset="UTF-8"></script>
 
 <script>
   // ─── 6. RUNNING APPLICATION INITIALIZATION ───────────────────────
