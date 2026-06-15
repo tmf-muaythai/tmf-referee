@@ -1,4 +1,4 @@
-const CACHE = "tmf-v57";
+const CACHE = "tmf-v58";
 const FILES = [
   "/tmf-referee/",
   "/tmf-referee/index.html",

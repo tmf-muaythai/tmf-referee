@@ -969,48 +969,49 @@ function tcTick(){
 function renderQuiz() {
     const c = document.getElementById("content");
 
-    // ─── 🎯 HAFIZADAN TAM KORUMALI VERİ KURTARMA (AŞILMAZ KALKAN) ───
     const savedIdx = localStorage.getItem('tmf_qIdx');
     const savedSec = localStorage.getItem('tmf_curSec');
     const savedQuizList = localStorage.getItem('tmf_shuffledQuiz');
 
-    // Eğer hafızada geçerli bir ilerleme varsa, dışarıdan gelen her şeyi ez ve hafızayı dayat!
-    if (savedIdx && parseInt(savedIdx) > 0) {
+    // 💡 YENİ KONTROL: Tıkladığımız sekme ile hafızadaki sekme FARKLIYSA hafızayı sıfırla!
+    if (savedSec && savedSec !== curSec) {
+        localStorage.removeItem('tmf_qIdx');
+        localStorage.removeItem('tmf_curSec');
+        localStorage.removeItem('tmf_shuffledQuiz');
+        localStorage.removeItem('tmf_score');
+        qIdx = 0;
+        score = 0;
+        shuffledQuiz = [];
+    } 
+    // Aynı sekmedeysek ve yarım kalan bir ilerleme varsa hafızayı yükle
+    else if (savedIdx && parseInt(savedIdx) > 0) {
         qIdx = parseInt(savedIdx);
         score = parseInt(localStorage.getItem('tmf_score')) || 0;
-        
-        if (savedSec) curSec = savedSec; 
-        
         if (savedQuizList) {
-            // 🔥 BURASI KRİTİK: Hafızadaki listeyi küresel değişkenimize çakıyoruz!
             shuffledQuiz = JSON.parse(savedQuizList);
         }
-        console.log("Navigasyon engeli aşıldı! Hafıza zorla yüklendi. Soru indeksi:", qIdx);
     }
 
     let activeQuiz = window.DAY2_QUIZ;
-    if (curSec === "senaryo") activeQuiz = window.QUIZ_TARTI;
-    else if (curSec === "d2_senaryo_jury") activeQuiz = window.QUIZ_JURY;
-    else if (curSec === "d2_senaryo_judge") activeQuiz = window.QUIZ_JUDGE;
-    else if (curSec === "d2_senaryo_timekeeper") activeQuiz = window.QUIZ_TIMEKEEPER;
-    else if (curSec === "d2_senaryo_announcer") activeQuiz = window.QUIZ_ANNOUNCER;
-    else if (curSec === "d2_senaryo_equipment") activeQuiz = window.QUIZ_EQUIPMENT;
-    else if (curSec === "d2_senaryo_referee") activeQuiz = window.QUIZ_REFEREE;
+    if (curSec === "senaryo") activeQuiz = window.QUIZ_TARTI || [];
+    else if (curSec === "d2_senaryo_jury") activeQuiz = window.QUIZ_JURY || [];
+    else if (curSec === "d2_senaryo_judge") activeQuiz = window.QUIZ_JUDGE || [];
+    else if (curSec === "d2_senaryo_timekeeper") activeQuiz = window.QUIZ_TIMEKEEPER || [];
+    else if (curSec === "d2_senaryo_announcer") activeQuiz = window.QUIZ_ANNOUNCER || [];
+    else if (curSec === "d2_senaryo_equipment") activeQuiz = window.QUIZ_EQUIPMENT || [];
+    else if (curSec === "d2_senaryo_referee") activeQuiz = window.QUIZ_REFEREE || [];
 
-    // 🔥 DEĞİŞEN EN ÖNEMLİ KONTROL SATIRI:
-    // Sadece ve sadece hem hafızada liste yoksa HEM DE şu anki liste boşsa karıştır!
-    // Eğer hafızadan liste yüklendiyse, bu if blokunu tamamen es geçecek ve listeye dokunmayacak!
-    if (!savedQuizList && (!shuffledQuiz || shuffledQuiz.length === 0)) {
+    // Eğer şu anki liste boşsa karıştır ve yükle
+    if (!shuffledQuiz || shuffledQuiz.length === 0) {
         shuffledQuiz = shuffle(activeQuiz);
     }
 
-    // Ekrana her yeni soru geldiğinde hafızayı anında güncel tut:
     if (qIdx < shuffledQuiz.length) {
         saveQuizState(); 
     }
 
     if (qIdx >= shuffledQuiz.length) { showDone(); return; }
-    
+        
 
   const q = shuffledQuiz[qIdx];
   const sOpts = shuffle(q.opts.map((o,i) => ({o, orig:i})));
@@ -1051,13 +1052,12 @@ const quizSesKodu = `quiz_${curSec}_${origIdx + 1}`;
     decodeURIComponent(this.dataset.ex), decodeURIComponent(this.dataset.ans), this.dataset.ses, quizSelectId, this.dataset.cat);
 }));
   
-  // ─── 🥊 İŞTE MENÜ KODLARINI NAKAVT EDEN SON DOKUNUŞ ───
-  // Fonksiyon biterken global değişkenlerin dışarıdan sıfırlanmasını engellemek için hafızayı bir kez daha mühürlüyoruz!
-  if (savedIdx && parseInt(savedIdx) > 0) {
+
+  if (savedIdx && parseInt(savedIdx) > 0 && savedSec === curSec) {
       qIdx = parseInt(savedIdx);
       if (savedQuizList) shuffledQuiz = JSON.parse(savedQuizList);
   }
-} 
+}
 
 function getCategoryNameById(id) {
   const map = {
@@ -1644,7 +1644,7 @@ window.QUIZ_TARTI = [
 
 </script>
 
-<script src="./day2.js?v=57" charset="UTF-8"></script>
+<script src="./day2.js?v=58" charset="UTF-8"></script>
 
 <script>
   // ─── 6. RUNNING APPLICATION INITIALIZATION ───────────────────────
