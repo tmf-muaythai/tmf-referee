@@ -419,7 +419,44 @@ window.resumeQuiz = function() {
   }
 };
 
-let currentPlayingAudio = null; 
+// 🎵 MERKEZİ SES YÖNETİCİSİ (HATA ÖNLEYİCİ KALKAN)
+const AudioManager = {
+  currentAudio: null,
+
+  play: function(audioPath, speed = 1.0) {
+    // 1. Eğer halihazırda çalan bir ses varsa güvenli bir şekilde durdur
+    this.stop();
+
+    // 2. Yeni ses objesini oluştur ve hızı ayarla
+    this.currentAudio = new Audio(audioPath);
+    this.currentAudio.playbackRate = speed;
+
+    // 3. Tarayıcının asenkron play() sözünü (Promise) yakala ve kontrol et
+    const playPromise = this.currentAudio.play();
+
+    if (playPromise !== undefined) {
+      playPromise.catch(error => {
+        // Tarayıcının otomatik engellemelerini veya hızlı tıklama hatalarını sessizce yönetir
+        console.warn("Ses oynatımı tarayıcı veya kullanıcı tarafından kesildi/engellendi:", error.message);
+      });
+    }
+  },
+
+  stop: function() {
+    if (this.currentAudio) {
+      try {
+        // Sesi durdur ve zamanı başa sar
+        this.currentAudio.pause();
+        this.currentAudio.currentTime = 0;
+      } catch (e) {
+        console.error("Ses durdurulurken bir hata oluştu:", e);
+      }
+      // Belleği temizle
+      this.currentAudio = null;
+    }
+  }
+};
+
 let curDay = "day1";
 let curL2  = "registration";
 let curL3  = null;
@@ -435,25 +472,14 @@ function isScenario(id) {
 function playElevenLabsVoice(fileCode, selectElementId) {
   if (!fileCode) return;
   
-  // 🚫 EĞER ÖNCEDEN ÇALAN BİR SES VARSA ONU DURDURUYORUZ
-  if (currentPlayingAudio) {
-    currentPlayingAudio.pause();
-    currentPlayingAudio.currentTime = 0; // Süreyi başa sar
-  }
-
   const speedSelect = document.getElementById(selectElementId);
   const targetSpeed = speedSelect ? parseFloat(speedSelect.value) : 1.0;
 
-  let cleanCode = fileCode.replace(".mp3", "");
+  const cleanCode = fileCode.replace(".mp3", "");
   const audioPath = `assets/audio/${cleanCode}.mp3`;
   
-  // Yeni sesi oluştur ve hafızaya kaydet
-  currentPlayingAudio = new Audio(audioPath);
-  currentPlayingAudio.playbackRate = targetSpeed;
-  
-  currentPlayingAudio.play().catch(err => {
-    console.error("Ses oynatılamadı veya bulunamadı, aranan yol:", audioPath, err);
-  });
+  // Artık tüm yükü AudioManager üstleniyor
+  AudioManager.play(audioPath, targetSpeed);
 }
 
 function fallbackSpeak(txt, targetSpeed) {
@@ -613,37 +639,71 @@ function switchL4(id) {
 function render() {
   const searchWrap = document.getElementById('search-wrap');
   const resumeBtn = document.getElementById('resume-quiz-btn');
+  const searchInput = document.getElementById('search-input');
+  
   if (searchWrap) {
     searchWrap.style.display = isScenario(curSec) ? 'none' : 'block';
-    document.getElementById('search-input').value = '';
   }
+  
+  // 🧼 Yeni bir menüye tıklandığı an hem input alanını sıfırla hem de eski filtreleri bellekten uçur
+  if (searchInput) {
+    searchInput.value = ''; 
+  }
+  
   if (resumeBtn) resumeBtn.style.display = 'none';
+  
   if (isScenario(curSec)) renderQuiz();
   else renderPhrases();
 }
 
 function searchPhrases(query) {
-  const wrap = document.getElementById('search-wrap');
-  const allP = Object.assign({}, PHRASES, (window.DAY2_PHRASES || {}));
-  const list = allP[curSec] || [];
-  if (!query.trim()) { render(); return; }
-  const q = query.toLowerCase();
-  const filtered = list.filter(p =>
-    (p.en && p.en.toLowerCase().includes(q)) ||
-    (p.tr && p.tr.toLowerCase().includes(q)) ||
-    (p.ph && p.ph.toLowerCase().includes(q))
-  );
   const c = document.getElementById("content");
+  if (!query.trim()) { 
+    // 🧹 Eğer arama çubuğu boşaltılırsa, o anki aktif menüyü sıfırdan tertemiz render et
+    if (isScenario(curSec)) renderQuiz();
+    else renderPhrases();
+    return; 
+  }
+  
+  const q = query.toLowerCase();
+  
+  // 🌍 TÜM UYGULAMAYI TARA: Sadece bulunulan bölümü değil, PHRASES ve DAY2_PHRASES içindeki her şeyi birleştiriyoruz
+  const allP = Object.assign({}, PHRASES, (window.DAY2_PHRASES || {}));
+  let filtered = [];
+  
+  // Bütün alt bölümleri tek tek dönerek eşleşen kelimeleri havuzda topla
+  Object.keys(allP).forEach(sectionKey => {
+    allP[sectionKey].forEach(p => {
+      const matchEn = p.en && p.en.toLowerCase().includes(q);
+      const matchTr = p.tr && p.tr.toLowerCase().includes(q);
+      const matchPh = p.ph && p.ph.toLowerCase().includes(q);
+      
+      if (matchEn || matchTr || matchPh) {
+        // İleride ses dosyasının doğru tetiklenmesi için hangi bölüme ait olduğunu ve indexini karta gömüyoruz
+        filtered.push({
+          phrase: p,
+          secCode: sectionKey,
+          originalIdx: allP[sectionKey].indexOf(p)
+        });
+      }
+    });
+  });
+
   if (!filtered.length) {
-    c.innerHTML = `<div class="empty-msg">🔍 "${query}" için sonuç bulunamadı.</div>`;
+    c.innerHTML = `<div class="empty-msg">🔍 "${query}" için hiçbir kategoride sonuç bulunamadı.</div>`;
     return;
   }
-  c.innerHTML = filtered.map((p, idx) => {
+  
+// searchPhrases içindeki map fonksiyonunun yeni hali
+  c.innerHTML = filtered.map((item, idx) => {
+    const p = item.phrase;
     const hasAlt = p.alt && p.alt.trim() !== "";
     const phonShort = p.phs && p.phs.trim() !== "" ? p.phs : "";
-    const tamSesKodu = `${curSec}_${list.indexOf(p) + 1}`;
-    const kisaSesKodu = `${curSec}_${list.indexOf(p) + 1}_short`;
+    
+    const tamSesKodu = `${item.secCode}_${item.originalIdx + 1}`;
+    const kisaSesKodu = `${item.secCode}_${item.originalIdx + 1}_short`;
     const selectId = `speed_sel_search_${idx}`;
+    
     return `
     <div class="phrase-card">
       <div class="p-en">${p.en}</div>
@@ -662,6 +722,16 @@ function searchPhrases(query) {
             <option value="1.0" selected>1.0x (Normal)</option>
           </select>
         </div>
+      </div>
+
+      <!-- 🔍 Arama Sonuçlarındaki Telaffuz Alanı -->
+      <div style="margin-top:12px; background:var(--l3-bg); border-radius:10px; padding:10px; border:1px solid var(--border)">
+        <div style="font-size:11px; font-weight:600; color:#185FA5; margin-bottom:6px;">🗣️ Telaffuz Pratiği Yap</div>
+        <div style="display:flex; gap:6px; flex-wrap:wrap;">
+          <button class="sbtn" id="mic_btn_search_tam_${idx}" onclick="startPhraseSpeech('${encodeURIComponent(p.en)}', 'mic_btn_search_tam_${idx}', 'result_search_${idx}')">🎤 Tam Versiyonu Söyle</button>
+          ${hasAlt ? `<button class="sbtn-alt" id="mic_btn_search_kisa_${idx}" onclick="startPhraseSpeech('${encodeURIComponent(p.alt)}', 'mic_btn_search_kisa_${idx}', 'result_search_${idx}')">🎤 Kısa Versiyonu Söyle</button>` : ""}
+        </div>
+        <div id="result_search_${idx}" style="margin-top:6px; font-size:11px; min-height:16px;"></div>
       </div>
     </div>`;
   }).join("");
@@ -682,6 +752,7 @@ function renderPhrases() {
     const tamSesKodu = `${curSec}_${idx + 1}`;
     const kisaSesKodu = `${curSec}_${idx + 1}_short`;
     const selectId = `speed_sel_${curSec}_${idx}`;
+    const wrapId = `practice_wrap_${curSec}_${idx}`;
 
     return `
     <div class="phrase-card">
@@ -703,8 +774,24 @@ function renderPhrases() {
           </select>
         </div>
       </div>
+
+      <!-- 🎧 Her Cümlenin Altına Eklenen Telaffuz Laboratuvarı -->
+      <div style="margin-top:12px; background:var(--l3-bg); border-radius:10px; padding:10px; border:1px solid var(--border)">
+        <div style="font-size:11px; font-weight:600; color:#185FA5; margin-bottom:6px;">🗣️ Telaffuz Pratiği Yap</div>
+        <div style="display:flex; gap:6px; flex-wrap:wrap;">
+          <button class="sbtn" id="mic_btn_tam_${curSec}_${idx}" onclick="startPhraseSpeech('${encodeURIComponent(p.en)}', 'mic_btn_tam_${curSec}_${idx}', 'result_${curSec}_${idx}')">🎤 Tam Versiyonu Söyle</button>
+          ${hasAlt ? `<button class="sbtn-alt" id="mic_btn_kisa_${curSec}_${idx}" onclick="startPhraseSpeech('${encodeURIComponent(p.alt)}', 'mic_btn_kisa_${curSec}_${idx}', 'result_${curSec}_${idx}')">🎤 Kısa Versiyonu Söyle</button>` : ""}
+        </div>
+        <div id="result_${curSec}_${idx}" style="margin-top:6px; font-size:11px; min-height:16px;"></div>
+      </div>
     </div>`;
   }).join("");
+  
+  // Tayca Sayma Pratiği (Mevcut kodunun bozulmaması için aynen korundu)
+  if (curSec === "d2_tayca") {
+    // ... (Senin mevcut Tayca if bloğu içeriğin buraya gelecek, dokunmana gerek yok)
+  }
+}
   
   if (curSec === "d2_tayca") {
   c.innerHTML += `
@@ -757,11 +844,8 @@ window.tcToggle = function(){
 };
 
 window.tcReset = function(){
-  // 🔇 Sıfırla butonuna basıldığı an çalan Tayca sesi anında susturuyoruz
-  if (currentPlayingAudio) {
-    currentPlayingAudio.pause();
-    currentPlayingAudio.currentTime = 0;
-  }
+  // 🔇 Sıfırla butonuna basıldığı an çalan Tayca sesini anında susturuyoruz
+  AudioManager.stop();
 
   clearInterval(tcTimer); clearInterval(tcProgTimer);
   tcRunning=false; tcIdx=0;
@@ -772,7 +856,7 @@ window.tcReset = function(){
   document.getElementById('tc-fill').style.width='0%';
   document.getElementById('tc-start').textContent='▶ Başlat';
   window.tcToggle();
-};
+}; // ← Kaçırdığımız kapanış parantezi ve noktalı virgül tam olarak burada olmalı
 
 function tcTick(){
   if(tcIdx >= TC_DATA.length){
@@ -805,7 +889,7 @@ function tcTick(){
   }, 50);
 }
 }
-}
+
 
 
 function renderQuiz() {
@@ -971,7 +1055,7 @@ function startSpeech(encodedAns, quizSelectId) {
     
     const keywords = ans.replace(/[^a-z\s]/g, '').split(' ').filter(w => w.length > 3);
 const matched = keywords.filter(w => {
-  if (said.includes(w)) return true;
+  if (cleanSaid.includes(w)) return true;
   // Fonetik benzerlik — kelime uzunluğu farkı 2'den az ise kabul et
   return said.split(' ').some(sw => {
     if (Math.abs(sw.length - w.length) > 2) return false;
@@ -997,6 +1081,121 @@ if (pct >= 50) {
     btn.style.borderColor = '';
     btn.style.color = '';
   };
+
+  function startPhraseSpeech(encodedTargetText, btnId, resultId) {
+  const targetText = decodeURIComponent(encodedTargetText).toLowerCase();
+  const btn = document.getElementById(btnId);
+  const result = document.getElementById(resultId);
+  
+  if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+    result.innerHTML = '<span style="color:#A32D2D">⚠ Tarayıcın mikrofonu desteklemiyor.</span>';
+    return;
+  }
+
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const recognition = new SR();
+  recognition.lang = 'en-US';
+  recognition.interimResults = false;
+  recognition.maxAlternatives = 1;
+
+  // Butonun eski stilini ve metnini geri yüklemek üzere yedekle
+  const originalText = btn.textContent;
+  const originalBg = btn.style.background;
+  const originalColor = btn.style.color;
+  const originalBorder = btn.style.borderColor;
+
+  btn.textContent = '🔴 Dinleniyor...';
+  btn.style.background = '#FCEBEB';
+  btn.style.borderColor = '#A32D2D';
+  btn.style.color = '#A32D2D';
+  result.innerHTML = '';
+
+  recognition.start();
+
+  recognition.onresult = function(e) {
+    const said = e.results[0][0].transcript.toLowerCase();
+    // 1. Kendi "Akıllı Sözlüğümüz"
+    let cleanSaid = e.results[0][0].transcript.toLowerCase();
+    const dictionary = {
+      "assets office": "athlete",
+      "assets": "athlete",
+      "head guard": "headguard",
+      "headgard": "headguard",
+      "gumshield": "gum shield",
+      "waikru": "wai kru"
+    };
+
+    Object.keys(dictionary).forEach(key => {
+      if (cleanSaid.includes(key)) {
+        cleanSaid = cleanSaid.replace(key, dictionary[key]);
+      }
+    });
+    result.innerHTML = `<span style="color:var(--text2)">Söylediğin: "<em>${cleanSaid}</em>"</span><br>`;
+    
+    // Noktalama işaretlerinden temizleyip kelimelere bölüyoruz (3 harften uzun kelimeleri baz alıyoruz)
+    const keywords = targetText.replace(/[^a-z\s]/g, '').split(' ').filter(w => w.length > 3);
+    
+    if(keywords.length === 0) {
+      // Eğer komut çok kısaysa (Örn: "Stop", "Fight") tam eşleşmeye bak veya fonetik esneklik uygula
+      if(cleanSaid.includes(targetText) || Math.abs(cleanSaid.length - targetText.length) <= 2) {
+        result.innerHTML += `<span style="color:#3B6D11; font-weight:600;">✓ Harika! %100 doğru</span>`;
+      } else {
+        result.innerHTML += `<span style="color:#A32D2D; font-weight:600;">✗ Tekrar dene</span>`;
+      }
+      return;
+    }
+
+    const matched = keywords.filter(w => {
+    // 1. Doğrudan eşleşme
+    if (cleanSaid.includes(w)) return true;
+    
+    // 2. Athlete için özel tolerans (Assets veya Athlet'i Athlete kabul et)
+    if (w === 'athlete' && (cleanSaid.includes('assets') || cleanSaid.includes('athlet'))) return true;
+
+    // 3. Fonetik benzerlik kontrolü
+    return cleanSaid.split(' ').some(sw => {
+      if (Math.abs(sw.length - w.length) > 2) return false;
+      let diff = 0;
+      for (let i = 0; i < Math.min(sw.length, w.length); i++) {
+        if (sw[i] !== w[i]) diff++;
+      }
+      return diff <= 2;
+    });
+  });
+
+    const pct = Math.round(matched.length / keywords.length * 100);
+
+    if (pct >= 50) {
+      result.innerHTML += `<span style="color:#3B6D11; font-weight:600;">✓ Harika! %${pct} doğru</span>`;
+    } else if (pct >= 25) {
+      result.innerHTML += `<span style="color:#BA7517; font-weight:600;">~ Yakın! %${pct} — tekrar dene</span>`;
+    } else {
+      result.innerHTML += `<span style="color:#A32D2D; font-weight:600;">✗ %${pct} — tekrar dene</span>`;
+    }
+  };
+
+  const resetButtonStiles = () => {
+    btn.textContent = originalText;
+    btn.style.background = originalBg;
+    btn.style.color = originalColor;
+    btn.style.borderColor = originalBorder;
+  };
+
+  recognition.onerror = function(event) {
+    resetButtonStiles();
+    if (event.error === 'not-allowed') {
+      result.innerHTML = '<span style="color:#A32D2D; font-weight: 500;">⚠️ Mikrofon izni reddedildi. Adres çubuğundan izin verin.</span>';
+    } else if (event.error === 'no-speech') {
+      result.innerHTML = '<span style="color:#A32D2D; font-weight: 500;">🔇 Ses algılanamadı. Tekrar dene.</span>';
+    } else {
+      result.innerHTML = '<span style="color:#A32D2D; font-weight: 500;">⚠ Mikrofon hatası (' + event.error + ').</span>';
+    }
+  };
+
+  recognition.onend = function() {
+    resetButtonStiles();
+  };
+}
 
 recognition.onerror = function(event) {
     btn.textContent = '🎤 Mikrofonu Aç';
@@ -1360,7 +1559,7 @@ window.QUIZ_TARTI = [
 
 </script>
 
-<script src="./day2.js?v=45" charset="UTF-45"></script>
+<script src="./day2.js?v=46" charset="UTF-8"></script>
 
 <script>
   // ─── 6. RUNNING APPLICATION INITIALIZATION ───────────────────────
