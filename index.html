@@ -274,6 +274,47 @@ body.dark .footer-btn {
   text-transform: uppercase;
 }
 
+/* --- GECE MODU TAMAMLAYICI (Tüm beyazlıkları yok eder) --- */
+
+/* 1. Telaffuz Kutusu ve İçerikleri */
+body.dark .practice-box {
+  background: #252a3d !important;
+  border-color: #3a4060 !important;
+}
+body.dark .practice-title {
+  color: #7ab0d4 !important;
+}
+
+/* 2. Senaryo/Quiz Kartları ve İçerikleri */
+body.dark .qcard, 
+body.dark .done-box,
+body.dark .empty-msg {
+  background: #1e2130 !important;
+  border-color: #2e3348 !important;
+  color: #e8eaf0 !important;
+}
+body.dark .sit-en, body.dark .qt { color: #e8eaf0 !important; }
+body.dark .sit-tr { color: #9aa0b4 !important; border-bottom-color: #2e3348 !important; }
+body.dark .qhead { background: #161b2e !important; border-bottom-color: #2e3348 !important; }
+
+/* 3. Butonlar ve Geri Bildirimler */
+body.dark .opt { 
+  background: #2a3050 !important; 
+  border-color: #3a4060 !important; 
+  color: #e8eaf0 !important; 
+}
+body.dark .opt:hover { background: #3a4060 !important; }
+body.dark .fb.ok { background: #1b2614 !important; color: #a8d58a !important; }
+body.dark .fb.no { background: #3d1b1b !important; color: #e57373 !important; }
+
+/* 4. Tayca Pratiği Alanı (Eğer varsa) */
+body.dark #tc-display {
+  background: #161b2e !important;
+  color: #e8eaf0 !important;
+}
+body.dark #tc-thai { color: #e8eaf0 !important; }
+body.dark #tc-num { color: #7ab0d4 !important; }
+
 /* Mobil Ekranlar İçin Gece Modu Butonunu ve Başlığı Düzenleme */
 @media (max-width: 480px) {
   .top-bar {
@@ -1520,7 +1561,7 @@ window.QUIZ_TARTI = [
 
 </script>
 
-<script src="./day2.js?v=54" charset="UTF-8"></script>
+<script src="./day2.js?v=55" charset="UTF-8"></script>
 
 <script>
   // ─── 6. RUNNING APPLICATION INITIALIZATION ───────────────────────
