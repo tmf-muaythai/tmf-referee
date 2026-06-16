@@ -293,10 +293,23 @@ function renderSimulation() {
   const totalScenes = SIM_KAYIT.length;
 
   // İkon ve etiket
+  // ─── YENİ NESİL PROFESYONEL İKONLAR (SVG) ───
   const speakerMeta = {
-    narrator:       { icon: "📢", label: "Anlatıcı" },
-    representative: { icon: "👨‍💼", label: "Takım Temsilcisi" },
-    user:           { icon: "🎤", label: "Sen (Hakem)" }
+    narrator: { 
+      // Şık bir ses/anons dalgası ikonu
+      icon: `<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>`, 
+      label: "Anlatıcı" 
+    },
+    representative: { 
+      // Şık bir kullanıcı/profil ikonu
+      icon: `<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>`, 
+      label: "Takım Temsilcisi" 
+    },
+    user: { 
+      // Modern bir stüdyo mikrofonu ikonu
+      icon: `<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="22"></line></svg>`, 
+      label: "Sen (Hakem)" 
+    }
   };
   const meta = speakerMeta[step.speaker] || speakerMeta.narrator;
 
@@ -422,27 +435,39 @@ function simPlay() {
   if (!step.audioId) return;
 
   const btn = document.getElementById("sim-play-btn");
-  if (btn) { btn.textContent = "▶ Tekrar Dinle"; }
+  if (btn) {
+    btn.textContent = "⏸ Çalıyor...";
+    btn.disabled = true;
+  }
 
-  AudioManager.play(`assets/audio/${step.audioId}.mp3`, 1.0);
-
-  // Eğer bu adımdan sonra user adımı varsa "Hazır mısın?" göster
   const nextStep = scene.steps[simStepIdx + 1];
-  if (nextStep && nextStep.speaker === "user") {
+  const audio = new Audio(`assets/audio/${step.audioId}.mp3`);
+  audio.play().catch(e => console.warn("Ses oynatılamadı:", e));
+
+  // Ses bitince sonraki adıma geç
+  audio.onended = function() {
+    if (btn) {
+      btn.textContent = "▶ Tekrar Dinle";
+      btn.disabled = false;
+    }
+
+    if (!nextStep) return;
+
+    // Kısa bir nefes molası (500ms) ver, sonra geç
     setTimeout(() => {
-      // Bir sonraki adıma (user adımına) geç
       simStepIdx++;
       simHintIdx = 0;
       renderSimulation();
-    }, 1800);
-  }
-  // Eğer birden fazla dinleme adımı varsa (sahne 3 gibi) bir sonraki dinleme adımına geç
-  else if (nextStep && nextStep.speaker !== "user") {
-    setTimeout(() => {
-      simStepIdx++;
-      renderSimulation();
-    }, 1800);
-  }
+    }, 500);
+  };
+
+  // Hata durumunda butonu serbest bırak
+  audio.onerror = function() {
+    if (btn) {
+      btn.textContent = "▶ Tekrar Dinle";
+      btn.disabled = false;
+    }
+  };
 }
 
 // ─── ALT YAZI ────────────────────────────────────────────────────
@@ -485,7 +510,27 @@ function simSpeak() {
   recognition.start();
 
   recognition.onresult = function(e) {
-    const said = e.results[0][0].transcript.toLowerCase().trim();
+    let said = e.results[0][0].transcript.toLowerCase().trim();
+
+    // Tarayıcı tanıma düzeltmeleri
+    const dictionary = {
+      "assets office": "athlete",
+      "assets":        "athlete",
+      "at least":      "athlete",
+      "head guard":    "headguard",
+      "headgard":      "headguard",
+      "gumshield":     "gum shield",
+      "waikru":        "wai kru",
+      "anti doping":   "anti-doping",
+      "non pregnancy": "non-pregnancy",
+      "hiv":           "hiv",
+      "hbv":           "hbv",
+      "hcv":           "hcv"
+    };
+    Object.keys(dictionary).forEach(key => {
+      if (said.includes(key)) said = said.replace(key, dictionary[key]);
+    });
+
     micBtn.style.background = "#185FA5";
     micBtn.textContent = "🎤";
     if (wave)  wave.style.display  = "none";

@@ -338,7 +338,15 @@ body.dark .hint-box {
 body.dark .hint-text {
   color: #e8d08b !important; /* Okunması kolay, yumuşak krem-sarı */
 }
+/* SİMÜLASYON GECE MODU UYUMLULUĞU */
+body.dark #sim-card { background: #1e2130; border-color: #2e3348 !important; box-shadow: none !important; }
+body.dark #sim-subtitle-wrap div { background: #161b2e !important; color: #e8eaf0 !important; border-color: #2e3348 !important; }
+body.dark #sim-listening-label { color: #e57373 !important; }
 
+/* Dinamik oluşturulan Başarı/Hata/İpucu kutuları için */
+body.dark #sim-result-area div[style*="background:#EAF3DE"] { background: #1b2614 !important; border-color: #3B6D11 !important; color: #a8d58a !important; }
+body.dark #sim-result-area div[style*="background:#FCEBEB"] { background: #3d1b1b !important; border-color: #A32D2D !important; color: #e57373 !important; }
+body.dark #sim-hint-area div[style*="background:#fff8e1"] { background: #2a220a !important; border-left-color: #d4a32a !important; color: #e8d08b !important; }
 /* Mobil Ekranlar İçin Gece Modu Butonunu ve Başlığı Düzenleme */
 @media (max-width: 480px) {
   .top-bar {
@@ -1645,8 +1653,8 @@ window.QUIZ_TARTI = [
 
 </script>
 
-<script src="./day2.js?v=60" charset="UTF-8"></script>
-<script src="./sim_kayit.js?v=1" charset="UTF-8"></script>
+<script src="./day2.js?v=61" charset="UTF-8"></script>
+<script src="./sim_kayit.js?v=2" charset="UTF-8"></script>
 
 <script>
   // ─── 6. RUNNING APPLICATION INITIALIZATION ───────────────────────
