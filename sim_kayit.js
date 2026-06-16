@@ -314,13 +314,20 @@ function renderSimulation() {
   const meta = speakerMeta[step.speaker] || speakerMeta.narrator;
 
   c.innerHTML = `
-    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;">
+    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; flex-wrap:wrap; gap:8px;">
       <div style="font-size:12px; font-weight:600; color:#185FA5;">
         🎙️ Sesli Simülasyon
       </div>
-      <div style="font-size:11px; color:#888;">
-        Sahne <b style="color:#185FA5">${simSceneIdx + 1}</b> / ${totalScenes}
-        &nbsp;·&nbsp; ${scene.title}
+      <div style="display:flex; align-items:center; gap:10px;">
+        <div style="font-size:11px; color:var(--text2);">
+          Sahne <b style="color:#185FA5">${simSceneIdx + 1}</b> / ${totalScenes}
+        </div>
+        <button onclick="if(confirm('Simülasyonu baştan başlatmak istediğinize emin misiniz?')) simRestart();" style="
+          background: #dc3545; color: white; border: none; cursor: pointer; 
+          border-radius: 20px; padding: 4px 10px; font-size: 11px; font-weight: bold;
+        ">
+          Sıfırla
+        </button>
       </div>
     </div>
 
