@@ -548,7 +548,7 @@ let qIdx = 0, score = 0, answered = false, shuffledQuiz = [];
 
 // ─── 2. CORE AUDIO AND UTILITY FUNCTIONS ─────────────────────────
 function isScenario(id) {
-  return id && (id === "senaryo" || id.startsWith("senaryo_") || id.startsWith("d2_senaryo") || id === "sim_kayit");
+  return id && (id === "senaryo" || id.startsWith("senaryo_") || id.startsWith("d2_senaryo") || id.startsWith("d2_senaryo"));
 }
 
 function playElevenLabsVoice(fileCode, selectElementId) {
@@ -734,6 +734,7 @@ function render() {
   
   if (resumeBtn) resumeBtn.style.display = 'none';
   if (curSec === "sim_kayit") renderSimulation(); 
+  else if (curSec === "senaryo_kayit") renderQuiz();
   else if (isScenario(curSec)) renderQuiz();
   else renderPhrases();
 }
@@ -993,7 +994,7 @@ function renderQuiz() {
     }
 
     let activeQuiz = window.DAY2_QUIZ;
-    if (curSec === "senaryo") activeQuiz = window.QUIZ_TARTI || [];
+    if (curSec === "senaryo" || curSec === "senaryo_kayit") activeQuiz = window.QUIZ_TARTI || [];
     else if (curSec === "d2_senaryo_jury") activeQuiz = window.QUIZ_JURY || [];
     else if (curSec === "d2_senaryo_judge") activeQuiz = window.QUIZ_JUDGE || [];
     else if (curSec === "d2_senaryo_timekeeper") activeQuiz = window.QUIZ_TIMEKEEPER || [];
@@ -1354,7 +1355,7 @@ const NAV = {
     l2: [
       {
         id: "registration", label: "Kayıt (Registration)",
-        l3: [ { id: "kayit", label: "Kayıt & Belge (Registration & Documents)", leaf: true } ]
+        l3: [ { id: "kayit", label: "Kayıt & Belge (Registration & Documents)", leaf: true }, { id: "sim_kayit", label: "🎙️ Sesli Simülasyon", leaf: true }, ]
       },
       {
         id: "weighin", label: "Tartı (Weigh-In)",
@@ -1387,7 +1388,6 @@ const NAV = {
         id: "senaryo",  label: "▶ Senaryo Pratiği",
         isQuiz: true, quizId: "senaryo"
       },
-      { id: "sim_kayit", label: "🎙️ Sesli Simülasyon", isQuiz: true, quizId: "sim_kayit" },
     ]
  },
   
@@ -1641,287 +1641,11 @@ window.QUIZ_TARTI = [
   { en: "Announce that the male weigh-in is starting.", tr: "Erkek tartısının başladığını duyuruyorsun.", category: "cagirma", audioId: "quiz_senaryo_54", q: "Ne söylersin?", opts: ["Male weigh-in starts now.", "Female weigh-in starts now.", "Please show your passport.", "Please trim your toenails."], c: 0, ex: "✓ 'Male weigh-in starts now.'" },
   { en: "Ask the staff to check the scales.", tr: "Görevliden tartıları kontrol etmesini rica edeceksin.", category: "baskul", audioId: "quiz_senaryo_55", q: "Ne söylersin?", opts: ["Could you please check the scales?", "Could you please present your passport?", "Could you please step on the scale once?", "Could you please change the schales?"], c: 0, ex: "✓ 'Could you please check the scales?'" }
 ];
-const SIM_KAYIT = [
-  {
-    id: 1,
-    title: "Karşılama ve Ülke Sorma",
-    steps: [
-      {
-        speaker: "representative",
-        audioId: "sim_kayit_1",
-        subtitle: "Hello!",
-      },
-      {
-        speaker: "user",
-        accepted: [
-          "hello welcome which country are you representing",
-          "welcome which country are you representing",
-          "hello welcome your country",
-          "welcome your country"
-        ],
-        hints: [
-          "Karşındaki seni selamlıyor. Sen de karşılık verip hangi ülkeyi temsil ettiğini sormalısın.",
-          "'welcome' ve 'country' kelimelerini kullan.",
-          "Hello, welcome. Which country are you representing?"
-        ]
-      }
-    ]
-  },
-  {
-    id: 2,
-    title: "Belge İsteme",
-    steps: [
-      {
-        speaker: "representative",
-        audioId: "sim_kayit_2",
-        subtitle: "Germany.",
-      },
-      {
-        speaker: "user",
-        accepted: [
-          "please present the required documents",
-          "required documents please",
-          "documents please",
-          "can you show me your documents"
-        ],
-        hints: [
-          "Ülkeyi öğrendin. Şimdi kayıt için gerekli belgeleri talep etmelisin.",
-          "'documents' kelimesini kullan.",
-          "Please present the required documents."
-        ]
-      }
-    ]
-  },
-  {
-    id: 3,
-    title: "Kayıt Tamamlama",
-    steps: [
-      {
-        speaker: "narrator",
-        audioId: "sim_kayit_3",
-        subtitle: "Tüm evraklar tamam, hiçbir eksik yok.",
-      },
-      {
-        speaker: "representative",
-        audioId: "sim_kayit_3b",
-        subtitle: "Is it all done?",
-      },
-      {
-        speaker: "user",
-        accepted: [
-          "yes",
-          "yes have a nice day",
-          "yes all done",
-          "yes your registration is completed",
-          "registration completed",
-          "all done",
-          "all done have a nice day",
-          "all done good luck"
-        ],
-        hints: [
-          "Tüm belgeler tamam. Temsilci senden onay bekliyor.",
-          "'done' veya 'completed' kelimelerini kullan.",
-          "All done! Good luck."
-        ]
-      }
-    ]
-  },
-  {
-    id: 4,
-    title: "Tıbbi Beyan Eksikliği",
-    steps: [
-      {
-        speaker: "narrator",
-        audioId: "sim_kayit_4",
-        subtitle: "You are checking all the documents and you notice the athlete's medical declaration is missing.",
-      },
-      {
-        speaker: "user",
-        accepted: [
-          "athletes medical declaration is missing",
-          "medical declaration missing",
-          "there is no medical declaration",
-          "where is the medical declaration"
-        ],
-        hints: [
-          "Belgeleri incelerken bir eksiklik fark ettin. Bunu temsilciye bildirmelisin.",
-          "'medical' ve 'declaration' kelimelerini kullan.",
-          "Athlete's medical declaration is missing."
-        ]
-      }
-    ]
-  },
-  {
-    id: 5,
-    title: "Anti-Doping Onayı Eksikliği",
-    steps: [
-      {
-        speaker: "narrator",
-        audioId: "sim_kayit_5",
-        subtitle: "You are checking all the documents and you notice the athlete's anti-doping consent is missing.",
-      },
-      {
-        speaker: "user",
-        accepted: [
-          "athletes anti doping consent is missing",
-          "anti doping consent missing",
-          "there is no anti doping consent",
-          "where is the anti doping consent"
-        ],
-        hints: [
-          "Belgeler arasında önemli bir onay formu eksik. Bunu bildirmelisin.",
-          "'anti-doping' ve 'consent' kelimelerini kullan.",
-          "Athlete's anti-doping consent is missing."
-        ]
-      }
-    ]
-  },
-  {
-    id: 6,
-    title: "Hamile Olmama Beyanı Eksikliği",
-    steps: [
-      {
-        speaker: "narrator",
-        audioId: "sim_kayit_6",
-        subtitle: "You are checking all the documents and you notice the athlete's non-pregnancy declaration is missing.",
-      },
-      {
-        speaker: "user",
-        accepted: [
-          "athletes non pregnancy declaration is missing",
-          "non pregnancy declaration missing",
-          "there is no non pregnancy declaration",
-          "where is the non pregnancy declaration"
-        ],
-        hints: [
-          "Kadın sporcularda zorunlu olan bir beyan formu eksik.",
-          "'non-pregnancy' ve 'declaration' kelimelerini kullan.",
-          "Athlete's non-pregnancy declaration is missing."
-        ]
-      }
-    ]
-  },
-  {
-    id: 7,
-    title: "HIV Testi Eksikliği",
-    steps: [
-      {
-        speaker: "narrator",
-        audioId: "sim_kayit_7",
-        subtitle: "You are checking all the documents and you notice the athlete's HIV test result is missing.",
-      },
-      {
-        speaker: "user",
-        accepted: [
-          "athletes hiv test result is missing",
-          "hiv test result is missing",
-          "hiv result is missing",
-          "there is no hiv test result",
-          "there is no hiv result",
-          "where is the hiv test result",
-          "where is the hiv result",
-          "hiv result",
-          "hiv test result"
-        ],
-        hints: [
-          "Kan testi sonuçlarından biri eksik. Hangisi olduğunu belirtmelisin.",
-          "'HIV' ve 'result' kelimelerini kullan.",
-          "Athlete's HIV test result is missing."
-        ]
-      }
-    ]
-  },
-  {
-    id: 8,
-    title: "HBV Testi Eksikliği",
-    steps: [
-      {
-        speaker: "narrator",
-        audioId: "sim_kayit_8",
-        subtitle: "You are checking all the documents and you notice the athlete's HBV test result is missing.",
-      },
-      {
-        speaker: "user",
-        accepted: [
-          "athletes hbv test result is missing",
-          "hbv test result is missing",
-          "hbv result is missing",
-          "there is no hbv test result",
-          "there is no hbv result",
-          "where is the hbv test result",
-          "where is the hbv result",
-          "hbv result",
-          "hbv test result"
-        ],
-        hints: [
-          "Kan testi sonuçlarından biri eksik. Hangisi olduğunu belirtmelisin.",
-          "'HBV' ve 'result' kelimelerini kullan.",
-          "Athlete's HBV test result is missing."
-        ]
-      }
-    ]
-  },
-  {
-    id: 9,
-    title: "HCV Testi Eksikliği",
-    steps: [
-      {
-        speaker: "narrator",
-        audioId: "sim_kayit_9",
-        subtitle: "You are checking all the documents and you notice the athlete's HCV test result is missing.",
-      },
-      {
-        speaker: "user",
-        accepted: [
-          "athletes hcv test result is missing",
-          "hcv test result is missing",
-          "hcv result is missing",
-          "there is no hcv test result",
-          "there is no hcv result",
-          "where is the hcv test result",
-          "where is the hcv result",
-          "hcv result",
-          "hcv test result"
-        ],
-        hints: [
-          "Kan testi sonuçlarından biri eksik. Hangisi olduğunu belirtmelisin.",
-          "'HCV' ve 'result' kelimelerini kullan.",
-          "Athlete's HCV test result is missing."
-        ]
-      }
-    ]
-  },
-  {
-    id: 10,
-    title: "Eksik Evrak — Geri Gönderme",
-    steps: [
-      {
-        speaker: "narrator",
-        audioId: "sim_kayit_10",
-        subtitle: "Evraklar eksik ve kayıt işlemine devam edemiyorsun.",
-      },
-      {
-        speaker: "user",
-        accepted: [
-          "please come back after the documents are complete",
-          "come back when documents are ready",
-          "come back when documents are complete",
-          "please bring all the documents"
-        ],
-        hints: [
-          "Eksik belgeler var ve işleme devam edemiyorsun. Temsilciyi ne zaman geri gelmesi gerektiği konusunda yönlendirmelisin.",
-          "'come back' ve 'documents' kelimelerini kullan.",
-          "Please come back after the documents are complete."
-        ]
-      }
-    ]
-  }
-];
 
 
 </script>
 
-<script src="./day2.js?v=59" charset="UTF-8"></script>
+<script src="./day2.js?v=60" charset="UTF-8"></script>
 <script src="./sim_kayit.js?v=1" charset="UTF-8"></script>
 
 <script>

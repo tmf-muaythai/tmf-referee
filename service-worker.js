@@ -1,4 +1,4 @@
-const CACHE = "tmf-v59";
+const CACHE = "tmf-v60";
 const FILES = [
   "/tmf-referee/",
   "/tmf-referee/index.html",
@@ -755,7 +755,19 @@ const FILES = [
   "/tmf-referee/assets/audio/s_ulasim_5.mp3",
   "/tmf-referee/assets/audio/s_ulasim_6.mp3",
   "/tmf-referee/assets/audio/s_ulasim_6_short.mp3",
-  "/tmf-referee/assets/audio/s_ulasim_7.mp3"
+  "/tmf-referee/assets/audio/s_ulasim_7.mp3",
+"/tmf-referee/assets/audio/sim_kayit_1.mp3",
+"/tmf-referee/assets/audio/sim_kayit_2.mp3",
+"/tmf-referee/assets/audio/sim_kayit_3.mp3",
+"/tmf-referee/assets/audio/sim_kayit_3b.mp3",
+"/tmf-referee/assets/audio/sim_kayit_4.mp3",
+"/tmf-referee/assets/audio/sim_kayit_5.mp3",
+"/tmf-referee/assets/audio/sim_kayit_6.mp3",
+"/tmf-referee/assets/audio/sim_kayit_7.mp3",
+"/tmf-referee/assets/audio/sim_kayit_8.mp3",
+"/tmf-referee/assets/audio/sim_kayit_9.mp3",
+"/tmf-referee/assets/audio/sim_kayit_10.mp3",
+
 ];
 
 self.addEventListener("install", e => {
