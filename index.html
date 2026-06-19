@@ -743,6 +743,7 @@ function render() {
   if (resumeBtn) resumeBtn.style.display = 'none';
   if (curSec === "sim_kayit") renderSimulation(); 
   else if (curSec === "sim_day2") renderSimDay2();
+  else if (curSec === "builder_kayit") renderBuilder();
   else if (curSec === "senaryo_kayit") renderQuiz();
   else if (isScenario(curSec)) renderQuiz();
   else renderPhrases();
@@ -1398,6 +1399,7 @@ const NAV = {
         isQuiz: true, quizId: "senaryo"
       },
       { id: "sim_kayit", label: "🎙️ Sesli Simülasyon", isQuiz: true, quizId: "sim_kayit" },
+      { id: "builder_kayit", label: "🧩 Cümle Kurma Pratiği", isQuiz: true, quizId: "builder_kayit" },
     ]
  },
   
@@ -1657,8 +1659,9 @@ window.QUIZ_TARTI = [
 </script>
 
 <script src="./day2.js?v=62" charset="UTF-8"></script>
-<script src="./sim_kayit.js?v=4" charset="UTF-8"></script>
+<script src="./sim_kayit.js?v=5" charset="UTF-8"></script>
 <script src="./sim_day2.js?v=1" charset="UTF-8"></script>
+<script src="./builder_kayit.js?v=1" charset="UTF-8"></script>
 
 <script>
   // ─── 6. RUNNING APPLICATION INITIALIZATION ───────────────────────

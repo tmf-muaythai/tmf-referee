@@ -666,7 +666,8 @@ function simSpeak() {
       "waikru":        "wai kru",
       "anti doping":   "anti-doping",
       "non pregnancy": "non-pregnancy",
-      "declaration":     "declaration",
+      "decoration":     "declaration",
+      "auntie":          "anti",
     };
     Object.keys(dictionary).forEach(key => {
       if (said.includes(key)) said = said.replace(key, dictionary[key]);
