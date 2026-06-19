@@ -1,299 +1,401 @@
-// ─── SESLİ SİMÜLASYON — KAYIT VERİSİ ────────────────────────────
-const SIM_KAYIT = [
+// ─── SESLİ SİMÜLASYON — KATEGORİ VERİSİ ─────────────────────────
+// Her kategori kendi sahne dizisine (scenes) sahiptir.
+// Şimdilik sadece "registration" dolu; diğerleri içerik eklenince
+// scenes dizisine sahne objeleri eklenecek (format registration ile aynı).
+
+const SIM_CATEGORIES = [
   {
-    id: 1,
-    title: "Karşılama ve Ülke Sorma",
-    steps: [
+    id: "registration",
+    label: "Registration",
+    labelTr: "Kayıt",
+    scenes: [
       {
-        speaker: "representative",
-        audioId: "sim_kayit_1",
-        subtitle: "Hello!",
+        id: 1,
+        title: "Karşılama ve Ülke Sorma",
+        steps: [
+          {
+            speaker: "representative",
+            audioId: "sim_kayit_1",
+            subtitle: "Hello!",
+          },
+          {
+            speaker: "user",
+            accepted: [
+              "hello welcome which country are you representing",
+              "welcome which country are you representing",
+              "hello welcome your country",
+              "welcome your country"
+            ],
+            hints: [
+              "Karşındaki seni selamlıyor. Sen de karşılık verip hangi ülkeyi temsil ettiğini sormalısın.",
+              "'welcome' ve 'country' kelimelerini kullan.",
+              "Hello, welcome. Which country are you representing?"
+            ]
+          }
+        ]
       },
       {
-        speaker: "user",
-        accepted: [
-          "hello welcome which country are you representing",
-          "welcome which country are you representing",
-          "hello welcome your country",
-          "welcome your country"
-        ],
-        hints: [
-          "Karşındaki seni selamlıyor. Sen de karşılık verip hangi ülkeyi temsil ettiğini sormalısın.",
-          "'welcome' ve 'country' kelimelerini kullan.",
-          "Hello, welcome. Which country are you representing?"
+        id: 2,
+        title: "Belge İsteme",
+        steps: [
+          {
+            speaker: "representative",
+            audioId: "sim_kayit_2",
+            subtitle: "Germany.",
+          },
+          {
+            speaker: "user",
+            accepted: [
+              "please present the required documents",
+              "required documents please",
+              "documents please",
+              "can you show me your documents"
+            ],
+            hints: [
+              "Ülkeyi öğrendin. Şimdi kayıt için gerekli belgeleri talep etmelisin.",
+              "'documents' kelimesini kullan.",
+              "Please present the required documents."
+            ]
+          }
+        ]
+      },
+      {
+        id: 3,
+        title: "Kayıt Tamamlama",
+        steps: [
+          {
+            speaker: "narrator",
+            audioId: "sim_kayit_3",
+            subtitle: "All documents are complete. No documents are missing.",
+          },
+          {
+            speaker: "representative",
+            audioId: "sim_kayit_3b",
+            subtitle: "Is it all done?",
+          },
+          {
+            speaker: "user",
+            accepted: [
+              "yes",
+              "yes have a nice day",
+              "yes all done",
+              "yes your registration is completed",
+              "registration completed",
+              "all done",
+              "all done have a nice day",
+              "all done good luck"
+            ],
+            hints: [
+              "Tüm belgeler tamam. Temsilci senden onay bekliyor.",
+              "'done' veya 'completed' kelimelerini kullan.",
+              "All done! Good luck."
+            ]
+          }
+        ]
+      },
+      {
+        id: 4,
+        title: "Tıbbi Beyan Eksikliği",
+        steps: [
+          {
+            speaker: "narrator",
+            audioId: "sim_kayit_4",
+            subtitle: "You are checking all the documents and you notice the athlete's medical declaration is missing.",
+          },
+          {
+            speaker: "user",
+            accepted: [
+              "athletes medical declaration is missing",
+              "medical declaration missing",
+              "there is no medical declaration",
+              "where is the medical declaration"
+            ],
+            hints: [
+              "Belgeleri incelerken bir eksiklik fark ettin. Bunu temsilciye bildirmelisin.",
+              "'medical' ve 'declaration' kelimelerini kullan.",
+              "Athlete's medical declaration is missing."
+            ]
+          }
+        ]
+      },
+      {
+        id: 5,
+        title: "Anti-Doping Onayı Eksikliği",
+        steps: [
+          {
+            speaker: "narrator",
+            audioId: "sim_kayit_5",
+            subtitle: "You are checking all the documents and you notice the athlete's anti-doping consent is missing.",
+          },
+          {
+            speaker: "user",
+            accepted: [
+              "athletes anti doping consent is missing",
+              "anti doping consent missing",
+              "there is no anti doping consent",
+              "where is the anti doping consent"
+            ],
+            hints: [
+              "Belgeler arasında önemli bir onay formu eksik. Bunu bildirmelisin.",
+              "'anti-doping' ve 'consent' kelimelerini kullan.",
+              "Athlete's anti-doping consent is missing."
+            ]
+          }
+        ]
+      },
+      {
+        id: 6,
+        title: "Hamile Olmama Beyanı Eksikliği",
+        steps: [
+          {
+            speaker: "narrator",
+            audioId: "sim_kayit_6",
+            subtitle: "You are checking all the documents and you notice the athlete's non-pregnancy declaration is missing.",
+          },
+          {
+            speaker: "user",
+            accepted: [
+              "athletes non pregnancy declaration is missing",
+              "non pregnancy declaration missing",
+              "there is no non pregnancy declaration",
+              "where is the non pregnancy declaration"
+            ],
+            hints: [
+              "Kadın sporcularda zorunlu olan bir beyan formu eksik.",
+              "'non-pregnancy' ve 'declaration' kelimelerini kullan.",
+              "Athlete's non-pregnancy declaration is missing."
+            ]
+          }
+        ]
+      },
+      {
+        id: 7,
+        title: "HIV Testi Eksikliği",
+        steps: [
+          {
+            speaker: "narrator",
+            audioId: "sim_kayit_7",
+            subtitle: "You are checking all the documents and you notice the athlete's HIV test result is missing.",
+          },
+          {
+            speaker: "user",
+            accepted: [
+              "athletes hiv test result is missing",
+              "hiv test result is missing",
+              "hiv result is missing",
+              "there is no hiv test result",
+              "there is no hiv result",
+              "where is the hiv test result",
+              "where is the hiv result",
+              "hiv result",
+              "hiv test result"
+            ],
+            hints: [
+              "Kan testi sonuçlarından biri eksik. Hangisi olduğunu belirtmelisin.",
+              "'HIV' ve 'result' kelimelerini kullan.",
+              "Athlete's HIV test result is missing."
+            ]
+          }
+        ]
+      },
+      {
+        id: 8,
+        title: "HBV Testi Eksikliği",
+        steps: [
+          {
+            speaker: "narrator",
+            audioId: "sim_kayit_8",
+            subtitle: "You are checking all the documents and you notice the athlete's HBV test result is missing.",
+          },
+          {
+            speaker: "user",
+            accepted: [
+              "athletes hbv test result is missing",
+              "hbv test result is missing",
+              "hbv result is missing",
+              "there is no hbv test result",
+              "there is no hbv result",
+              "where is the hbv test result",
+              "where is the hbv result",
+              "hbv result",
+              "hbv test result"
+            ],
+            hints: [
+              "Kan testi sonuçlarından biri eksik. Hangisi olduğunu belirtmelisin.",
+              "'HBV' ve 'result' kelimelerini kullan.",
+              "Athlete's HBV test result is missing."
+            ]
+          }
+        ]
+      },
+      {
+        id: 9,
+        title: "HCV Testi Eksikliği",
+        steps: [
+          {
+            speaker: "narrator",
+            audioId: "sim_kayit_9",
+            subtitle: "You are checking all the documents and you notice the athlete's HCV test result is missing.",
+          },
+          {
+            speaker: "user",
+            accepted: [
+              "athletes hcv test result is missing",
+              "hcv test result is missing",
+              "hcv result is missing",
+              "there is no hcv test result",
+              "there is no hcv result",
+              "where is the hcv test result",
+              "where is the hcv result",
+              "hcv result",
+              "hcv test result"
+            ],
+            hints: [
+              "Kan testi sonuçlarından biri eksik. Hangisi olduğunu belirtmelisin.",
+              "'HCV' ve 'result' kelimelerini kullan.",
+              "Athlete's HCV test result is missing."
+            ]
+          }
+        ]
+      },
+      {
+        id: 10,
+        title: "Eksik Evrak — Geri Gönderme",
+        steps: [
+          {
+            speaker: "narrator",
+            audioId: "sim_kayit_10",
+            subtitle: "The documents are incomplete. You cannot proceed with the registration.",
+          },
+          {
+            speaker: "user",
+            accepted: [
+              "please come back after the documents are complete",
+              "come back when documents are ready",
+              "come back when documents are complete",
+              "please bring all the documents"
+            ],
+            hints: [
+              "Eksik belgeler var ve işleme devam edemiyorsun. Temsilciyi geri gelmesi konusunda yönlendirmelisin.",
+              "'come back' ve 'documents' kelimelerini kullan.",
+              "Please come back after the documents are complete."
+            ]
+          }
         ]
       }
     ]
   },
-  {
-    id: 2,
-    title: "Belge İsteme",
-    steps: [
-      {
-        speaker: "representative",
-        audioId: "sim_kayit_2",
-        subtitle: "Germany.",
-      },
-      {
-        speaker: "user",
-        accepted: [
-          "please present the required documents",
-          "required documents please",
-          "documents please",
-          "can you show me your documents"
-        ],
-        hints: [
-          "Ülkeyi öğrendin. Şimdi kayıt için gerekli belgeleri talep etmelisin.",
-          "'documents' kelimesini kullan.",
-          "Please present the required documents."
-        ]
-      }
-    ]
-  },
-  {
-    id: 3,
-    title: "Kayıt Tamamlama",
-    steps: [
-      {
-        speaker: "narrator",
-        audioId: "sim_kayit_3",
-        subtitle: "Tüm evraklar tamam, hiçbir eksik yok.",
-      },
-      {
-        speaker: "representative",
-        audioId: "sim_kayit_3b",
-        subtitle: "Is it all done?",
-      },
-      {
-        speaker: "user",
-        accepted: [
-          "yes",
-          "yes have a nice day",
-          "yes all done",
-          "yes your registration is completed",
-          "registration completed",
-          "all done",
-          "all done have a nice day",
-          "all done good luck"
-        ],
-        hints: [
-          "Tüm belgeler tamam. Temsilci senden onay bekliyor.",
-          "'done' veya 'completed' kelimelerini kullan.",
-          "All done! Good luck."
-        ]
-      }
-    ]
-  },
-  {
-    id: 4,
-    title: "Tıbbi Beyan Eksikliği",
-    steps: [
-      {
-        speaker: "narrator",
-        audioId: "sim_kayit_4",
-        subtitle: "You are checking all the documents and you notice the athlete's medical declaration is missing.",
-      },
-      {
-        speaker: "user",
-        accepted: [
-          "athletes medical declaration is missing",
-          "medical declaration missing",
-          "there is no medical declaration",
-          "where is the medical declaration"
-        ],
-        hints: [
-          "Belgeleri incelerken bir eksiklik fark ettin. Bunu temsilciye bildirmelisin.",
-          "'medical' ve 'declaration' kelimelerini kullan.",
-          "Athlete's medical declaration is missing."
-        ]
-      }
-    ]
-  },
-  {
-    id: 5,
-    title: "Anti-Doping Onayı Eksikliği",
-    steps: [
-      {
-        speaker: "narrator",
-        audioId: "sim_kayit_5",
-        subtitle: "You are checking all the documents and you notice the athlete's anti-doping consent is missing.",
-      },
-      {
-        speaker: "user",
-        accepted: [
-          "athletes anti doping consent is missing",
-          "anti doping consent missing",
-          "there is no anti doping consent",
-          "where is the anti doping consent"
-        ],
-        hints: [
-          "Belgeler arasında önemli bir onay formu eksik. Bunu bildirmelisin.",
-          "'anti-doping' ve 'consent' kelimelerini kullan.",
-          "Athlete's anti-doping consent is missing."
-        ]
-      }
-    ]
-  },
-  {
-    id: 6,
-    title: "Hamile Olmama Beyanı Eksikliği",
-    steps: [
-      {
-        speaker: "narrator",
-        audioId: "sim_kayit_6",
-        subtitle: "You are checking all the documents and you notice the athlete's non-pregnancy declaration is missing.",
-      },
-      {
-        speaker: "user",
-        accepted: [
-          "athletes non pregnancy declaration is missing",
-          "non pregnancy declaration missing",
-          "there is no non pregnancy declaration",
-          "where is the non pregnancy declaration"
-        ],
-        hints: [
-          "Kadın sporcularda zorunlu olan bir beyan formu eksik.",
-          "'non-pregnancy' ve 'declaration' kelimelerini kullan.",
-          "Athlete's non-pregnancy declaration is missing."
-        ]
-      }
-    ]
-  },
-  {
-    id: 7,
-    title: "HIV Testi Eksikliği",
-    steps: [
-      {
-        speaker: "narrator",
-        audioId: "sim_kayit_7",
-        subtitle: "You are checking all the documents and you notice the athlete's HIV test result is missing.",
-      },
-      {
-        speaker: "user",
-        accepted: [
-          "athletes hiv test result is missing",
-          "hiv test result is missing",
-          "hiv result is missing",
-          "there is no hiv test result",
-          "there is no hiv result",
-          "where is the hiv test result",
-          "where is the hiv result",
-          "hiv result",
-          "hiv test result"
-        ],
-        hints: [
-          "Kan testi sonuçlarından biri eksik. Hangisi olduğunu belirtmelisin.",
-          "'HIV' ve 'result' kelimelerini kullan.",
-          "Athlete's HIV test result is missing."
-        ]
-      }
-    ]
-  },
-  {
-    id: 8,
-    title: "HBV Testi Eksikliği",
-    steps: [
-      {
-        speaker: "narrator",
-        audioId: "sim_kayit_8",
-        subtitle: "You are checking all the documents and you notice the athlete's HBV test result is missing.",
-      },
-      {
-        speaker: "user",
-        accepted: [
-          "athletes hbv test result is missing",
-          "hbv test result is missing",
-          "hbv result is missing",
-          "there is no hbv test result",
-          "there is no hbv result",
-          "where is the hbv test result",
-          "where is the hbv result",
-          "hbv result",
-          "hbv test result"
-        ],
-        hints: [
-          "Kan testi sonuçlarından biri eksik. Hangisi olduğunu belirtmelisin.",
-          "'HBV' ve 'result' kelimelerini kullan.",
-          "Athlete's HBV test result is missing."
-        ]
-      }
-    ]
-  },
-  {
-    id: 9,
-    title: "HCV Testi Eksikliği",
-    steps: [
-      {
-        speaker: "narrator",
-        audioId: "sim_kayit_9",
-        subtitle: "You are checking all the documents and you notice the athlete's HCV test result is missing.",
-      },
-      {
-        speaker: "user",
-        accepted: [
-          "athletes hcv test result is missing",
-          "hcv test result is missing",
-          "hcv result is missing",
-          "there is no hcv test result",
-          "there is no hcv result",
-          "where is the hcv test result",
-          "where is the hcv result",
-          "hcv result",
-          "hcv test result"
-        ],
-        hints: [
-          "Kan testi sonuçlarından biri eksik. Hangisi olduğunu belirtmelisin.",
-          "'HCV' ve 'result' kelimelerini kullan.",
-          "Athlete's HCV test result is missing."
-        ]
-      }
-    ]
-  },
-  {
-    id: 10,
-    title: "Eksik Evrak — Geri Gönderme",
-    steps: [
-      {
-        speaker: "narrator",
-        audioId: "sim_kayit_10",
-        subtitle: "Evraklar eksik ve kayıt işlemine devam edemiyorsun.",
-      },
-      {
-        speaker: "user",
-        accepted: [
-          "please come back after the documents are complete",
-          "come back when documents are ready",
-          "come back when documents are complete",
-          "please bring all the documents"
-        ],
-        hints: [
-          "Eksik belgeler var ve işleme devam edemiyorsun. Temsilciyi geri gelmesi konusunda yönlendirmelisin.",
-          "'come back' ve 'documents' kelimelerini kullan.",
-          "Please come back after the documents are complete."
-        ]
-      }
-    ]
-  }
+  { id: "cagirma",  label: "Calling for Weigh-in",  labelTr: "Tartıya Çağırma",     scenes: [] },
+  { id: "kimlik",   label: "ID & Document",          labelTr: "Kimlik & Belge",      scenes: [] },
+  { id: "giyim",    label: "Dress & Preparation",     labelTr: "Giyim & Hazırlık",   scenes: [] },
+  { id: "tartim",   label: "Weighing",                labelTr: "Tartım",             scenes: [] },
+  { id: "sonuc",    label: "Weigh-in Results",         labelTr: "Tartı Sonucu",       scenes: [] },
+  { id: "rapor",    label: "Final Report",             labelTr: "Tartı Sonu Raporu", scenes: [] },
+  { id: "sistem",   label: "System Errors",            labelTr: "Sistemsel Sorunlar", scenes: [] },
+  { id: "baskul",   label: "Scale Issues",             labelTr: "Baskül Sorunları",  scenes: [] },
 ];
 
 // ─── SESLİ SİMÜLASYON STATE ──────────────────────────────────────
+let simView = "menu";          // "menu" | "scene"
+let simCategoryIdx = 0;
 let simSceneIdx = 0;
 let simStepIdx  = 0;
 let simHintIdx  = 0;
 let simSubtitleVisible = false;
+let simCompletedScenes = {};   // { "registration_1": true, ... }
 
-// ─── SESLİ SİMÜLASYON RENDER ─────────────────────────────────────
+// ─── ANA GİRİŞ NOKTASI ────────────────────────────────────────────
 function renderSimulation() {
+  if (simView === "menu") {
+    renderSimMenu();
+  } else {
+    renderSimScene();
+  }
+}
+
+// ─── 3x3 GRID MENÜ ────────────────────────────────────────────────
+function renderSimMenu() {
   const c = document.getElementById("content");
-  const scene = SIM_KAYIT[simSceneIdx];
+
+  c.innerHTML = `
+    <div style="margin-bottom:14px;">
+      <div style="font-size:13px; font-weight:700; color:#185FA5; margin-bottom:2px;">
+        🎙️ Sesli Simülasyon
+      </div>
+      <div style="font-size:11px; color:var(--text2);">
+        Pratik yapmak istediğin bölümü seç.
+      </div>
+    </div>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px;">
+      ${SIM_CATEGORIES.map((cat, idx) => {
+        const hasContent = cat.scenes.length > 0;
+        const total = cat.scenes.length;
+        const completed = cat.scenes.filter(s => simCompletedScenes[`${cat.id}_${s.id}`]).length;
+        const allDone = hasContent && completed === total;
+
+        return `
+        <button
+          onclick="${hasContent ? `simOpenCategory(${idx})` : ""}"
+          ${hasContent ? "" : "disabled"}
+          style="
+            position:relative;
+            display:flex; flex-direction:column; align-items:center; justify-content:center;
+            gap:4px;
+            min-height:84px;
+            padding:10px 6px;
+            border-radius:12px;
+            border:1px solid ${allDone ? "#3B6D11" : "var(--border)"};
+            background:${hasContent ? (allDone ? "#EAF3DE" : "var(--card-bg)") : "var(--l3-bg)"};
+            color:${hasContent ? "var(--text)" : "var(--text2)"};
+            cursor:${hasContent ? "pointer" : "default"};
+            opacity:${hasContent ? "1" : "0.55"};
+            text-align:center;
+            transition:all .15s;
+          ">
+          ${allDone ? `<span style="position:absolute; top:6px; right:8px; font-size:11px;">✓</span>` : ""}
+          <span style="font-size:11.5px; font-weight:700; line-height:1.3;">${cat.label}</span>
+          <span style="font-size:9.5px; color:var(--text2); line-height:1.2;">${cat.labelTr}</span>
+          ${hasContent
+            ? `<span style="font-size:9px; color:#185FA5; font-weight:600; margin-top:2px;">${completed}/${total}</span>`
+            : `<span style="font-size:9px; color:var(--text2); margin-top:2px;">Yakında</span>`
+          }
+        </button>
+      `}).join("")}
+    </div>
+  `;
+}
+
+// ─── KATEGORİ AÇ ──────────────────────────────────────────────────
+function simOpenCategory(catIdx) {
+  simCategoryIdx = catIdx;
+  simSceneIdx = 0;
+  simStepIdx = 0;
+  simHintIdx = 0;
+  simSubtitleVisible = false;
+  simView = "scene";
+  renderSimScene();
+}
+
+// ─── MENÜYE GERİ DÖN ──────────────────────────────────────────────
+function simBackToMenu() {
+  simView = "menu";
+  renderSimMenu();
+}
+
+// ─── SAHNE EKRANI ─────────────────────────────────────────────────
+function renderSimScene() {
+  const c = document.getElementById("content");
+  const category = SIM_CATEGORIES[simCategoryIdx];
+  const scenes = category.scenes;
+  const scene = scenes[simSceneIdx];
   if (!scene) return;
 
   const step = scene.steps[simStepIdx];
-  const isLast = simSceneIdx === SIM_KAYIT.length - 1;
-  const totalScenes = SIM_KAYIT.length;
+  const isLast = simSceneIdx === scenes.length - 1;
+  const totalScenes = scenes.length;
 
-  // İkon ve etiket
-  // ─── YENİ NESİL PROFESYONEL İKONLAR (SVG) ───
+ // ─── YENİ NESİL PROFESYONEL İKONLAR (SVG) ───
   const speakerMeta = {
     narrator: { 
       // Şık bir ses/anons dalgası ikonu
@@ -313,27 +415,59 @@ function renderSimulation() {
   };
   const meta = speakerMeta[step.speaker] || speakerMeta.narrator;
 
-  c.innerHTML = `
-    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; flex-wrap:wrap; gap:8px;">
-      <div style="font-size:12px; font-weight:600; color:#185FA5;">
-        🎙️ Sesli Simülasyon
-      </div>
-      <div style="display:flex; align-items:center; gap:10px;">
-        <div style="font-size:11px; color:var(--text2);">
-          Sahne <b style="color:#185FA5">${simSceneIdx + 1}</b> / ${totalScenes}
+  // ── Segment ilerleme çizgisi: her sahne için bir nokta ──
+  const segmentsHtml = scenes.map((s, i) => {
+    let state = "upcoming"; // gri/nötr
+    if (i === simSceneIdx) state = "current";       // yeşil
+    else if (i < simSceneIdx) state = "done";        // tamamlandı — gri ama dolu
+
+    const bg = state === "current" ? "#3B6D11"
+             : state === "done"    ? "#9aa8b8"
+             : "var(--border)";
+    const labelColor = state === "current" ? "#185FA5" : "var(--text2)";
+
+    return `
+      <div style="display:flex; flex-direction:column; align-items:center; flex:1; min-width:0;">
+        <div style="
+          width:100%; height:6px; border-radius:4px;
+          background:${bg};
+          transition:background .3s;
+        "></div>
+        <div style="font-size:8px; color:${labelColor}; margin-top:3px; font-weight:${state === 'current' ? '700' : '500'};">
+          ${i + 1}
         </div>
-        <button onclick="if(confirm('Simülasyonu baştan başlatmak istediğinize emin misiniz?')) simRestart();" style="
-          background: #dc3545; color: white; border: none; cursor: pointer; 
-          border-radius: 20px; padding: 4px 10px; font-size: 11px; font-weight: bold;
-        ">
-          Sıfırla
-        </button>
+      </div>
+    `;
+  }).join("");
+
+  c.innerHTML = `
+    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;">
+      <button onclick="simBackToMenu()" style="
+        background:none; border:none; font-size:11px; color:#185FA5;
+        cursor:pointer; font-weight:600; padding:0;
+      ">← Bölümler</button>
+      <div style="font-size:11px; color:#888; text-align:right;">
+        🎙️ ${category.label}
       </div>
     </div>
 
-    <!-- İlerleme çubuğu -->
-    <div style="height:3px; background:var(--border); border-radius:2px; margin-bottom:16px; overflow:hidden;">
-      <div style="height:100%; width:${Math.round((simSceneIdx / totalScenes) * 100)}%; background:#185FA5; border-radius:2px; transition:width .4s;"></div>
+    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
+  <div style="font-size:12px; font-weight:600; color:var(--text);">
+    Senaryo ${simSceneIdx + 1} <span style="color:var(--text2); font-weight:400;">/ ${totalScenes}</span>
+    &nbsp;·&nbsp; ${scene.title}
+  </div>
+  <button onclick="if(confirm('Bu bölümü baştan başlatmak istediğinize emin misiniz?')) simRestartCategory();" style="
+    background: #dc3545; color: white; border: none; cursor: pointer; 
+    border-radius: 20px; padding: 4px 10px; font-size: 11px; font-weight: bold;
+    flex-shrink: 0;
+  ">
+    Sıfırla
+  </button>
+</div>
+
+    <!-- Segment ilerleme çizgisi -->
+    <div style="display:flex; gap:4px; margin-bottom:16px;">
+      ${segmentsHtml}
     </div>
 
     <!-- Sahne kartı -->
@@ -410,14 +544,14 @@ function renderSimulation() {
       </div>
     </div>
 
-    <!-- Sağ altta: sonraki sahne butonu (sadece son adımda doğru cevap verilince görünür) -->
+    <!-- Sağ altta: sonraki sahne butonu -->
     <div style="display:flex; justify-content:flex-end; margin-top:8px;">
       <button id="sim-next-btn" onclick="simNextScene()" style="
         display:none;
         padding:10px 20px; font-size:13px; font-weight:600;
         background:#185FA5; color:#fff; border:none;
         border-radius:22px; cursor:pointer;
-      ">${isLast ? "✓ Simülasyonu Tamamla" : "Sonraki Sahne →"}</button>
+      ">${isLast ? "✓ Bölümü Tamamla" : "Sonraki Sahne →"}</button>
     </div>
 
     <style>
@@ -437,7 +571,8 @@ function renderSimulation() {
 
 // ─── OYNAT ───────────────────────────────────────────────────────
 function simPlay() {
-  const scene = SIM_KAYIT[simSceneIdx];
+  const category = SIM_CATEGORIES[simCategoryIdx];
+  const scene = category.scenes[simSceneIdx];
   const step  = scene.steps[simStepIdx];
   if (!step.audioId) return;
 
@@ -464,7 +599,7 @@ function simPlay() {
     setTimeout(() => {
       simStepIdx++;
       simHintIdx = 0;
-      renderSimulation();
+      renderSimScene();
     }, 500);
   };
 
@@ -494,7 +629,8 @@ function simSpeak() {
     return;
   }
 
-  const scene = SIM_KAYIT[simSceneIdx];
+  const category = SIM_CATEGORIES[simCategoryIdx];
+  const scene = category.scenes[simSceneIdx];
   const step  = scene.steps[simStepIdx];
 
   const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -530,9 +666,7 @@ function simSpeak() {
       "waikru":        "wai kru",
       "anti doping":   "anti-doping",
       "non pregnancy": "non-pregnancy",
-      "hiv":           "hiv",
-      "hbv":           "hbv",
-      "hcv":           "hcv"
+      "declaration":     "declaration",
     };
     Object.keys(dictionary).forEach(key => {
       if (said.includes(key)) said = said.replace(key, dictionary[key]);
@@ -591,6 +725,10 @@ function simCheckAnswer(said, acceptedList) {
 
 // ─── BAŞARI ──────────────────────────────────────────────────────
 function simShowSuccess() {
+  const category = SIM_CATEGORIES[simCategoryIdx];
+  const scene = category.scenes[simSceneIdx];
+  simCompletedScenes[`${category.id}_${scene.id}`] = true;
+
   const card = document.getElementById("sim-card");
   const resultEl = document.getElementById("sim-result-area");
   const nextBtn = document.getElementById("sim-next-btn");
@@ -680,26 +818,29 @@ function simShowHint(hints) {
 
 // ─── SONRAKİ İPUCU ───────────────────────────────────────────────
 function simNextHint() {
-  const scene = SIM_KAYIT[simSceneIdx];
+  const category = SIM_CATEGORIES[simCategoryIdx];
+  const scene = category.scenes[simSceneIdx];
   const step  = scene.steps[simStepIdx];
   simShowHint(step.hints);
 }
 
 // ─── SONRAKİ SAHNE ───────────────────────────────────────────────
 function simNextScene() {
-  if (simSceneIdx < SIM_KAYIT.length - 1) {
+  const category = SIM_CATEGORIES[simCategoryIdx];
+  if (simSceneIdx < category.scenes.length - 1) {
     simSceneIdx++;
     simStepIdx  = 0;
     simHintIdx  = 0;
     simSubtitleVisible = false;
-    renderSimulation();
+    renderSimScene();
   } else {
     simShowComplete();
   }
 }
 
-// ─── TAMAMLANDI ──────────────────────────────────────────────────
+// ─── BÖLÜM TAMAMLANDI ─────────────────────────────────────────────
 function simShowComplete() {
+  const category = SIM_CATEGORIES[simCategoryIdx];
   const c = document.getElementById("content");
   c.innerHTML = `
     <div style="
@@ -708,27 +849,34 @@ function simShowComplete() {
       border-radius:14px;
     ">
       <div style="font-size:56px; margin-bottom:12px;">🏆</div>
-      <div style="font-size:22px; font-weight:700; color:#185FA5; margin-bottom:8px;">
-        Simülasyon Tamamlandı!
+      <div style="font-size:20px; font-weight:700; color:#185FA5; margin-bottom:8px;">
+        ${category.label} Tamamlandı!
       </div>
       <div style="font-size:14px; color:var(--text2); margin-bottom:24px; line-height:1.6;">
-        Tüm ${SIM_KAYIT.length} sahneyi başarıyla geçtin.<br>
+        Bu bölümdeki tüm ${category.scenes.length} senaryoyu başarıyla geçtin.<br>
         Harika bir pratik yaptın!
       </div>
-      <button onclick="simRestart()" style="
-        padding:11px 28px; font-size:14px; font-weight:600;
-        background:#185FA5; color:#fff; border:none;
-        border-radius:22px; cursor:pointer;
-      ">↺ Baştan Başla</button>
+      <div style="display:flex; gap:8px; justify-content:center;">
+        <button onclick="simRestartCategory()" style="
+          padding:11px 22px; font-size:13px; font-weight:600;
+          background:var(--card-bg); color:#185FA5; border:1px solid #185FA5;
+          border-radius:22px; cursor:pointer;
+        ">↺ Tekrar Yap</button>
+        <button onclick="simBackToMenu()" style="
+          padding:11px 22px; font-size:13px; font-weight:600;
+          background:#185FA5; color:#fff; border:none;
+          border-radius:22px; cursor:pointer;
+        ">Bölümlere Dön</button>
+      </div>
     </div>
   `;
 }
 
-// ─── BAŞTAN BAŞLA ─────────────────────────────────────────────────
-function simRestart() {
+// ─── BÖLÜMÜ TEKRAR BAŞLAT ─────────────────────────────────────────
+function simRestartCategory() {
   simSceneIdx = 0;
   simStepIdx  = 0;
   simHintIdx  = 0;
   simSubtitleVisible = false;
-  renderSimulation();
+  renderSimScene();
 }

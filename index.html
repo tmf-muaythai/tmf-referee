@@ -556,7 +556,7 @@ let qIdx = 0, score = 0, answered = false, shuffledQuiz = [];
 
 // ─── 2. CORE AUDIO AND UTILITY FUNCTIONS ─────────────────────────
 function isScenario(id) {
-  return id && (id === "senaryo" || id.startsWith("senaryo_") || id.startsWith("d2_senaryo") || id.startsWith("d2_senaryo"));
+  return id && (id === "senaryo" || id.startsWith("senaryo_") || id.startsWith("d2_senaryo") || id.startsWith("d2_senaryo") || id === "sim_day2" );
 }
 
 function playElevenLabsVoice(fileCode, selectElementId) {
@@ -742,6 +742,7 @@ function render() {
   
   if (resumeBtn) resumeBtn.style.display = 'none';
   if (curSec === "sim_kayit") renderSimulation(); 
+  else if (curSec === "sim_day2") renderSimDay2();
   else if (curSec === "senaryo_kayit") renderQuiz();
   else if (isScenario(curSec)) renderQuiz();
   else renderPhrases();
@@ -1363,7 +1364,7 @@ const NAV = {
     l2: [
       {
         id: "registration", label: "Kayıt (Registration)",
-        l3: [ { id: "kayit", label: "Kayıt & Belge (Registration & Documents)", leaf: true }, { id: "sim_kayit", label: "🎙️ Sesli Simülasyon", leaf: true }, ]
+        l3: [ { id: "kayit", label: "Kayıt & Belge (Registration & Documents)", leaf: true },]
       },
       {
         id: "weighin", label: "Tartı (Weigh-In)",
@@ -1396,6 +1397,7 @@ const NAV = {
         id: "senaryo",  label: "▶ Senaryo Pratiği",
         isQuiz: true, quizId: "senaryo"
       },
+      { id: "sim_kayit", label: "🎙️ Sesli Simülasyon", isQuiz: true, quizId: "sim_kayit" },
     ]
  },
   
@@ -1455,6 +1457,7 @@ const NAV = {
           { id: "d2_senaryo_announcer", label: "▶ Senaryo Pratiği", leaf: true },
         ]
       },
+      { id: "sim_day2", label: "🎙️ Sesli Simülasyon", isQuiz: true, quizId: "sim_day2" },
     ]
   },
   social: {
@@ -1653,8 +1656,9 @@ window.QUIZ_TARTI = [
 
 </script>
 
-<script src="./day2.js?v=61" charset="UTF-8"></script>
-<script src="./sim_kayit.js?v=3" charset="UTF-8"></script>
+<script src="./day2.js?v=62" charset="UTF-8"></script>
+<script src="./sim_kayit.js?v=4" charset="UTF-8"></script>
+<script src="./sim_day2.js?v=1" charset="UTF-8"></script>
 
 <script>
   // ─── 6. RUNNING APPLICATION INITIALIZATION ───────────────────────
