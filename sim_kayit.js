@@ -1,8 +1,3 @@
-// ─── SESLİ SİMÜLASYON — KATEGORİ VERİSİ ─────────────────────────
-// Her kategori kendi sahne dizisine (scenes) sahiptir.
-// Şimdilik sadece "registration" dolu; diğerleri içerik eklenince
-// scenes dizisine sahne objeleri eklenecek (format registration ile aynı).
-
 const SIM_CATEGORIES = [
   {
     id: "registration",
@@ -14,7 +9,7 @@ const SIM_CATEGORIES = [
         title: "Karşılama ve Ülke Sorma",
         steps: [
           {
-            speaker: "representative",
+            speaker: "Team Representative",
             audioId: "sim_kayit_1",
             subtitle: "Hello!",
           },
@@ -39,7 +34,7 @@ const SIM_CATEGORIES = [
         title: "Belge İsteme",
         steps: [
           {
-            speaker: "representative",
+            speaker: "Team Representative",
             audioId: "sim_kayit_2",
             subtitle: "Germany.",
           },
@@ -69,7 +64,7 @@ const SIM_CATEGORIES = [
             subtitle: "All documents are complete. No documents are missing.",
           },
           {
-            speaker: "representative",
+            speaker: "Team Representative",
             audioId: "sim_kayit_3b",
             subtitle: "Is it all done?",
           },
@@ -285,14 +280,1220 @@ const SIM_CATEGORIES = [
       }
     ]
   },
-  { id: "cagirma",  label: "Calling for Weigh-in",  labelTr: "Tartıya Çağırma",     scenes: [] },
-  { id: "kimlik",   label: "ID & Document",          labelTr: "Kimlik & Belge",      scenes: [] },
-  { id: "giyim",    label: "Dress & Preparation",     labelTr: "Giyim & Hazırlık",   scenes: [] },
-  { id: "tartim",   label: "Weighing",                labelTr: "Tartım",             scenes: [] },
-  { id: "sonuc",    label: "Weigh-in Results",         labelTr: "Tartı Sonucu",       scenes: [] },
-  { id: "rapor",    label: "Final Report",             labelTr: "Tartı Sonu Raporu", scenes: [] },
-  { id: "sistem",   label: "System Errors",            labelTr: "Sistemsel Sorunlar", scenes: [] },
-  { id: "baskul",   label: "Scale Issues",             labelTr: "Baskül Sorunları",  scenes: [] },
+  {
+    id: "cagirma",
+    label: "Calling for Weigh-in",
+    labelTr: "Tartıya Çağırma",
+    scenes: [
+      {
+        id: 1,
+        title: "Erkek Sporcuları Çağırma",
+        steps: [
+          {
+            speaker: "narrator",
+            audioId: "sim_cagirma_1",
+            subtitle: "All preparations for the weigh-in are complete. You can call the male athletes into the weigh-in room.",
+          },
+          {
+            speaker: "user",
+            accepted: [
+              "male weigh in starts now you can come in only one athlete please",
+              "males please come in one at a time",
+              "weigh in starts now you can come in",
+              "you can come in",
+              "you can come in only one athlete please",
+              "males can come in"
+            ],
+            hints: [
+              "Erkek sporcuları tartı odasına çağırman gerekiyor, aynı anda sadece bir kişi girebilir.",
+              "'male' ve 'one athlete' kelimelerini kullan.",
+              "Male weigh-in starts now. You can come in. Only one athlete please!"
+            ]
+          }
+        ]
+      },
+      {
+        id: 2,
+        title: "Kadın Sporcuları Çağırma",
+        steps: [
+          {
+            speaker: "narrator",
+            audioId: "sim_cagirma_2",
+            subtitle: "All preparations for the weigh-in are complete. You can call the female athletes into the weigh-in room.",
+          },
+          {
+            speaker: "user",
+            accepted: [
+              "female weigh in starts now you can come in only one athlete please",
+              "female weigh in starts now you can come in only one athlete",
+              "females please come in one at a time",
+              "weigh in starts now you can come in",
+              "you can come in",
+              "you can come in only one athlete please",
+              "females can come in"
+            ],
+            hints: [
+              "Kadın sporcuları tartı odasına çağırman gerekiyor, aynı anda sadece bir kişi girebilir.",
+              "'female' ve 'one athlete' kelimelerini kullan.",
+              "Female weigh-in starts now. You can come in. Only one athlete please!"
+            ]
+          }
+        ]
+      },
+      {
+        id: 3,
+        title: "Sıradaki Sporcuyu Çağırma",
+        steps: [
+          {
+            speaker: "narrator",
+            audioId: "sim_cagirma_3",
+            subtitle: "You need to call the next athlete into the weigh-in room.",
+          },
+          {
+            speaker: "user",
+            accepted: [
+              "next athlete please",
+              "next athlete",
+              "next please",
+              "next one",
+              "next one please"
+            ],
+            hints: [
+              "Bir önceki sporcunun işi bitti, sıradaki sporcuyu çağırman gerekiyor.",
+              "'next' kelimesini kullan.",
+              "Next athlete, please."
+            ]
+          }
+        ]
+      },
+      {
+        id: 4,
+        title: "Deneme Tartısı Talebi",
+        steps: [
+          {
+            speaker: "athlete",
+            audioId: "sim_cagirma_4",
+            subtitle: "Hello. Can I check my weight here?",
+          },
+          {
+            speaker: "user",
+            accepted: [
+              "this is not a test weigh in the control scale is located in the corridor",
+              "official weigh in only test scale is in the corridor",
+              "no this is not a test weigh in",
+              "this is not a control weigh in",
+              "this is not a test weigh in"
+            ],
+            hints: [
+              "Sporcu burada deneme tartısı yapmak istiyor ama bu resmi tartı alanı. Deneme tartısının nerede olduğunu söylemelisin.",
+              "'test weigh-in' ve 'corridor' kelimelerini kullan.",
+              "This is not a test weigh-in. The control scale is located in the corridor."
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: "kimlik",
+    label: "ID & Document",
+    labelTr: "Kimlik & Belge",
+    scenes: [
+      {
+        id: 1,
+        title: "Doktor Onayı Kontrolü",
+        steps: [
+          {
+            speaker: "narrator",
+            audioId: "sim_kimlik_1",
+            subtitle: "The athlete has arrived at the weigh-in room. You ask if they have already seen the doctor.",
+          },
+          {
+            speaker: "user",
+            accepted: [
+              "do you have the doctors approval",
+              "doctors approval"
+            ],
+            hints: [
+              "Sporcunun doktora gidip gitmediğini sormalısın.",
+              "'doctor's approval' kelimelerini kullan.",
+              "Do you have the doctor's approval?"
+            ]
+          },
+          {
+            speaker: "athlete",
+            audioId: "sim_kimlik_1b",
+            subtitle: "Yes, I got the doctor's approval.",
+          },
+          {
+            speaker: "narrator",
+            audioId: "sim_kimlik_1c",
+            subtitle: "You check the system but you cannot see the doctor's approval.",
+          },
+          {
+            speaker: "user",
+            accepted: [
+              "i cannot see the doctors approval",
+              "doctors approval is missing",
+              "there is no doctors approval",
+              "there is no doctors approval in the system"
+            ],
+            hints: [
+              "Sporcu doktor onayı aldığını söylüyor ama sistemde göremiyorsun. Bu durumu bildirmelisin.",
+              "'cannot see' ve 'doctor's approval' kelimelerini kullan.",
+              "I cannot see the doctor's approval."
+            ]
+          }
+        ]
+      },
+      {
+        id: 2,
+        title: "Doktora Yönlendirme",
+        steps: [
+          {
+            speaker: "narrator",
+            audioId: "sim_kimlik_2",
+            subtitle: "An athlete arrives at the weigh-in room without seeing the doctor first. Tell the athlete what to do.",
+          },
+          {
+            speaker: "user",
+            accepted: [
+              "you must see the doctor first",
+              "doctor check first please",
+              "first doctor",
+              "doctor first"
+            ],
+            hints: [
+              "Sporcu önce doktora gitmeden tartıya geldi. Ona ne yapması gerektiğini söylemelisin.",
+              "'doctor' ve 'first' kelimelerini kullan.",
+              "You must see the doctor first."
+            ]
+          }
+        ]
+      },
+      {
+        id: 3,
+        title: "Ülke ve Belge Sorma",
+        steps: [
+          {
+            speaker: "narrator",
+            audioId: "sim_kimlik_3",
+            subtitle: "Ask the athlete which country they are representing.",
+          },
+          {
+            speaker: "user",
+            accepted: [
+              "which country are you representing",
+              "your country",
+              "which country"
+            ],
+            hints: [
+              "Sporcunun hangi ülkeyi temsil ettiğini sormalısın.",
+              "'country' kelimesini kullan.",
+              "Which country are you representing?"
+            ]
+          },
+          {
+            speaker: "narrator",
+            audioId: "sim_kimlik_3b",
+            subtitle: "Now ask the athlete to show their accreditation card.",
+          },
+          {
+            speaker: "user",
+            accepted: [
+              "can i see your accreditation card",
+              "accreditation card please",
+              "show me your accreditation card",
+              "please present your accreditation card"
+            ],
+            hints: [
+              "Sporcudan akreditasyon kartını göstermesini istemelisin.",
+              "'accreditation card' kelimelerini kullan.",
+              "Can I see your accreditation card?"
+            ]
+          },
+          {
+            speaker: "narrator",
+            audioId: "sim_kimlik_3c",
+            subtitle: "Now ask the athlete to show their passport.",
+          },
+          {
+            speaker: "user",
+            accepted: [
+              "please present your passport",
+              "can i see your passport",
+              "passport please"
+            ],
+            hints: [
+              "Sporcudan pasaportunu göstermesini istemelisin.",
+              "'passport' kelimesini kullan.",
+              "Please present your passport."
+            ]
+          },
+          {
+            speaker: "narrator",
+            audioId: "sim_kimlik_3d",
+            subtitle: "Now ask the athlete to show their athlete's book.",
+          },
+          {
+            speaker: "user",
+            accepted: [
+              "please present your athletes book",
+              "can i see your athletes book",
+              "athletes book please",
+              "show me your athletes book please"
+            ],
+            hints: [
+              "Sporcudan athlete's book'unu göstermesini istemelisin.",
+              "'athlete's book' kelimelerini kullan.",
+              "Please present your athlete's book."
+            ]
+          }
+        ]
+      },
+      {
+        id: 4,
+        title: "Athlete's Book Geri Talebi",
+        steps: [
+          {
+            speaker: "athlete",
+            audioId: "sim_kimlik_4",
+            subtitle: "Can I get my athlete's book back?",
+          },
+          {
+            speaker: "user",
+            accepted: [
+              "you will collect your athletes book after the contest",
+              "you will receive your athletes book after the contest",
+              "we will return it after the contest",
+              "we will give it to you after the contest",
+              "you can take it after the contest"
+            ],
+            hints: [
+              "Sporcunun athlete's book'unu ne zaman geri alacağını söylemelisin.",
+              "'after the contest' kelimelerini kullan.",
+              "You will collect your athlete's book after the contest."
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: "giyim",
+    label: "Dress & Preparation",
+    labelTr: "Giyim & Hazırlık",
+    scenes: [
+      {
+        id: 1,
+        title: "Tartı Öncesi Hazırlık",
+        steps: [
+          {
+            speaker: "athlete",
+            audioId: "sim_giyim_1",
+            subtitle: "Here is my accreditation and my other documents. What should I do now?",
+          },
+          {
+            speaker: "user",
+            accepted: [
+              "please remove socks and any extra clothing including jewelry",
+              "socks and jewelry off please"
+            ],
+            hints: [
+              "Sporcunun tartıya çıkmadan önce çorap ve fazladan kıyafetlerini, takılarını çıkarması gerekiyor.",
+              "'socks' ve 'jewelry' kelimelerini kullan.",
+              "Please remove socks and any extra clothing. Including jewelry."
+            ]
+          }
+        ]
+      },
+      {
+        id: 2,
+        title: "Kalın İç Çamaşırı Uyarısı",
+        steps: [
+          {
+            speaker: "narrator",
+            audioId: "sim_giyim_2",
+            subtitle: "The athlete comes to the weigh-in wearing thick undergarments. Remind the athlete of the rule.",
+          },
+          {
+            speaker: "user",
+            accepted: [
+              "only lightweight undergarments are allowed",
+              "underwear only please",
+              "lightweight undergarments only",
+              "only underwear"
+            ],
+            hints: [
+              "Sadece hafif iç çamaşırına izin verildiğini hatırlatmalısın.",
+              "'lightweight' ve 'undergarments' kelimelerini kullan.",
+              "Only lightweight undergarments are allowed."
+            ]
+          }
+        ]
+      },
+      {
+        id: 3,
+        title: "Çorap Uyarısı",
+        steps: [
+          {
+            speaker: "narrator",
+            audioId: "sim_giyim_3",
+            subtitle: "The athlete comes to the weigh-in wearing socks. Remind the athlete of the rule.",
+          },
+          {
+            speaker: "user",
+            accepted: [
+              "remove your socks please",
+              "socks off",
+              "no socks"
+            ],
+            hints: [
+              "Sporcunun çoraplarını çıkarması gerektiğini söylemelisin.",
+              "'socks' kelimesini kullan.",
+              "Remove your socks, please."
+            ]
+          }
+        ]
+      },
+      {
+        id: 4,
+        title: "Takı Uyarısı",
+        steps: [
+          {
+            speaker: "narrator",
+            audioId: "sim_giyim_4",
+            subtitle: "The athlete comes to the weigh-in wearing jewelry. Remind them of the rule.",
+          },
+          {
+            speaker: "user",
+            accepted: [
+              "remove your jewelry please",
+              "jewelry off",
+              "no jewelry"
+            ],
+            hints: [
+              "Sporcunun takılarını çıkarması gerektiğini söylemelisin.",
+              "'jewelry' kelimesini kullan.",
+              "Remove your jewelry, please."
+            ]
+          }
+        ]
+      },
+      {
+        id: 5,
+        title: "Kolye Uyarısı",
+        steps: [
+          {
+            speaker: "narrator",
+            audioId: "sim_giyim_5",
+            subtitle: "The athlete comes to the weigh-in wearing a necklace. Warn them.",
+          },
+          {
+            speaker: "user",
+            accepted: [
+              "please take off your necklace",
+              "necklace off",
+              "no necklace"
+            ],
+            hints: [
+              "Sporcunun kolyesini çıkarması gerektiğini söylemelisin.",
+              "'necklace' kelimesini kullan.",
+              "Please take off your necklace."
+            ]
+          }
+        ]
+      },
+      {
+        id: 6,
+        title: "Piercing Uyarısı",
+        steps: [
+          {
+            speaker: "narrator",
+            audioId: "sim_giyim_6",
+            subtitle: "The athlete comes to the weigh-in wearing a piercing. Remind the athlete of the rule.",
+          },
+          {
+            speaker: "user",
+            accepted: [
+              "please remove your piercing",
+              "piercing off",
+              "no piercing"
+            ],
+            hints: [
+              "Sporcunun piercing'ini çıkarması gerektiğini söylemelisin.",
+              "'piercing' kelimesini kullan.",
+              "Please remove your piercing."
+            ]
+          }
+        ]
+      },
+      {
+        id: 7,
+        title: "Küpe Uyarısı",
+        steps: [
+          {
+            speaker: "narrator",
+            audioId: "sim_giyim_7",
+            subtitle: "The athlete comes to the weigh-in wearing earrings. Tell the athlete to remove them.",
+          },
+          {
+            speaker: "user",
+            accepted: [
+              "please take off your earrings",
+              "earrings off",
+              "no earrings"
+            ],
+            hints: [
+              "Sporcunun küpelerini çıkarması gerektiğini söylemelisin.",
+              "'earrings' kelimesini kullan.",
+              "Please take off your earrings."
+            ]
+          }
+        ]
+      },
+      {
+        id: 8,
+        title: "Gözlük Uyarısı",
+        steps: [
+          {
+            speaker: "narrator",
+            audioId: "sim_giyim_8",
+            subtitle: "The athlete comes to the weigh-in wearing glasses. Tell the athlete to remove them.",
+          },
+          {
+            speaker: "user",
+            accepted: [
+              "please remove your glasses",
+              "glasses off",
+              "no glasses"
+            ],
+            hints: [
+              "Sporcunun gözlüğünü çıkarması gerektiğini söylemelisin.",
+              "'glasses' kelimesini kullan.",
+              "Please remove your glasses."
+            ]
+          }
+        ]
+      },
+      {
+        id: 9,
+        title: "İç Çamaşırını Çıkarma Talebi",
+        steps: [
+          {
+            speaker: "athlete",
+            audioId: "sim_giyim_9",
+            subtitle: "I trained hard to lose weight. Can I weigh in without my undergarments? I don't have spare clothes with me.",
+          },
+          {
+            speaker: "user",
+            accepted: [
+              "please do not remove your undergarments",
+              "keep your undergarments on",
+              "keep it",
+              "keep them",
+              "undergarments stay",
+              "dont remove undergarments"
+            ],
+            hints: [
+              "Sporcu kilo vermek için iç çamaşırını çıkarmak istiyor ama bu yasak. Onu uyarmalısın.",
+              "'undergarments' kelimesini kullan, çıkarmaması gerektiğini belirt.",
+              "Please do not remove your undergarments."
+            ]
+          }
+        ]
+      },
+      {
+        id: 10,
+        title: "Sakal Uyarısı",
+        steps: [
+          {
+            speaker: "narrator",
+            audioId: "sim_giyim_10",
+            subtitle: "The athlete comes to the weigh-in with a beard. Remind the athlete of the rule.",
+          },
+          {
+            speaker: "user",
+            accepted: [
+              "you must be shaved before the weigh in",
+              "please be clean shaved",
+              "you must be shaved",
+              "no beard",
+              "no moustache"
+            ],
+            hints: [
+              "Sporcunun tartıdan önce tıraşlı olması gerektiğini söylemelisin.",
+              "'shaved' kelimesini kullan.",
+              "You must be shaved before the weigh-in."
+            ]
+          }
+        ]
+      },
+      {
+        id: 11,
+        title: "Tırnak Uyarısı",
+        steps: [
+          {
+            speaker: "narrator",
+            audioId: "sim_giyim_11",
+            subtitle: "The athlete comes to the weigh-in with long toenails. Tell the athlete to trim their nails.",
+          },
+          {
+            speaker: "user",
+            accepted: [
+              "please trim your toenails before the weigh in",
+              "toenails must be trimmed",
+              "trim your toenails",
+              "trim your nails"
+            ],
+            hints: [
+              "Sporcunun ayak tırnaklarını kısaltması gerektiğini söylemelisin.",
+              "'trim' ve 'toenails' kelimelerini kullan.",
+              "Please trim your toenails before the weigh-in."
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: "tartim",
+    label: "Weighing",
+    labelTr: "Tartım",
+    scenes: [
+      {
+        id: 1,
+        title: "Tartıya Çağırma",
+        steps: [
+          {
+            speaker: "narrator",
+            audioId: "sim_tartim_1",
+            subtitle: "The athlete has handed in their documents and finished preparing. Call the athlete to the scale.",
+          },
+          {
+            speaker: "user",
+            accepted: [
+              "please come to the scale",
+              "come to the scale please"
+            ],
+            hints: [
+              "Sporcuyu tartıya çağırman gerekiyor.",
+              "'scale' kelimesini kullan.",
+              "Please come to the scale."
+            ]
+          }
+        ]
+      },
+      {
+        id: 2,
+        title: "Tartıya Çıkma İzni",
+        steps: [
+          {
+            speaker: "narrator",
+            audioId: "sim_tartim_2",
+            subtitle: "You have checked the athlete's general physical condition. Athlete is ready to be weighed.",
+          },
+          {
+            speaker: "user",
+            accepted: [
+              "you can step on the scale",
+              "step on the scale please",
+              "step on",
+              "step on please"
+            ],
+            hints: [
+              "Sporcuya tartıya çıkabileceğini söylemelisin.",
+              "'step on' kelimelerini kullan.",
+              "You can step on the scale."
+            ]
+          }
+        ]
+      },
+      {
+        id: 3,
+        title: "Tekrar Tartılma Talebi",
+        steps: [
+          {
+            speaker: "athlete",
+            audioId: "sim_tartim_3",
+            subtitle: "Can I check my weight one more time first?",
+          },
+          {
+            speaker: "user",
+            accepted: [
+              "you may only step on the scale once",
+              "only once"
+            ],
+            hints: [
+              "Sporcu resmi tartıya sadece bir kez çıkabilir. Bunu söylemelisin.",
+              "'only once' kelimelerini kullan.",
+              "You may only step on the scale once."
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: "sonuc",
+    label: "Weigh-in Results",
+    labelTr: "Tartı Sonucu",
+    scenes: [
+      {
+        id: 1,
+        title: "Kilo Limitinin Üstünde",
+        steps: [
+          {
+            speaker: "narrator",
+            audioId: "sim_sonuc_1",
+            subtitle: "The athlete's weight on the scale is above their weight class limit.",
+          },
+          {
+            speaker: "user",
+            accepted: [
+              "you are over the weight limit",
+              "overweight",
+              "over the weight limit"
+            ],
+            hints: [
+              "Sporcunun kilo limitinin üstünde olduğunu söylemelisin.",
+              "'over' ve 'weight limit' kelimelerini kullan.",
+              "You are over the weight limit."
+            ]
+          }
+        ]
+      },
+      {
+        id: 2,
+        title: "Kilo Limitinin Altında",
+        steps: [
+          {
+            speaker: "narrator",
+            audioId: "sim_sonuc_2",
+            subtitle: "The athlete's weight on the scale is below their weight class limit.",
+          },
+          {
+            speaker: "user",
+            accepted: [
+              "you are under the weight limit",
+              "underweight",
+              "under the weight limit"
+            ],
+            hints: [
+              "Sporcunun kilo limitinin altında olduğunu söylemelisin.",
+              "'under' ve 'weight limit' kelimelerini kullan.",
+              "You are under the weight limit."
+            ]
+          }
+        ]
+      },
+      {
+        id: 3,
+        title: "Kilo Nedeniyle Diskalifiye",
+        steps: [
+          {
+            speaker: "narrator",
+            audioId: "sim_sonuc_3",
+            subtitle: "The athlete's weight is over the limit, so they cannot take part in the championship. Tell the athlete the decision.",
+          },
+          {
+            speaker: "user",
+            accepted: [
+              "you are disqualified due to weight",
+              "disqualified",
+              "disqualified because of the weight"
+            ],
+            hints: [
+              "Sporcuya kilo nedeniyle diskalifiye olduğunu söylemelisin.",
+              "'disqualified' ve 'weight' kelimelerini kullan.",
+              "You are disqualified due to weight."
+            ]
+          }
+        ]
+      },
+      {
+        id: 4,
+        title: "Tartı Sonu Veda",
+        steps: [
+          {
+            speaker: "narrator",
+            audioId: "sim_sonuc_4",
+            subtitle: "The athlete's weigh-in process is finished. Wish them good luck.",
+          },
+          {
+            speaker: "user",
+            accepted: [
+              "all done good luck",
+              "good luck"
+            ],
+            hints: [
+              "Sporcunun tartı işlemi bitti, ona başarılar dilemelisin.",
+              "'good luck' kelimelerini kullan.",
+              "All done. Good luck."
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: "rapor",
+    label: "Final Report",
+    labelTr: "Tartı Sonu Raporu",
+    scenes: [
+      {
+        id: 1,
+        title: "Tartılan Sporcu Sayısı",
+        steps: [
+          {
+            speaker: "narrator",
+            audioId: "sim_rapor_1",
+            subtitle: "The weigh-in is successfully finished. It is time to report the total number of weighed athletes to the Administration Jury.",
+          },
+          {
+            speaker: "user",
+            accepted: [
+              "the total number of athletes weighed is",
+              "athletes weighed",
+              "the total number",
+              "the total number of athletes"
+            ],
+            hints: [
+              "Tartılan toplam sporcu sayısını Administration Jury'ye bildirmelisin.",
+              "'total number' ve 'athletes' kelimelerini kullan.",
+              "The total number of athletes weighed is..."
+            ]
+          }
+        ]
+      },
+      {
+        id: 2,
+        title: "Diskalifiye Sayısı",
+        steps: [
+          {
+            speaker: "representative",
+            audioId: "sim_rapor_2",
+            subtitle: "How many athletes were disqualified?",
+          },
+          {
+            speaker: "user",
+            accepted: [
+              "the total number of disqualifications is",
+              "disqualifications",
+              "disqualification numbers"
+            ],
+            hints: [
+              "Diskalifiye edilen sporcu sayısını bildirmelisin.",
+              "'disqualifications' kelimesini kullan.",
+              "The total number of disqualifications is..."
+            ]
+          }
+        ]
+      },
+      {
+        id: 3,
+        title: "Walkover Sayısı",
+        steps: [
+          {
+            speaker: "representative",
+            audioId: "sim_rapor_3",
+            subtitle: "How many walkovers were there?",
+          },
+          {
+            speaker: "user",
+            accepted: [
+              "the total number of walkovers is",
+              "walkovers",
+              "walkover numbers"
+            ],
+            hints: [
+              "Walkover olan sporcu sayısını bildirmelisin.",
+              "'walkovers' kelimesini kullan.",
+              "The total number of walkovers is..."
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: "sistem",
+    label: "System Errors",
+    labelTr: "Sistemsel Sorunlar",
+    scenes: [
+      {
+        id: 1,
+        title: "İnternet Bağlantı Sorunu",
+        steps: [
+          {
+            speaker: "narrator",
+            audioId: "sim_sistem_1",
+            subtitle: "You are trying to log into the system, but the internet connection is not working.",
+          },
+          {
+            speaker: "user",
+            accepted: [
+              "i am having internet connection issues can you assist me please",
+              "internet problem can you help",
+              "i have internet problem",
+              "there is internet problem",
+              "no internet connection",
+              "there is no internet"
+            ],
+            hints: [
+              "İnternet bağlantı sorunun olduğunu ve yardım istediğini söylemelisin.",
+              "'internet' ve 'connection' kelimelerini kullan.",
+              "I am having internet connection issues. Can you assist me, please?"
+            ]
+          }
+        ]
+      },
+      {
+        id: 2,
+        title: "Liste Güncel Değil",
+        steps: [
+          {
+            speaker: "narrator",
+            audioId: "sim_sistem_2",
+            subtitle: "You notice that the data you entered earlier does not appear in the system.",
+          },
+          {
+            speaker: "user",
+            accepted: [
+              "the list is not up to date",
+              "list is outdated"
+            ],
+            hints: [
+              "Listenin güncel olmadığını bildirmelisin.",
+              "'list' ve 'up to date' kelimelerini kullan.",
+              "The list is not up to date."
+            ]
+          }
+        ]
+      },
+      {
+        id: 3,
+        title: "Liste Görüntülenemiyor",
+        steps: [
+          {
+            speaker: "narrator",
+            audioId: "sim_sistem_3",
+            subtitle: "You clicked the link, but you cannot view the list.",
+          },
+          {
+            speaker: "user",
+            accepted: [
+              "i cannot view the list",
+              "list wont load",
+              "list is not opening",
+              "i cant see the list"
+            ],
+            hints: [
+              "Listeyi görüntüleyemediğini söylemelisin.",
+              "'view' ve 'list' kelimelerini kullan.",
+              "I cannot view the list."
+            ]
+          }
+        ]
+      },
+      {
+        id: 4,
+        title: "Veri Girişi Yapılamıyor",
+        steps: [
+          {
+            speaker: "narrator",
+            audioId: "sim_sistem_4",
+            subtitle: "You tried to enter the weigh-in result into the system, but it will not let you.",
+          },
+          {
+            speaker: "user",
+            accepted: [
+              "i cannot enter data into the list",
+              "cant enter data",
+              "i cant write anything"
+            ],
+            hints: [
+              "Sisteme veri girişi yapamadığını bildirmelisin.",
+              "'enter data' kelimelerini kullan.",
+              "I cannot enter data into the list."
+            ]
+          }
+        ]
+      },
+      {
+        id: 5,
+        title: "İsim Listede Görünmüyor",
+        steps: [
+          {
+            speaker: "narrator",
+            audioId: "sim_sistem_5",
+            subtitle: "Athlete's registered, but you cannot see their name on the list.",
+          },
+          {
+            speaker: "user",
+            accepted: [
+              "the athletes name does not appear on the list",
+              "name not on the list",
+              "name is not on the list",
+              "i cant see the name"
+            ],
+            hints: [
+              "Sporcunun isminin listede görünmediğini bildirmelisin.",
+              "'name' ve 'list' kelimelerini kullan.",
+              "The athlete's name does not appear on the list."
+            ]
+          }
+        ]
+      },
+      {
+        id: 6,
+        title: "Yanlış İsim",
+        steps: [
+          {
+            speaker: "narrator",
+            audioId: "sim_sistem_6",
+            subtitle: "The athlete's name was entered incorrectly. Afra Uz was entered as Dilek Uz by mistake.",
+          },
+          {
+            speaker: "user",
+            accepted: [
+              "the athletes name is incorrect",
+              "wrong name",
+              "name is not correct"
+            ],
+            hints: [
+              "Sporcunun isminin yanlış girildiğini bildirmelisin.",
+              "'name' ve 'incorrect' kelimelerini kullan.",
+              "The athlete's name is incorrect."
+            ]
+          }
+        ]
+      },
+      {
+        id: 7,
+        title: "Yanlış Sıklet",
+        steps: [
+          {
+            speaker: "narrator",
+            audioId: "sim_sistem_7",
+            subtitle: "The athlete's weight class was entered incorrectly. It was entered as 51 kg instead of 48 kg by mistake.",
+          },
+          {
+            speaker: "user",
+            accepted: [
+              "wrong weight class",
+              "weight class is not correct"
+            ],
+            hints: [
+              "Sporcunun sıkletinin yanlış girildiğini bildirmelisin.",
+              "'weight class' kelimelerini kullan.",
+              "Wrong weight class."
+            ]
+          }
+        ]
+      },
+      {
+        id: 8,
+        title: "Yanlış Ülke",
+        steps: [
+          {
+            speaker: "narrator",
+            audioId: "sim_sistem_8",
+            subtitle: "The athlete's country was entered as Germany instead of Holland by mistake.",
+          },
+          {
+            speaker: "user",
+            accepted: [
+              "the athletes country is incorrect",
+              "wrong country",
+              "athletes country is not correct"
+            ],
+            hints: [
+              "Sporcunun ülkesinin yanlış girildiğini bildirmelisin.",
+              "'country' ve 'incorrect' kelimelerini kullan.",
+              "The athlete's country is incorrect."
+            ]
+          }
+        ]
+      },
+      {
+        id: 9,
+        title: "Yanlış Cinsiyet",
+        steps: [
+          {
+            speaker: "narrator",
+            audioId: "sim_sistem_9",
+            subtitle: "You notice that a female athlete was registered as male in the system.",
+          },
+          {
+            speaker: "user",
+            accepted: [
+              "the athletes gender is incorrect",
+              "wrong gender",
+              "gender is not correct"
+            ],
+            hints: [
+              "Sporcunun cinsiyetinin yanlış girildiğini bildirmelisin.",
+              "'gender' ve 'incorrect' kelimelerini kullan.",
+              "The athlete's gender is incorrect."
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: "baskul",
+    label: "Scale Issues",
+    labelTr: "Baskül Sorunları",
+    scenes: [
+      {
+        id: 1,
+        title: "Eksik Ölçen Tartı",
+        steps: [
+          {
+            speaker: "narrator",
+            audioId: "sim_baskul_1",
+            subtitle: "You are checking the scales. You weighed 60 kg on two other scales, but this scale shows 58 kg. Report the situation.",
+          },
+          {
+            speaker: "user",
+            accepted: [
+              "the scale is under reading",
+              "scale reads low",
+              "scale is under reading"
+            ],
+            hints: [
+              "Bu tartının eksik ölçtüğünü bildirmelisin.",
+              "'under-reading' kelimesini kullan.",
+              "The scale is under-reading."
+            ]
+          }
+        ]
+      },
+      {
+        id: 2,
+        title: "Fazla Ölçen Tartı",
+        steps: [
+          {
+            speaker: "narrator",
+            audioId: "sim_baskul_2",
+            subtitle: "You are checking the scales. You weighed 60 kg on two other scales, but this scale shows 62 kg. Report the situation.",
+          },
+          {
+            speaker: "user",
+            accepted: [
+              "the scale is over reading",
+              "scale reads high",
+              "scale is over reading"
+            ],
+            hints: [
+              "Bu tartının fazla ölçtüğünü bildirmelisin.",
+              "'over-reading' kelimesini kullan.",
+              "The scale is over-reading."
+            ]
+          }
+        ]
+      },
+      {
+        id: 3,
+        title: "Çalışmayan Tartı",
+        steps: [
+          {
+            speaker: "narrator",
+            audioId: "sim_baskul_3",
+            subtitle: "You step on the scale, but it does not show any number.",
+          },
+          {
+            speaker: "user",
+            accepted: [
+              "the scale is not working",
+              "scale is down",
+              "scale is not working",
+              "scale doesnt show any number",
+              "its not working"
+            ],
+            hints: [
+              "Tartının çalışmadığını bildirmelisin.",
+              "'not working' kelimelerini kullan.",
+              "The scale is not working."
+            ]
+          }
+        ]
+      },
+      {
+        id: 4,
+        title: "Hasarlı Tartı",
+        steps: [
+          {
+            speaker: "narrator",
+            audioId: "sim_baskul_4",
+            subtitle: "You notice that the scale is physically damaged. Report this to the officials.",
+          },
+          {
+            speaker: "user",
+            accepted: [
+              "the scale is broken",
+              "scale is broken"
+            ],
+            hints: [
+              "Tartının fiziksel olarak bozuk olduğunu bildirmelisin.",
+              "'broken' kelimesini kullan.",
+              "The scale is broken."
+            ]
+          }
+        ]
+      },
+      {
+        id: 5,
+        title: "Tartıyı Kontrol Etme Ricası",
+        steps: [
+          {
+            speaker: "narrator",
+            audioId: "sim_baskul_5",
+            subtitle: "You are preparing for the weigh-in. Ask your colleague to check the scales.",
+          },
+          {
+            speaker: "user",
+            accepted: [
+              "could you please check the scales",
+              "please check the scale",
+              "can you check the scales"
+            ],
+            hints: [
+              "Meslektaşından tartıları kontrol etmesini rica etmelisin.",
+              "'check' ve 'scales' kelimelerini kullan.",
+              "Could you please check the scales?"
+            ]
+          }
+        ]
+      },
+      {
+        id: 6,
+        title: "Tartı Değiştirme Ricası",
+        steps: [
+          {
+            speaker: "narrator",
+            audioId: "sim_baskul_6",
+            subtitle: "The scale is broken. Ask the officials to replace it with a new one.",
+          },
+          {
+            speaker: "user",
+            accepted: [
+              "can we change the scale",
+              "replace the scale please",
+              "can you replace the scale"
+            ],
+            hints: [
+              "Tartının değiştirilmesini rica etmelisin.",
+              "'change' veya 'replace' kelimesini kullan.",
+              "Can we change the scale?"
+            ]
+          }
+        ]
+      }
+    ]
+  },
 ];
 
 // ─── SESLİ SİMÜLASYON STATE ──────────────────────────────────────
@@ -395,22 +1596,23 @@ function renderSimScene() {
   const isLast = simSceneIdx === scenes.length - 1;
   const totalScenes = scenes.length;
 
- // ─── YENİ NESİL PROFESYONEL İKONLAR (SVG) ───
+  // ─── PROFESYONEL İKONLAR (SVG) ───
   const speakerMeta = {
-    narrator: { 
-      // Şık bir ses/anons dalgası ikonu
-      icon: `<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>`, 
-      label: "Anlatıcı" 
+    narrator: {
+      icon: `<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>`,
+      label: "Anlatıcı"
     },
-    representative: { 
-      // Şık bir kullanıcı/profil ikonu
-      icon: `<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>`, 
-      label: "Takım Temsilcisi" 
+    representative: {
+      icon: `<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>`,
+      label: "Takım Temsilcisi"
     },
-    user: { 
-      // Modern bir stüdyo mikrofonu ikonu
-      icon: `<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="22"></line></svg>`, 
-      label: "Sen (Hakem)" 
+    athlete: {
+      icon: `<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13a3 3 0 0 1 3-3h1.5a2.5 2.5 0 0 1 2.5 2.5V14"></path><path d="M9 10V8a2 2 0 0 1 4 0v2"></path><path d="M12 12h2a3 3 0 0 1 3 3v1a3 3 0 0 1-3 3h-1"></path><path d="M5 13v3a3 3 0 0 0 3 3h1"></path><line x1="13" y1="19" x2="20" y2="19"></line></svg>`,
+      label: "Sporcu"
+    },
+    user: {
+      icon: `<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="22"></line></svg>`,
+      label: "Sen (Hakem)"
     }
   };
   const meta = speakerMeta[step.speaker] || speakerMeta.narrator;
@@ -451,19 +1653,18 @@ function renderSimScene() {
       </div>
     </div>
 
+    <!-- Sahne başlığı + Sıfırla butonu -->
     <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
-  <div style="font-size:12px; font-weight:600; color:var(--text);">
-    Senaryo ${simSceneIdx + 1} <span style="color:var(--text2); font-weight:400;">/ ${totalScenes}</span>
-    &nbsp;·&nbsp; ${scene.title}
-  </div>
-  <button onclick="if(confirm('Bu bölümü baştan başlatmak istediğinize emin misiniz?')) simRestartCategory();" style="
-    background: #dc3545; color: white; border: none; cursor: pointer; 
-    border-radius: 20px; padding: 4px 10px; font-size: 11px; font-weight: bold;
-    flex-shrink: 0;
-  ">
-    Sıfırla
-  </button>
-</div>
+      <div style="font-size:12px; font-weight:600; color:var(--text);">
+        Senaryo ${simSceneIdx + 1} <span style="color:var(--text2); font-weight:400;">/ ${totalScenes}</span>
+        &nbsp;·&nbsp; ${scene.title}
+      </div>
+      <button onclick="if(confirm('Bu bölümü baştan başlatmak istediğinize emin misiniz?')) simRestartCategory();" style="
+        background:#dc3545; color:#fff; border:none; cursor:pointer;
+        border-radius:20px; padding:4px 10px; font-size:11px; font-weight:bold;
+        flex-shrink:0;
+      ">Sıfırla</button>
+    </div>
 
     <!-- Segment ilerleme çizgisi -->
     <div style="display:flex; gap:4px; margin-bottom:16px;">
@@ -475,7 +1676,7 @@ function renderSimScene() {
 
       <!-- Üst: konuşmacı -->
       <div style="padding:20px 20px 16px; text-align:center; border-bottom:1px solid var(--border); background:var(--l3-bg);">
-        <div style="font-size:48px; line-height:1; margin-bottom:8px;">${meta.icon}</div>
+        <div style="font-size:40px; line-height:1; margin-bottom:8px; color:#185FA5; display:flex; justify-content:center;">${meta.icon}</div>
         <div style="font-size:12px; font-weight:600; color:#185FA5; text-transform:uppercase; letter-spacing:.5px;">${meta.label}</div>
       </div>
 
@@ -666,8 +1867,8 @@ function simSpeak() {
       "waikru":        "wai kru",
       "anti doping":   "anti-doping",
       "non pregnancy": "non-pregnancy",
-      "decoration":     "declaration",
-      "auntie":          "anti",
+      "decoration":    "declaration",
+      "auntie":        "anti"
     };
     Object.keys(dictionary).forEach(key => {
       if (said.includes(key)) said = said.replace(key, dictionary[key]);
