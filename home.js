@@ -18,35 +18,41 @@ function renderHome() {
   const rule = IFMA_RULES[homeRuleIdx] || IFMA_RULES[0];
 
   c.innerHTML = `
-    <div style="padding: 20px; max-width: 850px; margin: 0 auto;">
+    <div style="padding: 20px; max-width: 850px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px;">
       
-      <div style="display: flex; gap: 30px; align-items: flex-start; justify-content: center;">
+      <!-- ÜST KISIM: Balon + Karakter -->
+      <div style="display: flex; align-items: flex-start; gap: 20px;">
         
-        <div style="width: 380px; display: flex; flex-direction: column; gap: 15px;">
-          
-          <div style="position: relative; background: #185FA5; color: white; padding: 20px; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+        <!-- Sol: Balon -->
+        <div style="flex: 1; position: relative;">
+          <div style="background: #185FA5; color: white; padding: 20px; border-radius: 20px; position: relative;">
             <div style="font-weight: 700; margin-bottom: 5px;">TMF Hakem İngilizcesi Eğitim Modülü</div>
             <div style="font-size: 13px; opacity: 0.9;">Hoş geldin! Pratik yapmak istediğin bölümü seç.</div>
-            <div style="position: absolute; bottom: -10px; left: 30px; width: 0; height: 0; border-left: 10px solid transparent; border-right: 10px solid transparent; border-top: 10px solid #185FA5;"></div>
-          </div>
-
-          <div style="display:flex; flex-direction:column; gap:10px;"> 
-            ${renderHomeButton("day1", "📄", "Tartı ve Kayıt", "Registration & Weigh-In")}
-            ${renderHomeButton("day2", "🥊", "Müsabaka Alanı", "Competition Area")}
-            ${renderHomeButton("social", "💬", "Sosyal İletişim", "Social Communication")}
+            <!-- Balonun ucu SAĞA (karaktere) dönük -->
+            <div style="position: absolute; top: 50%; right: -15px; width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-left: 15px solid #185FA5;"></div>
           </div>
         </div>
 
-        <div style="width: 320px; margin-top: 20px;"> 
-          <img src="assets/images/afra-avatar.png" style="width: 100%; height: auto; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3));">
+        <!-- Sağ: Karakter -->
+        <div style="width: 250px; flex-shrink: 0;">
+          <img src="assets/images/afra-avatar.png" style="width: 100%; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3));">
         </div>
       </div>
 
-      <div style="margin-top: 25px; background: #1a1d23; border: 1px solid #30363d; border-radius: 12px; padding: 18px;">
+      <!-- ORTA KISIM: Sekmeler (Karakterin hizasında sol blok) -->
+      <div style="width: 500px; display: flex; flex-direction: column; gap: 10px;">
+        ${renderHomeButton("day1", "📄", "Tartı ve Kayıt", "Registration & Weigh-In")}
+        ${renderHomeButton("day2", "🥊", "Müsabaka Alanı", "Competition Area")}
+        ${renderHomeButton("social", "💬", "Sosyal İletişim", "Social Communication")}
+      </div>
+
+      <!-- ALT KISIM: IFMA Kuralı -->
+      <div style="background: #1a1d23; border: 1px solid #30363d; border-radius: 12px; padding: 18px;">
         <div style="font-size: 9px; font-weight: 700; color: #58a6ff; text-transform: uppercase; margin-bottom: 6px;">📌 IFMA Rules and Regulatıons</div>
         <div style="font-size: 13px; color: #c9d1d9; line-height: 1.5;">${rule.en}</div>
-        <div style="font-size: 12px; color: #8b949e; font-style: italic; margin-top: 4px;">${rule.tr}</div>
+        <div style="font-size: 11px; color: #8b949e; font-style: italic; margin-top: 4px;">${rule.tr}</div>
       </div>
+      
     </div>
   `;
 }
