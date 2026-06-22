@@ -19,7 +19,8 @@ const SIM_CATEGORIES = [
               "hello welcome which country are you representing",
               "welcome which country are you representing",
               "hello welcome your country",
-              "welcome your country"
+              "welcome your country",
+              "hello welcome which country"
             ],
             hints: [
               "Karşındaki seni selamlıyor. Sen de karşılık verip hangi ülkeyi temsil ettiğini sormalısın.",
@@ -64,7 +65,7 @@ const SIM_CATEGORIES = [
             subtitle: "All documents are complete. No documents are missing.",
           },
           {
-            speaker: "Team Representative",
+            speaker: "Athlete",
             audioId: "sim_kayit_3b",
             subtitle: "Is it all done?",
           },
@@ -412,7 +413,8 @@ const SIM_CATEGORIES = [
             speaker: "user",
             accepted: [
               "do you have the doctors approval",
-              "doctors approval"
+              "doctors approval",
+              "have you seen the doctor",
             ],
             hints: [
               "Sporcunun doktora gidip gitmediğini sormalısın.",
@@ -597,7 +599,10 @@ const SIM_CATEGORIES = [
             speaker: "user",
             accepted: [
               "please remove socks and any extra clothing including jewelry",
-              "socks and jewelry off please"
+              "socks and jewelry off please",
+              "please remove extra clothing and jewelry",
+              "please remove socks and jewelry",
+              "remove socks and jewelry please",
             ],
             hints: [
               "Sporcunun tartıya çıkmadan önce çorap ve fazladan kıyafetlerini, takılarını çıkarması gerekiyor.",
@@ -1600,19 +1605,19 @@ function renderSimScene() {
   const speakerMeta = {
     narrator: {
       icon: `<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>`,
-      label: "Anlatıcı"
+      label: "Narrator"
     },
     representative: {
       icon: `<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>`,
-      label: "Takım Temsilcisi"
+      label: "Team Representative"
     },
     athlete: {
       icon: `<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13a3 3 0 0 1 3-3h1.5a2.5 2.5 0 0 1 2.5 2.5V14"></path><path d="M9 10V8a2 2 0 0 1 4 0v2"></path><path d="M12 12h2a3 3 0 0 1 3 3v1a3 3 0 0 1-3 3h-1"></path><path d="M5 13v3a3 3 0 0 0 3 3h1"></path><line x1="13" y1="19" x2="20" y2="19"></line></svg>`,
-      label: "Sporcu"
+      label: "Athlete"
     },
     user: {
       icon: `<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="22"></line></svg>`,
-      label: "Sen (Hakem)"
+      label: "You (Referee)"
     }
   };
   const meta = speakerMeta[step.speaker] || speakerMeta.narrator;
@@ -1860,7 +1865,10 @@ function simSpeak() {
     const dictionary = {
       "assets office": "athlete",
       "assets":        "athlete",
+      "outfits":        "athlete",
       "at least":      "athlete",
+      "actress":        "athlete",
+      "artist":         "athlete",
       "head guard":    "headguard",
       "headgard":      "headguard",
       "gumshield":     "gum shield",
@@ -1868,7 +1876,13 @@ function simSpeak() {
       "anti doping":   "anti-doping",
       "non pregnancy": "non-pregnancy",
       "decoration":    "declaration",
-      "auntie":        "anti"
+      "auntie":        "anti",
+      "lot wait":       "lightweight",
+      "mailway": "male weigh-in",
+      "male outfits": "male athletes",
+      "mail office": "male athletes",
+      "office": "athlete",
+
     };
     Object.keys(dictionary).forEach(key => {
       if (said.includes(key)) said = said.replace(key, dictionary[key]);
