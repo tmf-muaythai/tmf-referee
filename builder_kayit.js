@@ -650,8 +650,7 @@ function renderBuilderScene() {
       <!-- Senaryo Bildirimi (Prompt) -->
       <div style="padding:16px 20px; border-bottom:1px solid var(--border); background:var(--l3-bg); display:flex; gap:12px; align-items:center;">
 
-        <!-- Avatar -->
-        <img src="assets/images/hakem-avatar.png" style="width:48px; height:48px; border-radius:50%; object-fit:cover; flex-shrink:0;" alt="Sen">
+      <img src="assets/images/soru-avatar.png" style="width: 80px; height: auto; flex-shrink: 0;" alt="Sen">
 
         <!-- Yazı -->
         <div style="font-size:14px; color:var(--text); line-height:1.5; font-weight:500;">

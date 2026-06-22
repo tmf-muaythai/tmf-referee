@@ -55,33 +55,37 @@ function renderHome() {
   `;
 }
 
-// Sekmeleri biraz daha küçük ve şık hale getirmek için buton fonksiyonu güncellemesi
 function renderHomeButton(dayId, emoji, title, subtitle) {
   return `
     <button onclick="homeGoTo('${dayId}')" style="
-      display:flex; align-items:center; gap:12px; padding:10px 14px; border-radius:12px;
-      border:1px solid #30363d; background: #161b22; cursor:pointer; text-align:left; width:100%; transition: 0.2s;
-    ">
-      <div style="width:36px; height:36px; background:#0d1117; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:18px;">${emoji}</div>
+      display: flex; 
+      align-items: center; 
+      gap: 14px; 
+      padding: 12px 16px; 
+      border-radius: 14px;
+      border: 1px solid var(--border); 
+      background: var(--card-bg); 
+      cursor: pointer; 
+      text-align: left; 
+      width: 100%;
+      transition: 0.2s;
+    " onmouseover="this.style.filter='brightness(1.1)'" onmouseout="this.style.filter='brightness(1)'">
+      
+      <div style="
+        width: 42px; 
+        height: 42px; 
+        border-radius: 50%; 
+        background: var(--l3-bg); 
+        display: flex; 
+        align-items: center; 
+        justify-content: center; 
+        font-size: 22px;
+        flex-shrink: 0;
+      ">${emoji}</div>
+      
       <span>
-        <div style="font-size:13px; font-weight:700; color:#e6edf3;">${title}</div>
-        <div style="font-size:10px; color:#8b949e;">${subtitle}</div>
-      </span>
-    </button>
-  `;
-}
-
-// Yardımcı Fonksiyon (Kod kalabalığını azaltmak için)
-function renderHomeButton(dayId, emoji, title, subtitle) {
-  return `
-    <button onclick="homeGoTo('${dayId}')" style="
-      display:flex; align-items:center; gap:14px; padding:12px 16px; border-radius:14px;
-      border:1px solid var(--border); background:var(--card-bg); cursor:pointer; text-align:left; width:100%;
-    ">
-      <div style="width:42px; height:42px; border-radius:50%; background:var(--l3-bg); display:flex; align-items:center; justify-content:center; font-size:22px;">${emoji}</div>
-      <span>
-        <div style="font-size:14px; font-weight:700; color:var(--text);">${title}</div>
-        <div style="font-size:11px; color:var(--text2); margin-top:2px;">${subtitle}</div>
+        <div style="font-size: 14px; font-weight: 700; color: var(--text);">${title}</div>
+        <div style="font-size: 11px; color: var(--text2); margin-top: 2px;">${subtitle}</div>
       </span>
     </button>
   `;
