@@ -378,7 +378,7 @@ body.dark #sim-hint-area div[style*="background:#fff8e1"] { background: #2a220a 
 <div class="top-bar" style="position:relative">
   <h1>TMF Muaythai – Hakem İngilizcesi Eğitim Modülü</h1>
   <p>Görev İngilizcesi · Referee English Training</p>
-  <button id="dark-toggle" onclick="toggleDark()" style="position:absolute;top:12px;right:12px;background:transparent;border:1px solid rgba(255,255,255,0.5);border-radius:20px;color:#fff;padding:4px 12px;font-size:11px;cursor:pointer">🌙 Gece</button>
+  <button id="dark-toggle" onclick="toggleDark()" style="position:absolute;top:12px;right:12px;background:transparent;border:1px solid rgba(255,255,255,0.5);border-radius:20px;color:#fff;padding:4px 12px;font-size:11px;cursor:pointer">🌙 Gece</button> <button onclick="goHome()" style="position:absolute; top:12px; left:12px; background:transparent; border:1px solid rgba(255,255,255,0.5); border-radius:20px; color:#fff; padding:4px 12px; font-size:11px; cursor:pointer">Ana Sayfa</button>
 </div>
 <div class="day-nav" id="day-nav"></div>
 <div id="l2-nav-wrap"></div>
@@ -552,6 +552,7 @@ let curL2  = "registration";
 let curL3  = null;
 let curL4  = null;
 let curSec = "kayit";
+let isHomeActive = true; 
 let qIdx = 0, score = 0, answered = false, shuffledQuiz = [];
 
 // ─── 2. CORE AUDIO AND UTILITY FUNCTIONS ─────────────────────────
@@ -1662,13 +1663,14 @@ window.QUIZ_TARTI = [
 <script src="./sim_kayit.js?v=7" charset="UTF-8"></script>
 <script src="./sim_day2.js?v=1" charset="UTF-8"></script>
 <script src="./builder_kayit.js?v=2" charset="UTF-8"></script>
+<script src="./home.js?v=1" charset="UTF-8"></script>
 
 <script>
   // ─── 6. RUNNING APPLICATION INITIALIZATION ───────────────────────
   buildDayNav();
   if(NAV[curDay] && NAV[curDay].l2 && NAV[curDay].l2.length > 0) {
       const firstL2 = NAV[curDay].l2[0]; curL2 = firstL2.id;
-      buildL2(); initL2(firstL2);
+      buildL2(); goHome();
   };
 </script>
 </body>
