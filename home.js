@@ -47,13 +47,22 @@ function renderHome() {
       </div>
 
       <!-- ALT KISIM: IFMA Kuralı -->
-      <div style="background: #1a1d23; border: 1px solid #30363d; border-radius: 12px; padding: 18px;">
-        <div style="font-size: 9px; font-weight: 700; color: #58a6ff; text-transform: uppercase; margin-bottom: 6px;">📌 IFMA Rules and Regulatıons</div>
-        <div style="font-size: 13px; color: #c9d1d9; line-height: 1.5;">${rule.en}</div>
-        <div style="font-size: 11px; color: #8b949e; font-style: italic; margin-top: 4px;">${rule.tr}</div>
-      </div>
-      
-    </div>
+<div style="
+  background: var(--ifma-bg); 
+  border: 1px solid var(--ifma-border); 
+  border-radius: 12px; 
+  padding: 20px;
+">
+  <div style="font-size: 9px; font-weight: 700; color: #185FA5; text-transform: uppercase; margin-bottom: 8px;">
+    📌 IFMA Rules and Regulatıons
+  </div>
+  <div style="font-size: 13px; color: var(--ifma-text); line-height: 1.5; margin-bottom: 8px;">
+    ${rule.en}
+  </div>
+  <div style="font-size: 12px; color: #666; font-style: italic; line-height: 1.5;">
+    ${rule.tr}
+  </div>
+</div>
   `;
 }
 

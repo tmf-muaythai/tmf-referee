@@ -365,6 +365,19 @@ body.dark #sim-hint-area div[style*="background:#fff8e1"] { background: #2a220a 
     margin-bottom: 8px;
     display: inline-block;
   }
+  /* Aydınlık mod için kutu arka planı */
+:root {
+  --ifma-bg: #eef2f7; /* Hafif mavi-gri tonu */
+  --ifma-border: #d1d9e6;
+  --ifma-text: #1a202c;
+}
+
+/* Karanlık mod için kutu arka planı */
+[data-theme='dark'] {
+  --ifma-bg: #1a1d23;
+  --ifma-border: #30363d;
+  --ifma-text: #c9d1d9;
+}
 }
 </style>
 <script>
@@ -1659,11 +1672,11 @@ window.QUIZ_TARTI = [
 
 </script>
 
-<script src="./day2.js?v=71" charset="UTF-8"></script>
+<script src="./day2.js?v=72" charset="UTF-8"></script>
 <script src="./sim_kayit.js?v=7" charset="UTF-8"></script>
 <script src="./sim_day2.js?v=1" charset="UTF-8"></script>
 <script src="./builder_kayit.js?v=2" charset="UTF-8"></script>
-<script src="./home.js?v=5" charset="UTF-8"></script>
+<script src="./home.js?v=6" charset="UTF-8"></script>
 
 <script>
   // ─── 6. RUNNING APPLICATION INITIALIZATION ───────────────────────
