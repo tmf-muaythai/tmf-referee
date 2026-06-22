@@ -52,7 +52,7 @@ function renderHome() {
       </div>
 
       <img src="assets/images/afra-avatar.png" alt="Rehber" style="
-        width:130px; 
+        width:300px; 
         height:auto; 
         object-fit:contain;
         filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15));
