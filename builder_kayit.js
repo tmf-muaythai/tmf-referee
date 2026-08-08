@@ -650,7 +650,7 @@ function renderBuilderScene() {
       <!-- Senaryo Bildirimi (Prompt) -->
       <div style="padding:16px 20px; border-bottom:1px solid var(--border); background:var(--l3-bg); display:flex; gap:12px; align-items:center;">
 
-      <img src="assets/images/soru-avatar.png" style="width: 80px; height: auto; flex-shrink: 0;" alt="Sen">
+      <div style="width:40px; height:40px; border-radius:50%; background:var(--surface-2); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; color:var(--text2); flex-shrink:0; letter-spacing:.5px;">EN</div>
 
         <!-- Yazı -->
         <div style="font-size:14px; color:var(--text); line-height:1.5; font-weight:500;">
