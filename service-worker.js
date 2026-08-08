@@ -1,4 +1,4 @@
-const CACHE = "tmf-v82";
+const CACHE = "tmf-v83";
 const FILES = [
   "/tmf-referee/",
   "/tmf-referee/index.html",
@@ -28,6 +28,7 @@ const FILES = [
   "/tmf-referee/qr.html",
   "/tmf-referee/manifest.json",
   "/tmf-referee/assets/images/favicon.png",
+  "/tmf-referee/assets/images/favicon-192.png",
   "/tmf-referee/assets/images/afra-avatar.png",
   "/tmf-referee/assets/images/acilis-bg.jpg",
   "/tmf-referee/assets/images/hakem-avatar.png",

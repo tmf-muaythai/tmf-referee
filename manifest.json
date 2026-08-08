@@ -3,11 +3,11 @@
   "short_name": "TMF Hakem",
   "start_url": "/tmf-referee/",
   "display": "standalone",
-  "background_color": "#185FA5",
-  "theme_color": "#185FA5",
+  "background_color": "#cfe0f2",
+  "theme_color": "#0d2b4e",
   "icons": [
     {
-      "src": "assets/images/favicon.png",
+      "src": "assets/images/favicon-192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
