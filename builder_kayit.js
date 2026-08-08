@@ -519,10 +519,10 @@ function renderBuilderMenu() {
   c.innerHTML = `
     <div style="margin-bottom:14px;">
       <div style="font-size:13px; font-weight:700; color:#185FA5; margin-bottom:2px;">
-        🧩 Cümle Kurma Pratiği
+        ${(typeof icon==='function')?icon('puzzle2'):''} ${t('bTitle')}
       </div>
       <div style="font-size:11px; color:var(--text2);">
-        Kelimeleri doğru sıraya dizerek pratik yapmak istediğin bölümü seç.
+        ${t('bSubtitle')}
       </div>
     </div>
 
@@ -552,9 +552,9 @@ function renderBuilderMenu() {
             text-align:center;
             transition:all .15s;
           ">
-          ${allDone ? `<span style="position:absolute; top:6px; right:8px; font-size:11px;">✓</span>` : ""}
+          ${allDone ? `<span style="position:absolute; top:6px; right:8px; color:var(--success);">${(typeof icon==='function')?icon('check',{size:'13px'}):''}</span>` : ""}
           <span style="font-size:11.5px; font-weight:700; line-height:1.3;">${cat.label}</span>
-          <span style="font-size:9.5px; color:var(--text2); line-height:1.2;">${cat.labelTr}</span>
+          <span style="font-size:9.5px; color:var(--text2); line-height:1.2;">${(typeof builderLabelLoc==='function')?builderLabelLoc(cat.id, cat.labelTr):cat.labelTr}</span>
           ${hasContent
             ? `<span style="font-size:9px; color:#185FA5; font-weight:600; margin-top:2px;">${completed}/${total}</span>`
             : `<span style="font-size:9px; color:var(--text2); margin-top:2px;">Yakında</span>`
@@ -629,17 +629,17 @@ function renderBuilderScene() {
   c.innerHTML = `
     <!-- Üst Bar -->
     <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;">
-      <button onclick="builderBackToMenu()" style="background:none; border:none; font-size:11px; color:#185FA5; cursor:pointer; font-weight:600; padding:0;">← Bölümler</button>
-      <div style="font-size:11px; color:#888; text-align:right;">🧩 ${category.label}</div>
+      <button onclick="builderBackToMenu()" style="background:none; border:none; font-size:11px; color:#185FA5; cursor:pointer; font-weight:600; padding:0;">${t('bBack')}</button>
+      <div style="font-size:11px; color:#888; text-align:right; display:inline-flex; align-items:center; gap:5px; justify-content:flex-end;">${(typeof icon==='function')?icon('puzzle2',{size:'0.95em'}):''} ${category.label}</div>
     </div>
 
     <!-- Başlık ve Sıfırla -->
     <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
       <div style="font-size:12px; font-weight:600; color:var(--text);">
-        Senaryo ${builderSceneIdx + 1} <span style="color:var(--text2); font-weight:400;">/ ${totalScenes}</span>
+        ${t('bScenario')} ${builderSceneIdx + 1} <span style="color:var(--text2); font-weight:400;">/ ${totalScenes}</span>
         &nbsp;·&nbsp; ${scene.title}
       </div>
-      <button onclick="if(confirm('Bu bölümü baştan başlatmak istediğinize emin misiniz?')) { builderSceneIdx=0; builderInitScene(); }" style="background: #dc3545; color: white; border: none; cursor: pointer; border-radius: 20px; padding: 4px 10px; font-size: 11px; font-weight: bold; flex-shrink: 0;">Sıfırla</button>
+      <button onclick="if(confirm('${t('bResetConfirm')}')) { builderSceneIdx=0; builderInitScene(); }" style="background: var(--surface-2); color: var(--text2); border: 1px solid var(--border); cursor: pointer; border-radius: 20px; padding: 4px 10px; font-size: 11px; font-weight: 600; flex-shrink: 0; display:inline-flex; align-items:center; gap:4px;">${(typeof icon==='function')?icon('rotateCcw',{size:'0.95em'}):''} ${t('bReset')}</button>
     </div>
 
     <div style="display:flex; gap:4px; margin-bottom:16px;">${segmentsHtml}</div>
@@ -668,7 +668,7 @@ function renderBuilderScene() {
           transition:all .3s;
           ${isError ? 'animation: builderShake 0.4s;' : ''}
         ">
-          ${builderSelectedWords.length === 0 && !isSuccess && !isError ? `<span style="color:var(--text2); font-size:13px; font-style:italic; margin:auto;">Kelimeleri buraya diz...</span>` : ""}
+          ${builderSelectedWords.length === 0 && !isSuccess && !isError ? `<span style="color:var(--text2); font-size:13px; font-style:italic; margin:auto;">${t('bPlaceholder')}</span>` : ""}
           ${builderSelectedWords.map(w => `
             <button onclick="builderRemoveWord(${w.id})" ${isSuccess ? "disabled" : ""} style="
               padding:8px 14px; font-size:14px; font-weight:600;
@@ -694,7 +694,7 @@ function renderBuilderScene() {
         ` : ""}
 
         <!-- Uyarı Mesajı (Yanlışsa) -->
-        ${isError ? `<div style="text-align:center; color:#A32D2D; font-size:12px; font-weight:600; margin-bottom:16px;">⚠️ Sıralama hatalı, tekrar dene!</div>` : ""}
+        ${isError ? `<div style="text-align:center; color:#A32D2D; font-size:12px; font-weight:600; margin-bottom:16px;">${t('bWrong')}</div>` : ""}
 
         <!-- Butonlar -->
         <div style="text-align:center;">
@@ -704,13 +704,13 @@ function renderBuilderScene() {
               background:${builderSelectedWords.length === 0 ? 'var(--border)' : '#185FA5'};
               color:#fff; border:none; border-radius:24px; cursor:${builderSelectedWords.length === 0 ? 'default' : 'pointer'};
               transition:background .3s;
-            ">Kontrol Et</button>
+            ">${t('bCheck')}</button>
           ` : `
             <button onclick="builderNextScene()" style="
               padding:12px 32px; font-size:14px; font-weight:600;
               background:#3B6D11; color:#fff; border:none;
               border-radius:24px; cursor:pointer;
-            ">${isLast ? "✓ Bölümü Tamamla" : "Sonraki Senaryo →"}</button>
+            ">${isLast ? t('bComplete') : t('bNext')}</button>
           `}
         </div>
 
@@ -790,22 +790,22 @@ function builderShowComplete() {
 
   c.innerHTML = `
     <div style="text-align:center; padding:3rem 1rem; background:var(--card-bg); border:1px solid var(--border); border-radius:14px;">
-      <div style="font-size:56px; margin-bottom:12px;">🏆</div>
+      <div style="color:var(--gold); margin-bottom:12px;">${(typeof icon==='function')?icon('trophy',{size:'48px'}):''}</div>
       <div style="font-size:20px; font-weight:700; color:#185FA5; margin-bottom:8px;">
-        ${category.label} Tamamlandı!
+        ${category.label} ${t('bDoneSuffix')}
       </div>
       <div style="font-size:14px; color:var(--text2); margin-bottom:24px; line-height:1.6;">
-        Bu bölümdeki tüm senaryolarda cümleleri başarıyla kurdun.<br>Harika bir iş çıkardın!
+        ${t('bDoneMsg')}
       </div>
       <div style="display:flex; gap:8px; justify-content:center;">
         <button onclick="builderSceneIdx=0; builderInitScene();" style="
           padding:11px 22px; font-size:13px; font-weight:600;
           background:var(--card-bg); color:#185FA5; border:1px solid #185FA5; border-radius:22px; cursor:pointer;
-        ">↺ Tekrar Yap</button>
+        ">${t('bRedo')}</button>
         <button onclick="builderBackToMenu()" style="
           padding:11px 22px; font-size:13px; font-weight:600;
           background:#185FA5; color:#fff; border:none; border-radius:22px; cursor:pointer;
-        ">Bölümlere Dön</button>
+        ">${t('bBackToMenu')}</button>
       </div>
     </div>
   `;

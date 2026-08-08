@@ -1,14 +1,9 @@
 // ─── ANA EKRAN (HOME) ────────────────────────────────────────────
-// Uygulama açıldığında gösterilen karşılama ekranı.
-// IFMA_RULES dizisi placeholder içerikle başlar; gerçek kurallar
-// eklendiğinde bu diziyi güncellemek yeterli olacak.
-
 const IFMA_RULES = [
   {
     en: "The referee must clearly call \"YOOT\" to stop the action and \"CHOK\" to resume the fight.",
     tr: "Hakem, aksiyonu durdurmak için net bir şekilde \"YOOT\", dövüşü devam ettirmek için \"CHOK\" komutunu vermelidir."
   },
-  // Buraya yeni kurallar eklenecek — aynı format: { en: "...", tr: "..." }
 ];
 
 let homeRuleIdx = Math.floor(Math.random() * IFMA_RULES.length);
@@ -18,82 +13,50 @@ function renderHome() {
   const rule = IFMA_RULES[homeRuleIdx] || IFMA_RULES[0];
 
   c.innerHTML = `
-    <!-- Balon ve Karakter Bölümü -->
-    <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; padding: 20px;">
-        <div style="background: #185FA5; color: white; padding: 20px; border-radius: 20px; position: relative; max-width: 350px;">
-            <div style="font-weight: 700; margin-bottom: 5px;">TMF Hakem İngilizcesi Eğitim Modülü</div>
-            <div style="font-size: 13px; opacity: 0.9;">Hoş geldin! Pratik yapmak istediğin bölümü seç.</div>
-            <div style="position: absolute; bottom: -10px; left: 30px; width: 0; height: 0; border-left: 10px solid transparent; border-right: 10px solid transparent; border-top: 10px solid #185FA5;"></div>
-        </div>
-        <div style="width: 300px;">
-            <img src="assets/images/afra-avatar.png" style="width: 100%; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.2));">
-        </div>
+    <!-- HERO -->
+    <div class="home-hero">
+      <div class="home-hero-text">
+        <div class="home-hero-hi">${(typeof t==='function')?t('heroHi'):'TMF MUAYTHAI · REFEREE ENGLISH'}</div>
+        <div class="home-hero-title">${(typeof t==='function')?t('heroTitle'):'Hoş geldin! 🥊'}</div>
+        <div class="home-hero-sub">${(typeof t==='function')?t('heroSub'):'Uluslararası müsabakalarda ihtiyacın olan İngilizceyi dinle, konuş ve pratik yap. Başlamak için bir bölüm seç.'}</div>
+      </div>
+      <img src="assets/images/afra-avatar.png" class="home-hero-img" alt="">
     </div>
 
-    <!-- Sekmeler -->
-    <div style="padding: 0 20px; display: flex; flex-direction: column; gap: 10px;">
-        ${renderHomeButton("day1", "📄", "Tartı ve Kayıt", "Registration & Weigh-In")}
-        ${renderHomeButton("day2", "🥊", "Müsabaka Alanı", "Competition Area")}
-        ${renderHomeButton("social", "💬", "Sosyal İletişim", "Social Communication")}
+    <!-- BÖLÜM KARTLARI -->
+    <div class="home-sections">
+      ${renderHomeButton("day1",   "c1", "file",   (typeof navT==='function')?navT("day1","Tartı ve Kayıt"):"Tartı ve Kayıt",   "Registration & Weigh-In")}
+      ${renderHomeButton("day2",   "c2", "target", (typeof navT==='function')?navT("day2","Müsabaka Alanı"):"Müsabaka Alanı",   "Field of Play")}
+      ${renderHomeButton("social", "c3", "message",(typeof navT==='function')?navT("social","Sosyal İletişim"):"Sosyal İletişim",  "Social Communication")}
     </div>
 
-    
-<div style="
-  margin: 20px; 
-  padding: 12px 16px; /* Padding'i kıstık */
-  border-radius: 12px; 
-  border: 1px solid #d1d9e6; 
-  background: #eef2f7; 
-  color: #1a202c;
-">
-    <div style="font-size: 9px; font-weight: 700; color: #185FA5; text-transform: uppercase; margin-bottom: 4px;">
-        📌 IFMA RULES AND REGULATIONS
+    <!-- IFMA KURAL KARTI -->
+    <div class="home-rule">
+      <div class="home-rule-tag">${(typeof icon==='function')?icon('pin',{size:'11px'}):''} IFMA RULES AND REGULATIONS</div>
+      <div class="home-rule-en">${rule.en}</div>
+      <div class="home-rule-tr">${(typeof t==='function')?t('ruleTr'):rule.tr}</div>
     </div>
-    <div style="font-size: 13px; font-weight: 600; margin-bottom: 4px;">${rule.en}</div>
-    <div style="font-size: 12px; font-style: italic; opacity: 0.8;">${rule.tr}</div>
-</div>
   `;
 }
 
-function renderHomeButton(dayId, emoji, title, subtitle) {
+function renderHomeButton(dayId, colorClass, iconName, title, subtitle) {
   return `
-    <button onclick="homeGoTo('${dayId}')" style="
-      display: flex; 
-      align-items: center; 
-      gap: 14px; 
-      padding: 12px 16px; 
-      border-radius: 14px;
-      border: 1px solid var(--border); 
-      background: var(--card-bg); 
-      cursor: pointer; 
-      text-align: left; 
-      width: 100%;
-      transition: 0.2s;
-    " onmouseover="this.style.filter='brightness(1.1)'" onmouseout="this.style.filter='brightness(1)'">
-      
-      <div style="
-        width: 42px; 
-        height: 42px; 
-        border-radius: 50%; 
-        background: var(--l3-bg); 
-        display: flex; 
-        align-items: center; 
-        justify-content: center; 
-        font-size: 22px;
-        flex-shrink: 0;
-      ">${emoji}</div>
-      
+    <button class="home-card" onclick="homeGoTo('${dayId}')">
+      <div class="home-card-ic ${colorClass}">${(typeof icon==='function')?icon(iconName,{size:'22px'}):''}</div>
       <span>
-        <div style="font-size: 14px; font-weight: 700; color: var(--text);">${title}</div>
-        <div style="font-size: 11px; color: var(--text2); margin-top: 2px;">${subtitle}</div>
+        <div class="home-card-tt">${title}</div>
+        <div class="home-card-st">${subtitle}</div>
       </span>
+      <span class="home-card-go">›</span>
     </button>
   `;
 }
 
-// ─── KART TIKLAMA — İLGİLİ ANA SEKMEYE GEÇİŞ ──────────────────────
+// ─── KART TIKLAMA ─────────────────────────────────────────────────
 function homeGoTo(dayId) {
   isHomeActive = false;
+  // Üst sekmeleri tekrar göster
+  document.getElementById("day-nav").style.display = "flex";
   curDay = dayId;
   const firstL2 = NAV[dayId].l2[0];
   curL2 = firstL2.id;
@@ -102,10 +65,12 @@ function homeGoTo(dayId) {
   buildL2();
 }
 
-// ─── ANA SAYFAYA DÖN (üst bardaki buton) ──────────────────────────
+// ─── ANA SAYFAYA DÖN ──────────────────────────────────────────────
 function goHome() {
   isHomeActive = true;
   homeRuleIdx = Math.floor(Math.random() * IFMA_RULES.length);
+  // Üst sekmeleri gizle
+  document.getElementById("day-nav").style.display = "none";
   document.getElementById("l2-nav-wrap").innerHTML = "";
   document.getElementById("l3-nav-wrap").innerHTML = "";
   document.getElementById("l4-nav-wrap").innerHTML = "";

@@ -1,11 +1,37 @@
-const CACHE = "tmf-v74";
+const CACHE = "tmf-v80";
 const FILES = [
   "/tmf-referee/",
   "/tmf-referee/index.html",
+  "/tmf-referee/styles.css",
+  "/tmf-referee/data.js",
+  "/tmf-referee/icons.js",
+  "/tmf-referee/i18n.js",
+  "/tmf-referee/qrcode.js",
+  "/tmf-referee/app.js",
+  "/tmf-referee/assets/fonts/inter-latin-400-normal.woff2",
+  "/tmf-referee/assets/fonts/inter-latin-ext-400-normal.woff2",
+  "/tmf-referee/assets/fonts/inter-latin-500-normal.woff2",
+  "/tmf-referee/assets/fonts/inter-latin-ext-500-normal.woff2",
+  "/tmf-referee/assets/fonts/inter-latin-600-normal.woff2",
+  "/tmf-referee/assets/fonts/inter-latin-ext-600-normal.woff2",
+  "/tmf-referee/assets/fonts/inter-latin-700-normal.woff2",
+  "/tmf-referee/assets/fonts/inter-latin-ext-700-normal.woff2",
+  "/tmf-referee/assets/fonts/inter-latin-800-normal.woff2",
+  "/tmf-referee/assets/fonts/inter-latin-ext-800-normal.woff2",
+  "/tmf-referee/sim-engine.js",
+  "/tmf-referee/sim_kayit.js",
+  "/tmf-referee/sim_day2.js",
+  "/tmf-referee/builder_kayit.js",
+  "/tmf-referee/home.js",
   "/tmf-referee/day2.js",
   "/tmf-referee/privacy.html",
+  "/tmf-referee/qr.html",
   "/tmf-referee/manifest.json",
   "/tmf-referee/assets/images/favicon.png",
+  "/tmf-referee/assets/images/afra-avatar.png",
+  "/tmf-referee/assets/images/acilis-bg.jpg",
+  "/tmf-referee/assets/images/hakem-avatar.png",
+  "/tmf-referee/assets/images/soru-avatar.png",
   "/tmf-referee/assets/audio/baskul_1.mp3",
   "/tmf-referee/assets/audio/baskul_1_short.mp3",
   "/tmf-referee/assets/audio/baskul_2.mp3",
@@ -819,7 +845,9 @@ const FILES = [
 
 ];
 
+// ─── KURULUM: tüm dosyaları önbelleğe al ─────────────────────────────
 self.addEventListener("install", e => {
+  self.skipWaiting();  // yeni sürüm hazır olur olmaz devreye girsin
   e.waitUntil(
     caches.open(CACHE).then(cache => {
       return Promise.allSettled(
@@ -827,6 +855,41 @@ self.addEventListener("install", e => {
           console.warn("Cache eklenemedi:", file, err);
         }))
       );
+    })
+  );
+});
+
+// ─── AKTİFLEŞME: eski sürüm önbelleklerini temizle ───────────────────
+self.addEventListener("activate", e => {
+  e.waitUntil(
+    caches.keys()
+      .then(keys => Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k))))
+      .then(() => self.clients.claim())  // açık sekmeleri hemen kontrol al
+  );
+});
+
+// ─── İSTEK YAKALAMA: önce önbellek, sonra ağ (offline çalışma) ───────
+self.addEventListener("fetch", e => {
+  const req = e.request;
+  if (req.method !== "GET") return;
+
+  const url = new URL(req.url);
+  // Yalnızca kendi kaynağımız (same-origin). Dış kaynaklar (Google Fonts,
+  // QR görseli) doğrudan ağa gider; offline'da zaten yedeğe düşerler.
+  if (url.origin !== self.location.origin) return;
+
+  e.respondWith(
+    // ?v=… gibi sürüm sorgularını yok say ki önbellekteki dosyayla eşleşsin
+    caches.match(req, { ignoreSearch: true }).then(cached => {
+      if (cached) return cached;
+      return fetch(req).then(res => {
+        // Ağdan gelen geçerli yanıtları da önbelleğe ekle (sonraki offline için)
+        if (res && res.status === 200 && res.type === "basic") {
+          const copy = res.clone();
+          caches.open(CACHE).then(c => c.put(req, copy));
+        }
+        return res;
+      }).catch(() => cached);  // ağ yoksa ve önbellekte yoksa: undefined
     })
   );
 });
