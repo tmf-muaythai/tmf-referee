@@ -1447,12 +1447,16 @@ function setLang(l){
   APP_LANG = l;
   try { localStorage.setItem('appLang', l); } catch(e){}
   applyStaticLang();
+  // Ana sayfadaysak navigasyonu kurma (yoksa içerik sekmeleri ana sayfada beliriyor); sadece ana sayfayı yenile.
+  if (typeof isHomeActive !== 'undefined' && isHomeActive && typeof renderHome === 'function') {
+    renderHome();
+    return;
+  }
   if (typeof buildDayNav === 'function') buildDayNav();
   if (typeof buildL2 === 'function') { try { buildL2(); } catch(e){} }
   if (typeof buildL3 === 'function') { try { buildL3(); } catch(e){} }
   if (typeof buildL4 === 'function') { try { buildL4(); } catch(e){} }
-  if (typeof isHomeActive !== 'undefined' && isHomeActive && typeof renderHome === 'function') renderHome();
-  else if (typeof render === 'function') render();
+  if (typeof render === 'function') render();
 }
 function cycleLang(){ setLang(APP_LANG === 'tr' ? 'de' : 'tr'); }
 

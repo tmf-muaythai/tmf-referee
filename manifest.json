@@ -1,9 +1,9 @@
 {
   "name": "TMF Muaythai – Hakem İngilizcesi",
-  "short_name": "TMF Hakem",
+  "short_name": "Muaythai English",
   "start_url": "/tmf-referee/",
   "display": "standalone",
-  "background_color": "#cfe0f2",
+  "background_color": "#84b1ee",
   "theme_color": "#0d2b4e",
   "icons": [
     {

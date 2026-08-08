@@ -357,11 +357,18 @@ body.dark #tc-num{color:var(--brand) !important}
 
 /* ─── MOBİL ──────────────────────────────────────────────────────────── */
 @media (max-width: 480px) {
-  .top-bar{display:flex;flex-direction:column;align-items:center;padding:16px 12px}
-  .top-bar h1{padding-right:0 !important;margin-bottom:10px;width:100%}
-  #dark-toggle{position:static !important;margin-bottom:8px;display:inline-block}
-  #home-btn{position:static !important;margin-bottom:8px;display:inline-block}
-  #lang-btn{position:static !important;margin-bottom:8px;display:inline-block}
+  /* Üst bar: başlık + alt yazı tam satır, butonlar tek satırda yan yana */
+  .top-bar{display:flex;flex-direction:row;flex-wrap:wrap;justify-content:center;align-items:center;padding:16px 12px 14px}
+  .top-bar h1{padding-right:0 !important;margin-bottom:6px;flex:0 0 100%;text-align:center}
+  .top-bar p{flex:0 0 100%;text-align:center;padding-bottom:12px}
+  #dark-toggle,#lang-btn,#home-btn{position:static !important;margin:0 4px;display:inline-flex}
+  /* Hero: telefonda görsel ile yazı oranını dengele */
+  .home-hero{padding:0 8px 0 16px;gap:4px}
+  .home-hero-text{padding:15px 0 13px}
+  .home-hero-hi{font-size:10.5px}
+  .home-hero-title{font-size:17px}
+  .home-hero-sub{font-size:11.5px;line-height:1.46}
+  .home-hero-img{width:138px}
 }
 
 /* ── İkon sistemi + buton bileşenleri (görsel tutarlılık) ─────────────── */
@@ -387,9 +394,11 @@ button .ic, a .ic{pointer-events:none}
 
 /* ── Açılış ekranı (splash) — tam ekran görsel ───────────────────────── */
 #app-splash{position:fixed;inset:0;z-index:9999;overflow:hidden;
-  background:linear-gradient(180deg,#bcd6ef 0%,#cfe0f2 45%,#eef4d9 100%);
+  background:#8cafe1;
   opacity:1;transition:opacity .6s ease}
 #app-splash.hide{opacity:0;pointer-events:none}
+#app-splash picture{position:absolute;inset:0;display:block}
+/* Telefonda dikey, geniş ekranda yatay görsel (index.html <picture>); ikisi de ekranı doldurur */
 .splash-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center center;
   animation:splashRise .8s ease both}
 .splash-caption{position:absolute;left:0;right:0;bottom:0;z-index:2;text-align:center;
