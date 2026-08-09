@@ -494,6 +494,7 @@ const BUILDER_CATEGORIES = [
 
 // ─── CÜMLE KURMA STATE ──────────────────────────────────────────────
 let builderView = "menu";          // "menu" | "scene"
+let builderActiveSec = null;        // hangi builder bölümü aktif (curSec)
 let builderCategoryIdx = 0;
 let builderSceneIdx = 0;
 let builderCompletedScenes = {};   // { "registration_1": true, ... }
@@ -505,6 +506,13 @@ let builderCheckState = "idle"; // "idle" (bekliyor) | "error" (yanlış) | "suc
 
 // ─── ANA GİRİŞ NOKTASI ────────────────────────────────────────────
 function renderBuilder() {
+  // Farklı bir kategoriye (curSec) geçildiyse builder'ı menüye sıfırla
+  if (typeof curSec !== "undefined" && curSec !== builderActiveSec) {
+    builderActiveSec = curSec;
+    builderView = "menu";
+    builderCategoryIdx = 0;
+    builderSceneIdx = 0;
+  }
   if (builderView === "menu") {
     renderBuilderMenu();
   } else {
@@ -527,7 +535,7 @@ function renderBuilderMenu() {
     </div>
 
     <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px;">
-      ${BUILDER_CATEGORIES.map((cat, idx) => {
+      ${getBuilderSet().map((cat, idx) => {
         const hasContent = cat.scenes.length > 0;
         const total = cat.scenes.length;
         const completed = cat.scenes.filter(s => builderCompletedScenes[`${cat.id}_${s.id}`]).length;
@@ -581,7 +589,7 @@ function builderBackToMenu() {
 
 // ─── SAHNEYİ BAŞLAT (Kelimeleri Karıştır) ─────────────────────────
 function builderInitScene() {
-  const category = BUILDER_CATEGORIES[builderCategoryIdx];
+  const category = getBuilderSet()[builderCategoryIdx];
   const scene = category.scenes[builderSceneIdx];
   if (!scene) return;
 
@@ -597,7 +605,7 @@ function builderInitScene() {
 // ─── SAHNE EKRANI (Oyun Alanı) ────────────────────────────────────
 function renderBuilderScene() {
   const c = document.getElementById("content");
-  const category = BUILDER_CATEGORIES[builderCategoryIdx];
+  const category = getBuilderSet()[builderCategoryIdx];
   const scenes = category.scenes;
   const scene = scenes[builderSceneIdx];
   if (!scene) return;
@@ -605,21 +613,31 @@ function renderBuilderScene() {
   const totalScenes = scenes.length;
   const isLast = builderSceneIdx === totalScenes - 1;
 
-  const segmentsHtml = scenes.map((s, i) => {
-    let state = "upcoming";
-    if (i === builderSceneIdx) state = "current";
-    else if (i < builderSceneIdx) state = "done";
+  // Az sahnede segmentli çubuk; çok sahnede (>12) tek sürekli yüzde çubuğu
+  let segmentsHtml;
+  if (totalScenes <= 12) {
+    segmentsHtml = scenes.map((s, i) => {
+      let state = "upcoming";
+      if (i === builderSceneIdx) state = "current";
+      else if (i < builderSceneIdx) state = "done";
 
-    const bg = state === "current" ? "#3B6D11" : state === "done" ? "#9aa8b8" : "var(--border)";
-    const labelColor = state === "current" ? "#185FA5" : "var(--text2)";
+      const bg = state === "current" ? "#3B6D11" : state === "done" ? "#9aa8b8" : "var(--border)";
+      const labelColor = state === "current" ? "#185FA5" : "var(--text2)";
 
-    return `
-      <div style="display:flex; flex-direction:column; align-items:center; flex:1; min-width:0;">
-        <div style="width:100%; height:6px; border-radius:4px; background:${bg}; transition:background .3s;"></div>
-        <div style="font-size:8px; color:${labelColor}; margin-top:3px; font-weight:${state === 'current' ? '700' : '500'};">${i + 1}</div>
-      </div>
-    `;
-  }).join("");
+      return `
+        <div style="display:flex; flex-direction:column; align-items:center; flex:1; min-width:0;">
+          <div style="width:100%; height:6px; border-radius:4px; background:${bg}; transition:background .3s;"></div>
+          <div style="font-size:8px; color:${labelColor}; margin-top:3px; font-weight:${state === 'current' ? '700' : '500'};">${i + 1}</div>
+        </div>
+      `;
+    }).join("");
+  } else {
+    const pct = Math.round(((builderSceneIdx + 1) / totalScenes) * 100);
+    segmentsHtml = `
+      <div style="flex:1; height:8px; border-radius:5px; background:var(--border); overflow:hidden;">
+        <div style="width:${pct}%; height:100%; background:#3B6D11; border-radius:5px; transition:width .3s;"></div>
+      </div>`;
+  }
 
   const isSuccess = builderCheckState === "success";
   const isError = builderCheckState === "error";
@@ -756,7 +774,7 @@ function builderRemoveWord(id) {
 
 // ─── CEVABI KONTROL ET ────────────────────────────────────────────
 function builderCheck() {
-  const category = BUILDER_CATEGORIES[builderCategoryIdx];
+  const category = getBuilderSet()[builderCategoryIdx];
   const scene = category.scenes[builderSceneIdx];
 
   const userSentence = builderSelectedWords.map(w => w.text).join(" ").toLowerCase().replace(/[^a-z0-9\s]/g, "").trim();
@@ -774,7 +792,7 @@ function builderCheck() {
 
 // ─── SONRAKİ SAHNE VEYA BİTİŞ ─────────────────────────────────────
 function builderNextScene() {
-  const category = BUILDER_CATEGORIES[builderCategoryIdx];
+  const category = getBuilderSet()[builderCategoryIdx];
   if (builderSceneIdx < category.scenes.length - 1) {
     builderSceneIdx++;
     builderInitScene();
@@ -785,7 +803,7 @@ function builderNextScene() {
 
 // ─── BÖLÜM TAMAMLANDI EKRANI ──────────────────────────────────────
 function builderShowComplete() {
-  const category = BUILDER_CATEGORIES[builderCategoryIdx];
+  const category = getBuilderSet()[builderCategoryIdx];
   const c = document.getElementById("content");
 
   c.innerHTML = `

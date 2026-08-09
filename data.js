@@ -104,6 +104,7 @@ const NAV = {
         ]
       },
       { id: "sim_day2", label: "Sesli Simülasyon", isQuiz: true, quizId: "sim_day2" },
+      { id: "builder_day2", label: "Cümle Kurma Pratiği", isQuiz: true, quizId: "builder_day2" },
     ]
   },
   social: {
@@ -112,6 +113,7 @@ const NAV = {
     { id: "s_selamlasma", label: "Selamlaşma (Greetings & Small Talk)", l3: [] },
     { id: "s_tanitma",    label: "Kendini Tanıtma (Introduction & Networking)", l3: [] },
     { id: "s_ulasim",     label: "Ulaşım & Yemek (Transport & Meals)", l3: [] },
+    { id: "builder_social", label: "Cümle Kurma Pratiği", isQuiz: true, quizId: "builder_social" },
   ]
 }
 };

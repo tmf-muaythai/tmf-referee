@@ -368,7 +368,7 @@ function render() {
   if (resumeBtn) resumeBtn.style.display = 'none';
   if (curSec === "sim_kayit") renderSimulation(); 
   else if (curSec === "sim_day2") renderSimDay2();
-  else if (curSec === "builder_kayit") renderBuilder();
+  else if (curSec.indexOf("builder_") === 0) renderBuilder();
   else if (curSec === "senaryo_kayit") renderQuiz();
   else if (isScenario(curSec)) renderQuiz();
   else renderPhrases();
@@ -380,7 +380,7 @@ function searchPhrases(query) {
     // 🧹 Arama çubuğu boşaltılırsa, o anki aktif bölümü doğru şekilde yeniden çiz
     if (curSec === "sim_kayit") renderSimulation();
     else if (curSec === "sim_day2") renderSimDay2();
-    else if (curSec === "builder_kayit") renderBuilder();
+    else if (curSec.indexOf("builder_") === 0) renderBuilder();
     else if (isScenario(curSec)) renderQuiz();
     else renderPhrases();
     return;
