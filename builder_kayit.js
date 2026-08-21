@@ -495,6 +495,7 @@ const BUILDER_CATEGORIES = [
 // ─── CÜMLE KURMA STATE ──────────────────────────────────────────────
 let builderView = "menu";          // "menu" | "scene"
 let builderActiveSec = null;        // hangi builder bölümü aktif (curSec)
+let builderGroup = null;            // seçili rol grubu (Jury/Referee...) — 2 seviyeli menü
 let builderCategoryIdx = 0;
 let builderSceneIdx = 0;
 let builderCompletedScenes = {};   // { "registration_1": true, ... }
@@ -503,6 +504,63 @@ let builderCompletedScenes = {};   // { "registration_1": true, ... }
 let builderAvailableWords = []; // Aşağıda bekleyen kelimeler
 let builderSelectedWords = [];  // Yukarıya dizilen kelimeler
 let builderCheckState = "idle"; // "idle" (bekliyor) | "error" (yanlış) | "success" (doğru)
+let builderCorrectPrefix = 0;   // yanlışta baştan kaç kelime doğru (yeşil gösterilir)
+
+// Dil kısayolu (yeni ipucu metinleri için)
+function bT(tr, de, ar) {
+  if (typeof APP_LANG === 'undefined') return tr;
+  if (APP_LANG === 'de') return de;
+  if (APP_LANG === 'ar') return (ar != null ? ar : tr);
+  return tr;
+}
+function builderNorm(s) { return String(s).toLowerCase().replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim(); }
+
+// Hedef cümleyi, kutucuklardan doğru SIRAYLA kur (çeldiriciler elenir)
+function builderComputeOrder(scene) {
+  let cur = builderNorm(scene.target);
+  let pool = scene.words.map(w => ({ t: w, n: builderNorm(w) }));
+  const order = [];
+  let guard = 0;
+  while (cur.length && guard++ < 100) {
+    pool.sort((a, b) => b.n.length - a.n.length);
+    const m = pool.find(x => x.n.length && (cur === x.n || cur.startsWith(x.n + ' ')));
+    if (!m) break;
+    order.push(m.t);
+    cur = cur.slice(m.n.length).trim();
+    pool = pool.filter(x => x !== m);
+  }
+  return order; // doğru kutucuk metinleri, sırayla
+}
+
+// Baştan kaç seçili kutucuk doğru sırada?
+function builderPrefixCount(order) {
+  let n = 0;
+  for (let i = 0; i < builderSelectedWords.length; i++) {
+    if (i < order.length && builderNorm(builderSelectedWords[i].text) === builderNorm(order[i])) n++;
+    else break;
+  }
+  return n;
+}
+
+// ─── İPUCU: yanlış kuyruğu temizle, sıradaki doğru kelimeyi yerleştir ──
+function builderHint() {
+  const scene = getBuilderSet()[builderCategoryIdx].scenes[builderSceneIdx];
+  const order = builderComputeOrder(scene);
+  const prefix = builderPrefixCount(order);
+  // baştan doğru olanları koru, gerisini havuza geri at
+  while (builderSelectedWords.length > prefix) {
+    builderAvailableWords.push(builderSelectedWords.pop());
+  }
+  // sıradaki doğru kelimeyi ekle
+  if (prefix < order.length) {
+    const nextText = builderNorm(order[prefix]);
+    const idx = builderAvailableWords.findIndex(w => builderNorm(w.text) === nextText);
+    if (idx >= 0) builderSelectedWords.push(builderAvailableWords.splice(idx, 1)[0]);
+  }
+  builderCheckState = "idle";
+  builderCorrectPrefix = 0;
+  renderBuilder();
+}
 
 // ─── ANA GİRİŞ NOKTASI ────────────────────────────────────────────
 function renderBuilder() {
@@ -510,6 +568,7 @@ function renderBuilder() {
   if (typeof curSec !== "undefined" && curSec !== builderActiveSec) {
     builderActiveSec = curSec;
     builderView = "menu";
+    builderGroup = null;
     builderCategoryIdx = 0;
     builderSceneIdx = 0;
   }
@@ -520,68 +579,82 @@ function renderBuilder() {
   }
 }
 
-// ─── 3x3 GRID MENÜ ────────────────────────────────────────────────
+// ─── Menü kutucuğu (tek tasarım, hem grup hem kategori için) ──────
+const BUILDER_GROUP_TR = { Jury:'Jüri', Equipment:'Ekipman', Referee:'Orta Hakem', Judge:'Yan Hakem', Timekeeper:'Zaman Hakemi', Announcer:'Anons Hakemi' };
+const BUILDER_GROUP_AR = { Jury:'لجنة التحكيم', Equipment:'المعدّات', Referee:'حكم الوسط', Judge:'الحكم الجانبي', Timekeeper:'حكم التوقيت', Announcer:'حكم الإعلان' };
+function builderGroupSub(g){ if(typeof APP_LANG!=='undefined' && APP_LANG==='ar' && BUILDER_GROUP_AR[g]) return BUILDER_GROUP_AR[g]; return BUILDER_GROUP_TR[g]||''; }
+function builderTile(o) {
+  const on = !o.disabled;
+  return `
+    <button onclick="${on ? o.onclick : ''}" ${on ? '' : 'disabled'}
+      style="position:relative; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; min-height:84px; padding:10px 6px; border-radius:12px;
+        border:1px solid ${o.allDone ? '#3B6D11' : 'var(--border)'};
+        background:${on ? (o.allDone ? '#EAF3DE' : 'var(--card-bg)') : 'var(--l3-bg)'};
+        color:${on ? 'var(--text)' : 'var(--text2)'}; cursor:${on ? 'pointer' : 'default'}; opacity:${on ? '1' : '0.55'}; text-align:center; transition:all .15s;">
+      ${o.allDone ? `<span style="position:absolute; top:6px; right:8px; color:var(--success);">${(typeof icon==='function')?icon('check',{size:'13px'}):''}</span>` : ''}
+      <span style="font-size:11.5px; font-weight:700; line-height:1.3;">${o.label}</span>
+      ${o.sub ? `<span style="font-size:9.5px; color:var(--text2); line-height:1.2;">${o.sub}</span>` : ''}
+      ${o.badge ? `<span style="font-size:9px; color:#185FA5; font-weight:600; margin-top:2px;">${o.badge}</span>` : ''}
+    </button>`;
+}
+
+// ─── MENÜ (2 seviyeli: roller → kategoriler) ──────────────────────
 function renderBuilderMenu() {
   const c = document.getElementById("content");
-
-  c.innerHTML = `
+  const set = getBuilderSet();
+  const hasGroups = set.some(cat => cat.group);
+  const head = `
     <div style="margin-bottom:14px;">
-      <div style="font-size:13px; font-weight:700; color:#185FA5; margin-bottom:2px;">
-        ${(typeof icon==='function')?icon('puzzle2'):''} ${t('bTitle')}
-      </div>
-      <div style="font-size:11px; color:var(--text2);">
-        ${t('bSubtitle')}
-      </div>
-    </div>
+      <div style="font-size:13px; font-weight:700; color:#185FA5; margin-bottom:2px;">${(typeof icon==='function')?icon('puzzle2'):''} ${t('bTitle')}</div>
+      <div style="font-size:11px; color:var(--text2);">${t('bSubtitle')}</div>
+    </div>`;
+  const gOpen = `<div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px;">`;
 
-    <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px;">
-      ${getBuilderSet().map((cat, idx) => {
-        const hasContent = cat.scenes.length > 0;
-        const total = cat.scenes.length;
-        const completed = cat.scenes.filter(s => builderCompletedScenes[`${cat.id}_${s.id}`]).length;
-        const allDone = hasContent && completed === total;
+  // 1. seviye: rol grupları
+  if (hasGroups && !builderGroup) {
+    const order = [], map = {};
+    set.forEach((cat, idx) => { const g = cat.group || '—'; if (!map[g]) { map[g] = []; order.push(g); } map[g].push({ cat, idx }); });
+    const tiles = order.map(g => {
+      const cats = map[g];
+      const total = cats.reduce((a, x) => a + x.cat.scenes.length, 0);
+      const completed = cats.reduce((a, x) => a + x.cat.scenes.filter(s => builderCompletedScenes[`${x.cat.id}_${s.id}`]).length, 0);
+      return builderTile({ onclick: `builderOpenGroup('${g}')`, disabled: total === 0, allDone: total > 0 && completed === total, label: g, sub: builderGroupSub(g), badge: `${completed}/${total}` });
+    }).join("");
+    c.innerHTML = head + gOpen + tiles + `</div>`;
+    return;
+  }
 
-        return `
-        <button
-          onclick="${hasContent ? `builderOpenCategory(${idx})` : ""}"
-          ${hasContent ? "" : "disabled"}
-          style="
-            position:relative;
-            display:flex; flex-direction:column; align-items:center; justify-content:center;
-            gap:4px;
-            min-height:84px;
-            padding:10px 6px;
-            border-radius:12px;
-            border:1px solid ${allDone ? "#3B6D11" : "var(--border)"};
-            background:${hasContent ? (allDone ? "#EAF3DE" : "var(--card-bg)") : "var(--l3-bg)"};
-            color:${hasContent ? "var(--text)" : "var(--text2)"};
-            cursor:${hasContent ? "pointer" : "default"};
-            opacity:${hasContent ? "1" : "0.55"};
-            text-align:center;
-            transition:all .15s;
-          ">
-          ${allDone ? `<span style="position:absolute; top:6px; right:8px; color:var(--success);">${(typeof icon==='function')?icon('check',{size:'13px'}):''}</span>` : ""}
-          <span style="font-size:11.5px; font-weight:700; line-height:1.3;">${cat.label}</span>
-          <span style="font-size:9.5px; color:var(--text2); line-height:1.2;">${(typeof builderLabelLoc==='function')?builderLabelLoc(cat.id, cat.labelTr):cat.labelTr}</span>
-          ${hasContent
-            ? `<span style="font-size:9px; color:#185FA5; font-weight:600; margin-top:2px;">${completed}/${total}</span>`
-            : `<span style="font-size:9px; color:var(--text2); margin-top:2px;">Yakında</span>`
-          }
-        </button>
-      `}).join("")}
-    </div>
-  `;
+  // 2. seviye: kategoriler (düz veya seçili grup içinde)
+  let cats = set.map((cat, idx) => ({ cat, idx }));
+  if (hasGroups && builderGroup) cats = cats.filter(x => x.cat.group === builderGroup);
+  const back = (hasGroups && builderGroup)
+    ? `<button onclick="builderBackToGroups()" style="background:none; border:none; font-size:11px; color:#185FA5; cursor:pointer; font-weight:600; padding:0; margin-bottom:10px;">← ${builderGroup}</button>`
+    : '';
+  const tiles = cats.map(({ cat, idx }) => {
+    const on = cat.scenes.length > 0, total = cat.scenes.length;
+    const completed = cat.scenes.filter(s => builderCompletedScenes[`${cat.id}_${s.id}`]).length;
+    return builderTile({ onclick: `builderOpenCategory(${idx})`, disabled: !on, allDone: on && completed === total,
+      label: cat.label, sub: (typeof builderLabelLoc==='function') ? builderLabelLoc(cat.id, cat.labelTr) : cat.labelTr,
+      badge: on ? `${completed}/${total}` : (typeof APP_LANG!=='undefined' && APP_LANG==='ar' ? 'قريباً' : (typeof APP_LANG!=='undefined' && APP_LANG==='de' ? 'Bald' : 'Yakında')) });
+  }).join("");
+  c.innerHTML = head + back + gOpen + tiles + `</div>`;
 }
+
+// ─── GRUP AÇ / GRUPLARA DÖN ───────────────────────────────────────
+function builderOpenGroup(g) { builderGroup = g; renderBuilder(); }
+function builderBackToGroups() { builderGroup = null; renderBuilder(); }
 
 // ─── KATEGORİ AÇ VE SAHNEYİ HAZIRLA ───────────────────────────────
 function builderOpenCategory(catIdx) {
   builderCategoryIdx = catIdx;
+  const cat = getBuilderSet()[catIdx];
+  if (cat && cat.group) builderGroup = cat.group;   // geri dönüşte grup alt menüsüne dön
   builderSceneIdx = 0;
   builderView = "scene";
   builderInitScene();
 }
 
-// ─── MENÜYE GERİ DÖN ──────────────────────────────────────────────
+// ─── MENÜYE GERİ DÖN (sahneden kategori menüsüne) ─────────────────
 function builderBackToMenu() {
   builderView = "menu";
   renderBuilder();
@@ -668,7 +741,7 @@ function renderBuilderScene() {
       <!-- Senaryo Bildirimi (Prompt) -->
       <div style="padding:16px 20px; border-bottom:1px solid var(--border); background:var(--l3-bg); display:flex; gap:12px; align-items:center;">
 
-      <div style="width:40px; height:40px; border-radius:50%; background:var(--surface-2); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; color:var(--text2); flex-shrink:0; letter-spacing:.5px;">EN</div>
+      <div style="width:40px; height:40px; border-radius:50%; background:var(--surface-2); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; color:var(--text2); flex-shrink:0; letter-spacing:.5px;">${scene.promptLang === 'tr' ? 'TR' : 'EN'}</div>
 
         <!-- Yazı -->
         <div style="font-size:14px; color:var(--text); line-height:1.5; font-weight:500;">
@@ -687,14 +760,17 @@ function renderBuilderScene() {
           ${isError ? 'animation: builderShake 0.4s;' : ''}
         ">
           ${builderSelectedWords.length === 0 && !isSuccess && !isError ? `<span style="color:var(--text2); font-size:13px; font-style:italic; margin:auto;">${t('bPlaceholder')}</span>` : ""}
-          ${builderSelectedWords.map(w => `
+          ${builderSelectedWords.map((w, i) => {
+            let clr = '#185FA5';
+            if (isError) clr = (i < builderCorrectPrefix) ? '#3B6D11' : '#A32D2D';
+            return `
             <button onclick="builderRemoveWord(${w.id})" ${isSuccess ? "disabled" : ""} style="
               padding:8px 14px; font-size:14px; font-weight:600;
-              background:#fff; color:#185FA5; border:1px solid #185FA5;
+              background:#fff; color:${clr}; border:1px solid ${clr};
               border-radius:8px; cursor:${isSuccess ? 'default' : 'pointer'};
-              box-shadow:0 2px 0 #185FA5; transition:transform 0.1s;
-            ">${w.text}</button>
-          `).join("")}
+              box-shadow:0 2px 0 ${clr}; transition:transform 0.1s;
+            ">${w.text}</button>`;
+          }).join("")}
         </div>
 
         <!-- Aşağıdaki Kelime Havuzu -->
@@ -711,12 +787,21 @@ function renderBuilderScene() {
           </div>
         ` : ""}
 
-        <!-- Uyarı Mesajı (Yanlışsa) -->
-        ${isError ? `<div style="text-align:center; color:#A32D2D; font-size:12px; font-weight:600; margin-bottom:16px;">${t('bWrong')}</div>` : ""}
+        <!-- Uyarı Mesajı (Yanlışsa) — yeşil kısım doğru, ipucu ver -->
+        ${isError ? `<div style="text-align:center; font-size:12px; font-weight:600; margin-bottom:16px; color:${builderCorrectPrefix > 0 ? '#3B6D11' : '#A32D2D'};">
+          ${builderCorrectPrefix > 0
+            ? bT(`İlk ${builderCorrectPrefix} kelime doğru — kırmızıdan devam et 👍`, `Die ersten ${builderCorrectPrefix} Wörter stimmen — mach beim roten Teil weiter 👍`, `أول ${builderCorrectPrefix} كلمة صحيحة — تابِع من الجزء الأحمر 👍`)
+            : bT('Henüz doğru değil — “İpucu” ile ilk kelimeyi al.', 'Noch nicht richtig — hol dir mit „Tipp“ das erste Wort.', 'ليست صحيحة بعد — استخدم «تلميح» للحصول على أول كلمة.')}
+        </div>` : ""}
 
         <!-- Butonlar -->
-        <div style="text-align:center;">
+        <div style="text-align:center; display:flex; gap:8px; justify-content:center; flex-wrap:wrap;">
           ${!isSuccess ? `
+            <button onclick="builderHint()" title="${bT('İpucu','Tipp','تلميح')}" style="
+              padding:12px 20px; font-size:14px; font-weight:600; display:inline-flex; align-items:center; gap:6px;
+              background:var(--gold-050); color:var(--gold-strong); border:1px solid var(--gold);
+              border-radius:24px; cursor:pointer;
+            ">${(typeof icon==='function')?icon('bulb',{size:'0.95em'}):''} ${bT('İpucu','Tipp','تلميح')}</button>
             <button onclick="builderCheck()" ${builderSelectedWords.length === 0 ? "disabled" : ""} style="
               padding:12px 32px; font-size:14px; font-weight:600;
               background:${builderSelectedWords.length === 0 ? 'var(--border)' : '#185FA5'};
@@ -785,6 +870,7 @@ function builderCheck() {
     builderCompletedScenes[`${category.id}_${scene.id}`] = true;
   } else {
     builderCheckState = "error";
+    builderCorrectPrefix = builderPrefixCount(builderComputeOrder(scene));
   }
 
   renderBuilder();

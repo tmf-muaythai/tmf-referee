@@ -1,4 +1,4 @@
-const CACHE = "tmf-v86";
+const CACHE = "tmf-v94";
 const FILES = [
   "/tmf-referee/",
   "/tmf-referee/index.html",
@@ -6,6 +6,7 @@ const FILES = [
   "/tmf-referee/data.js",
   "/tmf-referee/icons.js",
   "/tmf-referee/i18n.js",
+  "/tmf-referee/i18n_ar.js",
   "/tmf-referee/qrcode.js",
   "/tmf-referee/app.js",
   "/tmf-referee/assets/fonts/inter-latin-400-normal.woff2",

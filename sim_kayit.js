@@ -1526,10 +1526,10 @@ function renderSimMenu() {
   c.innerHTML = `
     <div style="margin-bottom:14px;">
       <div style="font-size:13px; font-weight:700; color:#185FA5; margin-bottom:2px;">
-        🎙️ Sesli Simülasyon
+        🎙️ ${simUI('simHeader')}
       </div>
       <div style="font-size:11px; color:var(--text2);">
-        Pratik yapmak istediğin bölümü seç.
+        ${simUI('simPickSection')}
       </div>
     </div>
 
@@ -1561,10 +1561,10 @@ function renderSimMenu() {
           ">
           ${allDone ? `<span style="position:absolute; top:6px; right:8px; font-size:11px;">✓</span>` : ""}
           <span style="font-size:11.5px; font-weight:700; line-height:1.3;">${cat.label}</span>
-          <span style="font-size:9.5px; color:var(--text2); line-height:1.2;">${cat.labelTr}</span>
+          <span style="font-size:9.5px; color:var(--text2); line-height:1.2;">${simLabelLoc(cat.labelTr)}</span>
           ${hasContent
             ? `<span style="font-size:9px; color:#185FA5; font-weight:600; margin-top:2px;">${completed}/${total}</span>`
-            : `<span style="font-size:9px; color:var(--text2); margin-top:2px;">Yakında</span>`
+            : `<span style="font-size:9px; color:var(--text2); margin-top:2px;">${simUI('simSoon')}</span>`
           }
         </button>
       `}).join("")}
