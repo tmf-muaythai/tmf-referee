@@ -270,7 +270,11 @@ body.dark .home-hero-sub{color:rgba(255,255,255,.85)}
 .home-card-st{font-size:11px;color:var(--text2);margin-top:2px}
 .home-card-go{margin-left:auto;color:var(--muted);font-size:20px;line-height:1}
 .home-rule{margin:16px 12px 0;padding:14px 16px;border-radius:14px;background:var(--card-bg);border:1px solid var(--border);border-left:4px solid var(--gold);box-shadow:var(--shadow-sm)}
-.home-rule-tag{font-size:9px;font-weight:800;color:var(--gold-strong);letter-spacing:.6px;margin-bottom:7px}
+.home-rule-tag{font-size:9px;font-weight:800;color:var(--gold-strong);letter-spacing:.6px;margin-bottom:7px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.home-rule-nav{display:inline-flex;align-items:center;gap:5px;flex:0 0 auto}
+.home-rule-nav button{width:22px;height:22px;padding:0;line-height:1;display:inline-flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;border-radius:50%;border:1px solid var(--border);background:var(--card-bg);color:var(--gold-strong);cursor:pointer;transition:background .15s,border-color .15s}
+.home-rule-nav button:hover{background:var(--gold);border-color:var(--gold);color:#fff}
+.home-rule-count{font-size:9px;font-weight:700;color:var(--text2);min-width:36px;text-align:center;letter-spacing:.3px}
 .home-rule-en{font-size:13px;font-weight:600;line-height:1.5;margin-bottom:5px;color:var(--text)}
 .home-rule-tr{font-size:12px;font-style:italic;color:var(--text2);line-height:1.5}
 body.dark .home-card-go{color:var(--muted)}

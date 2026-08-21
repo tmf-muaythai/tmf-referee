@@ -1,16 +1,10 @@
 // ─── ANA EKRAN (HOME) ────────────────────────────────────────────
-const IFMA_RULES = [
-  {
-    en: "The referee must clearly call \"YOOT\" to stop the action and \"CHOK\" to resume the fight.",
-    tr: "Hakem, aksiyonu durdurmak için net bir şekilde \"YOOT\", dövüşü devam ettirmek için \"CHOK\" komutunu vermelidir."
-  },
-];
-
-let homeRuleIdx = Math.floor(Math.random() * IFMA_RULES.length);
+// IFMA_RULES artık ifma_rules.js dosyasında tanımlı (76 kural · 6 dil)
+let homeRuleIdx = Math.floor(Math.random() * ((typeof IFMA_RULES !== 'undefined' && IFMA_RULES.length) ? IFMA_RULES.length : 1));
 
 function renderHome() {
   const c = document.getElementById("content");
-  const rule = IFMA_RULES[homeRuleIdx] || IFMA_RULES[0];
+  const rule = (typeof IFMA_RULES!=='undefined' && IFMA_RULES.length) ? (IFMA_RULES[homeRuleIdx] || IFMA_RULES[0]) : {en:'',tr:''};
 
   c.innerHTML = `
     <!-- HERO -->
@@ -32,11 +26,26 @@ function renderHome() {
 
     <!-- IFMA KURAL KARTI -->
     <div class="home-rule">
-      <div class="home-rule-tag">${(typeof icon==='function')?icon('pin',{size:'11px'}):''} IFMA RULES AND REGULATIONS</div>
+      <div class="home-rule-tag">
+        <span>${(typeof icon==='function')?icon('pin',{size:'11px'}):''} IFMA RULES AND REGULATIONS</span>
+        <span class="home-rule-nav">
+          <button type="button" onclick="homeRuleNav(-1)" aria-label="Önceki kural">‹</button>
+          <span class="home-rule-count">${(homeRuleIdx+1)}/${(typeof IFMA_RULES!=='undefined'?IFMA_RULES.length:1)}</span>
+          <button type="button" onclick="homeRuleNav(1)" aria-label="Sonraki kural">›</button>
+        </span>
+      </div>
       <div class="home-rule-en">${rule.en}</div>
-      <div class="home-rule-tr">${(typeof t==='function')?t('ruleTr'):rule.tr}</div>
+      <div class="home-rule-tr">${(typeof APP_LANG!=='undefined' && rule[APP_LANG]) ? rule[APP_LANG] : (rule.tr||rule.en)}</div>
     </div>
   `;
+}
+
+// Kurallar arasında ileri/geri gezinme (rastgele değil, sıralı)
+function homeRuleNav(dir){
+  if(typeof IFMA_RULES==='undefined' || !IFMA_RULES.length) return;
+  const n = IFMA_RULES.length;
+  homeRuleIdx = ((homeRuleIdx + dir) % n + n) % n;
+  renderHome();
 }
 
 function renderHomeButton(dayId, colorClass, iconName, title, subtitle) {

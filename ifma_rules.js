@@ -1,0 +1,688 @@
+// ═══ IFMA KURALLARI — ana sayfa kural kartı için (6 dil) ═══
+// Otomatik üretildi; kaynak: IFMA Uluslararası Müsabaka Kuralları ve Yönetmelikleri (Çeviri: Afra UZ)
+var IFMA_RULES = [
+{
+"cat": "KOMUT",
+"en": "The referee clearly calls \"YOOT\" to stop the action and \"CHOK\" to resume the fight.",
+"tr": "Hakem, aksiyonu durdurmak için net \"YOOT\", dövüşü devam ettirmek için \"CHOK\" komutunu verir.",
+"de": "Der Kampfrichter ruft deutlich \"YOOT\", um die Aktion zu stoppen, und \"CHOK\", um den Kampf fortzusetzen.",
+"ar": "يقول الحكم بوضوح \"YOOT\" لإيقاف الحركة و\"CHOK\" لاستئناف النزال.",
+"fr": "L'arbitre annonce clairement « YOOT » pour arrêter l'action et « CHOK » pour reprendre le combat.",
+"ko": "주심은 동작을 멈추기 위해 \"YOOT\", 경기를 재개하기 위해 \"CHOK\"을 분명히 외칩니다."
+},
+{
+"cat": "KOMUT",
+"en": "When an athlete is knocked down, the round-end gong is not sounded while the referee counts; it sounds only after the referee calls \"CHOK\".",
+"tr": "Bir sporcu yere serildiğinde hakem sayarken raund biterse gong çalınmaz; gong ancak hakem \"CHOK\" dedikten sonra çalınır.",
+"de": "Wird ein Athlet zu Boden geschickt, ertönt der Rundenschluss-Gong nicht, während der Kampfrichter zählt; er ertönt erst, nachdem der Kampfrichter \"CHOK\" gerufen hat.",
+"ar": "عندما يسقط لاعب أرضًا، لا يُقرع جرس نهاية الجولة أثناء عدّ الحكم؛ بل يُقرع فقط بعد أن يقول الحكم \"CHOK\".",
+"fr": "Lorsqu'un athlète est mis au tapis, le gong de fin de round ne retentit pas pendant que l'arbitre compte ; il ne sonne qu'après que l'arbitre a annoncé « CHOK ».",
+"ko": "선수가 다운되면 주심이 카운트하는 동안 라운드 종료 공이 울리지 않습니다. 공은 주심이 \"CHOK\"을 외친 뒤에만 울립니다."
+},
+{
+"cat": "KOMUT",
+"en": "If an athlete falls out of the ring, the referee calls \"YOOT\" and counts; the athlete must return unaided within the Thai count \"Yee-Sib\" (20).",
+"tr": "Sporcu ring dışına düşerse hakem \"YOOT\" der ve sayar; sporcu Tayca \"Yee-Sib\" (20) sayımı içinde yardımsız ringe dönmelidir.",
+"de": "Fällt ein Athlet aus dem Ring, ruft der Kampfrichter \"YOOT\" und zählt; der Athlet muss ohne Hilfe innerhalb des thailändischen Zählens \"Yee-Sib\" (20) zurückkehren.",
+"ar": "إذا سقط اللاعب خارج الحلبة، يقول الحكم \"YOOT\" ويبدأ العدّ؛ وعلى اللاعب العودة دون مساعدة قبل انتهاء العدّ التايلاندي \"يي-سيب\" (20).",
+"fr": "Si un athlète tombe hors du ring, l'arbitre annonce « YOOT » et compte ; l'athlète doit revenir sans aide avant le compte thaï « Yee-Sib » (20).",
+"ko": "선수가 링 밖으로 떨어지면 주심은 \"YOOT\"을 외치고 카운트합니다. 선수는 태국어 카운트 \"이십(Yee-Sib, 20)\" 안에 도움 없이 링으로 돌아와야 합니다."
+},
+{
+"cat": "KOMUT",
+"en": "The salute (Wai) is performed only before the first round and after the result is announced; saluting between rounds is not allowed.",
+"tr": "Selamlaşma (Wai) yalnızca ilk raunttan önce ve sonuç ilan edildikten sonra yapılır; raundlar arası selamlaşma yasaktır.",
+"de": "Der Gruß (Wai) wird nur vor der ersten Runde und nach der Ergebnisverkündung ausgeführt; ein Gruß zwischen den Runden ist nicht erlaubt.",
+"ar": "تُؤدّى التحية (الواي) فقط قبل الجولة الأولى وبعد إعلان النتيجة؛ ولا يُسمح بالتحية بين الجولات.",
+"fr": "Le salut (Wai) ne se fait qu'avant le premier round et après l'annonce du résultat ; saluer entre les rounds n'est pas autorisé.",
+"ko": "인사(와이)는 1라운드 전과 결과 발표 후에만 합니다. 라운드 사이의 인사는 허용되지 않습니다."
+},
+{
+"cat": "KOMUT",
+"en": "Before and after the decision, athletes show respect to their opponent, corner and officials by shaking hands or performing the \"Wai\".",
+"tr": "Karar açıklanmadan önce ve sonra sporcular el sıkışarak veya \"Wai\" yaparak rakibine, köşesine ve hakemlere saygı gösterir.",
+"de": "Vor und nach der Entscheidung erweisen die Athleten ihrem Gegner, der Ecke und den Offiziellen Respekt, indem sie die Hände schütteln oder den \"Wai\" ausführen.",
+"ar": "قبل إعلان القرار وبعده، يُظهر اللاعبون الاحترام لخصمهم وركنهم والحكّام عبر المصافحة أو أداء \"الواي\".",
+"fr": "Avant et après la décision, les athlètes témoignent leur respect à l'adversaire, au coin et aux officiels en se serrant la main ou en effectuant le « Wai ».",
+"ko": "판정 전후로 선수들은 악수를 하거나 \"와이\"를 하여 상대, 코너, 심판에게 존중을 표합니다."
+},
+{
+"cat": "PUANLAMA",
+"en": "Ten-Point Must System: the winner of each round is awarded ten (10) points; no fractional points are given.",
+"tr": "Zorunlu On Puan Sistemi: Her raundun galibine on (10) puan verilir; küsuratlı puan verilmez.",
+"de": "Zwingendes Zehn-Punkte-System: Der Sieger jeder Runde erhält zehn (10) Punkte; es werden keine Bruchteilpunkte vergeben.",
+"ar": "نظام النقاط العشر الإلزامي: يُمنح الفائز بكل جولة عشر (10) نقاط؛ ولا تُمنح نقاط كسرية.",
+"fr": "Système obligatoire des dix points : le vainqueur de chaque round reçoit dix (10) points ; aucun point fractionnaire n'est attribué.",
+"ko": "필수 10점제: 각 라운드 승자에게 10점을 주며, 소수점 점수는 주지 않습니다."
+},
+{
+"cat": "PUANLAMA",
+"en": "The round winner takes 10-9 for a small difference, 10-8 for a clear difference, and 10-7 for total superiority.",
+"tr": "Raundu küçük farkla kazanan 10-9, açık farkla 10-8, tam üstünlükle 10-7 alır.",
+"de": "Der Rundensieger erhält 10-9 bei geringem Unterschied, 10-8 bei deutlichem Unterschied und 10-7 bei völliger Überlegenheit.",
+"ar": "يحصل الفائز بالجولة على 10-9 عند فارق بسيط، و10-8 عند فارق واضح، و10-7 عند تفوّق تام.",
+"fr": "Le vainqueur du round obtient 10-9 pour un faible écart, 10-8 pour un écart net et 10-7 pour une supériorité totale.",
+"ko": "라운드 승자는 근소한 차이면 10-9, 명확한 차이면 10-8, 완전한 우세면 10-7을 받습니다."
+},
+{
+"cat": "PUANLAMA",
+"en": "The scoring gap is set by scoring-strike difference: 7 or fewer = 10-9, 8-14 = 10-8, 15-21 = 10-7.",
+"tr": "Puan farkı, geçerli vuruş sayısı farkına göre belirlenir: 7 veya daha az = 10-9, 8-14 = 10-8, 15-21 = 10-7.",
+"de": "Der Punkteabstand richtet sich nach der Differenz der Trefferzahl: 7 oder weniger = 10-9, 8-14 = 10-8, 15-21 = 10-7.",
+"ar": "يُحدَّد فارق النقاط حسب فارق عدد الضربات المُحتسَبة: 7 أو أقل = 10-9، و8-14 = 10-8، و15-21 = 10-7.",
+"fr": "L'écart de points dépend de la différence de coups marquants : 7 ou moins = 10-9, 8-14 = 10-8, 15-21 = 10-7.",
+"ko": "점수 차는 유효 타격 수 차이로 정해집니다: 7 이하 = 10-9, 8~14 = 10-8, 15~21 = 10-7."
+},
+{
+"cat": "PUANLAMA",
+"en": "Every part of the body is a valid target except the head guard area and the neck vertebrae (C1-C7, the nape).",
+"tr": "Kask ve boyun omurları (C1-C7, ense) hariç vücudun her bölgesi geçerli puan hedefidir.",
+"de": "Jeder Körperteil ist ein gültiges Ziel, außer dem Kopfschutzbereich und den Halswirbeln (C1-C7, dem Nacken).",
+"ar": "كل جزء من الجسم هدف صحيح باستثناء منطقة واقي الرأس وفقرات الرقبة (C1-C7، مؤخّرة العنق).",
+"fr": "Toute partie du corps est une cible valable, sauf la zone du casque et les vertèbres cervicales (C1-C7, la nuque).",
+"ko": "헤드기어 부위와 경추(C1-C7, 뒷목)를 제외한 신체의 모든 부위가 유효 타격 목표입니다."
+},
+{
+"cat": "PUANLAMA",
+"en": "Deliberate strikes to the groin or the neck vertebrae (nape) are fouls and score no points.",
+"tr": "Kasık ve boyun omurgasına (enseye) kasıtlı vuruşlar faul sayılır ve puan verilmez.",
+"de": "Absichtliche Schläge in die Leiste oder auf die Halswirbel (den Nacken) sind Fouls und ergeben keine Punkte.",
+"ar": "الضربات المتعمَّدة إلى منطقة العانة أو فقرات الرقبة (مؤخّرة العنق) تُعدّ أخطاءً ولا تُحتسب لها نقاط.",
+"fr": "Les coups délibérés à l'aine ou aux vertèbres cervicales (nuque) sont des fautes et ne rapportent aucun point.",
+"ko": "사타구니나 경추(뒷목)에 대한 고의적 타격은 반칙이며 점수가 없습니다."
+},
+{
+"cat": "PUANLAMA",
+"en": "Strikes made without Muaythai skill, blocked strikes, or weak strikes lacking power do not score.",
+"tr": "Muaythai becerisi olmadan yapılan, bloke edilen veya güçten yoksun (zayıf) vuruşlar puan almaz.",
+"de": "Schläge ohne Muaythai-Können, geblockte Schläge oder kraftlose (schwache) Schläge zählen nicht.",
+"ar": "الضربات التي تُنفَّذ دون مهارة مواي تاي، أو المصدودة، أو الضعيفة التي تفتقر إلى القوة، لا تُحتسب.",
+"fr": "Les coups portés sans technique de Muaythai, bloqués ou faibles (sans puissance) ne comptent pas.",
+"ko": "무에타이 기술 없이 낸 타격, 막힌 타격, 힘이 없는 약한 타격은 점수가 되지 않습니다."
+},
+{
+"cat": "PUANLAMA",
+"en": "When judges agree with the referee's Warning, one (1) point is deducted from the penalised athlete's total.",
+"tr": "Yan hakemler hakemin ihtarına (Warning) katılırsa, ihtar alan sporcunun toplam puanından bir (1) puan düşülür.",
+"de": "Stimmen die Punktrichter der Verwarnung des Kampfrichters zu, wird dem verwarnten Athleten ein (1) Punkt vom Gesamtergebnis abgezogen.",
+"ar": "عندما يوافق الحكّام الجانبيون على إنذار الحكم، تُخصم نقطة (1) واحدة من مجموع اللاعب المُعاقَب.",
+"fr": "Lorsque les juges approuvent l'avertissement de l'arbitre, un (1) point est retiré du total de l'athlète pénalisé.",
+"ko": "부심이 주심의 경고(Warning)에 동의하면, 경고받은 선수의 총점에서 1점이 감점됩니다."
+},
+{
+"cat": "SAYMA LİMİTİ",
+"en": "Compulsory Count Limit (U24 / Elite / 35+): the referee ends the bout at 3 counts in the same round or 4 counts over the whole bout.",
+"tr": "Zorunlu Sayma Limiti (U24 / Elite / 35+): Hakem, aynı raundda 3 veya maç boyunca 4 sayıma ulaşılınca maçı bitirir.",
+"de": "Pflicht-Zähllimit (U24 / Elite / 35+): Der Kampfrichter beendet den Kampf bei 3 Zählungen in derselben Runde oder 4 Zählungen im gesamten Kampf.",
+"ar": "حدّ العدّ الإلزامي (U24 / النخبة / 35+): يُنهي الحكم النزال عند 3 عدّات في الجولة نفسها أو 4 عدّات خلال النزال كله.",
+"fr": "Limite de comptes obligatoire (U24 / Élite / 35+) : l'arbitre arrête le combat à 3 comptes dans le même round ou 4 comptes sur l'ensemble du combat.",
+"ko": "필수 카운트 제한(U24 / 엘리트 / 35+): 같은 라운드에서 3회 또는 경기 전체에서 4회 카운트에 이르면 주심이 경기를 종료합니다."
+},
+{
+"cat": "SAYMA LİMİTİ",
+"en": "Compulsory Count Limit (U18 / Veterans 40+ / 45+): the referee ends the bout at 2 counts in the same round or 3 counts over the whole bout.",
+"tr": "Zorunlu Sayma Limiti (U18 / Veteranlar 40+ / 45+): Hakem, aynı raundda 2 veya maç boyunca 3 sayıma ulaşılınca maçı bitirir.",
+"de": "Pflicht-Zähllimit (U18 / Veteranen 40+ / 45+): Der Kampfrichter beendet den Kampf bei 2 Zählungen in derselben Runde oder 3 Zählungen im gesamten Kampf.",
+"ar": "حدّ العدّ الإلزامي (U18 / قدامى 40+ / 45+): يُنهي الحكم النزال عند عدّتين في الجولة نفسها أو 3 عدّات خلال النزال كله.",
+"fr": "Limite de comptes obligatoire (U18 / Vétérans 40+ / 45+) : l'arbitre arrête le combat à 2 comptes dans le même round ou 3 comptes sur l'ensemble du combat.",
+"ko": "필수 카운트 제한(U18 / 베테랑 40+ / 45+): 같은 라운드에서 2회 또는 경기 전체에서 3회 카운트에 이르면 주심이 경기를 종료합니다."
+},
+{
+"cat": "SAYMA LİMİTİ",
+"en": "Compulsory Count Limit (U8 / U10 / U12 / U14 / U16): the referee ends the bout at 2 counts over the whole bout.",
+"tr": "Zorunlu Sayma Limiti (U8 / U10 / U12 / U14 / U16): Hakem, maç boyunca toplam 2 sayıma ulaşılınca maçı bitirir.",
+"de": "Pflicht-Zähllimit (U8 / U10 / U12 / U14 / U16): Der Kampfrichter beendet den Kampf bei insgesamt 2 Zählungen im gesamten Kampf.",
+"ar": "حدّ العدّ الإلزامي (U8 / U10 / U12 / U14 / U16): يُنهي الحكم النزال عند بلوغ عدّتين إجمالًا خلال النزال كله.",
+"fr": "Limite de comptes obligatoire (U8 / U10 / U12 / U14 / U16) : l'arbitre arrête le combat à 2 comptes au total sur l'ensemble du combat.",
+"ko": "필수 카운트 제한(U8 / U10 / U12 / U14 / U16): 경기 전체에서 총 2회 카운트에 이르면 주심이 경기를 종료합니다."
+},
+{
+"cat": "RAUND SÜRESİ",
+"en": "Veterans 40+/45+ | Veteranlar 40+/45+ | Veteranen 40+/45+ | قدامى 40+/45+ | Vétérans 40+/45+ | 베테랑 40+/45+: a bout is 3 rounds of 2 min, with 1.5 min rest between rounds.",
+"tr": "Veterans 40+/45+ | Veteranlar 40+/45+ | Veteranen 40+/45+ | قدامى 40+/45+ | Vétérans 40+/45+ | 베테랑 40+/45+: Maç 3 raundtan oluşur, her raund 2 dakika; raundlar arası dinlenme 1.5 dakika.",
+"de": "Veterans 40+/45+ | Veteranlar 40+/45+ | Veteranen 40+/45+ | قدامى 40+/45+ | Vétérans 40+/45+ | 베테랑 40+/45+: Ein Kampf besteht aus 3 Runden zu je 2 Minuten, mit 1,5 Minuten Pause zwischen den Runden.",
+"ar": "Veterans 40+/45+ | Veteranlar 40+/45+ | Veteranen 40+/45+ | قدامى 40+/45+ | Vétérans 40+/45+ | 베테랑 40+/45+: يتكوّن النزال من 3 جولات مدّة كلٍّ منها دقيقتين، مع راحة دقيقة ونصف بين الجولات.",
+"fr": "Veterans 40+/45+ | Veteranlar 40+/45+ | Veteranen 40+/45+ | قدامى 40+/45+ | Vétérans 40+/45+ | 베테랑 40+/45+ : le combat comprend 3 rounds de 2 minutes, avec 1,5 minute de repos entre les rounds.",
+"ko": "Veterans 40+/45+ | Veteranlar 40+/45+ | Veteranen 40+/45+ | قدامى 40+/45+ | Vétérans 40+/45+ | 베테랑 40+/45+: 경기는 각 2분의 3라운드로 진행되며, 라운드 사이 휴식은 1.5분입니다."
+},
+{
+"cat": "RAUND SÜRESİ",
+"en": "Seniors 35+ | Büyükler 35+ | Senioren 35+ | كبار 35+ | Seniors 35+ | 시니어 35+: a bout is 3 rounds of 3 min, with 1.5 min rest between rounds.",
+"tr": "Seniors 35+ | Büyükler 35+ | Senioren 35+ | كبار 35+ | Seniors 35+ | 시니어 35+: Maç 3 raundtan oluşur, her raund 3 dakika; raundlar arası dinlenme 1.5 dakika.",
+"de": "Seniors 35+ | Büyükler 35+ | Senioren 35+ | كبار 35+ | Seniors 35+ | 시니어 35+: Ein Kampf besteht aus 3 Runden zu je 3 Minuten, mit 1,5 Minuten Pause zwischen den Runden.",
+"ar": "Seniors 35+ | Büyükler 35+ | Senioren 35+ | كبار 35+ | Seniors 35+ | 시니어 35+: يتكوّن النزال من 3 جولات مدّة كلٍّ منها 3 دقائق، مع راحة دقيقة ونصف بين الجولات.",
+"fr": "Seniors 35+ | Büyükler 35+ | Senioren 35+ | كبار 35+ | Seniors 35+ | 시니어 35+ : le combat comprend 3 rounds de 3 minutes, avec 1,5 minute de repos entre les rounds.",
+"ko": "Seniors 35+ | Büyükler 35+ | Senioren 35+ | كبار 35+ | Seniors 35+ | 시니어 35+: 경기는 각 3분의 3라운드로 진행되며, 라운드 사이 휴식은 1.5분입니다."
+},
+{
+"cat": "RAUND SÜRESİ",
+"en": "Elite: a bout is 3 rounds of 3 min, with 1 min rest between rounds.",
+"tr": "Elite: Maç 3 raundtan oluşur, her raund 3 dakika; raundlar arası dinlenme 1 dakika.",
+"de": "Elite: Ein Kampf besteht aus 3 Runden zu je 3 Minuten, mit 1 Minute Pause zwischen den Runden.",
+"ar": "Elite: يتكوّن النزال من 3 جولات مدّة كلٍّ منها 3 دقائق، مع راحة دقيقة واحدة بين الجولات.",
+"fr": "Elite : le combat comprend 3 rounds de 3 minutes, avec 1 minute de repos entre les rounds.",
+"ko": "Elite: 경기는 각 3분의 3라운드로 진행되며, 라운드 사이 휴식은 1분입니다."
+},
+{
+"cat": "RAUND SÜRESİ",
+"en": "U24: a bout is 3 rounds of 3 min, with 1 min rest between rounds.",
+"tr": "U24: Maç 3 raundtan oluşur, her raund 3 dakika; raundlar arası dinlenme 1 dakika.",
+"de": "U24: Ein Kampf besteht aus 3 Runden zu je 3 Minuten, mit 1 Minute Pause zwischen den Runden.",
+"ar": "U24: يتكوّن النزال من 3 جولات مدّة كلٍّ منها 3 دقائق، مع راحة دقيقة واحدة بين الجولات.",
+"fr": "U24 : le combat comprend 3 rounds de 3 minutes, avec 1 minute de repos entre les rounds.",
+"ko": "U24: 경기는 각 3분의 3라운드로 진행되며, 라운드 사이 휴식은 1분입니다."
+},
+{
+"cat": "RAUND SÜRESİ",
+"en": "U18: a bout is 3 rounds of 2 min, with 1 min rest between rounds.",
+"tr": "U18: Maç 3 raundtan oluşur, her raund 2 dakika; raundlar arası dinlenme 1 dakika.",
+"de": "U18: Ein Kampf besteht aus 3 Runden zu je 2 Minuten, mit 1 Minute Pause zwischen den Runden.",
+"ar": "U18: يتكوّن النزال من 3 جولات مدّة كلٍّ منها دقيقتين، مع راحة دقيقة واحدة بين الجولات.",
+"fr": "U18 : le combat comprend 3 rounds de 2 minutes, avec 1 minute de repos entre les rounds.",
+"ko": "U18: 경기는 각 2분의 3라운드로 진행되며, 라운드 사이 휴식은 1분입니다."
+},
+{
+"cat": "RAUND SÜRESİ",
+"en": "U16: a bout is 3 rounds of 2 min, with 1 min rest between rounds.",
+"tr": "U16: Maç 3 raundtan oluşur, her raund 2 dakika; raundlar arası dinlenme 1 dakika.",
+"de": "U16: Ein Kampf besteht aus 3 Runden zu je 2 Minuten, mit 1 Minute Pause zwischen den Runden.",
+"ar": "U16: يتكوّن النزال من 3 جولات مدّة كلٍّ منها دقيقتين، مع راحة دقيقة واحدة بين الجولات.",
+"fr": "U16 : le combat comprend 3 rounds de 2 minutes, avec 1 minute de repos entre les rounds.",
+"ko": "U16: 경기는 각 2분의 3라운드로 진행되며, 라운드 사이 휴식은 1분입니다."
+},
+{
+"cat": "RAUND SÜRESİ",
+"en": "U14: a bout is 3 rounds of 1.5 min, with 1 min rest between rounds.",
+"tr": "U14: Maç 3 raundtan oluşur, her raund 1.5 dakika; raundlar arası dinlenme 1 dakika.",
+"de": "U14: Ein Kampf besteht aus 3 Runden zu je 1,5 Minuten, mit 1 Minute Pause zwischen den Runden.",
+"ar": "U14: يتكوّن النزال من 3 جولات مدّة كلٍّ منها دقيقة ونصف، مع راحة دقيقة واحدة بين الجولات.",
+"fr": "U14 : le combat comprend 3 rounds de 1,5 minute, avec 1 minute de repos entre les rounds.",
+"ko": "U14: 경기는 각 1.5분의 3라운드로 진행되며, 라운드 사이 휴식은 1분입니다."
+},
+{
+"cat": "RAUND SÜRESİ",
+"en": "U12: a bout is 3 rounds of 1 min, with 1 min rest between rounds.",
+"tr": "U12: Maç 3 raundtan oluşur, her raund 1 dakika; raundlar arası dinlenme 1 dakika.",
+"de": "U12: Ein Kampf besteht aus 3 Runden zu je 1 Minute, mit 1 Minute Pause zwischen den Runden.",
+"ar": "U12: يتكوّن النزال من 3 جولات مدّة كلٍّ منها دقيقة واحدة، مع راحة دقيقة واحدة بين الجولات.",
+"fr": "U12 : le combat comprend 3 rounds de 1 minute, avec 1 minute de repos entre les rounds.",
+"ko": "U12: 경기는 각 1분의 3라운드로 진행되며, 라운드 사이 휴식은 1분입니다."
+},
+{
+"cat": "RAUND SÜRESİ",
+"en": "U10: a bout is 3 rounds of 1 min, with 1 min rest between rounds.",
+"tr": "U10: Maç 3 raundtan oluşur, her raund 1 dakika; raundlar arası dinlenme 1 dakika.",
+"de": "U10: Ein Kampf besteht aus 3 Runden zu je 1 Minute, mit 1 Minute Pause zwischen den Runden.",
+"ar": "U10: يتكوّن النزال من 3 جولات مدّة كلٍّ منها دقيقة واحدة، مع راحة دقيقة واحدة بين الجولات.",
+"fr": "U10 : le combat comprend 3 rounds de 1 minute, avec 1 minute de repos entre les rounds.",
+"ko": "U10: 경기는 각 1분의 3라운드로 진행되며, 라운드 사이 휴식은 1분입니다."
+},
+{
+"cat": "RAUND SÜRESİ",
+"en": "U8: a bout is 3 rounds of 1 min, with 1 min rest between rounds.",
+"tr": "U8: Maç 3 raundtan oluşur, her raund 1 dakika; raundlar arası dinlenme 1 dakika.",
+"de": "U8: Ein Kampf besteht aus 3 Runden zu je 1 Minute, mit 1 Minute Pause zwischen den Runden.",
+"ar": "U8: يتكوّن النزال من 3 جولات مدّة كلٍّ منها دقيقة واحدة، مع راحة دقيقة واحدة بين الجولات.",
+"fr": "U8 : le combat comprend 3 rounds de 1 minute, avec 1 minute de repos entre les rounds.",
+"ko": "U8: 경기는 각 1분의 3라운드로 진행되며, 라운드 사이 휴식은 1분입니다."
+},
+{
+"cat": "KARAR",
+"en": "WP (Win on Points): at the end of the bout the athlete declared winner by the majority of judges.",
+"tr": "WP (Puanla Galibiyet): Maç sonunda yan hakemlerin çoğunluğu tarafından kazanan ilan edilen sporcu.",
+"de": "WP (Sieg nach Punkten): Am Ende des Kampfes der von der Mehrheit der Punktrichter zum Sieger erklärte Athlet.",
+"ar": "WP (الفوز بالنقاط): اللاعب الذي تُعلنه أغلبية الحكّام فائزًا في نهاية النزال.",
+"fr": "WP (Victoire aux points) : à la fin du combat, l'athlète déclaré vainqueur par la majorité des juges.",
+"ko": "WP (판정승): 경기 종료 시 부심 다수결로 승자로 선언된 선수."
+},
+{
+"cat": "KARAR",
+"en": "RSC (Referee Stops Contest): the referee ends the bout for safety or injury when an athlete cannot continue.",
+"tr": "RSC (Hakem Maçı Bitirir): Bir sporcu devam edemeyeceğinde hakem, güvenlik veya sakatlık nedeniyle maçı bitirir.",
+"de": "RSC (Kampfrichter beendet den Kampf): Der Kampfrichter beendet den Kampf aus Sicherheits- oder Verletzungsgründen, wenn ein Athlet nicht fortfahren kann.",
+"ar": "RSC (الحكم يوقف النزال): يُنهي الحكم النزال لأسباب السلامة أو الإصابة عندما لا يستطيع لاعب المتابعة.",
+"fr": "RSC (L'arbitre arrête le combat) : l'arbitre met fin au combat pour raison de sécurité ou de blessure lorsqu'un athlète ne peut continuer.",
+"ko": "RSC (주심 경기 중단): 선수가 계속할 수 없을 때 주심이 안전 또는 부상을 이유로 경기를 종료합니다."
+},
+{
+"cat": "KARAR",
+"en": "RSCS (Safety): the referee stops the bout when an athlete is taking heavy strikes and no longer defends.",
+"tr": "RSCS (Güvenlik): Bir sporcu ağır vuruşlara maruz kalıp kendini koruyamadığında hakem maçı durdurur.",
+"de": "RSCS (Sicherheit): Der Kampfrichter stoppt den Kampf, wenn ein Athlet schwere Treffer erhält und sich nicht mehr verteidigt.",
+"ar": "RSCS (السلامة): يوقف الحكم النزال عندما يتلقّى اللاعب ضربات قوية ولم يعد يدافع عن نفسه.",
+"fr": "RSCS (Sécurité) : l'arbitre arrête le combat lorsqu'un athlète encaisse de lourds coups et ne se défend plus.",
+"ko": "RSCS (안전): 선수가 강한 타격을 받으며 더 이상 방어하지 못할 때 주심이 경기를 멈춥니다."
+},
+{
+"cat": "KARAR",
+"en": "RSCI (Injury): the referee stops the bout when an athlete cannot continue due to injury.",
+"tr": "RSCI (Yaralanma): Bir sporcu yaralanma nedeniyle maça devam edemeyeceğinde hakem maçı durdurur.",
+"de": "RSCI (Verletzung): Der Kampfrichter stoppt den Kampf, wenn ein Athlet wegen einer Verletzung nicht fortfahren kann.",
+"ar": "RSCI (الإصابة): يوقف الحكم النزال عندما يعجز لاعب عن المتابعة بسبب إصابة.",
+"fr": "RSCI (Blessure) : l'arbitre arrête le combat lorsqu'un athlète ne peut continuer en raison d'une blessure.",
+"ko": "RSCI (부상): 선수가 부상으로 경기를 계속할 수 없을 때 주심이 경기를 멈춥니다."
+},
+{
+"cat": "KARAR",
+"en": "RSCH (Head Strike): the referee ends the bout when an athlete cannot continue after hard blows to the head.",
+"tr": "RSCH (Kafa Darbesi): Kafaya alınan sert darbeler sonucu sporcu devam edemezse hakem maçı bitirir.",
+"de": "RSCH (Kopftreffer): Der Kampfrichter beendet den Kampf, wenn ein Athlet nach harten Schlägen auf den Kopf nicht fortfahren kann.",
+"ar": "RSCH (ضربة الرأس): يُنهي الحكم النزال عندما يعجز اللاعب عن المتابعة إثر ضربات قوية على الرأس.",
+"fr": "RSCH (Coup à la tête) : l'arbitre met fin au combat lorsqu'un athlète ne peut continuer après de violents coups à la tête.",
+"ko": "RSCH (머리 타격): 머리에 강한 타격을 받아 선수가 계속할 수 없으면 주심이 경기를 종료합니다."
+},
+{
+"cat": "KARAR",
+"en": "RSCB (Body Strike): the referee ends the bout when an athlete cannot continue after a hard blow to the body.",
+"tr": "RSCB (Vücut Darbesi): Vücuda alınan sert darbe sonucu sporcu devam edemezse hakem maçı bitirir.",
+"de": "RSCB (Körpertreffer): Der Kampfrichter beendet den Kampf, wenn ein Athlet nach einem harten Schlag auf den Körper nicht fortfahren kann.",
+"ar": "RSCB (ضربة الجسم): يُنهي الحكم النزال عندما يعجز اللاعب عن المتابعة إثر ضربة قوية على الجسم.",
+"fr": "RSCB (Coup au corps) : l'arbitre met fin au combat lorsqu'un athlète ne peut continuer après un coup violent au corps.",
+"ko": "RSCB (몸통 타격): 몸통에 강한 타격을 받아 선수가 계속할 수 없으면 주심이 경기를 종료합니다."
+},
+{
+"cat": "KARAR",
+"en": "KO (Knock-Out): after a knockdown, an athlete who cannot continue within the count of ten (10) loses by KO.",
+"tr": "KO (Nakavt): Yere serilme sonrası on (10) sayımı içinde devam edemeyen sporcu nakavtla yenik sayılır.",
+"de": "KO (Knock-out): Nach einem Niederschlag verliert ein Athlet, der nicht innerhalb des Zählens bis zehn (10) fortfahren kann, durch KO.",
+"ar": "KO (الضربة القاضية): بعد السقوط، يخسر بالضربة القاضية اللاعب الذي لا يستطيع المتابعة قبل انتهاء العدّ إلى عشرة (10).",
+"fr": "KO (Knock-out) : après une mise au tapis, l'athlète qui ne peut reprendre avant le compte de dix (10) perd par KO.",
+"ko": "KO (녹아웃): 다운 후 10 카운트 안에 계속하지 못한 선수는 KO로 패합니다."
+},
+{
+"cat": "KARAR",
+"en": "KOH / KOB: a knockout caused by a blow to the head (KOH) or by a blow to the body (KOB).",
+"tr": "KOH / KOB: Kafaya alınan darbe sonucu nakavt (KOH) veya vücuda alınan darbe sonucu nakavt (KOB).",
+"de": "KOH / KOB: ein Knockout durch einen Schlag auf den Kopf (KOH) oder durch einen Schlag auf den Körper (KOB).",
+"ar": "KOH / KOB: ضربة قاضية ناتجة عن ضربة على الرأس (KOH) أو ضربة على الجسم (KOB).",
+"fr": "KOH / KOB : un knock-out provoqué par un coup à la tête (KOH) ou par un coup au corps (KOB).",
+"ko": "KOH / KOB: 머리 타격에 의한 녹아웃(KOH) 또는 몸통 타격에 의한 녹아웃(KOB)."
+},
+{
+"cat": "KARAR",
+"en": "RET (Win by Retirement): the opponent wins if the athlete does not leave the corner after the rest or refuses to continue.",
+"tr": "RET (Maçtan Çekilme): Sporcu dinlenme sonrası köşesinden çıkmaz veya devam etmek istemezse rakibi kazanır.",
+"de": "RET (Sieg durch Aufgabe): Der Gegner gewinnt, wenn der Athlet nach der Pause die Ecke nicht verlässt oder sich weigert fortzufahren.",
+"ar": "RET (الفوز بالانسحاب): يفوز الخصم إذا لم يغادر اللاعب ركنه بعد الراحة أو رفض المتابعة.",
+"fr": "RET (Victoire par abandon) : l'adversaire gagne si l'athlète ne quitte pas son coin après le repos ou refuse de continuer.",
+"ko": "RET (기권승): 선수가 휴식 후 코너에서 나오지 않거나 계속하기를 거부하면 상대가 승리합니다."
+},
+{
+"cat": "KARAR",
+"en": "DQ (Disqualification): if an athlete is disqualified, the opponent is declared the winner.",
+"tr": "DQ (Diskalifiye): Bir sporcu diskalifiye edilirse rakibi kazanan ilan edilir.",
+"de": "DQ (Disqualifikation): Wird ein Athlet disqualifiziert, wird der Gegner zum Sieger erklärt.",
+"ar": "DQ (الاستبعاد): إذا استُبعد لاعب، يُعلَن الخصم فائزًا.",
+"fr": "DQ (Disqualification) : si un athlète est disqualifié, l'adversaire est déclaré vainqueur.",
+"ko": "DQ (실격): 한 선수가 실격되면 상대가 승자로 선언됩니다."
+},
+{
+"cat": "KARAR",
+"en": "WO (Walk-Over): if the opponent does not enter the ring within the 2-minute period, the athlete wins by walk-over.",
+"tr": "WO (Hükmen Galibiyet): Rakip 2 dakikalık süre içinde ringe çıkmazsa sporcu hükmen galip ilan edilir.",
+"de": "WO (Kampflos-Sieg): Betritt der Gegner den Ring nicht innerhalb der 2-minütigen Frist, gewinnt der Athlet kampflos.",
+"ar": "WO (الفوز بالانسحاب الحكمي): إذا لم يدخل الخصم الحلبة خلال دقيقتين، يفوز اللاعب بالانسحاب الحكمي.",
+"fr": "WO (Forfait) : si l'adversaire n'entre pas sur le ring dans le délai de 2 minutes, l'athlète gagne par forfait.",
+"ko": "WO (부전승): 상대가 2분 이내에 링에 오르지 않으면 선수가 부전승으로 승리합니다."
+},
+{
+"cat": "KARAR",
+"en": "NC (No Contest): the bout is declared void due to exceptional circumstances beyond the athletes' control.",
+"tr": "NC (Geçersiz Maç): Sporcuların kontrolü dışındaki istisnai durumlar nedeniyle maç geçersiz ilan edilir.",
+"de": "NC (Kein Kampf): Der Kampf wird wegen außergewöhnlicher, von den Athleten nicht zu beeinflussender Umstände für ungültig erklärt.",
+"ar": "NC (نزال ملغى): يُعلَن النزال لاغيًا بسبب ظروف استثنائية خارجة عن إرادة اللاعبين.",
+"fr": "NC (Combat nul) : le combat est déclaré nul en raison de circonstances exceptionnelles indépendantes de la volonté des athlètes.",
+"ko": "NC (무효 경기): 선수가 통제할 수 없는 예외적 상황으로 경기가 무효로 선언됩니다."
+},
+{
+"cat": "KARAR",
+"en": "Draw: a draw may only be declared in exhibition bouts, by the majority of judges.",
+"tr": "Beraberlik (Draw): Beraberlik yalnızca gösteri maçlarında, yan hakemlerin çoğunluğuyla ilan edilebilir.",
+"de": "Unentschieden: Ein Unentschieden darf nur in Schaukämpfen durch die Mehrheit der Punktrichter erklärt werden.",
+"ar": "التعادل: لا يُعلَن التعادل إلا في نزالات العرض، بأغلبية الحكّام.",
+"fr": "Match nul : un match nul ne peut être déclaré que lors des combats d'exhibition, par la majorité des juges.",
+"ko": "무승부: 무승부는 시범 경기에서만 부심 다수결로 선언될 수 있습니다."
+},
+{
+"cat": "KARAR",
+"en": "In a serious injury the referee may consult the doctor for up to 1 minute; if the doctor advises stopping, the referee must comply.",
+"tr": "Ciddi yaralanmada hakem en fazla 1 dakika doktora danışabilir; doktor durdurmayı tavsiye ederse hakem uymak zorundadır.",
+"de": "Bei einer schweren Verletzung darf der Kampfrichter den Arzt bis zu 1 Minute konsultieren; rät der Arzt zum Abbruch, muss der Kampfrichter dem folgen.",
+"ar": "في الإصابة الخطيرة يجوز للحكم استشارة الطبيب لمدة تصل إلى دقيقة واحدة؛ وإذا نصح الطبيب بالإيقاف، وجب على الحكم الامتثال.",
+"fr": "En cas de blessure grave, l'arbitre peut consulter le médecin pendant 1 minute au maximum ; si le médecin conseille l'arrêt, l'arbitre doit s'y conformer.",
+"ko": "심각한 부상 시 주심은 최대 1분간 의사와 상의할 수 있으며, 의사가 중단을 권하면 주심은 이를 따라야 합니다."
+},
+{
+"cat": "KARAR",
+"en": "A protest must be lodged within 30 minutes of the decision (5 minutes for a final) with a USD 500 fee by the Team Manager.",
+"tr": "İtiraz, karar sonrası 30 dakika içinde (final maçı ise 5 dakika) ve 500 USD ücretle Takım Yöneticisi tarafından yapılır.",
+"de": "Ein Protest ist innerhalb von 30 Minuten nach der Entscheidung (5 Minuten bei einem Finale) mit einer Gebühr von 500 USD durch den Teammanager einzulegen.",
+"ar": "يُقدَّم الاعتراض خلال 30 دقيقة من القرار (5 دقائق في النهائي) برسم قدره 500 دولار أمريكي بواسطة مدير الفريق.",
+"fr": "Une réclamation doit être déposée dans les 30 minutes suivant la décision (5 minutes pour une finale), avec des frais de 500 USD, par le manager de l'équipe.",
+"ko": "이의 제기는 판정 후 30분 이내(결승은 5분)에 팀 매니저가 500 USD의 수수료와 함께 제출해야 합니다."
+},
+{
+"cat": "FAUL",
+"en": "It is a foul to bite, headbutt or spit at the opponent.",
+"tr": "Rakibi ısırmak, kafa atmak veya ona tükürmek fauldür.",
+"de": "Es ist ein Foul, den Gegner zu beißen, ihm einen Kopfstoß zu geben oder ihn anzuspucken.",
+"ar": "من الأخطاء عضّ الخصم أو نطحه بالرأس أو البصق عليه.",
+"fr": "Il est interdit de mordre l'adversaire, de lui donner un coup de tête ou de cracher sur lui.",
+"ko": "상대를 물거나 박치기하거나 침을 뱉는 것은 반칙입니다."
+},
+{
+"cat": "FAUL",
+"en": "It is a foul to press the opponent's eyes with the thumb.",
+"tr": "Başparmakla rakibin gözlerine baskı uygulamak fauldür.",
+"de": "Es ist ein Foul, mit dem Daumen auf die Augen des Gegners zu drücken.",
+"ar": "من الأخطاء الضغط على عينَي الخصم بالإبهام.",
+"fr": "Il est interdit d'appuyer sur les yeux de l'adversaire avec le pouce.",
+"ko": "엄지로 상대의 눈을 누르는 것은 반칙입니다."
+},
+{
+"cat": "FAUL",
+"en": "It is a foul to deliberately use the chin to grind the opponent's face.",
+"tr": "Kasıtlı olarak çene kullanarak rakibin yüzünü ezmek fauldür.",
+"de": "Es ist ein Foul, absichtlich mit dem Kinn das Gesicht des Gegners zu bearbeiten.",
+"ar": "من الأخطاء استخدام الذقن عمدًا لسحق وجه الخصم.",
+"fr": "Il est interdit d'utiliser délibérément le menton pour écraser le visage de l'adversaire.",
+"ko": "고의로 턱을 사용해 상대의 얼굴을 짓누르는 것은 반칙입니다."
+},
+{
+"cat": "FAUL",
+"en": "It is a foul to cover the opponent's mouth and nose to smother or suffocate them.",
+"tr": "Rakibin ağzını ve burnunu kapatarak boğmaya veya nefessiz bırakmaya çalışmak fauldür.",
+"de": "Es ist ein Foul, Mund und Nase des Gegners zu bedecken, um ihn zu ersticken.",
+"ar": "من الأخطاء تغطية فم الخصم وأنفه لمحاولة خنقه أو منعه من التنفّس.",
+"fr": "Il est interdit de couvrir la bouche et le nez de l'adversaire pour tenter de l'étouffer.",
+"ko": "상대의 입과 코를 막아 질식시키려 하는 것은 반칙입니다."
+},
+{
+"cat": "FAUL",
+"en": "It is a foul to deliberately remove, undo or displace equipment.",
+"tr": "Ekipmanları kasıtlı olarak çıkarmak, çözmek veya yerini değiştirmek fauldür.",
+"de": "Es ist ein Foul, Ausrüstung absichtlich zu entfernen, zu lösen oder zu verschieben.",
+"ar": "من الأخطاء نزع المعدّات أو حلّها أو تحريكها عن مكانها عمدًا.",
+"fr": "Il est interdit d'enlever, de défaire ou de déplacer délibérément l'équipement.",
+"ko": "장비를 고의로 제거하거나 풀거나 위치를 바꾸는 것은 반칙입니다."
+},
+{
+"cat": "FAUL",
+"en": "It is a foul to deliberately spit out or remove the gum shield.",
+"tr": "Dişliği kasıtlı olarak tükürmek veya ağızdan çıkarmak fauldür.",
+"de": "Es ist ein Foul, den Mundschutz absichtlich auszuspucken oder herauszunehmen.",
+"ar": "من الأخطاء بصق واقي الأسنان أو إخراجه من الفم عمدًا.",
+"fr": "Il est interdit de recracher ou de retirer délibérément le protège-dents.",
+"ko": "마우스피스를 고의로 뱉거나 입에서 빼는 것은 반칙입니다."
+},
+{
+"cat": "FAUL",
+"en": "It is a foul to try to throw the opponent to the ground without a Muaythai technique (sweeping, hip throw or wrestling them down).",
+"tr": "Muaythai tekniği kullanmadan rakibi yere çarpmaya çalışmak fauldür (süpürme, kalçayla fırlatma veya sarılıp düşürme).",
+"de": "Es ist ein Foul, den Gegner ohne Muaythai-Technik zu Boden zu werfen (Fegen, Hüftwurf oder Ringen).",
+"ar": "من الأخطاء محاولة رمي الخصم أرضًا دون تقنية مواي تاي (الكنس أو الرمي بالورك أو المصارعة لإسقاطه).",
+"fr": "Il est interdit de tenter de jeter l'adversaire au sol sans technique de Muaythai (balayage, projection de hanche ou lutte).",
+"ko": "무에타이 기술 없이 상대를 바닥에 넘어뜨리려는 것은 반칙입니다(스위핑, 허리 던지기, 붙잡아 넘어뜨리기)."
+},
+{
+"cat": "FAUL",
+"en": "It is a foul to lock or immobilise the opponent's legs using the shin, ankle or heel.",
+"tr": "Baldır, ayak bileği veya topuk kullanarak rakibin bacaklarını kilitlemek veya hareketsiz bırakmak fauldür.",
+"de": "Es ist ein Foul, die Beine des Gegners mit Schienbein, Knöchel oder Ferse zu blockieren oder festzusetzen.",
+"ar": "من الأخطاء إقفال ساقَي الخصم أو تثبيتهما باستخدام الساق أو الكاحل أو الكعب.",
+"fr": "Il est interdit de bloquer ou d'immobiliser les jambes de l'adversaire avec le tibia, la cheville ou le talon.",
+"ko": "정강이, 발목, 발뒤꿈치로 상대의 다리를 걸어 잠그거나 움직이지 못하게 하는 것은 반칙입니다."
+},
+{
+"cat": "FAUL",
+"en": "It is a foul to lift the opponent off the ground by grabbing the torso.",
+"tr": "Rakibi gövdesinden tutarak havaya kaldırmak fauldür.",
+"de": "Es ist ein Foul, den Gegner am Rumpf zu greifen und hochzuheben.",
+"ar": "من الأخطاء رفع الخصم عن الأرض بالإمساك بجذعه.",
+"fr": "Il est interdit de soulever l'adversaire du sol en le saisissant par le torse.",
+"ko": "상대의 몸통을 잡아 공중으로 들어 올리는 것은 반칙입니다."
+},
+{
+"cat": "FAUL",
+"en": "It is a foul to lock or apply excessive pressure to the opponent's joints (arm, leg, head/neck or back).",
+"tr": "Rakibin eklemlerini (kol, bacak, baş/boyun veya sırt) kilitlemek ya da aşırı baskı uygulamak fauldür.",
+"de": "Es ist ein Foul, die Gelenke des Gegners (Arm, Bein, Kopf/Hals oder Rücken) zu blockieren oder übermäßig zu belasten.",
+"ar": "من الأخطاء إقفال مفاصل الخصم (الذراع أو الساق أو الرأس/الرقبة أو الظهر) أو الضغط عليها بإفراط.",
+"fr": "Il est interdit de verrouiller ou d'exercer une pression excessive sur les articulations de l'adversaire (bras, jambe, tête/cou ou dos).",
+"ko": "상대의 관절(팔, 다리, 머리/목, 등)을 잠그거나 과도한 압력을 가하는 것은 반칙입니다."
+},
+{
+"cat": "FAUL",
+"en": "It is a foul to strike while holding the ropes or to use the ropes unlawfully.",
+"tr": "İplere tutunarak vuruş yapmak veya iplerden kural dışı yararlanmak fauldür.",
+"de": "Es ist ein Foul, im Festhalten an den Seilen zu schlagen oder die Seile unerlaubt zu nutzen.",
+"ar": "من الأخطاء توجيه ضربة أثناء الإمساك بالحبال أو استغلال الحبال بشكل مخالف.",
+"fr": "Il est interdit de frapper en tenant les cordes ou d'utiliser les cordes de façon irrégulière.",
+"ko": "로프를 잡은 채 타격하거나 로프를 부정하게 이용하는 것은 반칙입니다."
+},
+{
+"cat": "FAUL",
+"en": "It is a foul to fall onto an opponent lying on the ground.",
+"tr": "Yerde yatan rakibin üzerine düşmek fauldür.",
+"de": "Es ist ein Foul, sich auf einen am Boden liegenden Gegner fallen zu lassen.",
+"ar": "من الأخطاء السقوط فوق خصم مستلقٍ على الأرض.",
+"fr": "Il est interdit de se laisser tomber sur un adversaire au sol.",
+"ko": "바닥에 누운 상대 위로 떨어지는 것은 반칙입니다."
+},
+{
+"cat": "FAUL",
+"en": "It is a foul to strike an opponent who is down or getting up.",
+"tr": "Yerde olan veya ayağa kalkmakta olan rakibe vurmak fauldür.",
+"de": "Es ist ein Foul, einen am Boden liegenden oder aufstehenden Gegner zu schlagen.",
+"ar": "من الأخطاء ضرب خصم ساقط أو في أثناء نهوضه.",
+"fr": "Il est interdit de frapper un adversaire à terre ou en train de se relever.",
+"ko": "쓰러져 있거나 일어나는 중인 상대를 치는 것은 반칙입니다."
+},
+{
+"cat": "FAUL",
+"en": "It is a foul to strike while a body part other than the feet is touching the ground.",
+"tr": "Ayaklar dışında bir vücut parçası yere temas ederken vuruş yapmak fauldür.",
+"de": "Es ist ein Foul, zu schlagen, während ein anderer Körperteil als die Füße den Boden berührt.",
+"ar": "من الأخطاء توجيه ضربة بينما يلامس الأرضَ جزءٌ من الجسم غير القدمين.",
+"fr": "Il est interdit de frapper alors qu'une partie du corps autre que les pieds touche le sol.",
+"ko": "발 이외의 신체 부위가 바닥에 닿은 상태에서 타격하는 것은 반칙입니다."
+},
+{
+"cat": "FAUL",
+"en": "It is a foul to prevent the opponent from getting up or re-entering the ring.",
+"tr": "Rakibin ayağa kalkmasını veya ringe geri girmesini engellemek fauldür.",
+"de": "Es ist ein Foul, den Gegner am Aufstehen oder am Wiederbetreten des Rings zu hindern.",
+"ar": "من الأخطاء منع الخصم من النهوض أو من العودة إلى الحلبة.",
+"fr": "Il est interdit d'empêcher l'adversaire de se relever ou de revenir sur le ring.",
+"ko": "상대가 일어나거나 링으로 돌아오는 것을 막는 것은 반칙입니다."
+},
+{
+"cat": "FAUL",
+"en": "It is a foul to double-block (cover up) completely passively or to deliberately go down to avoid being hit.",
+"tr": "Çift blok (kapanma) yaparak tamamen pasif kalmak veya darbe almamak için kasıtlı yere düşmek fauldür.",
+"de": "Es ist ein Foul, in völliger Passivität doppelt zu blocken (sich einzuigeln) oder sich absichtlich fallen zu lassen, um Treffern zu entgehen.",
+"ar": "من الأخطاء الالتزام بصدٍّ مزدوج بشكل سلبيّ تام أو السقوط عمدًا لتفادي تلقّي الضربات.",
+"fr": "Il est interdit de garder une double garde totalement passive ou de se laisser tomber délibérément pour éviter les coups.",
+"ko": "완전히 소극적으로 이중 가드(웅크리기)를 하거나 타격을 피하려 고의로 넘어지는 것은 반칙입니다."
+},
+{
+"cat": "FAUL",
+"en": "It is a foul to deliberately leave the Field of Play to avoid taking a strike.",
+"tr": "Darbe almamak için Müsabaka Alanı'nı kasıtlı olarak terk etmek fauldür.",
+"de": "Es ist ein Foul, das Wettkampffeld absichtlich zu verlassen, um einem Treffer zu entgehen.",
+"ar": "من الأخطاء مغادرة منطقة النزال عمدًا لتفادي تلقّي ضربة.",
+"fr": "Il est interdit de quitter délibérément l'aire de compétition pour éviter un coup.",
+"ko": "타격을 피하려고 경기 구역을 고의로 벗어나는 것은 반칙입니다."
+},
+{
+"cat": "FAUL",
+"en": "It is a foul to strike the groin or the neck vertebrae.",
+"tr": "Kasık bölgesine veya boyun omurlarına vurmak fauldür.",
+"de": "Es ist ein Foul, in die Leiste oder auf die Halswirbel zu schlagen.",
+"ar": "من الأخطاء الضرب على منطقة العانة أو فقرات الرقبة.",
+"fr": "Il est interdit de frapper l'aine ou les vertèbres cervicales.",
+"ko": "사타구니나 경추(목뼈)를 치는 것은 반칙입니다."
+},
+{
+"cat": "FAUL",
+"en": "It is a foul to hold the opponent's leg without any Muaythai technique and step forward more than two (2) steps.",
+"tr": "Muaythai tekniği kullanmaksızın rakibin bacağını tutup iki (2) adımdan fazla ileri gitmek fauldür.",
+"de": "Es ist ein Foul, das Bein des Gegners ohne Muaythai-Technik zu halten und mehr als zwei (2) Schritte vorzugehen.",
+"ar": "من الأخطاء الإمساك بساق الخصم دون أيّ تقنية مواي تاي والتقدّم أكثر من خطوتين (2).",
+"fr": "Il est interdit de tenir la jambe de l'adversaire sans technique de Muaythai et d'avancer de plus de deux (2) pas.",
+"ko": "무에타이 기술 없이 상대의 다리를 잡고 두 걸음 넘게 앞으로 나아가는 것은 반칙입니다."
+},
+{
+"cat": "FAUL",
+"en": "It is a foul to strike the opponent after the round has ended.",
+"tr": "Raund bittikten sonra rakibe vurmak fauldür.",
+"de": "Es ist ein Foul, den Gegner nach Rundenende zu schlagen.",
+"ar": "من الأخطاء ضرب الخصم بعد انتهاء الجولة.",
+"fr": "Il est interdit de frapper l'adversaire après la fin du round.",
+"ko": "라운드가 끝난 뒤 상대를 치는 것은 반칙입니다."
+},
+{
+"cat": "FAUL",
+"en": "It is a foul to disobey the referee's \"YOOT\" (stop) or \"YAEK\" (break) and not step back.",
+"tr": "Hakemin \"YOOT\" (Dur) veya \"YAEK\" (Ayrıl) komutuna uymamak ve geri adım atmamak fauldür.",
+"de": "Es ist ein Foul, dem \"YOOT\" (Stopp) oder \"YAEK\" (Trennen) des Kampfrichters nicht zu folgen und nicht zurückzutreten.",
+"ar": "من الأخطاء عدم الامتثال لأمر الحكم \"YOOT\" (قف) أو \"YAEK\" (افترقا) وعدم التراجع.",
+"fr": "Il est interdit de désobéir au « YOOT » (stop) ou au « YAEK » (séparez-vous) de l'arbitre et de ne pas reculer.",
+"ko": "주심의 \"YOOT\"(정지)이나 \"YAEK\"(브레이크) 지시에 따르지 않고 물러서지 않는 것은 반칙입니다."
+},
+{
+"cat": "FAUL",
+"en": "It is a foul to attempt to strike after \"YOOT\"/\"YAEK\" before the referee calls \"CHOK\".",
+"tr": "\"YOOT\"/\"YAEK\" sonrası, hakem \"CHOK\" demeden rakibe vurmaya teşebbüs etmek fauldür.",
+"de": "Es ist ein Foul, nach \"YOOT\"/\"YAEK\" zu schlagen zu versuchen, bevor der Kampfrichter \"CHOK\" ruft.",
+"ar": "من الأخطاء محاولة توجيه ضربة بعد \"YOOT\"/\"YAEK\" قبل أن يقول الحكم \"CHOK\".",
+"fr": "Il est interdit de tenter de frapper après « YOOT »/« YAEK » avant que l'arbitre n'annonce « CHOK ».",
+"ko": "\"YOOT\"/\"YAEK\" 후 주심이 \"CHOK\"을 외치기 전에 상대를 치려 시도하는 것은 반칙입니다."
+},
+{
+"cat": "FAUL",
+"en": "It is a foul to use unnecessary, aggressive or insulting words during the bout.",
+"tr": "Müsabaka esnasında gereksiz, agresif veya hakaret içerikli sözler sarf etmek fauldür.",
+"de": "Es ist ein Foul, während des Kampfes unnötige, aggressive oder beleidigende Worte zu benutzen.",
+"ar": "من الأخطاء التلفّظ بكلمات غير ضرورية أو عدوانية أو مهينة أثناء النزال.",
+"fr": "Il est interdit de tenir des propos inutiles, agressifs ou insultants pendant le combat.",
+"ko": "경기 중 불필요하거나 공격적이거나 모욕적인 말을 하는 것은 반칙입니다."
+},
+{
+"cat": "FAUL",
+"en": "It is a foul to attack the referee or behave aggressively toward them.",
+"tr": "Hakeme saldırmak veya ona karşı agresif tavır sergilemek fauldür.",
+"de": "Es ist ein Foul, den Kampfrichter anzugreifen oder sich ihm gegenüber aggressiv zu verhalten.",
+"ar": "من الأخطاء الاعتداء على الحكم أو التصرّف بعدوانية تجاهه.",
+"fr": "Il est interdit d'attaquer l'arbitre ou d'avoir un comportement agressif envers lui.",
+"ko": "주심을 공격하거나 주심에게 공격적으로 행동하는 것은 반칙입니다."
+},
+{
+"cat": "FAUL",
+"en": "It is a foul to apply water by any method other than the spray bottle.",
+"tr": "Sprey şişesi dışında bir yöntemle su uygulamak fauldür.",
+"de": "Es ist ein Foul, Wasser auf andere Weise als mit der Sprühflasche aufzutragen.",
+"ar": "من الأخطاء استخدام الماء بأيّ وسيلة غير زجاجة الرذاذ.",
+"fr": "Il est interdit d'appliquer de l'eau par un moyen autre que le vaporisateur.",
+"ko": "분무기 이외의 방법으로 물을 사용하는 것은 반칙입니다."
+},
+{
+"cat": "FAUL",
+"en": "It is a foul to use excessive water during the rest, delaying the start of the next round.",
+"tr": "Raundlar arası dinlenmede aşırı su kullanarak sonraki raundun başlamasını geciktirmek fauldür.",
+"de": "Es ist ein Foul, in der Pause übermäßig Wasser zu verwenden und so den Beginn der nächsten Runde zu verzögern.",
+"ar": "من الأخطاء الإفراط في استخدام الماء خلال الراحة بما يؤخّر بدء الجولة التالية.",
+"fr": "Il est interdit d'utiliser trop d'eau pendant le repos, retardant le début du round suivant.",
+"ko": "휴식 중 물을 과도하게 사용해 다음 라운드 시작을 지연시키는 것은 반칙입니다."
+},
+{
+"cat": "FAUL",
+"en": "It is a foul to use any substance prohibited by WADA or the IFMA anti-doping rules.",
+"tr": "WADA veya IFMA anti-doping kurallarınca yasaklanan herhangi bir maddeyi kullanmak fauldür.",
+"de": "Es ist ein Foul, eine von der WADA oder den IFMA-Anti-Doping-Regeln verbotene Substanz zu verwenden.",
+"ar": "من الأخطاء استخدام أيّ مادة محظورة بموجب الوكالة العالمية لمكافحة المنشّطات (WADA) أو قواعد مكافحة المنشّطات في الاتحاد (IFMA).",
+"fr": "Il est interdit d'utiliser toute substance prohibée par l'AMA (WADA) ou les règles antidopage de l'IFMA.",
+"ko": "WADA 또는 IFMA 반도핑 규정에서 금지한 물질을 사용하는 것은 반칙입니다."
+},
+{
+"cat": "FAUL",
+"en": "In the U14 category, elbow and knee strikes to the head are prohibited.",
+"tr": "U14 kategorisinde kafaya dirsek ve diz vuruşu yasaktır.",
+"de": "In der Kategorie U14 sind Ellbogen- und Knieschläge zum Kopf verboten.",
+"ar": "في فئة U14 يُحظر توجيه ضربات المرفق والركبة إلى الرأس.",
+"fr": "Dans la catégorie U14, les coups de coude et de genou à la tête sont interdits.",
+"ko": "U14 부문에서는 머리에 대한 팔꿈치와 무릎 공격이 금지됩니다."
+},
+{
+"cat": "FAUL",
+"en": "In the U8, U10 and U12 categories, strikes to the head are prohibited.",
+"tr": "U8, U10 ve U12 kategorilerinde kafaya vuruş yasaktır.",
+"de": "In den Kategorien U8, U10 und U12 sind Schläge zum Kopf verboten.",
+"ar": "في فئات U8 وU10 وU12 يُحظر توجيه الضربات إلى الرأس.",
+"fr": "Dans les catégories U8, U10 et U12, les coups à la tête sont interdits.",
+"ko": "U8, U10, U12 부문에서는 머리 타격이 금지됩니다."
+},
+{
+"cat": "EKİPMAN",
+"en": "The athlete must enter the ring bout-ready, wearing bandages, gloves, elbow guards, shin guards and a groin guard.",
+"tr": "Sporcu; bandaj, eldiven, dirseklik, kaval koruyucu ve kasık koruyucu takılı, maça hazır şekilde ringe çıkmalıdır.",
+"de": "Der Athlet muss kampfbereit den Ring betreten, mit Bandagen, Handschuhen, Ellbogenschonern, Schienbeinschonern und Tiefschutz.",
+"ar": "على اللاعب دخول الحلبة جاهزًا للنزال مرتديًا اللفافات والقفّازات وواقيات المرفق وواقيات القصبة وواقي العانة.",
+"fr": "L'athlète doit entrer sur le ring prêt à combattre, avec bandages, gants, protège-coudes, protège-tibias et coquille.",
+"ko": "선수는 붕대, 글러브, 팔꿈치 보호대, 정강이 보호대, 낭심 보호대를 착용하고 경기 준비를 마친 채 링에 올라야 합니다."
+},
+{
+"cat": "EKİPMAN",
+"en": "The mongkon is placed on the athlete's head by the second after the equipment check.",
+"tr": "Mongkon, ekipman kontrolünden sonra sporcunun köşe görevlisi tarafından başına takılır.",
+"de": "Der Mongkon wird dem Athleten nach der Ausrüstungskontrolle vom Sekundanten aufgesetzt.",
+"ar": "يُوضع المونغكون على رأس اللاعب من قبل مساعد الركن بعد فحص المعدّات.",
+"fr": "Le mongkon est placé sur la tête de l'athlète par le soigneur après le contrôle de l'équipement.",
+"ko": "몽콘은 장비 점검 후 세컨이 선수의 머리에 씌워 줍니다."
+},
+{
+"cat": "EKİPMAN",
+"en": "Every athlete must perform the traditional \"Wai Kru\" respect ritual before the first round.",
+"tr": "Her sporcu birinci raunttan önce geleneksel \"Wai Kru\" saygı ritüelini gerçekleştirmelidir.",
+"de": "Jeder Athlet muss vor der ersten Runde das traditionelle Respektritual \"Wai Kru\" ausführen.",
+"ar": "على كل لاعب أداء طقس الاحترام التقليدي \"واي كرو\" قبل الجولة الأولى.",
+"fr": "Chaque athlète doit accomplir le rituel de respect traditionnel « Wai Kru » avant le premier round.",
+"ko": "모든 선수는 1라운드 전에 전통 존중 의식인 \"와이 크루\"를 해야 합니다."
+},
+{
+"cat": "EKİPMAN",
+"en": "The athlete enters the ring between the 2nd and 3rd ropes; heavyweight athletes enter between the 3rd and 4th ropes.",
+"tr": "Sporcu ringe 2. ve 3. ip arasından girer; ağır sıklet sporcuları 3. ve 4. ip arasından girer.",
+"de": "Der Athlet betritt den Ring zwischen dem 2. und 3. Seil; Schwergewichtler zwischen dem 3. und 4. Seil.",
+"ar": "يدخل اللاعب الحلبة بين الحبلين الثاني والثالث؛ أما لاعبو الوزن الثقيل فيدخلون بين الحبلين الثالث والرابع.",
+"fr": "L'athlète entre sur le ring entre la 2e et la 3e corde ; les poids lourds entrent entre la 3e et la 4e corde.",
+"ko": "선수는 두 번째와 세 번째 로프 사이로 링에 들어가며, 헤비급 선수는 세 번째와 네 번째 로프 사이로 들어갑니다."
+},
+{
+"cat": "KÖŞE",
+"en": "Each athlete may have at most two (2) seconds and cannot compete without at least one (1).",
+"tr": "Her sporcunun en fazla iki (2) köşe görevlisi olabilir; en az bir (1) köşe görevlisi olmadan maça çıkamaz.",
+"de": "Jeder Athlet darf höchstens zwei (2) Sekundanten haben und kann ohne mindestens einen (1) nicht antreten.",
+"ar": "يجوز لكل لاعب أن يكون لديه اثنان (2) من مساعدي الركن كحدٍّ أقصى، ولا يمكنه النزال دون واحد (1) على الأقل.",
+"fr": "Chaque athlète peut avoir au maximum deux (2) soigneurs et ne peut concourir sans au moins un (1).",
+"ko": "각 선수는 최대 2명의 세컨을 둘 수 있으며, 최소 1명 없이는 경기에 나설 수 없습니다."
+},
+{
+"cat": "KÖŞE",
+"en": "For hygiene, corner items (towel, spray bottle) are not lent to another athlete; drinking from the opponent's spray bottle is forbidden.",
+"tr": "Hijyen gereği köşe malzemeleri (havlu, sprey şişesi) başka bir sporcuya verilmez; rakibin sprey şişesinden su içmek yasaktır.",
+"de": "Aus Hygienegründen werden Eckutensilien (Handtuch, Sprühflasche) nicht an andere Athleten verliehen; das Trinken aus der Sprühflasche des Gegners ist verboten.",
+"ar": "لأسباب صحّية، لا تُعار أدوات الركن (المنشفة، زجاجة الرذاذ) للاعب آخر؛ ويُمنع الشرب من زجاجة رذاذ الخصم.",
+"fr": "Pour l'hygiène, le matériel de coin (serviette, vaporisateur) ne se prête pas à un autre athlète ; boire au vaporisateur de l'adversaire est interdit.",
+"ko": "위생을 위해 코너 용품(수건, 분무기)은 다른 선수에게 빌려주지 않으며, 상대의 분무기로 물을 마시는 것은 금지됩니다."
+},
+{
+"cat": "SAĞLIK",
+"en": "An athlete may fight at most three (3) bouts per day, with at least two (2) hours of rest between bouts.",
+"tr": "Bir sporcu günde en fazla üç (3) maç yapabilir ve maçlar arasında en az iki (2) saat dinlenmelidir.",
+"de": "Ein Athlet darf höchstens drei (3) Kämpfe pro Tag bestreiten, mit mindestens zwei (2) Stunden Pause zwischen den Kämpfen.",
+"ar": "يجوز للاعب خوض ثلاث (3) نزالات كحدٍّ أقصى في اليوم، مع راحة لا تقلّ عن ساعتين (2) بين النزالات.",
+"fr": "Un athlète peut disputer au maximum trois (3) combats par jour, avec au moins deux (2) heures de repos entre les combats.",
+"ko": "선수는 하루에 최대 3경기를 치를 수 있으며, 경기 사이에 최소 2시간 휴식해야 합니다."
+}
+];

@@ -39,13 +39,27 @@
   .lang-toggle button { font-size:11px; font-weight:600; padding:4px 12px; border-radius:20px;
     border:1px solid var(--border); background:var(--card-bg); color:var(--text2); cursor:pointer; }
   .lang-toggle button.active { background:var(--primary); color:#fff; border-color:var(--primary); }
+  .pp-topbar { display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:10px; }
+  .pp-home { font-size:12px; font-weight:600; padding:5px 12px; border-radius:20px; border:1px solid var(--border);
+    background:var(--card-bg); color:var(--primary); white-space:nowrap; }
+  .pp-home:hover { background:var(--primary); color:#fff; border-color:var(--primary); text-decoration:none; }
+  .lang-toggle { margin-bottom:0; flex-wrap:wrap; }
+  html[dir=rtl] body { direction:rtl; }
+  html[dir=rtl] ul { padding-left:0; padding-right:20px; }
+  html[dir=rtl] h1 { border-bottom-color:var(--primary); }
 </style>
 </head>
 <body>
 
-<div class="lang-toggle">
-  <button id="lt-tr" onclick="setPrivacyLang('tr')">TR</button>
-  <button id="lt-de" onclick="setPrivacyLang('de')">DE</button>
+<div class="pp-topbar">
+  <a href="index.html" id="pp-home" class="pp-home">← Ana Sayfa</a>
+  <div class="lang-toggle">
+    <button id="lt-tr" onclick="setPrivacyLang('tr')">TR</button>
+    <button id="lt-de" onclick="setPrivacyLang('de')">DE</button>
+    <button id="lt-ar" onclick="setPrivacyLang('ar')">ع</button>
+    <button id="lt-fr" onclick="setPrivacyLang('fr')">FR</button>
+    <button id="lt-ko" onclick="setPrivacyLang('ko')">KO</button>
+  </div>
 </div>
 
 <div id="privacy-content"></div>
@@ -55,7 +69,7 @@
     tr: {
       docTitle: "Gizlilik Politikası – TMF Hakem İngilizcesi",
       h1: "Gizlilik Politikası",
-      lead: "<strong>TMF Muaythai – Hakem İngilizcesi Eğitim Modülü</strong><br>Son güncelleme: 08. Temmuz 2026",
+      lead: "<strong>TMF Muaythai – Hakem İngilizcesi Eğitim Modülü</strong><br>Son güncelleme: 20 Haziran 2026",
       cards: [
         { h: "Mikrofon Kullanımı",
           p: ["Bu uygulama, Senaryo Pratiği bölümündeki telaffuz kontrolü için isteğe bağlı olarak mikrofonunuza erişim talep edebilir."],
@@ -92,7 +106,8 @@
         { h: "İletişim",
           p: ["Uygulama hakkında sorularınız için:<br><a href=\"mailto:afrauz@outlook.com\">afrauz@outlook.com</a>"] }
       ],
-      footer: "Designed &amp; Developed by <strong>Afra UZ</strong> · TMF Muaythai"
+      footer: "Designed &amp; Developed by <strong>Afra UZ</strong> · TMF Muaythai",
+      home: "← Ana Sayfa"
     },
     de: {
       docTitle: "Datenschutzerklärung – MTBD Referee-Englisch",
@@ -134,8 +149,12 @@
         { h: "Kontakt",
           p: ["Bei Fragen zur App:<br><a href=\"mailto:afrauz@outlook.com\">afrauz@outlook.com</a>"] }
       ],
-      footer: "Designed &amp; Developed by <strong>Afra UZ</strong> · TMF Muaythai"
-    }
+      footer: "Designed &amp; Developed by <strong>Afra UZ</strong> · TMF Muaythai",
+      home: "← Startseite"
+    },
+    fr: {"docTitle": "Politique de confidentialité – FFKMDA Anglais pour arbitres", "h1": "Politique de confidentialité", "lead": "<strong>FFKMDA Muaythaï – Module d'anglais pour arbitres</strong><br>Dernière mise à jour : 20 juin 2026", "cards": [{"h": "Utilisation du microphone", "p": ["Cette application peut, de façon facultative, demander l'accès à votre microphone pour le contrôle de la prononciation dans la section Exercice de scénarios."], "ul": ["Le microphone ne s'active que lorsque vous appuyez sur le bouton.", "Aucune donnée audio n'est transmise à un serveur ni stockée.", "La reconnaissance vocale est entièrement effectuée par le navigateur de votre appareil.", "L'application ne crée aucun enregistrement audio.", "Vous pouvez révoquer l'autorisation du microphone à tout moment dans les paramètres du navigateur."]}, {"h": "Collecte de données", "p": ["Cette application ne collecte aucune donnée personnelle."], "ul": ["Il n'y a ni compte utilisateur ni système d'inscription.", "Aucun cookie n'est utilisé.", "Aucun outil d'analyse ou de suivi n'est utilisé.", "Aucune donnée d'utilisateur n'est partagée avec des tiers."]}, {"h": "Hébergement", "p": ["L'application est hébergée sur <strong>GitHub Pages</strong>. Tout le contenu, y compris les fichiers audio, est constitué de fichiers statiques. Il n'y a aucun serveur backend.", "Vous pouvez consulter la politique de confidentialité de GitHub ici : <a href=\"https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement\" target=\"_blank\">GitHub Privacy Statement</a>"]}, {"h": "Contenus audio", "ul": ["Les voix anglaises de l'application ont été générées et utilisées dans le cadre de la licence commerciale de la technologie vocale d'IA <strong>ElevenLabs</strong>.", "Les voix thaïes ont été créées avec la technologie Google Text-to-Speech.", "Tous les contenus audio ont été intégrés au projet pour contribuer à la formation linguistique des arbitres de la fédération."]}, {"h": "À propos de l'application", "p": ["Cette application a été conçue et développée le <strong>3 juin 2026</strong> par <strong>Afra UZ, arbitre internationale de Muaythaï et professeure de langues étrangères</strong>, afin d'améliorer les compétences de communication en anglais des arbitres de la Fédération turque de Muaythaï lors des compétitions internationales.", "Tout le matériel pédagogique et la terminologie de l'application ont été préparés avec le plus grand soin, selon des principes pédagogiques, par la développeuse qui a elle-même réalisé la traduction anglaise du règlement officiel de la fédération.", "<span style=\"font-weight:500\">Avis juridique : la structure de formation basée sur des scénarios propre à la discipline, les modules de tâches interactifs développés spécialement pour les rôles d'arbitre, ainsi que la méthode d'utilisation originale intégrant les technologies d'apprentissage des langues au domaine de l'arbitrage sportif présentent le caractère d'une &quot;invention technique&quot; ; les procédures légales d'enregistrement et de brevet sont en cours. Les droits de conception, de programmation et d'édition du contenu de ce logiciel appartiennent à Afra UZ.</span>"]}, {"h": "Contact", "p": ["Pour toute question sur l'application :<br><a href=\"mailto:afrauz@outlook.com\">afrauz@outlook.com</a>"]}], "footer": "Designed &amp; Developed by <strong>Afra UZ</strong> · TMF Muaythai", "home": "← Accueil"},
+    ar: {"docTitle": "سياسة الخصوصية – TMF إنجليزية الحكّام", "h1": "سياسة الخصوصية", "lead": "<strong>TMF مواي تاي – وحدة تدريب إنجليزية الحكّام</strong><br>آخر تحديث: 20 يونيو 2026", "cards": [{"h": "استخدام الميكروفون", "p": ["قد يطلب هذا التطبيق اختياريًا الوصول إلى الميكروفون للتحقّق من النطق في قسم تمرين السيناريوهات."], "ul": ["لا يعمل الميكروفون إلا عند الضغط على الزر.", "لا تُرسَل أيّ بيانات صوتية إلى أيّ خادم ولا تُخزَّن.", "تتمّ معالجة التعرّف على الكلام بالكامل داخل متصفّح جهازك.", "لا ينشئ التطبيق أيّ تسجيل صوتي.", "يمكنك إلغاء إذن الميكروفون في أيّ وقت من إعدادات المتصفّح."]}, {"h": "جمع البيانات", "p": ["لا يجمع هذا التطبيق أيّ بيانات شخصية."], "ul": ["لا يوجد حساب مستخدم ولا نظام تسجيل.", "لا تُستخدَم ملفّات تعريف الارتباط (الكوكيز).", "لا تُستخدَم أدوات تحليل أو تتبّع.", "لا تُشارَك أيّ بيانات مستخدم مع أطراف ثالثة."]}, {"h": "الاستضافة", "p": ["يُستضاف التطبيق على <strong>GitHub Pages</strong>. جميع المحتويات، بما فيها الملفّات الصوتية، عبارة عن ملفّات ثابتة. ولا يوجد أيّ خادم خلفي.", "يمكنك الاطّلاع على سياسة خصوصية GitHub من هنا: <a href=\"https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement\" target=\"_blank\">GitHub Privacy Statement</a>"]}, {"h": "المحتويات الصوتية", "ul": ["أُنتِجت الأصوات الإنجليزية في التطبيق واستُخدِمت ضمن الترخيص التجاري لتقنية الصوت بالذكاء الاصطناعي <strong>ElevenLabs</strong>.", "أُنشئت الأصوات التايلاندية باستخدام تقنية Google Text-to-Speech.", "دُمِجت جميع المحتويات الصوتية في المشروع للمساهمة في التدريب اللغوي لحكّام الاتحاد."]}, {"h": "حول التطبيق", "p": ["صُمِّم هذا التطبيق وطُوِّر في <strong>3 يونيو 2026</strong> على يد <strong>أفرا أوز، حَكَم مواي تاي دولية ومعلّمة لغات أجنبية</strong>، بهدف تعزيز كفاءة التواصل بالإنجليزية لدى حكّام الاتحاد التركي للمواي تاي في المنافسات الدولية.", "أُعِدّت جميع المواد التعليمية والمصطلحات في التطبيق بعناية فائقة ووفق مبادئ تربوية من قبل المطوّرة التي أنجزت بنفسها الترجمة الإنجليزية للائحة الرسمية للاتحاد.", "<span style=\"font-weight:500\">تنويه قانوني: يحمل كلٌّ من بنية التدريب القائمة على السيناريوهات الخاصة بالرياضة، ووحدات المهامّ التفاعلية المطوّرة خصيصًا لأدوار الحكّام، والأسلوب الأصلي لدمج تقنيات تعلّم اللغات في مجال التحكيم الرياضي، صفةَ &quot;الاختراع التقني&quot;؛ وإجراءات التسجيل والحماية ببراءة الاختراع جارية. حقوق تصميم هذا البرنامج وبرمجته وتنظيم محتواه تعود إلى أفرا أوز.</span>"]}, {"h": "التواصل", "p": ["لأيّ أسئلة حول التطبيق:<br><a href=\"mailto:afrauz@outlook.com\">afrauz@outlook.com</a>"]}], "footer": "Designed &amp; Developed by <strong>Afra UZ</strong> · TMF Muaythai", "home": "الرئيسية →"},
+    ko: {"docTitle": "개인정보 처리방침 – 대한무에타이협회 심판 영어", "h1": "개인정보 처리방침", "lead": "<strong>대한무에타이협회 – 심판 영어 교육 모듈</strong><br>최종 업데이트: 2026년 6월 20일", "cards": [{"h": "마이크 사용", "p": ["이 앱은 시나리오 연습 섹션의 발음 확인을 위해 선택적으로 마이크 접근을 요청할 수 있습니다."], "ul": ["마이크는 버튼을 눌렀을 때만 작동합니다.", "음성 데이터는 어떤 서버로도 전송되거나 저장되지 않습니다.", "음성 인식은 전적으로 기기의 브라우저에서 처리됩니다.", "앱은 어떤 음성 녹음도 생성하지 않습니다.", "마이크 권한은 언제든지 브라우저 설정에서 해제할 수 있습니다."]}, {"h": "데이터 수집", "p": ["이 앱은 어떠한 개인정보도 수집하지 않습니다."], "ul": ["사용자 계정이나 가입 시스템이 없습니다.", "쿠키를 사용하지 않습니다.", "분석 또는 추적 도구를 사용하지 않습니다.", "어떤 사용자 데이터도 제3자와 공유하지 않습니다."]}, {"h": "호스팅", "p": ["앱은 <strong>GitHub Pages</strong>에서 호스팅됩니다. 음성 파일을 포함한 모든 콘텐츠는 정적 파일로 구성됩니다. 백엔드 서버는 없습니다.", "GitHub의 개인정보 처리방침은 여기에서 확인할 수 있습니다: <a href=\"https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement\" target=\"_blank\">GitHub Privacy Statement</a>"]}, {"h": "음성 콘텐츠", "ul": ["앱의 영어 음성은 AI 음성 기술 <strong>ElevenLabs</strong>의 상업용 라이선스에 따라 제작·사용되었습니다.", "태국어 음성은 Google Text-to-Speech 기술로 생성되었습니다.", "모든 음성 콘텐츠는 협회 심판들의 언어 교육에 기여하기 위해 프로젝트에 통합되었습니다."]}, {"h": "앱 소개", "p": ["이 앱은 <strong>2026년 6월 3일</strong> <strong>국제 무에타이 심판이자 외국어 교사인 Afra UZ</strong>가 튀르키예 무에타이 협회 심판진의 국제 대회 영어 소통 역량을 높이기 위해 설계·개발했습니다.", "앱의 모든 교육 자료와 용어는 협회 공식 규정의 영어 번역을 직접 수행한 개발자가 교육학 원칙에 따라 세심하게 준비했습니다.", "<span style=\"font-weight:500\">법적 고지: 이 소프트웨어의 종목 특화 시나리오 기반 교육 구조, 심판 역할을 위해 특별히 개발된 인터랙티브 과제 모듈, 그리고 언어 학습 기술을 스포츠 심판 분야에 통합한 독창적 활용 방식은 &quot;기술적 발명&quot;의 성격을 가지며, 법적 등록 및 특허 절차가 진행 중입니다. 이 소프트웨어의 디자인, 코딩, 콘텐츠 편집 권리는 Afra UZ에게 있습니다.</span>"]}, {"h": "문의", "p": ["앱에 관한 문의:<br><a href=\"mailto:afrauz@outlook.com\">afrauz@outlook.com</a>"]}], "footer": "Designed &amp; Developed by <strong>Afra UZ</strong> · TMF Muaythai", "home": "← 홈"}
   };
 
   function renderPrivacy(lang) {
@@ -151,8 +170,11 @@
     });
     html += `<div class="footer">${d.footer}</div>`;
     document.getElementById('privacy-content').innerHTML = html;
-    document.getElementById('lt-tr').classList.toggle('active', lang === 'tr');
-    document.getElementById('lt-de').classList.toggle('active', lang === 'de');
+    document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+    ['tr','de','ar','fr','ko'].forEach(function(l){
+      var b = document.getElementById('lt-'+l); if(b) b.classList.toggle('active', lang === l);
+    });
+    var hb = document.getElementById('pp-home'); if(hb && d.home) hb.textContent = d.home;
   }
   function setPrivacyLang(lang) {
     try { localStorage.setItem('appLang', lang); } catch(e){}
