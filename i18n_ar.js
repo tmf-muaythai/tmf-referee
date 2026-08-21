@@ -130,16 +130,19 @@ function simLabelLoc(labelTr){
     if (APP_LANG==='ar' && typeof SIM_LABEL_AR!=='undefined' && SIM_LABEL_AR[labelTr]) return SIM_LABEL_AR[labelTr];
     if (APP_LANG==='fr' && typeof SIM_LABEL_FR!=='undefined' && SIM_LABEL_FR[labelTr]) return SIM_LABEL_FR[labelTr];
     if (APP_LANG==='ko' && typeof SIM_LABEL_KO!=='undefined' && SIM_LABEL_KO[labelTr]) return SIM_LABEL_KO[labelTr];
+    if (APP_LANG==='th' && typeof SIM_LABEL_TH!=='undefined' && SIM_LABEL_TH[labelTr]) return SIM_LABEL_TH[labelTr];
+    if (APP_LANG==='nl' && typeof SIM_LABEL_NL!=='undefined' && SIM_LABEL_NL[labelTr]) return SIM_LABEL_NL[labelTr];
+    if (APP_LANG==='it' && typeof SIM_LABEL_IT!=='undefined' && SIM_LABEL_IT[labelTr]) return SIM_LABEL_IT[labelTr];
   }
   return labelTr;
 }
 function simUI(k){
   var M={
-    simHeader:{tr:'Sesli Simülasyon',de:'Audio-Simulation',ar:'المحاكاة الصوتية',fr:'Simulation vocale',ko:'음성 시뮬레이션'},
-    simPickTask:{tr:'Pratik yapmak istediğin görevi seç.',de:'Wähle die Aufgabe, die du üben möchtest.',ar:'اختر المهمة التي تريد التدرّب عليها.',fr:'Choisis la tâche que tu veux pratiquer.',ko:'연습하고 싶은 과제를 선택하세요.'},
-    simPickSection:{tr:'Pratik yapmak istediğin bölümü seç.',de:'Wähle den Abschnitt, den du üben möchtest.',ar:'اختر القسم الذي تريد التدرّب عليه.',fr:'Choisis la section que tu veux pratiquer.',ko:'연습하고 싶은 섹션을 선택하세요.'},
-    simBackTasks:{tr:'← Görevler',de:'← Aufgaben',ar:'← المهام',fr:'← Tâches',ko:'← 과제'},
-    simSoon:{tr:'Yakında',de:'Bald',ar:'قريباً',fr:'Bientôt',ko:'곧 제공'}
+    simHeader:{tr:'Sesli Simülasyon',de:'Audio-Simulation',ar:'المحاكاة الصوتية',fr:'Simulation vocale',ko:'음성 시뮬레이션',th:'การจำลองด้วยเสียง',nl:'Spraaksimulatie',it:'Simulazione vocale'},
+    simPickTask:{tr:'Pratik yapmak istediğin görevi seç.',de:'Wähle die Aufgabe, die du üben möchtest.',ar:'اختر المهمة التي تريد التدرّب عليها.',fr:'Choisis la tâche que tu veux pratiquer.',ko:'연습하고 싶은 과제를 선택하세요.',th:'เลือกงานที่คุณต้องการฝึก',nl:'Kies de taak die je wilt oefenen.',it:'Scegli il compito che vuoi esercitare.'},
+    simPickSection:{tr:'Pratik yapmak istediğin bölümü seç.',de:'Wähle den Abschnitt, den du üben möchtest.',ar:'اختر القسم الذي تريد التدرّب عليه.',fr:'Choisis la section que tu veux pratiquer.',ko:'연습하고 싶은 섹션을 선택하세요.',th:'เลือกส่วนที่คุณต้องการฝึก',nl:'Kies het onderdeel dat je wilt oefenen.',it:'Scegli la sezione che vuoi esercitare.'},
+    simBackTasks:{tr:'← Görevler',de:'← Aufgaben',ar:'← المهام',fr:'← Tâches',ko:'← 과제',th:'← งาน',nl:'← Taken',it:'← Compiti'},
+    simSoon:{tr:'Yakında',de:'Bald',ar:'قريباً',fr:'Bientôt',ko:'곧 제공',th:'เร็ว ๆ นี้',nl:'Binnenkort',it:'Presto'}
   };
   var e=M[k]||{}, L=(typeof APP_LANG!=='undefined')?APP_LANG:'tr';
   return (e[L]!=null)?e[L]:(e.tr||'');

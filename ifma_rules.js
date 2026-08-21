@@ -1,5 +1,6 @@
-// ═══ IFMA KURALLARI — ana sayfa kural kartı için (6 dil) ═══
+// ═══ IFMA KURALLARI — ana sayfa kural kartı için (9 dil) ═══
 // Otomatik üretildi; kaynak: IFMA Uluslararası Müsabaka Kuralları ve Yönetmelikleri (Çeviri: Afra UZ)
+// Tayca (th), Hollandaca (nl) ve İtalyanca (it) alanları AI çevirisi — native inceleme önerilir.
 var IFMA_RULES = [
 {
 "cat": "KOMUT",
@@ -8,7 +9,10 @@ var IFMA_RULES = [
 "de": "Der Kampfrichter ruft deutlich \"YOOT\", um die Aktion zu stoppen, und \"CHOK\", um den Kampf fortzusetzen.",
 "ar": "يقول الحكم بوضوح \"YOOT\" لإيقاف الحركة و\"CHOK\" لاستئناف النزال.",
 "fr": "L'arbitre annonce clairement « YOOT » pour arrêter l'action et « CHOK » pour reprendre le combat.",
-"ko": "주심은 동작을 멈추기 위해 \"YOOT\", 경기를 재개하기 위해 \"CHOK\"을 분명히 외칩니다."
+"ko": "주심은 동작을 멈추기 위해 \"YOOT\", 경기를 재개하기 위해 \"CHOK\"을 분명히 외칩니다.",
+"th": "ผู้ตัดสินออกคำสั่ง \"YOOT\" อย่างชัดเจนเพื่อหยุดการชก และ \"CHOK\" เพื่อให้ชกต่อ",
+"nl": "De scheidsrechter roept duidelijk \"YOOT\" om de actie te stoppen en \"CHOK\" om de strijd te hervatten.",
+"it": "L'arbitro dà chiaramente il comando \"YOOT\" per fermare l'azione e \"CHOK\" per riprendere il combattimento."
 },
 {
 "cat": "KOMUT",
@@ -17,7 +21,10 @@ var IFMA_RULES = [
 "de": "Wird ein Athlet zu Boden geschickt, ertönt der Rundenschluss-Gong nicht, während der Kampfrichter zählt; er ertönt erst, nachdem der Kampfrichter \"CHOK\" gerufen hat.",
 "ar": "عندما يسقط لاعب أرضًا، لا يُقرع جرس نهاية الجولة أثناء عدّ الحكم؛ بل يُقرع فقط بعد أن يقول الحكم \"CHOK\".",
 "fr": "Lorsqu'un athlète est mis au tapis, le gong de fin de round ne retentit pas pendant que l'arbitre compte ; il ne sonne qu'après que l'arbitre a annoncé « CHOK ».",
-"ko": "선수가 다운되면 주심이 카운트하는 동안 라운드 종료 공이 울리지 않습니다. 공은 주심이 \"CHOK\"을 외친 뒤에만 울립니다."
+"ko": "선수가 다운되면 주심이 카운트하는 동안 라운드 종료 공이 울리지 않습니다. 공은 주심이 \"CHOK\"을 외친 뒤에만 울립니다.",
+"th": "เมื่อนักกีฬาถูกน็อกดาวน์ จะไม่ตีฆ้องหมดยกขณะที่ผู้ตัดสินกำลังนับ ฆ้องจะตีก็ต่อเมื่อผู้ตัดสินออกคำสั่ง \"CHOK\" แล้วเท่านั้น",
+"nl": "Wanneer een atleet neergaat, klinkt de gong voor het einde van de ronde niet terwijl de scheidsrechter telt; hij klinkt pas nadat de scheidsrechter \"CHOK\" heeft geroepen.",
+"it": "Quando un atleta va a terra, il gong di fine ripresa non suona mentre l'arbitro conta; suona solo dopo che l'arbitro ha detto \"CHOK\"."
 },
 {
 "cat": "KOMUT",
@@ -26,7 +33,10 @@ var IFMA_RULES = [
 "de": "Fällt ein Athlet aus dem Ring, ruft der Kampfrichter \"YOOT\" und zählt; der Athlet muss ohne Hilfe innerhalb des thailändischen Zählens \"Yee-Sib\" (20) zurückkehren.",
 "ar": "إذا سقط اللاعب خارج الحلبة، يقول الحكم \"YOOT\" ويبدأ العدّ؛ وعلى اللاعب العودة دون مساعدة قبل انتهاء العدّ التايلاندي \"يي-سيب\" (20).",
 "fr": "Si un athlète tombe hors du ring, l'arbitre annonce « YOOT » et compte ; l'athlète doit revenir sans aide avant le compte thaï « Yee-Sib » (20).",
-"ko": "선수가 링 밖으로 떨어지면 주심은 \"YOOT\"을 외치고 카운트합니다. 선수는 태국어 카운트 \"이십(Yee-Sib, 20)\" 안에 도움 없이 링으로 돌아와야 합니다."
+"ko": "선수가 링 밖으로 떨어지면 주심은 \"YOOT\"을 외치고 카운트합니다. 선수는 태국어 카운트 \"이십(Yee-Sib, 20)\" 안에 도움 없이 링으로 돌아와야 합니다.",
+"th": "หากนักกีฬาตกจากเวที ผู้ตัดสินออกคำสั่ง \"YOOT\" และเริ่มนับ นักกีฬาต้องกลับขึ้นเวทีเองโดยไม่มีผู้ช่วยภายในการนับภาษาไทย \"ยี่สิบ\" (20)",
+"nl": "Als een atleet uit de ring valt, roept de scheidsrechter \"YOOT\" en telt; de atleet moet zonder hulp terugkeren binnen de Thaise telling \"Yee-Sib\" (20).",
+"it": "Se un atleta cade fuori dal ring, l'arbitro dice \"YOOT\" e conta; l'atleta deve rientrare senza aiuto entro il conteggio thai \"Yee-Sib\" (20)."
 },
 {
 "cat": "KOMUT",
@@ -35,7 +45,10 @@ var IFMA_RULES = [
 "de": "Der Gruß (Wai) wird nur vor der ersten Runde und nach der Ergebnisverkündung ausgeführt; ein Gruß zwischen den Runden ist nicht erlaubt.",
 "ar": "تُؤدّى التحية (الواي) فقط قبل الجولة الأولى وبعد إعلان النتيجة؛ ولا يُسمح بالتحية بين الجولات.",
 "fr": "Le salut (Wai) ne se fait qu'avant le premier round et après l'annonce du résultat ; saluer entre les rounds n'est pas autorisé.",
-"ko": "인사(와이)는 1라운드 전과 결과 발표 후에만 합니다. 라운드 사이의 인사는 허용되지 않습니다."
+"ko": "인사(와이)는 1라운드 전과 결과 발표 후에만 합니다. 라운드 사이의 인사는 허용되지 않습니다.",
+"th": "การไหว้ (Wai) ทำเฉพาะก่อนยกแรกและหลังประกาศผลเท่านั้น ห้ามไหว้ระหว่างยก",
+"nl": "De groet (Wai) wordt alleen vóór de eerste ronde en na de bekendmaking van de uitslag uitgevoerd; groeten tussen de ronden is niet toegestaan.",
+"it": "Il saluto (Wai) si esegue solo prima della prima ripresa e dopo l'annuncio della decisione; salutarsi tra le riprese non è consentito."
 },
 {
 "cat": "KOMUT",
@@ -44,7 +57,10 @@ var IFMA_RULES = [
 "de": "Vor und nach der Entscheidung erweisen die Athleten ihrem Gegner, der Ecke und den Offiziellen Respekt, indem sie die Hände schütteln oder den \"Wai\" ausführen.",
 "ar": "قبل إعلان القرار وبعده، يُظهر اللاعبون الاحترام لخصمهم وركنهم والحكّام عبر المصافحة أو أداء \"الواي\".",
 "fr": "Avant et après la décision, les athlètes témoignent leur respect à l'adversaire, au coin et aux officiels en se serrant la main ou en effectuant le « Wai ».",
-"ko": "판정 전후로 선수들은 악수를 하거나 \"와이\"를 하여 상대, 코너, 심판에게 존중을 표합니다."
+"ko": "판정 전후로 선수들은 악수를 하거나 \"와이\"를 하여 상대, 코너, 심판에게 존중을 표합니다.",
+"th": "ก่อนและหลังการตัดสิน นักกีฬาแสดงความเคารพต่อคู่ต่อสู้ มุม และคณะผู้ตัดสิน ด้วยการจับมือหรือการ \"ไหว้\"",
+"nl": "Vóór en na de beslissing tonen atleten respect aan hun tegenstander, hoek en functionarissen door handen te schudden of de \"Wai\" uit te voeren.",
+"it": "Prima e dopo la decisione, gli atleti mostrano rispetto all'avversario, all'angolo e ai funzionari stringendo la mano o eseguendo il \"Wai\"."
 },
 {
 "cat": "PUANLAMA",
@@ -53,7 +69,10 @@ var IFMA_RULES = [
 "de": "Zwingendes Zehn-Punkte-System: Der Sieger jeder Runde erhält zehn (10) Punkte; es werden keine Bruchteilpunkte vergeben.",
 "ar": "نظام النقاط العشر الإلزامي: يُمنح الفائز بكل جولة عشر (10) نقاط؛ ولا تُمنح نقاط كسرية.",
 "fr": "Système obligatoire des dix points : le vainqueur de chaque round reçoit dix (10) points ; aucun point fractionnaire n'est attribué.",
-"ko": "필수 10점제: 각 라운드 승자에게 10점을 주며, 소수점 점수는 주지 않습니다."
+"ko": "필수 10점제: 각 라운드 승자에게 10점을 주며, 소수점 점수는 주지 않습니다.",
+"th": "ระบบคะแนนบังคับสิบแต้ม: ผู้ชนะในแต่ละยกได้สิบ (10) คะแนน ไม่มีการให้คะแนนเศษ",
+"nl": "Verplicht tienpuntensysteem: de winnaar van elke ronde krijgt tien (10) punten; er worden geen deelpunten gegeven.",
+"it": "Sistema obbligatorio dei dieci punti: al vincitore di ogni ripresa vengono assegnati dieci (10) punti; non si danno punti frazionari."
 },
 {
 "cat": "PUANLAMA",
@@ -62,7 +81,10 @@ var IFMA_RULES = [
 "de": "Der Rundensieger erhält 10-9 bei geringem Unterschied, 10-8 bei deutlichem Unterschied und 10-7 bei völliger Überlegenheit.",
 "ar": "يحصل الفائز بالجولة على 10-9 عند فارق بسيط، و10-8 عند فارق واضح، و10-7 عند تفوّق تام.",
 "fr": "Le vainqueur du round obtient 10-9 pour un faible écart, 10-8 pour un écart net et 10-7 pour une supériorité totale.",
-"ko": "라운드 승자는 근소한 차이면 10-9, 명확한 차이면 10-8, 완전한 우세면 10-7을 받습니다."
+"ko": "라운드 승자는 근소한 차이면 10-9, 명확한 차이면 10-8, 완전한 우세면 10-7을 받습니다.",
+"th": "ผู้ชนะในยกได้ 10-9 เมื่อต่างกันเล็กน้อย, 10-8 เมื่อต่างกันชัดเจน และ 10-7 เมื่อเหนือกว่าอย่างเด็ดขาด",
+"nl": "De rondewinnaar krijgt 10-9 bij een klein verschil, 10-8 bij een duidelijk verschil en 10-7 bij totale superioriteit.",
+"it": "Il vincitore della ripresa prende 10-9 per una piccola differenza, 10-8 per una differenza netta e 10-7 per una superiorità totale."
 },
 {
 "cat": "PUANLAMA",
@@ -71,7 +93,10 @@ var IFMA_RULES = [
 "de": "Der Punkteabstand richtet sich nach der Differenz der Trefferzahl: 7 oder weniger = 10-9, 8-14 = 10-8, 15-21 = 10-7.",
 "ar": "يُحدَّد فارق النقاط حسب فارق عدد الضربات المُحتسَبة: 7 أو أقل = 10-9، و8-14 = 10-8، و15-21 = 10-7.",
 "fr": "L'écart de points dépend de la différence de coups marquants : 7 ou moins = 10-9, 8-14 = 10-8, 15-21 = 10-7.",
-"ko": "점수 차는 유효 타격 수 차이로 정해집니다: 7 이하 = 10-9, 8~14 = 10-8, 15~21 = 10-7."
+"ko": "점수 차는 유효 타격 수 차이로 정해집니다: 7 이하 = 10-9, 8~14 = 10-8, 15~21 = 10-7.",
+"th": "ช่องว่างคะแนนกำหนดจากผลต่างจำนวนหมัด/อาวุธที่นับได้: 7 หรือน้อยกว่า = 10-9, 8-14 = 10-8, 15-21 = 10-7",
+"nl": "De scorekloof wordt bepaald door het verschil in scorende treffers: 7 of minder = 10-9, 8-14 = 10-8, 15-21 = 10-7.",
+"it": "Il divario di punteggio è determinato dalla differenza di colpi validi: 7 o meno = 10-9, 8-14 = 10-8, 15-21 = 10-7."
 },
 {
 "cat": "PUANLAMA",
@@ -80,7 +105,10 @@ var IFMA_RULES = [
 "de": "Jeder Körperteil ist ein gültiges Ziel, außer dem Kopfschutzbereich und den Halswirbeln (C1-C7, dem Nacken).",
 "ar": "كل جزء من الجسم هدف صحيح باستثناء منطقة واقي الرأس وفقرات الرقبة (C1-C7، مؤخّرة العنق).",
 "fr": "Toute partie du corps est une cible valable, sauf la zone du casque et les vertèbres cervicales (C1-C7, la nuque).",
-"ko": "헤드기어 부위와 경추(C1-C7, 뒷목)를 제외한 신체의 모든 부위가 유효 타격 목표입니다."
+"ko": "헤드기어 부위와 경추(C1-C7, 뒷목)를 제외한 신체의 모든 부위가 유효 타격 목표입니다.",
+"th": "ทุกส่วนของร่างกายเป็นเป้าที่นับคะแนนได้ ยกเว้นบริเวณเครื่องป้องกันศีรษะและกระดูกคอ (C1-C7 ท้ายทอย)",
+"nl": "Elk deel van het lichaam is een geldig doel, behalve de zone van de hoofdbeschermer en de halswervels (C1-C7, de nek).",
+"it": "Ogni parte del corpo è un bersaglio valido tranne la zona del casco e le vertebre cervicali (C1-C7, la nuca)."
 },
 {
 "cat": "PUANLAMA",
@@ -89,7 +117,10 @@ var IFMA_RULES = [
 "de": "Absichtliche Schläge in die Leiste oder auf die Halswirbel (den Nacken) sind Fouls und ergeben keine Punkte.",
 "ar": "الضربات المتعمَّدة إلى منطقة العانة أو فقرات الرقبة (مؤخّرة العنق) تُعدّ أخطاءً ولا تُحتسب لها نقاط.",
 "fr": "Les coups délibérés à l'aine ou aux vertèbres cervicales (nuque) sont des fautes et ne rapportent aucun point.",
-"ko": "사타구니나 경추(뒷목)에 대한 고의적 타격은 반칙이며 점수가 없습니다."
+"ko": "사타구니나 경추(뒷목)에 대한 고의적 타격은 반칙이며 점수가 없습니다.",
+"th": "การจงใจตีที่เป้าหรือกระดูกคอ (ท้ายทอย) เป็นฟาวล์และไม่ได้คะแนน",
+"nl": "Opzettelijke slagen naar het kruis of de halswervels (nek) zijn overtredingen en leveren geen punten op.",
+"it": "I colpi intenzionali all'inguine o alle vertebre cervicali (nuca) sono infrazioni e non danno punti."
 },
 {
 "cat": "PUANLAMA",
@@ -98,7 +129,10 @@ var IFMA_RULES = [
 "de": "Schläge ohne Muaythai-Können, geblockte Schläge oder kraftlose (schwache) Schläge zählen nicht.",
 "ar": "الضربات التي تُنفَّذ دون مهارة مواي تاي، أو المصدودة، أو الضعيفة التي تفتقر إلى القوة، لا تُحتسب.",
 "fr": "Les coups portés sans technique de Muaythai, bloqués ou faibles (sans puissance) ne comptent pas.",
-"ko": "무에타이 기술 없이 낸 타격, 막힌 타격, 힘이 없는 약한 타격은 점수가 되지 않습니다."
+"ko": "무에타이 기술 없이 낸 타격, 막힌 타격, 힘이 없는 약한 타격은 점수가 되지 않습니다.",
+"th": "การชกที่ไม่มีทักษะมวยไทย การชกที่ถูกบล็อก หรือการชกที่อ่อนไร้พลัง ไม่นับคะแนน",
+"nl": "Slagen zonder Muaythai-techniek, geblokkeerde slagen of zwakke slagen zonder kracht scoren niet.",
+"it": "I colpi portati senza tecnica Muaythai, i colpi bloccati o i colpi deboli privi di potenza non fanno punto."
 },
 {
 "cat": "PUANLAMA",
@@ -107,7 +141,10 @@ var IFMA_RULES = [
 "de": "Stimmen die Punktrichter der Verwarnung des Kampfrichters zu, wird dem verwarnten Athleten ein (1) Punkt vom Gesamtergebnis abgezogen.",
 "ar": "عندما يوافق الحكّام الجانبيون على إنذار الحكم، تُخصم نقطة (1) واحدة من مجموع اللاعب المُعاقَب.",
 "fr": "Lorsque les juges approuvent l'avertissement de l'arbitre, un (1) point est retiré du total de l'athlète pénalisé.",
-"ko": "부심이 주심의 경고(Warning)에 동의하면, 경고받은 선수의 총점에서 1점이 감점됩니다."
+"ko": "부심이 주심의 경고(Warning)에 동의하면, 경고받은 선수의 총점에서 1점이 감점됩니다.",
+"th": "เมื่อกรรมการเห็นพ้องกับคำเตือน (Warning) ของผู้ตัดสิน จะหักหนึ่ง (1) คะแนนจากคะแนนรวมของนักกีฬาที่ถูกลงโทษ",
+"nl": "Wanneer de juryleden het eens zijn met de waarschuwing van de scheidsrechter, wordt één (1) punt afgetrokken van het totaal van de bestrafte atleet.",
+"it": "Quando i giudici concordano con l'ammonizione dell'arbitro, viene sottratto un (1) punto dal totale dell'atleta sanzionato."
 },
 {
 "cat": "SAYMA LİMİTİ",
@@ -116,7 +153,10 @@ var IFMA_RULES = [
 "de": "Pflicht-Zähllimit (U24 / Elite / 35+): Der Kampfrichter beendet den Kampf bei 3 Zählungen in derselben Runde oder 4 Zählungen im gesamten Kampf.",
 "ar": "حدّ العدّ الإلزامي (U24 / النخبة / 35+): يُنهي الحكم النزال عند 3 عدّات في الجولة نفسها أو 4 عدّات خلال النزال كله.",
 "fr": "Limite de comptes obligatoire (U24 / Élite / 35+) : l'arbitre arrête le combat à 3 comptes dans le même round ou 4 comptes sur l'ensemble du combat.",
-"ko": "필수 카운트 제한(U24 / 엘리트 / 35+): 같은 라운드에서 3회 또는 경기 전체에서 4회 카운트에 이르면 주심이 경기를 종료합니다."
+"ko": "필수 카운트 제한(U24 / 엘리트 / 35+): 같은 라운드에서 3회 또는 경기 전체에서 4회 카운트에 이르면 주심이 경기를 종료합니다.",
+"th": "ขีดจำกัดการนับบังคับ (U24 / อีลิท / 35+): ผู้ตัดสินยุติการแข่งขันเมื่อนับครบ 3 ครั้งในยกเดียวกัน หรือ 4 ครั้งตลอดการแข่งขัน",
+"nl": "Verplichte tellingslimiet (U24 / Elite / 35+): de scheidsrechter beëindigt de wedstrijd bij 3 tellingen in dezelfde ronde of 4 tellingen over de hele wedstrijd.",
+"it": "Limite di conteggio obbligatorio (U24 / Elite / 35+): l'arbitro termina l'incontro a 3 conteggi nella stessa ripresa o 4 conteggi in tutto l'incontro."
 },
 {
 "cat": "SAYMA LİMİTİ",
@@ -125,7 +165,10 @@ var IFMA_RULES = [
 "de": "Pflicht-Zähllimit (U18 / Veteranen 40+ / 45+): Der Kampfrichter beendet den Kampf bei 2 Zählungen in derselben Runde oder 3 Zählungen im gesamten Kampf.",
 "ar": "حدّ العدّ الإلزامي (U18 / قدامى 40+ / 45+): يُنهي الحكم النزال عند عدّتين في الجولة نفسها أو 3 عدّات خلال النزال كله.",
 "fr": "Limite de comptes obligatoire (U18 / Vétérans 40+ / 45+) : l'arbitre arrête le combat à 2 comptes dans le même round ou 3 comptes sur l'ensemble du combat.",
-"ko": "필수 카운트 제한(U18 / 베테랑 40+ / 45+): 같은 라운드에서 2회 또는 경기 전체에서 3회 카운트에 이르면 주심이 경기를 종료합니다."
+"ko": "필수 카운트 제한(U18 / 베테랑 40+ / 45+): 같은 라운드에서 2회 또는 경기 전체에서 3회 카운트에 이르면 주심이 경기를 종료합니다.",
+"th": "ขีดจำกัดการนับบังคับ (U18 / เวเทอรัน 40+ / 45+): ผู้ตัดสินยุติการแข่งขันเมื่อนับครบ 2 ครั้งในยกเดียวกัน หรือ 3 ครั้งตลอดการแข่งขัน",
+"nl": "Verplichte tellingslimiet (U18 / Veteranen 40+ / 45+): de scheidsrechter beëindigt de wedstrijd bij 2 tellingen in dezelfde ronde of 3 tellingen over de hele wedstrijd.",
+"it": "Limite di conteggio obbligatorio (U18 / Veterani 40+ / 45+): l'arbitro termina l'incontro a 2 conteggi nella stessa ripresa o 3 conteggi in tutto l'incontro."
 },
 {
 "cat": "SAYMA LİMİTİ",
@@ -134,7 +177,10 @@ var IFMA_RULES = [
 "de": "Pflicht-Zähllimit (U8 / U10 / U12 / U14 / U16): Der Kampfrichter beendet den Kampf bei insgesamt 2 Zählungen im gesamten Kampf.",
 "ar": "حدّ العدّ الإلزامي (U8 / U10 / U12 / U14 / U16): يُنهي الحكم النزال عند بلوغ عدّتين إجمالًا خلال النزال كله.",
 "fr": "Limite de comptes obligatoire (U8 / U10 / U12 / U14 / U16) : l'arbitre arrête le combat à 2 comptes au total sur l'ensemble du combat.",
-"ko": "필수 카운트 제한(U8 / U10 / U12 / U14 / U16): 경기 전체에서 총 2회 카운트에 이르면 주심이 경기를 종료합니다."
+"ko": "필수 카운트 제한(U8 / U10 / U12 / U14 / U16): 경기 전체에서 총 2회 카운트에 이르면 주심이 경기를 종료합니다.",
+"th": "ขีดจำกัดการนับบังคับ (U8 / U10 / U12 / U14 / U16): ผู้ตัดสินยุติการแข่งขันเมื่อนับครบ 2 ครั้งตลอดการแข่งขัน",
+"nl": "Verplichte tellingslimiet (U8 / U10 / U12 / U14 / U16): de scheidsrechter beëindigt de wedstrijd bij 2 tellingen over de hele wedstrijd.",
+"it": "Limite di conteggio obbligatorio (U8 / U10 / U12 / U14 / U16): l'arbitro termina l'incontro a 2 conteggi in tutto l'incontro."
 },
 {
 "cat": "RAUND SÜRESİ",
@@ -143,7 +189,10 @@ var IFMA_RULES = [
 "de": "Veterans 40+/45+ | Veteranlar 40+/45+ | Veteranen 40+/45+ | قدامى 40+/45+ | Vétérans 40+/45+ | 베테랑 40+/45+: Ein Kampf besteht aus 3 Runden zu je 2 Minuten, mit 1,5 Minuten Pause zwischen den Runden.",
 "ar": "Veterans 40+/45+ | Veteranlar 40+/45+ | Veteranen 40+/45+ | قدامى 40+/45+ | Vétérans 40+/45+ | 베테랑 40+/45+: يتكوّن النزال من 3 جولات مدّة كلٍّ منها دقيقتين، مع راحة دقيقة ونصف بين الجولات.",
 "fr": "Veterans 40+/45+ | Veteranlar 40+/45+ | Veteranen 40+/45+ | قدامى 40+/45+ | Vétérans 40+/45+ | 베테랑 40+/45+ : le combat comprend 3 rounds de 2 minutes, avec 1,5 minute de repos entre les rounds.",
-"ko": "Veterans 40+/45+ | Veteranlar 40+/45+ | Veteranen 40+/45+ | قدامى 40+/45+ | Vétérans 40+/45+ | 베테랑 40+/45+: 경기는 각 2분의 3라운드로 진행되며, 라운드 사이 휴식은 1.5분입니다."
+"ko": "Veterans 40+/45+ | Veteranlar 40+/45+ | Veteranen 40+/45+ | قدامى 40+/45+ | Vétérans 40+/45+ | 베테랑 40+/45+: 경기는 각 2분의 3라운드로 진행되며, 라운드 사이 휴식은 1.5분입니다.",
+"th": "เวเทอรัน 40+/45+: การแข่งขันมี 3 ยก ยกละ 2 นาที พักระหว่างยก 1.5 นาที",
+"nl": "Veteranen 40+/45+: een wedstrijd bestaat uit 3 ronden van 2 min, met 1,5 min rust tussen de ronden.",
+"it": "Veterani 40+/45+: un incontro è composto da 3 riprese di 2 min, con 1,5 min di riposo tra le riprese."
 },
 {
 "cat": "RAUND SÜRESİ",
@@ -152,7 +201,10 @@ var IFMA_RULES = [
 "de": "Seniors 35+ | Büyükler 35+ | Senioren 35+ | كبار 35+ | Seniors 35+ | 시니어 35+: Ein Kampf besteht aus 3 Runden zu je 3 Minuten, mit 1,5 Minuten Pause zwischen den Runden.",
 "ar": "Seniors 35+ | Büyükler 35+ | Senioren 35+ | كبار 35+ | Seniors 35+ | 시니어 35+: يتكوّن النزال من 3 جولات مدّة كلٍّ منها 3 دقائق، مع راحة دقيقة ونصف بين الجولات.",
 "fr": "Seniors 35+ | Büyükler 35+ | Senioren 35+ | كبار 35+ | Seniors 35+ | 시니어 35+ : le combat comprend 3 rounds de 3 minutes, avec 1,5 minute de repos entre les rounds.",
-"ko": "Seniors 35+ | Büyükler 35+ | Senioren 35+ | كبار 35+ | Seniors 35+ | 시니어 35+: 경기는 각 3분의 3라운드로 진행되며, 라운드 사이 휴식은 1.5분입니다."
+"ko": "Seniors 35+ | Büyükler 35+ | Senioren 35+ | كبار 35+ | Seniors 35+ | 시니어 35+: 경기는 각 3분의 3라운드로 진행되며, 라운드 사이 휴식은 1.5분입니다.",
+"th": "รุ่นใหญ่ 35+: การแข่งขันมี 3 ยก ยกละ 3 นาที พักระหว่างยก 1.5 นาที",
+"nl": "Senioren 35+: een wedstrijd bestaat uit 3 ronden van 3 min, met 1,5 min rust tussen de ronden.",
+"it": "Seniores 35+: un incontro è composto da 3 riprese di 3 min, con 1,5 min di riposo tra le riprese."
 },
 {
 "cat": "RAUND SÜRESİ",
@@ -161,7 +213,10 @@ var IFMA_RULES = [
 "de": "Elite: Ein Kampf besteht aus 3 Runden zu je 3 Minuten, mit 1 Minute Pause zwischen den Runden.",
 "ar": "Elite: يتكوّن النزال من 3 جولات مدّة كلٍّ منها 3 دقائق، مع راحة دقيقة واحدة بين الجولات.",
 "fr": "Elite : le combat comprend 3 rounds de 3 minutes, avec 1 minute de repos entre les rounds.",
-"ko": "Elite: 경기는 각 3분의 3라운드로 진행되며, 라운드 사이 휴식은 1분입니다."
+"ko": "Elite: 경기는 각 3분의 3라운드로 진행되며, 라운드 사이 휴식은 1분입니다.",
+"th": "อีลิท: การแข่งขันมี 3 ยก ยกละ 3 นาที พักระหว่างยก 1 นาที",
+"nl": "Elite: een wedstrijd bestaat uit 3 ronden van 3 min, met 1 min rust tussen de ronden.",
+"it": "Elite: un incontro è composto da 3 riprese di 3 min, con 1 min di riposo tra le riprese."
 },
 {
 "cat": "RAUND SÜRESİ",
@@ -170,7 +225,10 @@ var IFMA_RULES = [
 "de": "U24: Ein Kampf besteht aus 3 Runden zu je 3 Minuten, mit 1 Minute Pause zwischen den Runden.",
 "ar": "U24: يتكوّن النزال من 3 جولات مدّة كلٍّ منها 3 دقائق، مع راحة دقيقة واحدة بين الجولات.",
 "fr": "U24 : le combat comprend 3 rounds de 3 minutes, avec 1 minute de repos entre les rounds.",
-"ko": "U24: 경기는 각 3분의 3라운드로 진행되며, 라운드 사이 휴식은 1분입니다."
+"ko": "U24: 경기는 각 3분의 3라운드로 진행되며, 라운드 사이 휴식은 1분입니다.",
+"th": "U24: การแข่งขันมี 3 ยก ยกละ 3 นาที พักระหว่างยก 1 นาที",
+"nl": "U24: een wedstrijd bestaat uit 3 ronden van 3 min, met 1 min rust tussen de ronden.",
+"it": "U24: un incontro è composto da 3 riprese di 3 min, con 1 min di riposo tra le riprese."
 },
 {
 "cat": "RAUND SÜRESİ",
@@ -179,7 +237,10 @@ var IFMA_RULES = [
 "de": "U18: Ein Kampf besteht aus 3 Runden zu je 2 Minuten, mit 1 Minute Pause zwischen den Runden.",
 "ar": "U18: يتكوّن النزال من 3 جولات مدّة كلٍّ منها دقيقتين، مع راحة دقيقة واحدة بين الجولات.",
 "fr": "U18 : le combat comprend 3 rounds de 2 minutes, avec 1 minute de repos entre les rounds.",
-"ko": "U18: 경기는 각 2분의 3라운드로 진행되며, 라운드 사이 휴식은 1분입니다."
+"ko": "U18: 경기는 각 2분의 3라운드로 진행되며, 라운드 사이 휴식은 1분입니다.",
+"th": "U18: การแข่งขันมี 3 ยก ยกละ 2 นาที พักระหว่างยก 1 นาที",
+"nl": "U18: een wedstrijd bestaat uit 3 ronden van 2 min, met 1 min rust tussen de ronden.",
+"it": "U18: un incontro è composto da 3 riprese di 2 min, con 1 min di riposo tra le riprese."
 },
 {
 "cat": "RAUND SÜRESİ",
@@ -188,7 +249,10 @@ var IFMA_RULES = [
 "de": "U16: Ein Kampf besteht aus 3 Runden zu je 2 Minuten, mit 1 Minute Pause zwischen den Runden.",
 "ar": "U16: يتكوّن النزال من 3 جولات مدّة كلٍّ منها دقيقتين، مع راحة دقيقة واحدة بين الجولات.",
 "fr": "U16 : le combat comprend 3 rounds de 2 minutes, avec 1 minute de repos entre les rounds.",
-"ko": "U16: 경기는 각 2분의 3라운드로 진행되며, 라운드 사이 휴식은 1분입니다."
+"ko": "U16: 경기는 각 2분의 3라운드로 진행되며, 라운드 사이 휴식은 1분입니다.",
+"th": "U16: การแข่งขันมี 3 ยก ยกละ 2 นาที พักระหว่างยก 1 นาที",
+"nl": "U16: een wedstrijd bestaat uit 3 ronden van 2 min, met 1 min rust tussen de ronden.",
+"it": "U16: un incontro è composto da 3 riprese di 2 min, con 1 min di riposo tra le riprese."
 },
 {
 "cat": "RAUND SÜRESİ",
@@ -197,7 +261,10 @@ var IFMA_RULES = [
 "de": "U14: Ein Kampf besteht aus 3 Runden zu je 1,5 Minuten, mit 1 Minute Pause zwischen den Runden.",
 "ar": "U14: يتكوّن النزال من 3 جولات مدّة كلٍّ منها دقيقة ونصف، مع راحة دقيقة واحدة بين الجولات.",
 "fr": "U14 : le combat comprend 3 rounds de 1,5 minute, avec 1 minute de repos entre les rounds.",
-"ko": "U14: 경기는 각 1.5분의 3라운드로 진행되며, 라운드 사이 휴식은 1분입니다."
+"ko": "U14: 경기는 각 1.5분의 3라운드로 진행되며, 라운드 사이 휴식은 1분입니다.",
+"th": "U14: การแข่งขันมี 3 ยก ยกละ 1.5 นาที พักระหว่างยก 1 นาที",
+"nl": "U14: een wedstrijd bestaat uit 3 ronden van 1,5 min, met 1 min rust tussen de ronden.",
+"it": "U14: un incontro è composto da 3 riprese di 1,5 min, con 1 min di riposo tra le riprese."
 },
 {
 "cat": "RAUND SÜRESİ",
@@ -206,7 +273,10 @@ var IFMA_RULES = [
 "de": "U12: Ein Kampf besteht aus 3 Runden zu je 1 Minute, mit 1 Minute Pause zwischen den Runden.",
 "ar": "U12: يتكوّن النزال من 3 جولات مدّة كلٍّ منها دقيقة واحدة، مع راحة دقيقة واحدة بين الجولات.",
 "fr": "U12 : le combat comprend 3 rounds de 1 minute, avec 1 minute de repos entre les rounds.",
-"ko": "U12: 경기는 각 1분의 3라운드로 진행되며, 라운드 사이 휴식은 1분입니다."
+"ko": "U12: 경기는 각 1분의 3라운드로 진행되며, 라운드 사이 휴식은 1분입니다.",
+"th": "U12: การแข่งขันมี 3 ยก ยกละ 1 นาที พักระหว่างยก 1 นาที",
+"nl": "U12: een wedstrijd bestaat uit 3 ronden van 1 min, met 1 min rust tussen de ronden.",
+"it": "U12: un incontro è composto da 3 riprese di 1 min, con 1 min di riposo tra le riprese."
 },
 {
 "cat": "RAUND SÜRESİ",
@@ -215,7 +285,10 @@ var IFMA_RULES = [
 "de": "U10: Ein Kampf besteht aus 3 Runden zu je 1 Minute, mit 1 Minute Pause zwischen den Runden.",
 "ar": "U10: يتكوّن النزال من 3 جولات مدّة كلٍّ منها دقيقة واحدة، مع راحة دقيقة واحدة بين الجولات.",
 "fr": "U10 : le combat comprend 3 rounds de 1 minute, avec 1 minute de repos entre les rounds.",
-"ko": "U10: 경기는 각 1분의 3라운드로 진행되며, 라운드 사이 휴식은 1분입니다."
+"ko": "U10: 경기는 각 1분의 3라운드로 진행되며, 라운드 사이 휴식은 1분입니다.",
+"th": "U10: การแข่งขันมี 3 ยก ยกละ 1 นาที พักระหว่างยก 1 นาที",
+"nl": "U10: een wedstrijd bestaat uit 3 ronden van 1 min, met 1 min rust tussen de ronden.",
+"it": "U10: un incontro è composto da 3 riprese di 1 min, con 1 min di riposo tra le riprese."
 },
 {
 "cat": "RAUND SÜRESİ",
@@ -224,7 +297,10 @@ var IFMA_RULES = [
 "de": "U8: Ein Kampf besteht aus 3 Runden zu je 1 Minute, mit 1 Minute Pause zwischen den Runden.",
 "ar": "U8: يتكوّن النزال من 3 جولات مدّة كلٍّ منها دقيقة واحدة، مع راحة دقيقة واحدة بين الجولات.",
 "fr": "U8 : le combat comprend 3 rounds de 1 minute, avec 1 minute de repos entre les rounds.",
-"ko": "U8: 경기는 각 1분의 3라운드로 진행되며, 라운드 사이 휴식은 1분입니다."
+"ko": "U8: 경기는 각 1분의 3라운드로 진행되며, 라운드 사이 휴식은 1분입니다.",
+"th": "U8: การแข่งขันมี 3 ยก ยกละ 1 นาที พักระหว่างยก 1 นาที",
+"nl": "U8: een wedstrijd bestaat uit 3 ronden van 1 min, met 1 min rust tussen de ronden.",
+"it": "U8: un incontro è composto da 3 riprese di 1 min, con 1 min di riposo tra le riprese."
 },
 {
 "cat": "KARAR",
@@ -233,7 +309,10 @@ var IFMA_RULES = [
 "de": "WP (Sieg nach Punkten): Am Ende des Kampfes der von der Mehrheit der Punktrichter zum Sieger erklärte Athlet.",
 "ar": "WP (الفوز بالنقاط): اللاعب الذي تُعلنه أغلبية الحكّام فائزًا في نهاية النزال.",
 "fr": "WP (Victoire aux points) : à la fin du combat, l'athlète déclaré vainqueur par la majorité des juges.",
-"ko": "WP (판정승): 경기 종료 시 부심 다수결로 승자로 선언된 선수."
+"ko": "WP (판정승): 경기 종료 시 부심 다수결로 승자로 선언된 선수.",
+"th": "WP (ชนะด้วยคะแนน): เมื่อจบการแข่งขัน นักกีฬาที่กรรมการส่วนใหญ่ตัดสินให้เป็นผู้ชนะ",
+"nl": "WP (Winst op punten): aan het einde van de wedstrijd de atleet die door de meerderheid van de juryleden tot winnaar is uitgeroepen.",
+"it": "WP (Vittoria ai punti): a fine incontro l'atleta dichiarato vincitore dalla maggioranza dei giudici."
 },
 {
 "cat": "KARAR",
@@ -242,7 +321,10 @@ var IFMA_RULES = [
 "de": "RSC (Kampfrichter beendet den Kampf): Der Kampfrichter beendet den Kampf aus Sicherheits- oder Verletzungsgründen, wenn ein Athlet nicht fortfahren kann.",
 "ar": "RSC (الحكم يوقف النزال): يُنهي الحكم النزال لأسباب السلامة أو الإصابة عندما لا يستطيع لاعب المتابعة.",
 "fr": "RSC (L'arbitre arrête le combat) : l'arbitre met fin au combat pour raison de sécurité ou de blessure lorsqu'un athlète ne peut continuer.",
-"ko": "RSC (주심 경기 중단): 선수가 계속할 수 없을 때 주심이 안전 또는 부상을 이유로 경기를 종료합니다."
+"ko": "RSC (주심 경기 중단): 선수가 계속할 수 없을 때 주심이 안전 또는 부상을 이유로 경기를 종료합니다.",
+"th": "RSC (ผู้ตัดสินยุติการแข่งขัน): ผู้ตัดสินยุติการแข่งขันด้วยเหตุผลด้านความปลอดภัยหรือการบาดเจ็บ เมื่อนักกีฬาไม่สามารถชกต่อได้",
+"nl": "RSC (Scheidsrechter stopt de wedstrijd): de scheidsrechter beëindigt de wedstrijd om veiligheids- of blessureredenen wanneer een atleet niet verder kan.",
+"it": "RSC (L'arbitro ferma l'incontro): l'arbitro termina l'incontro per motivi di sicurezza o infortunio quando un atleta non può continuare."
 },
 {
 "cat": "KARAR",
@@ -251,7 +333,10 @@ var IFMA_RULES = [
 "de": "RSCS (Sicherheit): Der Kampfrichter stoppt den Kampf, wenn ein Athlet schwere Treffer erhält und sich nicht mehr verteidigt.",
 "ar": "RSCS (السلامة): يوقف الحكم النزال عندما يتلقّى اللاعب ضربات قوية ولم يعد يدافع عن نفسه.",
 "fr": "RSCS (Sécurité) : l'arbitre arrête le combat lorsqu'un athlète encaisse de lourds coups et ne se défend plus.",
-"ko": "RSCS (안전): 선수가 강한 타격을 받으며 더 이상 방어하지 못할 때 주심이 경기를 멈춥니다."
+"ko": "RSCS (안전): 선수가 강한 타격을 받으며 더 이상 방어하지 못할 때 주심이 경기를 멈춥니다.",
+"th": "RSCS (ความปลอดภัย): ผู้ตัดสินหยุดการแข่งขันเมื่อนักกีฬาถูกตีอย่างหนักและไม่ป้องกันตัวอีกต่อไป",
+"nl": "RSCS (Veiligheid): de scheidsrechter stopt de wedstrijd wanneer een atleet zware treffers incasseert en zich niet meer verdedigt.",
+"it": "RSCS (Sicurezza): l'arbitro ferma l'incontro quando un atleta subisce colpi pesanti e non si difende più."
 },
 {
 "cat": "KARAR",
@@ -260,7 +345,10 @@ var IFMA_RULES = [
 "de": "RSCI (Verletzung): Der Kampfrichter stoppt den Kampf, wenn ein Athlet wegen einer Verletzung nicht fortfahren kann.",
 "ar": "RSCI (الإصابة): يوقف الحكم النزال عندما يعجز لاعب عن المتابعة بسبب إصابة.",
 "fr": "RSCI (Blessure) : l'arbitre arrête le combat lorsqu'un athlète ne peut continuer en raison d'une blessure.",
-"ko": "RSCI (부상): 선수가 부상으로 경기를 계속할 수 없을 때 주심이 경기를 멈춥니다."
+"ko": "RSCI (부상): 선수가 부상으로 경기를 계속할 수 없을 때 주심이 경기를 멈춥니다.",
+"th": "RSCI (บาดเจ็บ): ผู้ตัดสินหยุดการแข่งขันเมื่อนักกีฬาไม่สามารถชกต่อได้เพราะบาดเจ็บ",
+"nl": "RSCI (Blessure): de scheidsrechter stopt de wedstrijd wanneer een atleet door een blessure niet verder kan.",
+"it": "RSCI (Infortunio): l'arbitro ferma l'incontro quando un atleta non può continuare a causa di un infortunio."
 },
 {
 "cat": "KARAR",
@@ -269,7 +357,10 @@ var IFMA_RULES = [
 "de": "RSCH (Kopftreffer): Der Kampfrichter beendet den Kampf, wenn ein Athlet nach harten Schlägen auf den Kopf nicht fortfahren kann.",
 "ar": "RSCH (ضربة الرأس): يُنهي الحكم النزال عندما يعجز اللاعب عن المتابعة إثر ضربات قوية على الرأس.",
 "fr": "RSCH (Coup à la tête) : l'arbitre met fin au combat lorsqu'un athlète ne peut continuer après de violents coups à la tête.",
-"ko": "RSCH (머리 타격): 머리에 강한 타격을 받아 선수가 계속할 수 없으면 주심이 경기를 종료합니다."
+"ko": "RSCH (머리 타격): 머리에 강한 타격을 받아 선수가 계속할 수 없으면 주심이 경기를 종료합니다.",
+"th": "RSCH (ตีศีรษะ): ผู้ตัดสินยุติการแข่งขันเมื่อนักกีฬาไม่สามารถชกต่อได้หลังโดนตีที่ศีรษะอย่างหนัก",
+"nl": "RSCH (Hoofdklap): de scheidsrechter beëindigt de wedstrijd wanneer een atleet na harde klappen tegen het hoofd niet verder kan.",
+"it": "RSCH (Colpo alla testa): l'arbitro termina l'incontro quando un atleta non può continuare dopo forti colpi alla testa."
 },
 {
 "cat": "KARAR",
@@ -278,7 +369,10 @@ var IFMA_RULES = [
 "de": "RSCB (Körpertreffer): Der Kampfrichter beendet den Kampf, wenn ein Athlet nach einem harten Schlag auf den Körper nicht fortfahren kann.",
 "ar": "RSCB (ضربة الجسم): يُنهي الحكم النزال عندما يعجز اللاعب عن المتابعة إثر ضربة قوية على الجسم.",
 "fr": "RSCB (Coup au corps) : l'arbitre met fin au combat lorsqu'un athlète ne peut continuer après un coup violent au corps.",
-"ko": "RSCB (몸통 타격): 몸통에 강한 타격을 받아 선수가 계속할 수 없으면 주심이 경기를 종료합니다."
+"ko": "RSCB (몸통 타격): 몸통에 강한 타격을 받아 선수가 계속할 수 없으면 주심이 경기를 종료합니다.",
+"th": "RSCB (ตีลำตัว): ผู้ตัดสินยุติการแข่งขันเมื่อนักกีฬาไม่สามารถชกต่อได้หลังโดนตีที่ลำตัวอย่างหนัก",
+"nl": "RSCB (Lichaamsklap): de scheidsrechter beëindigt de wedstrijd wanneer een atleet na een harde klap tegen het lichaam niet verder kan.",
+"it": "RSCB (Colpo al corpo): l'arbitro termina l'incontro quando un atleta non può continuare dopo un forte colpo al corpo."
 },
 {
 "cat": "KARAR",
@@ -287,7 +381,10 @@ var IFMA_RULES = [
 "de": "KO (Knock-out): Nach einem Niederschlag verliert ein Athlet, der nicht innerhalb des Zählens bis zehn (10) fortfahren kann, durch KO.",
 "ar": "KO (الضربة القاضية): بعد السقوط، يخسر بالضربة القاضية اللاعب الذي لا يستطيع المتابعة قبل انتهاء العدّ إلى عشرة (10).",
 "fr": "KO (Knock-out) : après une mise au tapis, l'athlète qui ne peut reprendre avant le compte de dix (10) perd par KO.",
-"ko": "KO (녹아웃): 다운 후 10 카운트 안에 계속하지 못한 선수는 KO로 패합니다."
+"ko": "KO (녹아웃): 다운 후 10 카운트 안에 계속하지 못한 선수는 KO로 패합니다.",
+"th": "KO (น็อกเอาต์): หลังน็อกดาวน์ นักกีฬาที่ไม่สามารถชกต่อได้ภายในการนับสิบ (10) แพ้ด้วยการน็อก",
+"nl": "KO (Knock-out): na een knockdown verliest een atleet die niet binnen de telling van tien (10) verder kan door KO.",
+"it": "KO (Knock-out): dopo un knockdown, un atleta che non può continuare entro il conteggio di dieci (10) perde per KO."
 },
 {
 "cat": "KARAR",
@@ -296,7 +393,10 @@ var IFMA_RULES = [
 "de": "KOH / KOB: ein Knockout durch einen Schlag auf den Kopf (KOH) oder durch einen Schlag auf den Körper (KOB).",
 "ar": "KOH / KOB: ضربة قاضية ناتجة عن ضربة على الرأس (KOH) أو ضربة على الجسم (KOB).",
 "fr": "KOH / KOB : un knock-out provoqué par un coup à la tête (KOH) ou par un coup au corps (KOB).",
-"ko": "KOH / KOB: 머리 타격에 의한 녹아웃(KOH) 또는 몸통 타격에 의한 녹아웃(KOB)."
+"ko": "KOH / KOB: 머리 타격에 의한 녹아웃(KOH) 또는 몸통 타격에 의한 녹아웃(KOB).",
+"th": "KOH / KOB: การน็อกที่เกิดจากการตีที่ศีรษะ (KOH) หรือการตีที่ลำตัว (KOB)",
+"nl": "KOH / KOB: een knock-out veroorzaakt door een klap tegen het hoofd (KOH) of een klap tegen het lichaam (KOB).",
+"it": "KOH / KOB: un knock-out causato da un colpo alla testa (KOH) o da un colpo al corpo (KOB)."
 },
 {
 "cat": "KARAR",
@@ -305,7 +405,10 @@ var IFMA_RULES = [
 "de": "RET (Sieg durch Aufgabe): Der Gegner gewinnt, wenn der Athlet nach der Pause die Ecke nicht verlässt oder sich weigert fortzufahren.",
 "ar": "RET (الفوز بالانسحاب): يفوز الخصم إذا لم يغادر اللاعب ركنه بعد الراحة أو رفض المتابعة.",
 "fr": "RET (Victoire par abandon) : l'adversaire gagne si l'athlète ne quitte pas son coin après le repos ou refuse de continuer.",
-"ko": "RET (기권승): 선수가 휴식 후 코너에서 나오지 않거나 계속하기를 거부하면 상대가 승리합니다."
+"ko": "RET (기권승): 선수가 휴식 후 코너에서 나오지 않거나 계속하기를 거부하면 상대가 승리합니다.",
+"th": "RET (ชนะด้วยการขอยอมแพ้): คู่ต่อสู้ชนะหากนักกีฬาไม่ออกจากมุมหลังพักหรือปฏิเสธที่จะชกต่อ",
+"nl": "RET (Winst door opgave): de tegenstander wint als de atleet na de rust de hoek niet verlaat of weigert door te gaan.",
+"it": "RET (Vittoria per ritiro): l'avversario vince se l'atleta non lascia l'angolo dopo il riposo o rifiuta di continuare."
 },
 {
 "cat": "KARAR",
@@ -314,7 +417,10 @@ var IFMA_RULES = [
 "de": "DQ (Disqualifikation): Wird ein Athlet disqualifiziert, wird der Gegner zum Sieger erklärt.",
 "ar": "DQ (الاستبعاد): إذا استُبعد لاعب، يُعلَن الخصم فائزًا.",
 "fr": "DQ (Disqualification) : si un athlète est disqualifié, l'adversaire est déclaré vainqueur.",
-"ko": "DQ (실격): 한 선수가 실격되면 상대가 승자로 선언됩니다."
+"ko": "DQ (실격): 한 선수가 실격되면 상대가 승자로 선언됩니다.",
+"th": "DQ (ปรับแพ้): หากนักกีฬาถูกปรับแพ้ คู่ต่อสู้จะถูกประกาศเป็นผู้ชนะ",
+"nl": "DQ (Diskwalificatie): als een atleet gediskwalificeerd wordt, wordt de tegenstander tot winnaar uitgeroepen.",
+"it": "DQ (Squalifica): se un atleta viene squalificato, l'avversario è dichiarato vincitore."
 },
 {
 "cat": "KARAR",
@@ -323,7 +429,10 @@ var IFMA_RULES = [
 "de": "WO (Kampflos-Sieg): Betritt der Gegner den Ring nicht innerhalb der 2-minütigen Frist, gewinnt der Athlet kampflos.",
 "ar": "WO (الفوز بالانسحاب الحكمي): إذا لم يدخل الخصم الحلبة خلال دقيقتين، يفوز اللاعب بالانسحاب الحكمي.",
 "fr": "WO (Forfait) : si l'adversaire n'entre pas sur le ring dans le délai de 2 minutes, l'athlète gagne par forfait.",
-"ko": "WO (부전승): 상대가 2분 이내에 링에 오르지 않으면 선수가 부전승으로 승리합니다."
+"ko": "WO (부전승): 상대가 2분 이내에 링에 오르지 않으면 선수가 부전승으로 승리합니다.",
+"th": "WO (ชนะบาย): หากคู่ต่อสู้ไม่ขึ้นเวทีภายใน 2 นาที นักกีฬาชนะด้วยการชนะบาย",
+"nl": "WO (Walk-over): als de tegenstander niet binnen 2 minuten de ring in komt, wint de atleet door walk-over.",
+"it": "WO (Walk-over): se l'avversario non entra sul ring entro i 2 minuti, l'atleta vince per walk-over."
 },
 {
 "cat": "KARAR",
@@ -332,7 +441,10 @@ var IFMA_RULES = [
 "de": "NC (Kein Kampf): Der Kampf wird wegen außergewöhnlicher, von den Athleten nicht zu beeinflussender Umstände für ungültig erklärt.",
 "ar": "NC (نزال ملغى): يُعلَن النزال لاغيًا بسبب ظروف استثنائية خارجة عن إرادة اللاعبين.",
 "fr": "NC (Combat nul) : le combat est déclaré nul en raison de circonstances exceptionnelles indépendantes de la volonté des athlètes.",
-"ko": "NC (무효 경기): 선수가 통제할 수 없는 예외적 상황으로 경기가 무효로 선언됩니다."
+"ko": "NC (무효 경기): 선수가 통제할 수 없는 예외적 상황으로 경기가 무효로 선언됩니다.",
+"th": "NC (การแข่งขันเป็นโมฆะ): การแข่งขันถูกประกาศเป็นโมฆะเนื่องจากสถานการณ์พิเศษที่อยู่นอกเหนือการควบคุมของนักกีฬา",
+"nl": "NC (Geen wedstrijd): de wedstrijd wordt ongeldig verklaard door uitzonderlijke omstandigheden buiten de macht van de atleten.",
+"it": "NC (Nessun incontro): l'incontro è dichiarato nullo a causa di circostanze eccezionali indipendenti dalla volontà degli atleti."
 },
 {
 "cat": "KARAR",
@@ -341,7 +453,10 @@ var IFMA_RULES = [
 "de": "Unentschieden: Ein Unentschieden darf nur in Schaukämpfen durch die Mehrheit der Punktrichter erklärt werden.",
 "ar": "التعادل: لا يُعلَن التعادل إلا في نزالات العرض، بأغلبية الحكّام.",
 "fr": "Match nul : un match nul ne peut être déclaré que lors des combats d'exhibition, par la majorité des juges.",
-"ko": "무승부: 무승부는 시범 경기에서만 부심 다수결로 선언될 수 있습니다."
+"ko": "무승부: 무승부는 시범 경기에서만 부심 다수결로 선언될 수 있습니다.",
+"th": "เสมอ (Draw): การเสมออาจประกาศได้เฉพาะในการแข่งขันอุ่นเครื่อง โดยเสียงข้างมากของกรรมการ",
+"nl": "Gelijkspel: een gelijkspel mag alleen bij demonstratiewedstrijden worden uitgesproken, door de meerderheid van de juryleden.",
+"it": "Pareggio: un pareggio può essere dichiarato solo negli incontri dimostrativi, dalla maggioranza dei giudici."
 },
 {
 "cat": "KARAR",
@@ -350,7 +465,10 @@ var IFMA_RULES = [
 "de": "Bei einer schweren Verletzung darf der Kampfrichter den Arzt bis zu 1 Minute konsultieren; rät der Arzt zum Abbruch, muss der Kampfrichter dem folgen.",
 "ar": "في الإصابة الخطيرة يجوز للحكم استشارة الطبيب لمدة تصل إلى دقيقة واحدة؛ وإذا نصح الطبيب بالإيقاف، وجب على الحكم الامتثال.",
 "fr": "En cas de blessure grave, l'arbitre peut consulter le médecin pendant 1 minute au maximum ; si le médecin conseille l'arrêt, l'arbitre doit s'y conformer.",
-"ko": "심각한 부상 시 주심은 최대 1분간 의사와 상의할 수 있으며, 의사가 중단을 권하면 주심은 이를 따라야 합니다."
+"ko": "심각한 부상 시 주심은 최대 1분간 의사와 상의할 수 있으며, 의사가 중단을 권하면 주심은 이를 따라야 합니다.",
+"th": "ในกรณีบาดเจ็บร้ายแรง ผู้ตัดสินอาจปรึกษาแพทย์ได้ไม่เกิน 1 นาที หากแพทย์แนะนำให้หยุด ผู้ตัดสินต้องปฏิบัติตาม",
+"nl": "Bij een ernstige blessure mag de scheidsrechter maximaal 1 minuut de arts raadplegen; adviseert de arts te stoppen, dan moet de scheidsrechter dat opvolgen.",
+"it": "In caso di infortunio grave l'arbitro può consultare il medico per un massimo di 1 minuto; se il medico consiglia di fermare, l'arbitro deve conformarsi."
 },
 {
 "cat": "KARAR",
@@ -359,7 +477,10 @@ var IFMA_RULES = [
 "de": "Ein Protest ist innerhalb von 30 Minuten nach der Entscheidung (5 Minuten bei einem Finale) mit einer Gebühr von 500 USD durch den Teammanager einzulegen.",
 "ar": "يُقدَّم الاعتراض خلال 30 دقيقة من القرار (5 دقائق في النهائي) برسم قدره 500 دولار أمريكي بواسطة مدير الفريق.",
 "fr": "Une réclamation doit être déposée dans les 30 minutes suivant la décision (5 minutes pour une finale), avec des frais de 500 USD, par le manager de l'équipe.",
-"ko": "이의 제기는 판정 후 30분 이내(결승은 5분)에 팀 매니저가 500 USD의 수수료와 함께 제출해야 합니다."
+"ko": "이의 제기는 판정 후 30분 이내(결승은 5분)에 팀 매니저가 500 USD의 수수료와 함께 제출해야 합니다.",
+"th": "การประท้วงต้องยื่นภายใน 30 นาทีหลังการตัดสิน (5 นาทีสำหรับรอบชิงชนะเลิศ) พร้อมค่าธรรมเนียม 500 ดอลลาร์สหรัฐ โดยผู้จัดการทีม",
+"nl": "Een protest moet binnen 30 minuten na de beslissing (5 minuten bij een finale) worden ingediend met een vergoeding van 500 USD door de teammanager.",
+"it": "Un reclamo deve essere presentato entro 30 minuti dalla decisione (5 minuti per una finale) con una quota di 500 USD dal Team Manager."
 },
 {
 "cat": "FAUL",
@@ -368,7 +489,10 @@ var IFMA_RULES = [
 "de": "Es ist ein Foul, den Gegner zu beißen, ihm einen Kopfstoß zu geben oder ihn anzuspucken.",
 "ar": "من الأخطاء عضّ الخصم أو نطحه بالرأس أو البصق عليه.",
 "fr": "Il est interdit de mordre l'adversaire, de lui donner un coup de tête ou de cracher sur lui.",
-"ko": "상대를 물거나 박치기하거나 침을 뱉는 것은 반칙입니다."
+"ko": "상대를 물거나 박치기하거나 침을 뱉는 것은 반칙입니다.",
+"th": "การกัด โขกศีรษะ หรือถ่มน้ำลายใส่คู่ต่อสู้ เป็นฟาวล์",
+"nl": "Het is een overtreding om de tegenstander te bijten, te koppen of naar hem te spuwen.",
+"it": "È un'infrazione mordere, dare testate o sputare all'avversario."
 },
 {
 "cat": "FAUL",
@@ -377,7 +501,10 @@ var IFMA_RULES = [
 "de": "Es ist ein Foul, mit dem Daumen auf die Augen des Gegners zu drücken.",
 "ar": "من الأخطاء الضغط على عينَي الخصم بالإبهام.",
 "fr": "Il est interdit d'appuyer sur les yeux de l'adversaire avec le pouce.",
-"ko": "엄지로 상대의 눈을 누르는 것은 반칙입니다."
+"ko": "엄지로 상대의 눈을 누르는 것은 반칙입니다.",
+"th": "การใช้นิ้วโป้งกดตาของคู่ต่อสู้ เป็นฟาวล์",
+"nl": "Het is een overtreding om met de duim op de ogen van de tegenstander te drukken.",
+"it": "È un'infrazione premere con il pollice sugli occhi dell'avversario."
 },
 {
 "cat": "FAUL",
@@ -386,7 +513,10 @@ var IFMA_RULES = [
 "de": "Es ist ein Foul, absichtlich mit dem Kinn das Gesicht des Gegners zu bearbeiten.",
 "ar": "من الأخطاء استخدام الذقن عمدًا لسحق وجه الخصم.",
 "fr": "Il est interdit d'utiliser délibérément le menton pour écraser le visage de l'adversaire.",
-"ko": "고의로 턱을 사용해 상대의 얼굴을 짓누르는 것은 반칙입니다."
+"ko": "고의로 턱을 사용해 상대의 얼굴을 짓누르는 것은 반칙입니다.",
+"th": "การจงใจใช้คางกดถูใบหน้าของคู่ต่อสู้ เป็นฟาวล์",
+"nl": "Het is een overtreding om opzettelijk met de kin het gezicht van de tegenstander te bewerken.",
+"it": "È un'infrazione usare di proposito il mento per strofinare il viso dell'avversario."
 },
 {
 "cat": "FAUL",
@@ -395,7 +525,10 @@ var IFMA_RULES = [
 "de": "Es ist ein Foul, Mund und Nase des Gegners zu bedecken, um ihn zu ersticken.",
 "ar": "من الأخطاء تغطية فم الخصم وأنفه لمحاولة خنقه أو منعه من التنفّس.",
 "fr": "Il est interdit de couvrir la bouche et le nez de l'adversaire pour tenter de l'étouffer.",
-"ko": "상대의 입과 코를 막아 질식시키려 하는 것은 반칙입니다."
+"ko": "상대의 입과 코를 막아 질식시키려 하는 것은 반칙입니다.",
+"th": "การปิดปากและจมูกของคู่ต่อสู้เพื่อทำให้หายใจไม่ออก เป็นฟาวล์",
+"nl": "Het is een overtreding om de mond en neus van de tegenstander te bedekken om hem te doen stikken.",
+"it": "È un'infrazione coprire bocca e naso dell'avversario per soffocarlo."
 },
 {
 "cat": "FAUL",
@@ -404,7 +537,10 @@ var IFMA_RULES = [
 "de": "Es ist ein Foul, Ausrüstung absichtlich zu entfernen, zu lösen oder zu verschieben.",
 "ar": "من الأخطاء نزع المعدّات أو حلّها أو تحريكها عن مكانها عمدًا.",
 "fr": "Il est interdit d'enlever, de défaire ou de déplacer délibérément l'équipement.",
-"ko": "장비를 고의로 제거하거나 풀거나 위치를 바꾸는 것은 반칙입니다."
+"ko": "장비를 고의로 제거하거나 풀거나 위치를 바꾸는 것은 반칙입니다.",
+"th": "การจงใจถอด แกะ หรือทำอุปกรณ์เคลื่อนที่ เป็นฟาวล์",
+"nl": "Het is een overtreding om opzettelijk uitrusting te verwijderen, los te maken of te verschuiven.",
+"it": "È un'infrazione rimuovere, slacciare o spostare di proposito l'attrezzatura."
 },
 {
 "cat": "FAUL",
@@ -413,7 +549,10 @@ var IFMA_RULES = [
 "de": "Es ist ein Foul, den Mundschutz absichtlich auszuspucken oder herauszunehmen.",
 "ar": "من الأخطاء بصق واقي الأسنان أو إخراجه من الفم عمدًا.",
 "fr": "Il est interdit de recracher ou de retirer délibérément le protège-dents.",
-"ko": "마우스피스를 고의로 뱉거나 입에서 빼는 것은 반칙입니다."
+"ko": "마우스피스를 고의로 뱉거나 입에서 빼는 것은 반칙입니다.",
+"th": "การจงใจคายหรือถอดยางกันฟัน เป็นฟาวล์",
+"nl": "Het is een overtreding om opzettelijk de gebitsbeschermer uit te spuwen of te verwijderen.",
+"it": "È un'infrazione sputare o rimuovere di proposito il paradenti."
 },
 {
 "cat": "FAUL",
@@ -422,7 +561,10 @@ var IFMA_RULES = [
 "de": "Es ist ein Foul, den Gegner ohne Muaythai-Technik zu Boden zu werfen (Fegen, Hüftwurf oder Ringen).",
 "ar": "من الأخطاء محاولة رمي الخصم أرضًا دون تقنية مواي تاي (الكنس أو الرمي بالورك أو المصارعة لإسقاطه).",
 "fr": "Il est interdit de tenter de jeter l'adversaire au sol sans technique de Muaythai (balayage, projection de hanche ou lutte).",
-"ko": "무에타이 기술 없이 상대를 바닥에 넘어뜨리려는 것은 반칙입니다(스위핑, 허리 던지기, 붙잡아 넘어뜨리기)."
+"ko": "무에타이 기술 없이 상대를 바닥에 넘어뜨리려는 것은 반칙입니다(스위핑, 허리 던지기, 붙잡아 넘어뜨리기).",
+"th": "การพยายามทุ่มคู่ต่อสู้ลงพื้นโดยไม่ใช้เทคนิคมวยไทย (การปัดขา ทุ่มด้วยสะโพก หรือปล้ำล้ม) เป็นฟาวล์",
+"nl": "Het is een overtreding om de tegenstander zonder Muaythai-techniek naar de grond te werpen (vegen, heupworp of worstelen).",
+"it": "È un'infrazione cercare di gettare a terra l'avversario senza una tecnica Muaythai (spazzata, proiezione d'anca o lotta)."
 },
 {
 "cat": "FAUL",
@@ -431,7 +573,10 @@ var IFMA_RULES = [
 "de": "Es ist ein Foul, die Beine des Gegners mit Schienbein, Knöchel oder Ferse zu blockieren oder festzusetzen.",
 "ar": "من الأخطاء إقفال ساقَي الخصم أو تثبيتهما باستخدام الساق أو الكاحل أو الكعب.",
 "fr": "Il est interdit de bloquer ou d'immobiliser les jambes de l'adversaire avec le tibia, la cheville ou le talon.",
-"ko": "정강이, 발목, 발뒤꿈치로 상대의 다리를 걸어 잠그거나 움직이지 못하게 하는 것은 반칙입니다."
+"ko": "정강이, 발목, 발뒤꿈치로 상대의 다리를 걸어 잠그거나 움직이지 못하게 하는 것은 반칙입니다.",
+"th": "การล็อกหรือตรึงขาของคู่ต่อสู้ด้วยหน้าแข้ง ข้อเท้า หรือส้นเท้า เป็นฟาวล์",
+"nl": "Het is een overtreding om de benen van de tegenstander te vergrendelen of vast te zetten met scheenbeen, enkel of hiel.",
+"it": "È un'infrazione bloccare o immobilizzare le gambe dell'avversario con tibia, caviglia o tallone."
 },
 {
 "cat": "FAUL",
@@ -440,7 +585,10 @@ var IFMA_RULES = [
 "de": "Es ist ein Foul, den Gegner am Rumpf zu greifen und hochzuheben.",
 "ar": "من الأخطاء رفع الخصم عن الأرض بالإمساك بجذعه.",
 "fr": "Il est interdit de soulever l'adversaire du sol en le saisissant par le torse.",
-"ko": "상대의 몸통을 잡아 공중으로 들어 올리는 것은 반칙입니다."
+"ko": "상대의 몸통을 잡아 공중으로 들어 올리는 것은 반칙입니다.",
+"th": "การยกคู่ต่อสู้ขึ้นจากพื้นด้วยการกอดลำตัว เป็นฟาวล์",
+"nl": "Het is een overtreding om de tegenstander bij de romp van de grond te tillen.",
+"it": "È un'infrazione sollevare l'avversario da terra afferrandolo per il tronco."
 },
 {
 "cat": "FAUL",
@@ -449,7 +597,10 @@ var IFMA_RULES = [
 "de": "Es ist ein Foul, die Gelenke des Gegners (Arm, Bein, Kopf/Hals oder Rücken) zu blockieren oder übermäßig zu belasten.",
 "ar": "من الأخطاء إقفال مفاصل الخصم (الذراع أو الساق أو الرأس/الرقبة أو الظهر) أو الضغط عليها بإفراط.",
 "fr": "Il est interdit de verrouiller ou d'exercer une pression excessive sur les articulations de l'adversaire (bras, jambe, tête/cou ou dos).",
-"ko": "상대의 관절(팔, 다리, 머리/목, 등)을 잠그거나 과도한 압력을 가하는 것은 반칙입니다."
+"ko": "상대의 관절(팔, 다리, 머리/목, 등)을 잠그거나 과도한 압력을 가하는 것은 반칙입니다.",
+"th": "การล็อกหรือกดข้อต่อของคู่ต่อสู้มากเกินไป (แขน ขา ศีรษะ/คอ หรือหลัง) เป็นฟาวล์",
+"nl": "Het is een overtreding om de gewrichten van de tegenstander (arm, been, hoofd/nek of rug) te vergrendelen of overmatig te belasten.",
+"it": "È un'infrazione bloccare o esercitare pressione eccessiva sulle articolazioni dell'avversario (braccio, gamba, testa/collo o schiena)."
 },
 {
 "cat": "FAUL",
@@ -458,7 +609,10 @@ var IFMA_RULES = [
 "de": "Es ist ein Foul, im Festhalten an den Seilen zu schlagen oder die Seile unerlaubt zu nutzen.",
 "ar": "من الأخطاء توجيه ضربة أثناء الإمساك بالحبال أو استغلال الحبال بشكل مخالف.",
 "fr": "Il est interdit de frapper en tenant les cordes ou d'utiliser les cordes de façon irrégulière.",
-"ko": "로프를 잡은 채 타격하거나 로프를 부정하게 이용하는 것은 반칙입니다."
+"ko": "로프를 잡은 채 타격하거나 로프를 부정하게 이용하는 것은 반칙입니다.",
+"th": "การตีขณะจับเชือก หรือใช้เชือกอย่างผิดกติกา เป็นฟาวล์",
+"nl": "Het is een overtreding om te slaan terwijl je de touwen vasthoudt of de touwen onrechtmatig te gebruiken.",
+"it": "È un'infrazione colpire tenendo le corde o usare le corde in modo irregolare."
 },
 {
 "cat": "FAUL",
@@ -467,7 +621,10 @@ var IFMA_RULES = [
 "de": "Es ist ein Foul, sich auf einen am Boden liegenden Gegner fallen zu lassen.",
 "ar": "من الأخطاء السقوط فوق خصم مستلقٍ على الأرض.",
 "fr": "Il est interdit de se laisser tomber sur un adversaire au sol.",
-"ko": "바닥에 누운 상대 위로 떨어지는 것은 반칙입니다."
+"ko": "바닥에 누운 상대 위로 떨어지는 것은 반칙입니다.",
+"th": "การล้มทับคู่ต่อสู้ที่นอนอยู่บนพื้น เป็นฟาวล์",
+"nl": "Het is een overtreding om op een tegenstander te vallen die op de grond ligt.",
+"it": "È un'infrazione cadere su un avversario disteso a terra."
 },
 {
 "cat": "FAUL",
@@ -476,7 +633,10 @@ var IFMA_RULES = [
 "de": "Es ist ein Foul, einen am Boden liegenden oder aufstehenden Gegner zu schlagen.",
 "ar": "من الأخطاء ضرب خصم ساقط أو في أثناء نهوضه.",
 "fr": "Il est interdit de frapper un adversaire à terre ou en train de se relever.",
-"ko": "쓰러져 있거나 일어나는 중인 상대를 치는 것은 반칙입니다."
+"ko": "쓰러져 있거나 일어나는 중인 상대를 치는 것은 반칙입니다.",
+"th": "การตีคู่ต่อสู้ที่ล้มอยู่หรือกำลังลุกขึ้น เป็นฟาวล์",
+"nl": "Het is een overtreding om een tegenstander te slaan die neer is of opstaat.",
+"it": "È un'infrazione colpire un avversario a terra o che si sta rialzando."
 },
 {
 "cat": "FAUL",
@@ -485,7 +645,10 @@ var IFMA_RULES = [
 "de": "Es ist ein Foul, zu schlagen, während ein anderer Körperteil als die Füße den Boden berührt.",
 "ar": "من الأخطاء توجيه ضربة بينما يلامس الأرضَ جزءٌ من الجسم غير القدمين.",
 "fr": "Il est interdit de frapper alors qu'une partie du corps autre que les pieds touche le sol.",
-"ko": "발 이외의 신체 부위가 바닥에 닿은 상태에서 타격하는 것은 반칙입니다."
+"ko": "발 이외의 신체 부위가 바닥에 닿은 상태에서 타격하는 것은 반칙입니다.",
+"th": "การตีขณะที่ส่วนของร่างกายอื่นนอกจากเท้าแตะพื้น เป็นฟาวล์",
+"nl": "Het is een overtreding om te slaan terwijl een ander lichaamsdeel dan de voeten de grond raakt.",
+"it": "È un'infrazione colpire mentre una parte del corpo diversa dai piedi tocca terra."
 },
 {
 "cat": "FAUL",
@@ -494,7 +657,10 @@ var IFMA_RULES = [
 "de": "Es ist ein Foul, den Gegner am Aufstehen oder am Wiederbetreten des Rings zu hindern.",
 "ar": "من الأخطاء منع الخصم من النهوض أو من العودة إلى الحلبة.",
 "fr": "Il est interdit d'empêcher l'adversaire de se relever ou de revenir sur le ring.",
-"ko": "상대가 일어나거나 링으로 돌아오는 것을 막는 것은 반칙입니다."
+"ko": "상대가 일어나거나 링으로 돌아오는 것을 막는 것은 반칙입니다.",
+"th": "การขัดขวางไม่ให้คู่ต่อสู้ลุกขึ้นหรือกลับเข้าเวที เป็นฟาวล์",
+"nl": "Het is een overtreding om de tegenstander te beletten op te staan of terug de ring in te gaan.",
+"it": "È un'infrazione impedire all'avversario di rialzarsi o di rientrare sul ring."
 },
 {
 "cat": "FAUL",
@@ -503,7 +669,10 @@ var IFMA_RULES = [
 "de": "Es ist ein Foul, in völliger Passivität doppelt zu blocken (sich einzuigeln) oder sich absichtlich fallen zu lassen, um Treffern zu entgehen.",
 "ar": "من الأخطاء الالتزام بصدٍّ مزدوج بشكل سلبيّ تام أو السقوط عمدًا لتفادي تلقّي الضربات.",
 "fr": "Il est interdit de garder une double garde totalement passive ou de se laisser tomber délibérément pour éviter les coups.",
-"ko": "완전히 소극적으로 이중 가드(웅크리기)를 하거나 타격을 피하려 고의로 넘어지는 것은 반칙입니다."
+"ko": "완전히 소극적으로 이중 가드(웅크리기)를 하거나 타격을 피하려 고의로 넘어지는 것은 반칙입니다.",
+"th": "การตั้งการ์ดสองชั้น (ปิดตัว) อย่างตั้งรับโดยสิ้นเชิง หรือจงใจล้มลงเพื่อหลบการโดนตี เป็นฟาวล์",
+"nl": "Het is een overtreding om volledig passief dubbel te blokken (dichtklappen) of opzettelijk neer te gaan om een klap te ontwijken.",
+"it": "È un'infrazione fare doppia guardia (chiudersi) in modo del tutto passivo o cadere di proposito per evitare di essere colpito."
 },
 {
 "cat": "FAUL",
@@ -512,7 +681,10 @@ var IFMA_RULES = [
 "de": "Es ist ein Foul, das Wettkampffeld absichtlich zu verlassen, um einem Treffer zu entgehen.",
 "ar": "من الأخطاء مغادرة منطقة النزال عمدًا لتفادي تلقّي ضربة.",
 "fr": "Il est interdit de quitter délibérément l'aire de compétition pour éviter un coup.",
-"ko": "타격을 피하려고 경기 구역을 고의로 벗어나는 것은 반칙입니다."
+"ko": "타격을 피하려고 경기 구역을 고의로 벗어나는 것은 반칙입니다.",
+"th": "การจงใจออกนอกเขตแข่งขันเพื่อหลบการโดนตี เป็นฟาวล์",
+"nl": "Het is een overtreding om opzettelijk het wedstrijdveld te verlaten om een klap te ontwijken.",
+"it": "È un'infrazione lasciare di proposito l'area di gara per evitare un colpo."
 },
 {
 "cat": "FAUL",
@@ -521,7 +693,10 @@ var IFMA_RULES = [
 "de": "Es ist ein Foul, in die Leiste oder auf die Halswirbel zu schlagen.",
 "ar": "من الأخطاء الضرب على منطقة العانة أو فقرات الرقبة.",
 "fr": "Il est interdit de frapper l'aine ou les vertèbres cervicales.",
-"ko": "사타구니나 경추(목뼈)를 치는 것은 반칙입니다."
+"ko": "사타구니나 경추(목뼈)를 치는 것은 반칙입니다.",
+"th": "การตีที่เป้าหรือกระดูกคอ เป็นฟาวล์",
+"nl": "Het is een overtreding om het kruis of de halswervels te raken.",
+"it": "È un'infrazione colpire l'inguine o le vertebre cervicali."
 },
 {
 "cat": "FAUL",
@@ -530,7 +705,10 @@ var IFMA_RULES = [
 "de": "Es ist ein Foul, das Bein des Gegners ohne Muaythai-Technik zu halten und mehr als zwei (2) Schritte vorzugehen.",
 "ar": "من الأخطاء الإمساك بساق الخصم دون أيّ تقنية مواي تاي والتقدّم أكثر من خطوتين (2).",
 "fr": "Il est interdit de tenir la jambe de l'adversaire sans technique de Muaythai et d'avancer de plus de deux (2) pas.",
-"ko": "무에타이 기술 없이 상대의 다리를 잡고 두 걸음 넘게 앞으로 나아가는 것은 반칙입니다."
+"ko": "무에타이 기술 없이 상대의 다리를 잡고 두 걸음 넘게 앞으로 나아가는 것은 반칙입니다.",
+"th": "การจับขาคู่ต่อสู้โดยไม่ใช้เทคนิคมวยไทยและเดินหน้าเกินสอง (2) ก้าว เป็นฟาวล์",
+"nl": "Het is een overtreding om het been van de tegenstander zonder Muaythai-techniek vast te houden en meer dan twee (2) stappen vooruit te gaan.",
+"it": "È un'infrazione tenere la gamba dell'avversario senza alcuna tecnica Muaythai e avanzare di più di due (2) passi."
 },
 {
 "cat": "FAUL",
@@ -539,7 +717,10 @@ var IFMA_RULES = [
 "de": "Es ist ein Foul, den Gegner nach Rundenende zu schlagen.",
 "ar": "من الأخطاء ضرب الخصم بعد انتهاء الجولة.",
 "fr": "Il est interdit de frapper l'adversaire après la fin du round.",
-"ko": "라운드가 끝난 뒤 상대를 치는 것은 반칙입니다."
+"ko": "라운드가 끝난 뒤 상대를 치는 것은 반칙입니다.",
+"th": "การตีคู่ต่อสู้หลังหมดยก เป็นฟาวล์",
+"nl": "Het is een overtreding om de tegenstander na het einde van de ronde te slaan.",
+"it": "È un'infrazione colpire l'avversario dopo la fine della ripresa."
 },
 {
 "cat": "FAUL",
@@ -548,7 +729,10 @@ var IFMA_RULES = [
 "de": "Es ist ein Foul, dem \"YOOT\" (Stopp) oder \"YAEK\" (Trennen) des Kampfrichters nicht zu folgen und nicht zurückzutreten.",
 "ar": "من الأخطاء عدم الامتثال لأمر الحكم \"YOOT\" (قف) أو \"YAEK\" (افترقا) وعدم التراجع.",
 "fr": "Il est interdit de désobéir au « YOOT » (stop) ou au « YAEK » (séparez-vous) de l'arbitre et de ne pas reculer.",
-"ko": "주심의 \"YOOT\"(정지)이나 \"YAEK\"(브레이크) 지시에 따르지 않고 물러서지 않는 것은 반칙입니다."
+"ko": "주심의 \"YOOT\"(정지)이나 \"YAEK\"(브레이크) 지시에 따르지 않고 물러서지 않는 것은 반칙입니다.",
+"th": "การไม่ปฏิบัติตามคำสั่ง \"YOOT\" (หยุด) หรือ \"YAEK\" (แยก) ของผู้ตัดสินและไม่ถอยหลัง เป็นฟาวล์",
+"nl": "Het is een overtreding om het commando \"YOOT\" (stop) of \"YAEK\" (uit elkaar) van de scheidsrechter te negeren en niet terug te stappen.",
+"it": "È un'infrazione disobbedire al comando \"YOOT\" (stop) o \"YAEK\" (separatevi) dell'arbitro e non indietreggiare."
 },
 {
 "cat": "FAUL",
@@ -557,7 +741,10 @@ var IFMA_RULES = [
 "de": "Es ist ein Foul, nach \"YOOT\"/\"YAEK\" zu schlagen zu versuchen, bevor der Kampfrichter \"CHOK\" ruft.",
 "ar": "من الأخطاء محاولة توجيه ضربة بعد \"YOOT\"/\"YAEK\" قبل أن يقول الحكم \"CHOK\".",
 "fr": "Il est interdit de tenter de frapper après « YOOT »/« YAEK » avant que l'arbitre n'annonce « CHOK ».",
-"ko": "\"YOOT\"/\"YAEK\" 후 주심이 \"CHOK\"을 외치기 전에 상대를 치려 시도하는 것은 반칙입니다."
+"ko": "\"YOOT\"/\"YAEK\" 후 주심이 \"CHOK\"을 외치기 전에 상대를 치려 시도하는 것은 반칙입니다.",
+"th": "การพยายามตีหลังคำสั่ง \"YOOT\"/\"YAEK\" ก่อนที่ผู้ตัดสินจะออกคำสั่ง \"CHOK\" เป็นฟาวล์",
+"nl": "Het is een overtreding om te proberen te slaan na \"YOOT\"/\"YAEK\" voordat de scheidsrechter \"CHOK\" roept.",
+"it": "È un'infrazione tentare di colpire dopo \"YOOT\"/\"YAEK\" prima che l'arbitro dica \"CHOK\"."
 },
 {
 "cat": "FAUL",
@@ -566,7 +753,10 @@ var IFMA_RULES = [
 "de": "Es ist ein Foul, während des Kampfes unnötige, aggressive oder beleidigende Worte zu benutzen.",
 "ar": "من الأخطاء التلفّظ بكلمات غير ضرورية أو عدوانية أو مهينة أثناء النزال.",
 "fr": "Il est interdit de tenir des propos inutiles, agressifs ou insultants pendant le combat.",
-"ko": "경기 중 불필요하거나 공격적이거나 모욕적인 말을 하는 것은 반칙입니다."
+"ko": "경기 중 불필요하거나 공격적이거나 모욕적인 말을 하는 것은 반칙입니다.",
+"th": "การพูดจาไร้ประโยชน์ ก้าวร้าว หรือดูหมิ่นระหว่างการแข่งขัน เป็นฟาวล์",
+"nl": "Het is een overtreding om onnodige, agressieve of beledigende woorden te gebruiken tijdens de wedstrijd.",
+"it": "È un'infrazione usare parole inutili, aggressive o offensive durante l'incontro."
 },
 {
 "cat": "FAUL",
@@ -575,7 +765,10 @@ var IFMA_RULES = [
 "de": "Es ist ein Foul, den Kampfrichter anzugreifen oder sich ihm gegenüber aggressiv zu verhalten.",
 "ar": "من الأخطاء الاعتداء على الحكم أو التصرّف بعدوانية تجاهه.",
 "fr": "Il est interdit d'attaquer l'arbitre ou d'avoir un comportement agressif envers lui.",
-"ko": "주심을 공격하거나 주심에게 공격적으로 행동하는 것은 반칙입니다."
+"ko": "주심을 공격하거나 주심에게 공격적으로 행동하는 것은 반칙입니다.",
+"th": "การทำร้ายผู้ตัดสินหรือแสดงพฤติกรรมก้าวร้าวต่อผู้ตัดสิน เป็นฟาวล์",
+"nl": "Het is een overtreding om de scheidsrechter aan te vallen of zich agressief tegenover hem te gedragen.",
+"it": "È un'infrazione attaccare l'arbitro o comportarsi in modo aggressivo verso di lui."
 },
 {
 "cat": "FAUL",
@@ -584,7 +777,10 @@ var IFMA_RULES = [
 "de": "Es ist ein Foul, Wasser auf andere Weise als mit der Sprühflasche aufzutragen.",
 "ar": "من الأخطاء استخدام الماء بأيّ وسيلة غير زجاجة الرذاذ.",
 "fr": "Il est interdit d'appliquer de l'eau par un moyen autre que le vaporisateur.",
-"ko": "분무기 이외의 방법으로 물을 사용하는 것은 반칙입니다."
+"ko": "분무기 이외의 방법으로 물을 사용하는 것은 반칙입니다.",
+"th": "การให้น้ำด้วยวิธีอื่นนอกจากขวดสเปรย์ เป็นฟาวล์",
+"nl": "Het is een overtreding om water toe te dienen op een andere manier dan met de sprayfles.",
+"it": "È un'infrazione applicare acqua con qualsiasi metodo diverso dallo spruzzino."
 },
 {
 "cat": "FAUL",
@@ -593,7 +789,10 @@ var IFMA_RULES = [
 "de": "Es ist ein Foul, in der Pause übermäßig Wasser zu verwenden und so den Beginn der nächsten Runde zu verzögern.",
 "ar": "من الأخطاء الإفراط في استخدام الماء خلال الراحة بما يؤخّر بدء الجولة التالية.",
 "fr": "Il est interdit d'utiliser trop d'eau pendant le repos, retardant le début du round suivant.",
-"ko": "휴식 중 물을 과도하게 사용해 다음 라운드 시작을 지연시키는 것은 반칙입니다."
+"ko": "휴식 중 물을 과도하게 사용해 다음 라운드 시작을 지연시키는 것은 반칙입니다.",
+"th": "การใช้น้ำมากเกินไประหว่างพักจนทำให้ยกถัดไปเริ่มช้า เป็นฟาวล์",
+"nl": "Het is een overtreding om tijdens de rust overmatig water te gebruiken en zo het begin van de volgende ronde te vertragen.",
+"it": "È un'infrazione usare acqua in eccesso durante il riposo, ritardando l'inizio della ripresa successiva."
 },
 {
 "cat": "FAUL",
@@ -602,7 +801,10 @@ var IFMA_RULES = [
 "de": "Es ist ein Foul, eine von der WADA oder den IFMA-Anti-Doping-Regeln verbotene Substanz zu verwenden.",
 "ar": "من الأخطاء استخدام أيّ مادة محظورة بموجب الوكالة العالمية لمكافحة المنشّطات (WADA) أو قواعد مكافحة المنشّطات في الاتحاد (IFMA).",
 "fr": "Il est interdit d'utiliser toute substance prohibée par l'AMA (WADA) ou les règles antidopage de l'IFMA.",
-"ko": "WADA 또는 IFMA 반도핑 규정에서 금지한 물질을 사용하는 것은 반칙입니다."
+"ko": "WADA 또는 IFMA 반도핑 규정에서 금지한 물질을 사용하는 것은 반칙입니다.",
+"th": "การใช้สารต้องห้ามตามกฎของ WADA หรือกฎต้านโด๊ปของ IFMA เป็นฟาวล์",
+"nl": "Het is een overtreding om een door de WADA of de IFMA-antidopingregels verboden stof te gebruiken.",
+"it": "È un'infrazione usare qualsiasi sostanza vietata dalla WADA o dalle regole antidoping IFMA."
 },
 {
 "cat": "FAUL",
@@ -611,7 +813,10 @@ var IFMA_RULES = [
 "de": "In der Kategorie U14 sind Ellbogen- und Knieschläge zum Kopf verboten.",
 "ar": "في فئة U14 يُحظر توجيه ضربات المرفق والركبة إلى الرأس.",
 "fr": "Dans la catégorie U14, les coups de coude et de genou à la tête sont interdits.",
-"ko": "U14 부문에서는 머리에 대한 팔꿈치와 무릎 공격이 금지됩니다."
+"ko": "U14 부문에서는 머리에 대한 팔꿈치와 무릎 공격이 금지됩니다.",
+"th": "ในรุ่น U14 ห้ามใช้ศอกและเข่าตีที่ศีรษะ",
+"nl": "In de categorie U14 zijn elleboog- en knieslagen naar het hoofd verboden.",
+"it": "Nella categoria U14 sono vietati i colpi di gomito e di ginocchio alla testa."
 },
 {
 "cat": "FAUL",
@@ -620,7 +825,10 @@ var IFMA_RULES = [
 "de": "In den Kategorien U8, U10 und U12 sind Schläge zum Kopf verboten.",
 "ar": "في فئات U8 وU10 وU12 يُحظر توجيه الضربات إلى الرأس.",
 "fr": "Dans les catégories U8, U10 et U12, les coups à la tête sont interdits.",
-"ko": "U8, U10, U12 부문에서는 머리 타격이 금지됩니다."
+"ko": "U8, U10, U12 부문에서는 머리 타격이 금지됩니다.",
+"th": "ในรุ่น U8, U10 และ U12 ห้ามตีที่ศีรษะ",
+"nl": "In de categorieën U8, U10 en U12 zijn slagen naar het hoofd verboden.",
+"it": "Nelle categorie U8, U10 e U12 sono vietati i colpi alla testa."
 },
 {
 "cat": "EKİPMAN",
@@ -629,7 +837,10 @@ var IFMA_RULES = [
 "de": "Der Athlet muss kampfbereit den Ring betreten, mit Bandagen, Handschuhen, Ellbogenschonern, Schienbeinschonern und Tiefschutz.",
 "ar": "على اللاعب دخول الحلبة جاهزًا للنزال مرتديًا اللفافات والقفّازات وواقيات المرفق وواقيات القصبة وواقي العانة.",
 "fr": "L'athlète doit entrer sur le ring prêt à combattre, avec bandages, gants, protège-coudes, protège-tibias et coquille.",
-"ko": "선수는 붕대, 글러브, 팔꿈치 보호대, 정강이 보호대, 낭심 보호대를 착용하고 경기 준비를 마친 채 링에 올라야 합니다."
+"ko": "선수는 붕대, 글러브, 팔꿈치 보호대, 정강이 보호대, 낭심 보호대를 착용하고 경기 준비를 마친 채 링에 올라야 합니다.",
+"th": "นักกีฬาต้องขึ้นเวทีในสภาพพร้อมแข่ง โดยสวมผ้าพันมือ นวม สนับศอก สนับแข้ง และกระจับ",
+"nl": "De atleet moet gevechtsklaar de ring in komen, met bandages, handschoenen, elleboogbeschermers, scheenbeschermers en een kruisbeschermer.",
+"it": "L'atleta deve entrare sul ring pronto a combattere, con bendaggi, guantoni, paragomiti, paratibia e conchiglia."
 },
 {
 "cat": "EKİPMAN",
@@ -638,7 +849,10 @@ var IFMA_RULES = [
 "de": "Der Mongkon wird dem Athleten nach der Ausrüstungskontrolle vom Sekundanten aufgesetzt.",
 "ar": "يُوضع المونغكون على رأس اللاعب من قبل مساعد الركن بعد فحص المعدّات.",
 "fr": "Le mongkon est placé sur la tête de l'athlète par le soigneur après le contrôle de l'équipement.",
-"ko": "몽콘은 장비 점검 후 세컨이 선수의 머리에 씌워 줍니다."
+"ko": "몽콘은 장비 점검 후 세컨이 선수의 머리에 씌워 줍니다.",
+"th": "มงคลจะถูกสวมบนศีรษะของนักกีฬาโดยพี่เลี้ยงหลังการตรวจอุปกรณ์",
+"nl": "De mongkon wordt na de uitrustingscontrole door de secondant op het hoofd van de atleet geplaatst.",
+"it": "Il mongkon viene posto sulla testa dell'atleta dal secondo dopo il controllo dell'attrezzatura."
 },
 {
 "cat": "EKİPMAN",
@@ -647,7 +861,10 @@ var IFMA_RULES = [
 "de": "Jeder Athlet muss vor der ersten Runde das traditionelle Respektritual \"Wai Kru\" ausführen.",
 "ar": "على كل لاعب أداء طقس الاحترام التقليدي \"واي كرو\" قبل الجولة الأولى.",
 "fr": "Chaque athlète doit accomplir le rituel de respect traditionnel « Wai Kru » avant le premier round.",
-"ko": "모든 선수는 1라운드 전에 전통 존중 의식인 \"와이 크루\"를 해야 합니다."
+"ko": "모든 선수는 1라운드 전에 전통 존중 의식인 \"와이 크루\"를 해야 합니다.",
+"th": "นักกีฬาทุกคนต้องแสดงพิธีเคารพตามประเพณี \"ไหว้ครู\" ก่อนยกแรก",
+"nl": "Elke atleet moet vóór de eerste ronde het traditionele respectritueel \"Wai Kru\" uitvoeren.",
+"it": "Ogni atleta deve eseguire il tradizionale rituale di rispetto \"Wai Kru\" prima della prima ripresa."
 },
 {
 "cat": "EKİPMAN",
@@ -656,7 +873,10 @@ var IFMA_RULES = [
 "de": "Der Athlet betritt den Ring zwischen dem 2. und 3. Seil; Schwergewichtler zwischen dem 3. und 4. Seil.",
 "ar": "يدخل اللاعب الحلبة بين الحبلين الثاني والثالث؛ أما لاعبو الوزن الثقيل فيدخلون بين الحبلين الثالث والرابع.",
 "fr": "L'athlète entre sur le ring entre la 2e et la 3e corde ; les poids lourds entrent entre la 3e et la 4e corde.",
-"ko": "선수는 두 번째와 세 번째 로프 사이로 링에 들어가며, 헤비급 선수는 세 번째와 네 번째 로프 사이로 들어갑니다."
+"ko": "선수는 두 번째와 세 번째 로프 사이로 링에 들어가며, 헤비급 선수는 세 번째와 네 번째 로프 사이로 들어갑니다.",
+"th": "นักกีฬาขึ้นเวทีระหว่างเชือกเส้นที่ 2 และ 3 ส่วนนักกีฬารุ่นหนักขึ้นระหว่างเชือกเส้นที่ 3 และ 4",
+"nl": "De atleet komt de ring in tussen de 2e en 3e touw; zwaargewichten komen binnen tussen de 3e en 4e touw.",
+"it": "L'atleta entra sul ring tra la 2ª e la 3ª corda; gli atleti dei pesi massimi entrano tra la 3ª e la 4ª corda."
 },
 {
 "cat": "KÖŞE",
@@ -665,7 +885,10 @@ var IFMA_RULES = [
 "de": "Jeder Athlet darf höchstens zwei (2) Sekundanten haben und kann ohne mindestens einen (1) nicht antreten.",
 "ar": "يجوز لكل لاعب أن يكون لديه اثنان (2) من مساعدي الركن كحدٍّ أقصى، ولا يمكنه النزال دون واحد (1) على الأقل.",
 "fr": "Chaque athlète peut avoir au maximum deux (2) soigneurs et ne peut concourir sans au moins un (1).",
-"ko": "각 선수는 최대 2명의 세컨을 둘 수 있으며, 최소 1명 없이는 경기에 나설 수 없습니다."
+"ko": "각 선수는 최대 2명의 세컨을 둘 수 있으며, 최소 1명 없이는 경기에 나설 수 없습니다.",
+"th": "นักกีฬาแต่ละคนมีพี่เลี้ยงได้ไม่เกินสอง (2) คน และไม่สามารถแข่งได้หากไม่มีอย่างน้อยหนึ่ง (1) คน",
+"nl": "Elke atleet mag maximaal twee (2) secondanten hebben en kan niet uitkomen zonder minstens één (1).",
+"it": "Ogni atleta può avere al massimo due (2) secondi e non può gareggiare senza almeno uno (1)."
 },
 {
 "cat": "KÖŞE",
@@ -674,7 +897,10 @@ var IFMA_RULES = [
 "de": "Aus Hygienegründen werden Eckutensilien (Handtuch, Sprühflasche) nicht an andere Athleten verliehen; das Trinken aus der Sprühflasche des Gegners ist verboten.",
 "ar": "لأسباب صحّية، لا تُعار أدوات الركن (المنشفة، زجاجة الرذاذ) للاعب آخر؛ ويُمنع الشرب من زجاجة رذاذ الخصم.",
 "fr": "Pour l'hygiène, le matériel de coin (serviette, vaporisateur) ne se prête pas à un autre athlète ; boire au vaporisateur de l'adversaire est interdit.",
-"ko": "위생을 위해 코너 용품(수건, 분무기)은 다른 선수에게 빌려주지 않으며, 상대의 분무기로 물을 마시는 것은 금지됩니다."
+"ko": "위생을 위해 코너 용품(수건, 분무기)은 다른 선수에게 빌려주지 않으며, 상대의 분무기로 물을 마시는 것은 금지됩니다.",
+"th": "เพื่อสุขอนามัย อุปกรณ์ประจำมุม (ผ้าเช็ดตัว ขวดสเปรย์) จะไม่ถูกยืมให้นักกีฬาคนอื่น และห้ามดื่มน้ำจากขวดสเปรย์ของคู่ต่อสู้",
+"nl": "Om hygiënische redenen worden hoekmaterialen (handdoek, sprayfles) niet aan een andere atleet uitgeleend; drinken uit de sprayfles van de tegenstander is verboden.",
+"it": "Per igiene, il materiale d'angolo (asciugamano, spruzzino) non viene prestato a un altro atleta; bere dallo spruzzino dell'avversario è vietato."
 },
 {
 "cat": "SAĞLIK",
@@ -683,6 +909,9 @@ var IFMA_RULES = [
 "de": "Ein Athlet darf höchstens drei (3) Kämpfe pro Tag bestreiten, mit mindestens zwei (2) Stunden Pause zwischen den Kämpfen.",
 "ar": "يجوز للاعب خوض ثلاث (3) نزالات كحدٍّ أقصى في اليوم، مع راحة لا تقلّ عن ساعتين (2) بين النزالات.",
 "fr": "Un athlète peut disputer au maximum trois (3) combats par jour, avec au moins deux (2) heures de repos entre les combats.",
-"ko": "선수는 하루에 최대 3경기를 치를 수 있으며, 경기 사이에 최소 2시간 휴식해야 합니다."
+"ko": "선수는 하루에 최대 3경기를 치를 수 있으며, 경기 사이에 최소 2시간 휴식해야 합니다.",
+"th": "นักกีฬาชกได้ไม่เกินสาม (3) แมตช์ต่อวัน และต้องพักอย่างน้อยสอง (2) ชั่วโมงระหว่างแมตช์",
+"nl": "Een atleet mag maximaal drie (3) wedstrijden per dag vechten, met minstens twee (2) uur rust tussen de wedstrijden.",
+"it": "Un atleta può disputare al massimo tre (3) incontri al giorno, con almeno due (2) ore di riposo tra un incontro e l'altro."
 }
 ];
