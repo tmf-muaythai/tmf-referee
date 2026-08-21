@@ -1,4 +1,4 @@
-const CACHE = "tmf-v103";
+const CACHE = "tmf-v104";
 const FILES = [
   "/tmf-referee/",
   "/tmf-referee/index.html",
@@ -28,6 +28,7 @@ const FILES = [
   "/tmf-referee/sim-engine.js",
   "/tmf-referee/sim_kayit.js",
   "/tmf-referee/sim_day2.js",
+  "/tmf-referee/sim_match.js",
   "/tmf-referee/builder_kayit.js",
   "/tmf-referee/builder_data.js",
   "/tmf-referee/home.js",
