@@ -507,11 +507,12 @@ let builderCheckState = "idle"; // "idle" (bekliyor) | "error" (yanlış) | "suc
 let builderCorrectPrefix = 0;   // yanlışta baştan kaç kelime doğru (yeşil gösterilir)
 
 // Dil kısayolu (yeni ipucu metinleri için)
-function bT(tr, de, ar, fr) {
+function bT(tr, de, ar, fr, ko) {
   if (typeof APP_LANG === 'undefined') return tr;
   if (APP_LANG === 'de') return de;
   if (APP_LANG === 'ar') return (ar != null ? ar : tr);
   if (APP_LANG === 'fr') return (fr != null ? fr : tr);
+  if (APP_LANG === 'ko') return (ko != null ? ko : tr);
   return tr;
 }
 function builderNorm(s) { return String(s).toLowerCase().replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim(); }
@@ -584,7 +585,8 @@ function renderBuilder() {
 const BUILDER_GROUP_TR = { Jury:'Jüri', Equipment:'Ekipman', Referee:'Orta Hakem', Judge:'Yan Hakem', Timekeeper:'Zaman Hakemi', Announcer:'Anons Hakemi' };
 const BUILDER_GROUP_AR = { Jury:'لجنة التحكيم', Equipment:'المعدّات', Referee:'حكم الوسط', Judge:'الحكم الجانبي', Timekeeper:'حكم التوقيت', Announcer:'حكم الإعلان' };
 const BUILDER_GROUP_FR = { Jury:'Jury', Equipment:'Équipement', Referee:'Arbitre', Judge:'Juge', Timekeeper:'Chronométreur', Announcer:'Annonceur' };
-function builderGroupSub(g){ if(typeof APP_LANG!=='undefined'){ if(APP_LANG==='ar' && BUILDER_GROUP_AR[g]) return BUILDER_GROUP_AR[g]; if(APP_LANG==='fr' && BUILDER_GROUP_FR[g]) return BUILDER_GROUP_FR[g]; } return BUILDER_GROUP_TR[g]||''; }
+const BUILDER_GROUP_KO = { Jury:'심판위원단', Equipment:'장비', Referee:'주심', Judge:'부심', Timekeeper:'계시원', Announcer:'아나운서' };
+function builderGroupSub(g){ if(typeof APP_LANG!=='undefined'){ if(APP_LANG==='ar' && BUILDER_GROUP_AR[g]) return BUILDER_GROUP_AR[g]; if(APP_LANG==='fr' && BUILDER_GROUP_FR[g]) return BUILDER_GROUP_FR[g]; if(APP_LANG==='ko' && BUILDER_GROUP_KO[g]) return BUILDER_GROUP_KO[g]; } return BUILDER_GROUP_TR[g]||''; }
 function builderTile(o) {
   const on = !o.disabled;
   return `
@@ -637,7 +639,7 @@ function renderBuilderMenu() {
     const completed = cat.scenes.filter(s => builderCompletedScenes[`${cat.id}_${s.id}`]).length;
     return builderTile({ onclick: `builderOpenCategory(${idx})`, disabled: !on, allDone: on && completed === total,
       label: cat.label, sub: (typeof builderLabelLoc==='function') ? builderLabelLoc(cat.id, cat.labelTr) : cat.labelTr,
-      badge: on ? `${completed}/${total}` : (typeof APP_LANG!=='undefined' && APP_LANG==='ar' ? 'قريباً' : (typeof APP_LANG!=='undefined' && APP_LANG==='de' ? 'Bald' : (typeof APP_LANG!=='undefined' && APP_LANG==='fr' ? 'Bientôt' : 'Yakında'))) });
+      badge: on ? `${completed}/${total}` : (typeof APP_LANG!=='undefined' && APP_LANG==='ar' ? 'قريباً' : (typeof APP_LANG!=='undefined' && APP_LANG==='de' ? 'Bald' : (typeof APP_LANG!=='undefined' && APP_LANG==='fr' ? 'Bientôt' : (typeof APP_LANG!=='undefined' && APP_LANG==='ko' ? '곧 제공' : 'Yakında')))) });
   }).join("");
   c.innerHTML = head + back + gOpen + tiles + `</div>`;
 }
@@ -792,18 +794,18 @@ function renderBuilderScene() {
         <!-- Uyarı Mesajı (Yanlışsa) — yeşil kısım doğru, ipucu ver -->
         ${isError ? `<div style="text-align:center; font-size:12px; font-weight:600; margin-bottom:16px; color:${builderCorrectPrefix > 0 ? '#3B6D11' : '#A32D2D'};">
           ${builderCorrectPrefix > 0
-            ? bT(`İlk ${builderCorrectPrefix} kelime doğru — kırmızıdan devam et 👍`, `Die ersten ${builderCorrectPrefix} Wörter stimmen — mach beim roten Teil weiter 👍`, `أول ${builderCorrectPrefix} كلمة صحيحة — تابِع من الجزء الأحمر 👍`, `Les ${builderCorrectPrefix} premiers mots sont corrects — continue à partir de la partie rouge 👍`)
-            : bT('Henüz doğru değil — “İpucu” ile ilk kelimeyi al.', 'Noch nicht richtig — hol dir mit „Tipp“ das erste Wort.', 'ليست صحيحة بعد — استخدم «تلميح» للحصول على أول كلمة.', 'Pas encore correct — utilise « Indice » pour obtenir le premier mot.')}
+            ? bT(`İlk ${builderCorrectPrefix} kelime doğru — kırmızıdan devam et 👍`, `Die ersten ${builderCorrectPrefix} Wörter stimmen — mach beim roten Teil weiter 👍`, `أول ${builderCorrectPrefix} كلمة صحيحة — تابِع من الجزء الأحمر 👍`, `Les ${builderCorrectPrefix} premiers mots sont corrects — continue à partir de la partie rouge 👍`, `처음 ${builderCorrectPrefix}개 단어가 맞았어요 — 빨간 부분부터 이어가세요 👍`)
+            : bT('Henüz doğru değil — “İpucu” ile ilk kelimeyi al.', 'Noch nicht richtig — hol dir mit „Tipp“ das erste Wort.', 'ليست صحيحة بعد — استخدم «تلميح» للحصول على أول كلمة.', 'Pas encore correct — utilise « Indice » pour obtenir le premier mot.', '아직 맞지 않아요 — “힌트”로 첫 단어를 받으세요.')}
         </div>` : ""}
 
         <!-- Butonlar -->
         <div style="text-align:center; display:flex; gap:8px; justify-content:center; flex-wrap:wrap;">
           ${!isSuccess ? `
-            <button onclick="builderHint()" title="${bT('İpucu','Tipp','تلميح','Indice')}" style="
+            <button onclick="builderHint()" title="${bT('İpucu','Tipp','تلميح','Indice','힌트')}" style="
               padding:12px 20px; font-size:14px; font-weight:600; display:inline-flex; align-items:center; gap:6px;
               background:var(--gold-050); color:var(--gold-strong); border:1px solid var(--gold);
               border-radius:24px; cursor:pointer;
-            ">${(typeof icon==='function')?icon('bulb',{size:'0.95em'}):''} ${bT('İpucu','Tipp','تلميح','Indice')}</button>
+            ">${(typeof icon==='function')?icon('bulb',{size:'0.95em'}):''} ${bT('İpucu','Tipp','تلميح','Indice','힌트')}</button>
             <button onclick="builderCheck()" ${builderSelectedWords.length === 0 ? "disabled" : ""} style="
               padding:12px 32px; font-size:14px; font-weight:600;
               background:${builderSelectedWords.length === 0 ? 'var(--border)' : '#185FA5'};

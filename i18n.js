@@ -744,7 +744,7 @@ Object.assign(I18N_UI.de, {
 });
 const BLABEL_DE = { registration:"Registrierung", cagirma:"Aufruf z. Wiegen", kimlik:"Ausweis & Doku", giyim:"Kleidung & Vorb.", tartim:"Wiegen", sonuc:"Wiege-Ergebnis", rapor:"Abschlussbericht", sistem:"Systemprobleme", baskul:"Waagenprobleme" };
 function builderLabelLoc(id, fallback){
-  const m = (APP_LANG==='de') ? BLABEL_DE : (APP_LANG==='ar' && typeof BLABEL_AR!=='undefined' ? BLABEL_AR : (APP_LANG==='fr' && typeof BLABEL_FR!=='undefined' ? BLABEL_FR : null));
+  const m = (APP_LANG==='de') ? BLABEL_DE : (APP_LANG==='ar' && typeof BLABEL_AR!=='undefined' ? BLABEL_AR : (APP_LANG==='fr' && typeof BLABEL_FR!=='undefined' ? BLABEL_FR : (APP_LANG==='ko' && typeof BLABEL_KO!=='undefined' ? BLABEL_KO : null)));
   return (m && m[id]!=null) ? m[id] : fallback;
 }
 
@@ -1423,11 +1423,11 @@ const SIM_TITLE_DE = {
   "Bir dakikalık mola bitiyor ve yeni raund başla…": "Die einminütige Pause endet und die neue Runde beginnt…",
 };
 function simHint(h){
-  const m = (APP_LANG==='de') ? SIM_HINT_DE : (APP_LANG==='ar' && typeof SIM_HINT_AR!=='undefined' ? SIM_HINT_AR : (APP_LANG==='fr' && typeof SIM_HINT_FR!=='undefined' ? SIM_HINT_FR : null));
+  const m = (APP_LANG==='de') ? SIM_HINT_DE : (APP_LANG==='ar' && typeof SIM_HINT_AR!=='undefined' ? SIM_HINT_AR : (APP_LANG==='fr' && typeof SIM_HINT_FR!=='undefined' ? SIM_HINT_FR : (APP_LANG==='ko' && typeof SIM_HINT_KO!=='undefined' ? SIM_HINT_KO : null)));
   return (m && m[h]!=null) ? m[h] : h;
 }
 function simTitle(tt){
-  const m = (APP_LANG==='de') ? SIM_TITLE_DE : (APP_LANG==='ar' && typeof SIM_TITLE_AR!=='undefined' ? SIM_TITLE_AR : (APP_LANG==='fr' && typeof SIM_TITLE_FR!=='undefined' ? SIM_TITLE_FR : null));
+  const m = (APP_LANG==='de') ? SIM_TITLE_DE : (APP_LANG==='ar' && typeof SIM_TITLE_AR!=='undefined' ? SIM_TITLE_AR : (APP_LANG==='fr' && typeof SIM_TITLE_FR!=='undefined' ? SIM_TITLE_FR : (APP_LANG==='ko' && typeof SIM_TITLE_KO!=='undefined' ? SIM_TITLE_KO : null)));
   return (m && m[tt]!=null) ? m[tt] : tt;
 }
 
@@ -1467,7 +1467,61 @@ function setLang(l){
   if (typeof buildL4 === 'function') { try { buildL4(); } catch(e){} }
   if (typeof render === 'function') render();
 }
-function cycleLang(){ setLang(APP_LANG === 'tr' ? 'de' : (APP_LANG === 'de' ? 'ar' : (APP_LANG === 'ar' ? 'fr' : 'tr'))); }
+function cycleLang(){ setLang(APP_LANG === 'tr' ? 'de' : (APP_LANG === 'de' ? 'ar' : (APP_LANG === 'ar' ? 'fr' : (APP_LANG === 'fr' ? 'ko' : 'tr')))); }
+
+/* ─── DİL SEÇİCİ (bayraklı mini menü) ──────────────────────────────── */
+var LANG_ORDER = ['tr','de','ar','fr','ko'];
+var LANG_NAMES = { tr:'Türkçe', de:'Deutsch', ar:'العربية', fr:'Français', ko:'한국어' };
+var LANG_FLAGS = {
+  tr:'<svg viewBox="0 0 30 20" xmlns="http://www.w3.org/2000/svg"><rect width="30" height="20" fill="#E30A17"/><circle cx="12" cy="10" r="5" fill="#fff"/><circle cx="13.6" cy="10" r="4" fill="#E30A17"/><polygon points="18.7,7.4 19.28,9.2 21.17,9.2 19.64,10.31 20.23,12.1 18.7,10.99 17.17,12.1 17.76,10.31 16.23,9.2 18.12,9.2" fill="#fff"/></svg>',
+  de:'<svg viewBox="0 0 30 20" xmlns="http://www.w3.org/2000/svg"><rect width="30" height="20" fill="#000"/><rect y="6.667" width="30" height="6.667" fill="#DD0000"/><rect y="13.333" width="30" height="6.667" fill="#FFCE00"/></svg>',
+  fr:'<svg viewBox="0 0 30 20" xmlns="http://www.w3.org/2000/svg"><rect width="30" height="20" fill="#fff"/><rect width="10" height="20" fill="#0055A4"/><rect x="20" width="10" height="20" fill="#EF4135"/></svg>',
+  ko:'<svg viewBox="0 0 30 20" xmlns="http://www.w3.org/2000/svg"><rect width="30" height="20" fill="#fff"/><circle cx="15" cy="10" r="4" fill="#0047A0"/><path d="M15,6 A4,4 0 0,1 15,14 A2,2 0 0,1 15,10 A2,2 0 0,0 15,6 Z" fill="#CD2E3A"/><g transform="translate(7,4.7) rotate(-33.69)" fill="#000"><rect x="-3.0" y="-2.4" width="6.0" height="1.0"/><rect x="-3.0" y="-0.5" width="6.0" height="1.0"/><rect x="-3.0" y="1.4" width="6.0" height="1.0"/></g><g transform="translate(23,4.7) rotate(33.69)" fill="#000"><rect x="-3.0" y="-2.4" width="2.3" height="1.0"/><rect x="0.7" y="-2.4" width="2.3" height="1.0"/><rect x="-3.0" y="-0.5" width="6.0" height="1.0"/><rect x="-3.0" y="1.4" width="2.3" height="1.0"/><rect x="0.7" y="1.4" width="2.3" height="1.0"/></g><g transform="translate(7,15.3) rotate(33.69)" fill="#000"><rect x="-3.0" y="-2.4" width="6.0" height="1.0"/><rect x="-3.0" y="-0.5" width="2.3" height="1.0"/><rect x="0.7" y="-0.5" width="2.3" height="1.0"/><rect x="-3.0" y="1.4" width="6.0" height="1.0"/></g><g transform="translate(23,15.3) rotate(-33.69)" fill="#000"><rect x="-3.0" y="-2.4" width="2.3" height="1.0"/><rect x="0.7" y="-2.4" width="2.3" height="1.0"/><rect x="-3.0" y="-0.5" width="2.3" height="1.0"/><rect x="0.7" y="-0.5" width="2.3" height="1.0"/><rect x="-3.0" y="1.4" width="2.3" height="1.0"/><rect x="0.7" y="1.4" width="2.3" height="1.0"/></g></svg>'
+};
+function langChip(l){
+  if(l === 'ar') return '<span class="lang-badge-ar">ع</span>';
+  return LANG_FLAGS[l] || ('<span class="lang-badge-ar">'+String(l).toUpperCase()+'</span>');
+}
+function renderLangTrigger(){
+  var lb = document.getElementById('lang-btn');
+  if(lb) lb.innerHTML = '<span class="lang-cur">'+langChip(APP_LANG)+'</span>';
+}
+function closeLangMenu(){
+  var menu = document.getElementById('lang-menu');
+  if(menu){
+    menu.classList.remove('show');
+    document.removeEventListener('click', outsideLangClose);
+    setTimeout(function(){ if(menu && menu.parentNode) menu.parentNode.removeChild(menu); }, 220);
+  }
+}
+function outsideLangClose(e){
+  var menu = document.getElementById('lang-menu');
+  var onTrigger = e.target.closest && e.target.closest('#lang-btn');
+  if(menu && !menu.contains(e.target) && !onTrigger){ closeLangMenu(); }
+}
+function pickLang(l){ closeLangMenu(); setLang(l); }
+function toggleLangMenu(ev){
+  if(ev) ev.stopPropagation();
+  if(document.getElementById('lang-menu')){ closeLangMenu(); return; }
+  var host = document.getElementById('lang-btn');
+  if(!host) return;
+  var menu = document.createElement('div');
+  menu.id = 'lang-menu'; menu.className = 'lang-menu'; menu.dir = 'ltr';
+  LANG_ORDER.forEach(function(l, i){
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'lang-chip' + (l === APP_LANG ? ' active' : '');
+    b.title = LANG_NAMES[l] || l;
+    b.setAttribute('aria-label', LANG_NAMES[l] || l);
+    b.innerHTML = langChip(l);
+    b.style.transitionDelay = (i * 55) + 'ms';
+    b.addEventListener('click', function(e){ e.stopPropagation(); pickLang(l); });
+    menu.appendChild(b);
+  });
+  host.parentNode.appendChild(menu);
+  requestAnimationFrame(function(){ menu.classList.add('show'); });
+  setTimeout(function(){ document.addEventListener('click', outsideLangClose); }, 0);
+}
 
 function applyStaticLang(){
   const h1 = document.querySelector('.top-bar h1'); if (h1) h1.textContent = t('appTitle');
@@ -1477,7 +1531,7 @@ function applyStaticLang(){
   const hb = document.getElementById('home-btn'); if (hb) hb.innerHTML = ic('home') + ' ' + t('home');
   const dark = document.body.classList.contains('dark');
   const db = document.getElementById('dark-toggle'); if (db) db.innerHTML = ic(dark ? 'sun' : 'moon') + ' ' + (dark ? t('day') : t('night'));
-  const lb = document.getElementById('lang-btn'); if (lb) lb.innerHTML = ic('globe') + ' ' + APP_LANG.toUpperCase();
+  renderLangTrigger();
   const ff = document.getElementById('footer-fed'); if (ff) ff.textContent = t('fedFull');
   const qt = document.getElementById('qr-title'); if (qt) qt.textContent = t('qrTitle');
   const qd = document.getElementById('qr-desc'); if (qd) qd.textContent = t('qrDesc');

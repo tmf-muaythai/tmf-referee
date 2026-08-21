@@ -129,16 +129,17 @@ function simLabelLoc(labelTr){
   if (typeof APP_LANG!=='undefined'){
     if (APP_LANG==='ar' && typeof SIM_LABEL_AR!=='undefined' && SIM_LABEL_AR[labelTr]) return SIM_LABEL_AR[labelTr];
     if (APP_LANG==='fr' && typeof SIM_LABEL_FR!=='undefined' && SIM_LABEL_FR[labelTr]) return SIM_LABEL_FR[labelTr];
+    if (APP_LANG==='ko' && typeof SIM_LABEL_KO!=='undefined' && SIM_LABEL_KO[labelTr]) return SIM_LABEL_KO[labelTr];
   }
   return labelTr;
 }
 function simUI(k){
   var M={
-    simHeader:{tr:'Sesli Simülasyon',de:'Audio-Simulation',ar:'المحاكاة الصوتية',fr:'Simulation vocale'},
-    simPickTask:{tr:'Pratik yapmak istediğin görevi seç.',de:'Wähle die Aufgabe, die du üben möchtest.',ar:'اختر المهمة التي تريد التدرّب عليها.',fr:'Choisis la tâche que tu veux pratiquer.'},
-    simPickSection:{tr:'Pratik yapmak istediğin bölümü seç.',de:'Wähle den Abschnitt, den du üben möchtest.',ar:'اختر القسم الذي تريد التدرّب عليه.',fr:'Choisis la section que tu veux pratiquer.'},
-    simBackTasks:{tr:'← Görevler',de:'← Aufgaben',ar:'← المهام',fr:'← Tâches'},
-    simSoon:{tr:'Yakında',de:'Bald',ar:'قريباً',fr:'Bientôt'}
+    simHeader:{tr:'Sesli Simülasyon',de:'Audio-Simulation',ar:'المحاكاة الصوتية',fr:'Simulation vocale',ko:'음성 시뮬레이션'},
+    simPickTask:{tr:'Pratik yapmak istediğin görevi seç.',de:'Wähle die Aufgabe, die du üben möchtest.',ar:'اختر المهمة التي تريد التدرّب عليها.',fr:'Choisis la tâche que tu veux pratiquer.',ko:'연습하고 싶은 과제를 선택하세요.'},
+    simPickSection:{tr:'Pratik yapmak istediğin bölümü seç.',de:'Wähle den Abschnitt, den du üben möchtest.',ar:'اختر القسم الذي تريد التدرّب عليه.',fr:'Choisis la section que tu veux pratiquer.',ko:'연습하고 싶은 섹션을 선택하세요.'},
+    simBackTasks:{tr:'← Görevler',de:'← Aufgaben',ar:'← المهام',fr:'← Tâches',ko:'← 과제'},
+    simSoon:{tr:'Yakında',de:'Bald',ar:'قريباً',fr:'Bientôt',ko:'곧 제공'}
   };
   var e=M[k]||{}, L=(typeof APP_LANG!=='undefined')?APP_LANG:'tr';
   return (e[L]!=null)?e[L]:(e.tr||'');
