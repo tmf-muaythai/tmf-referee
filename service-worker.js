@@ -1,4 +1,4 @@
-const CACHE = "tmf-v105";
+const CACHE = "tmf-v106";
 const FILES = [
   "/tmf-referee/",
   "/tmf-referee/index.html",
@@ -39,6 +39,14 @@ const FILES = [
   "/tmf-referee/assets/images/favicon.png",
   "/tmf-referee/assets/images/favicon-192.png",
   "/tmf-referee/assets/images/afra-avatar.png",
+  "/tmf-referee/assets/images/avatar-tr.png",
+  "/tmf-referee/assets/images/avatar-de.png",
+  "/tmf-referee/assets/images/avatar-ar.png",
+  "/tmf-referee/assets/images/avatar-fr.png",
+  "/tmf-referee/assets/images/avatar-ko.png",
+  "/tmf-referee/assets/images/avatar-th.png",
+  "/tmf-referee/assets/images/avatar-nl.png",
+  "/tmf-referee/assets/images/avatar-it.png",
   "/tmf-referee/assets/images/acilis-bg.jpg",
   "/tmf-referee/assets/images/acilis-desktop.jpg",
   "/tmf-referee/assets/images/hakem-avatar.png",

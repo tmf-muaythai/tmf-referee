@@ -14,7 +14,7 @@ function renderHome() {
         <div class="home-hero-title">${(typeof t==='function')?t('heroTitle'):'Hoş geldin! 🥊'}</div>
         <div class="home-hero-sub">${(typeof t==='function')?t('heroSub'):'Uluslararası müsabakalarda ihtiyacın olan İngilizceyi dinle, konuş ve pratik yap. Başlamak için bir bölüm seç.'}</div>
       </div>
-      <img src="assets/images/afra-avatar.png" class="home-hero-img" alt="">
+      <img src="assets/images/avatar-${(typeof APP_LANG!=='undefined')?APP_LANG:'tr'}.png" onerror="this.onerror=null;this.src='assets/images/afra-avatar.png';" class="home-hero-img" alt="">
     </div>
 
     <!-- BÖLÜM KARTLARI -->
