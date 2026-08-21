@@ -555,11 +555,11 @@ const QUIZ_I18N = { de: {
   "quiz_d2_senaryo_jury_27": "Am Ringrand hast du ein plötzliches, ernstes gesundheitliches Problem und brauchst professionelle medizinische Hilfe. Du benennst deinen Bedarf klar.",
   "quiz_d2_senaryo_jury_28": "Dir ist schwindelig und du hast Mühe zu stehen. Du meldest diese besondere Situation.",
   "quiz_d2_senaryo_jury_29": "Beim Trennen der Athlet hast du einen stechenden Schmerz im Arm gespürt und kannst die Aufgabe nicht fortsetzen. Du informierst die Jury.",
-  "quiz_d2_senaryo_jury_30": "Du hast plötzlich starke Magenbeschwerden und dir wird übel. Du informierst sofort den Beobachter.",
+  "quiz_d2_senaryo_jury_30": "Du hast plötzlich starke Magenbeschwerden und dir wird übel. Du informierst sofort die Jury.",
   "quiz_d2_senaryo_jury_31": "Dein Fuß bereitet dir starke Schmerzen. Du meldest dies.",
-  "quiz_d2_senaryo_jury_32": "Du fühlst dich schwach und zittrig. Du meldest dem Tisch, dass dein Blutzucker abgefallen ist.",
+  "quiz_d2_senaryo_jury_32": "Du fühlst dich schwach, zittrig und schwitzt. Du meldest dem Tisch deinen Zustand.",
   "quiz_d2_senaryo_jury_33": "Du bemerkst, dass dein Blutdruck gestiegen ist und dir im Kopf pocht. Du meldest der Jury deinen hohen Blutdruck.",
-  "quiz_d2_senaryo_jury_34": "Kurz bevor du in den Ring gerufen wirst, bemerkst du, dass deine Fliege verloren gegangen ist. Du bittest einen Kollegen oder die Jury um eine Ersatzfliege.",
+  "quiz_d2_senaryo_jury_34": "Du bemerkst, dass deine Fliege (Bow Tie) abgegangen und verloren gegangen ist. Du bittest einen Kollegen oder die Jury um eine Ersatzfliege.",
   "quiz_d2_senaryo_jury_35": "Du bemerkst, dass sich die Ringmatte an der Ecke löst oder gefährliche Falten bildet, über die Athleten stolpern könnten. Du meldest es der Jury.",
   "quiz_d2_senaryo_jury_36": "Während des Clinchs lehnen sich die Athleten in die Ringseile und die Ringseile hängen gefährlich durch. Du meldest es der Jury.",
   "quiz_d2_senaryo_jury_37": "Vor dem nächsten Kampf liegt trockener Schmutz oder kleiner Unrat auf der Ringmatte, der weggewischt werden muss. Du forderst die Offiziellen zur Reinigung auf.",
@@ -643,7 +643,7 @@ const QUIZ_I18N = { de: {
   "quiz_d2_senaryo_referee_29": "In einem Jugendkampf, in dem Ellbogen an den Kopf verboten sind, setzt der Athlet einen Ellbogen ins Gesicht des Gegners. Du gibst ihm eine Verwarnung (Caution).",
   "quiz_d2_senaryo_referee_30": "Der Athlet wurde während des Kampfes mehrfach wegen verschiedener Foularten verwarnt. Für dieses unsportliche Verhalten gibst du eine Strafe.",
   "quiz_d2_senaryo_referee_31": "Du hast den Athleten bei einem Knockdown angezählt. Der Athlet schüttelte den Kopf, als wolle er andeuten, dass er nicht weitermachen möchte. Um die Situation zu klären, fragst du den Athleten:",
-  "quiz_d2_senaryo_referee_32": "Die rote Ecke ist trotz der Ankunft der blauen Ecke im Ring noch immer nicht an den Ringrand gekommen. Welches Kommando gibst du dem Zeitnehmer?",
+  "quiz_d2_senaryo_referee_32": "Die blaue Ecke ist trotz der Bereitschaft der roten Ecke noch immer nicht an den Ringrand gekommen. Welches Kommando gibst du dem Zeitnehmer?",
   "quiz_d2_senaryo_referee_33": "Der Kampf dauerte volle 3 Runden. Wie lautet demzufolge das Kampfergebnis?",
   "quiz_d2_senaryo_referee_34": "Der Athlet kann seinem Gegner nichts entgegensetzen und sich nicht verteidigen. Du gibst das YOOT-Kommando und beendest den Kampf mit welcher Entscheidung:",
   "quiz_d2_senaryo_referee_35": "Du bemerkst, dass sich mitten im Kampf der Arm des Athleten ausgekugelt hat. Du stoppst den Kampf mit dem YOOT-Kommando, gibst dem Zeitnehmer das TIME-Kommando und rufst den Arzt. Mit welcher Entscheidung beendest du den Kampf?",
@@ -663,11 +663,11 @@ const QUIZ_I18N = { de: {
   "quiz_d2_senaryo_referee_49": "Der Athlet, den du bei einem Knockdown in die weiße Ecke geschickt hast, steht mit den Armen auf den Ringseilen in ausruhender Haltung. Welches Kommando gibst du:",
   "quiz_senaryo_1": "Bei einem Athleten fehlt das IFMA-Formular zur medizinischen Erklärung.",
   "quiz_senaryo_2": "Du bittest den Athleten, seine Akkreditierungskarte zu zeigen.",
-  "quiz_senaryo_3": "Die Online-Liste aktualisiert sich nicht.",
+  "quiz_senaryo_3": "Die Online-Liste ist nicht aktuell.",
   "quiz_senaryo_4": "Der Athlet kommt mit einer Halskette zum Wiegen.",
-  "quiz_senaryo_5": "Bei einem Athleten fehlt das Ergebnis des HBC/HBV-Bluttests.",
+  "quiz_senaryo_5": "Bei einem Athleten fehlt das Ergebnis des HBV-Bluttests.",
   "quiz_senaryo_6": "Du kannst keine Daten in die Liste eingeben.",
-  "quiz_senaryo_7": "Du nennst die Gesamtzahl der Athlet mit Walk-Over.",
+  "quiz_senaryo_7": "Du nennst die Gesamtzahl der Athleten mit Walk-Over.",
   "quiz_senaryo_8": "Du sagst, dass der Athlet zuerst zum Arzt gehen muss.",
   "quiz_senaryo_9": "Der Athlet möchte seine Unterwäsche ausziehen, um beim Wiegen ein niedrigeres Gewicht zu erreichen.",
   "quiz_senaryo_10": "Du bittest den Trainer um die für die Registrierung nötigen Dokumente.",
@@ -743,7 +743,10 @@ Object.assign(I18N_UI.de, {
   bRedo:"↺ Nochmal", bBackToMenu:"Zu den Bereichen"
 });
 const BLABEL_DE = { registration:"Registrierung", cagirma:"Aufruf z. Wiegen", kimlik:"Ausweis & Doku", giyim:"Kleidung & Vorb.", tartim:"Wiegen", sonuc:"Wiege-Ergebnis", rapor:"Abschlussbericht", sistem:"Systemprobleme", baskul:"Waagenprobleme" };
-function builderLabelLoc(id, fallback){ return (APP_LANG==='de' && BLABEL_DE[id]!=null) ? BLABEL_DE[id] : fallback; }
+function builderLabelLoc(id, fallback){
+  const m = (APP_LANG==='de') ? BLABEL_DE : (APP_LANG==='ar' && typeof BLABEL_AR!=='undefined' ? BLABEL_AR : (APP_LANG==='fr' && typeof BLABEL_FR!=='undefined' ? BLABEL_FR : null));
+  return (m && m[id]!=null) ? m[id] : fallback;
+}
 
 
 // ─── SİMÜLASYON i18n (ipuçları + sahne başlıkları) ─────────────────
@@ -1419,8 +1422,14 @@ const SIM_TITLE_DE = {
   "Teknik Delege resmi bir öğle arası verme karar…": "Der technische Delegierte hat entschieden, eine offizie…",
   "Bir dakikalık mola bitiyor ve yeni raund başla…": "Die einminütige Pause endet und die neue Runde beginnt…",
 };
-function simHint(h){ return (APP_LANG==='de' && SIM_HINT_DE[h]!=null) ? SIM_HINT_DE[h] : h; }
-function simTitle(tt){ return (APP_LANG==='de' && SIM_TITLE_DE[tt]!=null) ? SIM_TITLE_DE[tt] : tt; }
+function simHint(h){
+  const m = (APP_LANG==='de') ? SIM_HINT_DE : (APP_LANG==='ar' && typeof SIM_HINT_AR!=='undefined' ? SIM_HINT_AR : (APP_LANG==='fr' && typeof SIM_HINT_FR!=='undefined' ? SIM_HINT_FR : null));
+  return (m && m[h]!=null) ? m[h] : h;
+}
+function simTitle(tt){
+  const m = (APP_LANG==='de') ? SIM_TITLE_DE : (APP_LANG==='ar' && typeof SIM_TITLE_AR!=='undefined' ? SIM_TITLE_AR : (APP_LANG==='fr' && typeof SIM_TITLE_FR!=='undefined' ? SIM_TITLE_FR : null));
+  return (m && m[tt]!=null) ? m[tt] : tt;
+}
 
 // ─── SİMÜLASYON ARAYÜZ (sim-engine chrome) ───────────────────────────
 Object.assign(I18N_UI.tr, {
@@ -1458,7 +1467,7 @@ function setLang(l){
   if (typeof buildL4 === 'function') { try { buildL4(); } catch(e){} }
   if (typeof render === 'function') render();
 }
-function cycleLang(){ setLang(APP_LANG === 'tr' ? 'de' : 'tr'); }
+function cycleLang(){ setLang(APP_LANG === 'tr' ? 'de' : (APP_LANG === 'de' ? 'ar' : (APP_LANG === 'ar' ? 'fr' : 'tr'))); }
 
 function applyStaticLang(){
   const h1 = document.querySelector('.top-bar h1'); if (h1) h1.textContent = t('appTitle');
@@ -1484,5 +1493,10 @@ function applyStaticLang(){
     else if (/QR|qr/.test(el.textContent) || el.getAttribute('onclick')==='openQR()') el.innerHTML = ic('qr') + ' ' + t('qr');
   });
   document.documentElement.lang = APP_LANG;
+  // Arapça: sağdan sola (RTL) yön
+  try {
+    document.documentElement.dir = (APP_LANG === 'ar') ? 'rtl' : 'ltr';
+    document.body.classList.toggle('rtl', APP_LANG === 'ar');
+  } catch(e){}
 }
 document.addEventListener('DOMContentLoaded', applyStaticLang);

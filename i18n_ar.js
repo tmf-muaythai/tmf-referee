@@ -126,16 +126,19 @@ var SIM_LABEL_AR = {
  "Tartı Sonu Raporu":"تقرير نهاية الوزن","Baskül Sorunları":"مشاكل الميزان","Sistemsel Sorunlar":"مشاكل النظام"
 };
 function simLabelLoc(labelTr){
-  if (typeof APP_LANG!=='undefined' && APP_LANG==='ar' && SIM_LABEL_AR[labelTr]) return SIM_LABEL_AR[labelTr];
+  if (typeof APP_LANG!=='undefined'){
+    if (APP_LANG==='ar' && typeof SIM_LABEL_AR!=='undefined' && SIM_LABEL_AR[labelTr]) return SIM_LABEL_AR[labelTr];
+    if (APP_LANG==='fr' && typeof SIM_LABEL_FR!=='undefined' && SIM_LABEL_FR[labelTr]) return SIM_LABEL_FR[labelTr];
+  }
   return labelTr;
 }
 function simUI(k){
   var M={
-    simHeader:{tr:'Sesli Simülasyon',de:'Audio-Simulation',ar:'المحاكاة الصوتية'},
-    simPickTask:{tr:'Pratik yapmak istediğin görevi seç.',de:'Wähle die Aufgabe, die du üben möchtest.',ar:'اختر المهمة التي تريد التدرّب عليها.'},
-    simPickSection:{tr:'Pratik yapmak istediğin bölümü seç.',de:'Wähle den Abschnitt, den du üben möchtest.',ar:'اختر القسم الذي تريد التدرّب عليه.'},
-    simBackTasks:{tr:'← Görevler',de:'← Aufgaben',ar:'← المهام'},
-    simSoon:{tr:'Yakında',de:'Bald',ar:'قريباً'}
+    simHeader:{tr:'Sesli Simülasyon',de:'Audio-Simulation',ar:'المحاكاة الصوتية',fr:'Simulation vocale'},
+    simPickTask:{tr:'Pratik yapmak istediğin görevi seç.',de:'Wähle die Aufgabe, die du üben möchtest.',ar:'اختر المهمة التي تريد التدرّب عليها.',fr:'Choisis la tâche que tu veux pratiquer.'},
+    simPickSection:{tr:'Pratik yapmak istediğin bölümü seç.',de:'Wähle den Abschnitt, den du üben möchtest.',ar:'اختر القسم الذي تريد التدرّب عليه.',fr:'Choisis la section que tu veux pratiquer.'},
+    simBackTasks:{tr:'← Görevler',de:'← Aufgaben',ar:'← المهام',fr:'← Tâches'},
+    simSoon:{tr:'Yakında',de:'Bald',ar:'قريباً',fr:'Bientôt'}
   };
   var e=M[k]||{}, L=(typeof APP_LANG!=='undefined')?APP_LANG:'tr';
   return (e[L]!=null)?e[L]:(e.tr||'');
