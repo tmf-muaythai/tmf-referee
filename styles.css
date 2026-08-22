@@ -373,6 +373,8 @@ body.dark #tc-num{color:var(--brand) !important}
   .home-hero-title{font-size:17px}
   .home-hero-sub{font-size:11.5px;line-height:1.46}
   .home-hero-img{height:206px;width:auto;max-width:172px;margin-bottom:-2px}
+  /* Dil menüsü: telefonda tek satıra sığmıyor → bayrakları alt satıra sar, ekran içinde kal */
+  .lang-menu{ right:10px; left:auto; max-width:206px; flex-wrap:wrap; justify-content:flex-end; }
 }
 
 /* ── İkon sistemi + buton bileşenleri (görsel tutarlılık) ─────────────── */

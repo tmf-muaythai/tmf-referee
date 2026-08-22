@@ -3411,7 +3411,11 @@ const DAY2_SIM_CTX = {
     "waikru":        "wai kru",
     "wai crew":      "wai kru",
     "mongkong":      "mongkon",
-    "mongcon":       "mongkon"
+    "mongcon":       "mongkon",
+    "glows":         "gloves",
+    "clothes":       "gloves",
+    "gloss":         "gloves",
+    "globes":        "gloves"
   }
 };
 
