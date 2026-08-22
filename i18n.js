@@ -744,7 +744,7 @@ Object.assign(I18N_UI.de, {
 });
 const BLABEL_DE = { registration:"Registrierung", cagirma:"Aufruf z. Wiegen", kimlik:"Ausweis & Doku", giyim:"Kleidung & Vorb.", tartim:"Wiegen", sonuc:"Wiege-Ergebnis", rapor:"Abschlussbericht", sistem:"Systemprobleme", baskul:"Waagenprobleme" };
 function builderLabelLoc(id, fallback){
-  const m = (APP_LANG==='de') ? BLABEL_DE : (APP_LANG==='ar' && typeof BLABEL_AR!=='undefined' ? BLABEL_AR : (APP_LANG==='fr' && typeof BLABEL_FR!=='undefined' ? BLABEL_FR : (APP_LANG==='ko' && typeof BLABEL_KO!=='undefined' ? BLABEL_KO : (APP_LANG==='th' && typeof BLABEL_TH!=='undefined' ? BLABEL_TH : (APP_LANG==='nl' && typeof BLABEL_NL!=='undefined' ? BLABEL_NL : (APP_LANG==='it' && typeof BLABEL_IT!=='undefined' ? BLABEL_IT : null))))));
+  const m = (APP_LANG==='de') ? BLABEL_DE : (APP_LANG==='ar' && typeof BLABEL_AR!=='undefined' ? BLABEL_AR : (APP_LANG==='fr' && typeof BLABEL_FR!=='undefined' ? BLABEL_FR : (APP_LANG==='ko' && typeof BLABEL_KO!=='undefined' ? BLABEL_KO : (APP_LANG==='th' && typeof BLABEL_TH!=='undefined' ? BLABEL_TH : (APP_LANG==='nl' && typeof BLABEL_NL!=='undefined' ? BLABEL_NL : (APP_LANG==='it' && typeof BLABEL_IT!=='undefined' ? BLABEL_IT : (APP_LANG==='el' && typeof BLABEL_EL!=='undefined' ? BLABEL_EL : (APP_LANG==='uk' && typeof BLABEL_UK!=='undefined' ? BLABEL_UK : null))))))));
   return (m && m[id]!=null) ? m[id] : fallback;
 }
 
@@ -1423,11 +1423,11 @@ const SIM_TITLE_DE = {
   "Bir dakikalık mola bitiyor ve yeni raund başla…": "Die einminütige Pause endet und die neue Runde beginnt…",
 };
 function simHint(h){
-  const m = (APP_LANG==='de') ? SIM_HINT_DE : (APP_LANG==='ar' && typeof SIM_HINT_AR!=='undefined' ? SIM_HINT_AR : (APP_LANG==='fr' && typeof SIM_HINT_FR!=='undefined' ? SIM_HINT_FR : (APP_LANG==='ko' && typeof SIM_HINT_KO!=='undefined' ? SIM_HINT_KO : (APP_LANG==='th' && typeof SIM_HINT_TH!=='undefined' ? SIM_HINT_TH : (APP_LANG==='nl' && typeof SIM_HINT_NL!=='undefined' ? SIM_HINT_NL : (APP_LANG==='it' && typeof SIM_HINT_IT!=='undefined' ? SIM_HINT_IT : null))))));
+  const m = (APP_LANG==='de') ? SIM_HINT_DE : (APP_LANG==='ar' && typeof SIM_HINT_AR!=='undefined' ? SIM_HINT_AR : (APP_LANG==='fr' && typeof SIM_HINT_FR!=='undefined' ? SIM_HINT_FR : (APP_LANG==='ko' && typeof SIM_HINT_KO!=='undefined' ? SIM_HINT_KO : (APP_LANG==='th' && typeof SIM_HINT_TH!=='undefined' ? SIM_HINT_TH : (APP_LANG==='nl' && typeof SIM_HINT_NL!=='undefined' ? SIM_HINT_NL : (APP_LANG==='it' && typeof SIM_HINT_IT!=='undefined' ? SIM_HINT_IT : (APP_LANG==='el' && typeof SIM_HINT_EL!=='undefined' ? SIM_HINT_EL : (APP_LANG==='uk' && typeof SIM_HINT_UK!=='undefined' ? SIM_HINT_UK : null))))))));
   return (m && m[h]!=null) ? m[h] : h;
 }
 function simTitle(tt){
-  const m = (APP_LANG==='de') ? SIM_TITLE_DE : (APP_LANG==='ar' && typeof SIM_TITLE_AR!=='undefined' ? SIM_TITLE_AR : (APP_LANG==='fr' && typeof SIM_TITLE_FR!=='undefined' ? SIM_TITLE_FR : (APP_LANG==='ko' && typeof SIM_TITLE_KO!=='undefined' ? SIM_TITLE_KO : (APP_LANG==='th' && typeof SIM_TITLE_TH!=='undefined' ? SIM_TITLE_TH : (APP_LANG==='nl' && typeof SIM_TITLE_NL!=='undefined' ? SIM_TITLE_NL : (APP_LANG==='it' && typeof SIM_TITLE_IT!=='undefined' ? SIM_TITLE_IT : null))))));
+  const m = (APP_LANG==='de') ? SIM_TITLE_DE : (APP_LANG==='ar' && typeof SIM_TITLE_AR!=='undefined' ? SIM_TITLE_AR : (APP_LANG==='fr' && typeof SIM_TITLE_FR!=='undefined' ? SIM_TITLE_FR : (APP_LANG==='ko' && typeof SIM_TITLE_KO!=='undefined' ? SIM_TITLE_KO : (APP_LANG==='th' && typeof SIM_TITLE_TH!=='undefined' ? SIM_TITLE_TH : (APP_LANG==='nl' && typeof SIM_TITLE_NL!=='undefined' ? SIM_TITLE_NL : (APP_LANG==='it' && typeof SIM_TITLE_IT!=='undefined' ? SIM_TITLE_IT : (APP_LANG==='el' && typeof SIM_TITLE_EL!=='undefined' ? SIM_TITLE_EL : (APP_LANG==='uk' && typeof SIM_TITLE_UK!=='undefined' ? SIM_TITLE_UK : null))))))));
   return (m && m[tt]!=null) ? m[tt] : tt;
 }
 
@@ -1467,11 +1467,11 @@ function setLang(l){
   if (typeof buildL4 === 'function') { try { buildL4(); } catch(e){} }
   if (typeof render === 'function') render();
 }
-function cycleLang(){ setLang(APP_LANG === 'tr' ? 'de' : (APP_LANG === 'de' ? 'ar' : (APP_LANG === 'ar' ? 'fr' : (APP_LANG === 'fr' ? 'ko' : (APP_LANG === 'ko' ? 'th' : (APP_LANG === 'th' ? 'nl' : (APP_LANG === 'nl' ? 'it' : 'tr'))))))); }
+function cycleLang(){ setLang(APP_LANG === 'tr' ? 'de' : (APP_LANG === 'de' ? 'ar' : (APP_LANG === 'ar' ? 'fr' : (APP_LANG === 'fr' ? 'ko' : (APP_LANG === 'ko' ? 'th' : (APP_LANG === 'th' ? 'nl' : (APP_LANG === 'nl' ? 'it' : (APP_LANG === 'it' ? 'el' : (APP_LANG === 'el' ? 'uk' : 'tr'))))))))); }
 
 /* ─── DİL SEÇİCİ (bayraklı mini menü) ──────────────────────────────── */
-var LANG_ORDER = ['tr','de','ar','fr','ko','th','nl','it'];
-var LANG_NAMES = { tr:'Türkçe', de:'Deutsch', ar:'العربية', fr:'Français', ko:'한국어', th:'ไทย', nl:'Nederlands', it:'Italiano' };
+var LANG_ORDER = ['tr','de','ar','fr','ko','th','nl','it','el','uk'];
+var LANG_NAMES = { tr:'Türkçe', de:'Deutsch', ar:'العربية', fr:'Français', ko:'한국어', th:'ไทย', nl:'Nederlands', it:'Italiano', el:'Ελληνικά', uk:'Українська' };
 var LANG_FLAGS = {
   tr:'<svg viewBox="0 0 30 20" xmlns="http://www.w3.org/2000/svg"><rect width="30" height="20" fill="#E30A17"/><circle cx="12" cy="10" r="5" fill="#fff"/><circle cx="13.6" cy="10" r="4" fill="#E30A17"/><polygon points="18.7,7.4 19.28,9.2 21.17,9.2 19.64,10.31 20.23,12.1 18.7,10.99 17.17,12.1 17.76,10.31 16.23,9.2 18.12,9.2" fill="#fff"/></svg>',
   de:'<svg viewBox="0 0 30 20" xmlns="http://www.w3.org/2000/svg"><rect width="30" height="20" fill="#000"/><rect y="6.667" width="30" height="6.667" fill="#DD0000"/><rect y="13.333" width="30" height="6.667" fill="#FFCE00"/></svg>',
@@ -1480,7 +1480,9 @@ var LANG_FLAGS = {
   th:'<svg viewBox="0 0 30 20" xmlns="http://www.w3.org/2000/svg"><rect width="30" height="20" fill="#A51931"/><rect y="3.333" width="30" height="13.333" fill="#F4F5F8"/><rect y="6.667" width="30" height="6.667" fill="#2D2A4A"/></svg>',
   nl:'<svg viewBox="0 0 30 20" xmlns="http://www.w3.org/2000/svg"><rect width="30" height="20" fill="#FFFFFF"/><rect width="30" height="6.667" fill="#AE1C28"/><rect y="13.333" width="30" height="6.667" fill="#21468B"/></svg>',
   it:'<svg viewBox="0 0 30 20" xmlns="http://www.w3.org/2000/svg"><rect width="30" height="20" fill="#F1F2F1"/><rect width="10" height="20" fill="#009246"/><rect x="20" width="10" height="20" fill="#CE2B37"/></svg>',
-  ar:'<svg viewBox="0 0 30 20" xmlns="http://www.w3.org/2000/svg"><rect width="30" height="20" fill="#fff"/><rect x="7.5" width="22.5" height="6.667" fill="#00732F"/><rect x="7.5" y="13.333" width="22.5" height="6.667" fill="#000"/><rect width="7.5" height="20" fill="#FF0000"/></svg>'
+  ar:'<svg viewBox="0 0 30 20" xmlns="http://www.w3.org/2000/svg"><rect width="30" height="20" fill="#fff"/><rect x="7.5" width="22.5" height="6.667" fill="#00732F"/><rect x="7.5" y="13.333" width="22.5" height="6.667" fill="#000"/><rect width="7.5" height="20" fill="#FF0000"/></svg>',
+  el:'<svg viewBox="0 0 30 20" xmlns="http://www.w3.org/2000/svg"><rect width="30" height="20" fill="#0D5EAF"/><rect y="2.222" width="30" height="2.222" fill="#fff"/><rect y="6.667" width="30" height="2.222" fill="#fff"/><rect y="11.111" width="30" height="2.222" fill="#fff"/><rect y="15.556" width="30" height="2.222" fill="#fff"/><rect width="11.111" height="11.111" fill="#0D5EAF"/><rect x="4.444" width="2.222" height="11.111" fill="#fff"/><rect y="4.444" width="11.111" height="2.222" fill="#fff"/></svg>',
+  uk:'<svg viewBox="0 0 30 20" xmlns="http://www.w3.org/2000/svg"><rect width="30" height="20" fill="#FFD700"/><rect width="30" height="10" fill="#0057B7"/></svg>'
 };
 function langChip(l){
   return LANG_FLAGS[l] || ('<span class="lang-badge-ar">'+String(l).toUpperCase()+'</span>');

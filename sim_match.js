@@ -104,7 +104,17 @@ const MATCH_I18N = {
         boutRed:"Angolo rosso", boutBlue:"Angolo blu", youAre:"Tu: arbitro", format:"3 × 3 min", start:"Inizia l'incontro", steps:"passaggi",
         phase_prep:"Preparazione", phase_start:"Inizio incontro", phase_round1:"Ripresa 1", phase_round2:"Ripresa 2", phase_round3:"Ripresa 3", phase_decision:"Decisione e annuncio",
         completeTitle:"Incontro completato!", completeMsg:"Hai diretto un intero incontro dall'inizio alla fine in inglese. Complimenti!",
-        back:"← Scheda incontro", redo:"↺ Ripeti", progressLabel:"Avanzamento incontro" }
+        back:"← Scheda incontro", redo:"↺ Ripeti", progressLabel:"Avanzamento incontro" },
+  el: { navLabel:"Πλήρης αγώνας", title:"Προσομοίωση πλήρους αγώνα", tagline:"Διαιτήτευσε έναν αγώνα από την αρχή ως το τέλος στα αγγλικά.",
+        boutRed:"Κόκκινη γωνία", boutBlue:"Μπλε γωνία", youAre:"Εσύ: Διαιτητής", format:"3 × 3 λεπτά", start:"Ξεκίνα τον αγώνα", steps:"βήματα",
+        phase_prep:"Προετοιμασία", phase_start:"Έναρξη αγώνα", phase_round1:"Γύρος 1", phase_round2:"Γύρος 2", phase_round3:"Γύρος 3", phase_decision:"Απόφαση & Ανακοίνωση",
+        completeTitle:"Ολοκλήρωσες τον αγώνα!", completeMsg:"Διαιτήτευσες έναν ολόκληρο αγώνα από την αρχή ως το τέλος στα αγγλικά. Συγχαρητήρια!",
+        back:"← Κάρτα αγώνα", redo:"↺ Ξανά", progressLabel:"Πρόοδος αγώνα" },
+  uk: { navLabel:"Повний бій", title:"Симуляція повного бою", tagline:"Відсуди бій від початку до кінця англійською.",
+        boutRed:"Червоний кут", boutBlue:"Синій кут", youAre:"Ти: Рефері", format:"3 × 3 хвилини", start:"Почати бій", steps:"кроків",
+        phase_prep:"Підготовка", phase_start:"Початок бою", phase_round1:"Раунд 1", phase_round2:"Раунд 2", phase_round3:"Раунд 3", phase_decision:"Рішення та оголошення",
+        completeTitle:"Ти завершила бій!", completeMsg:"Ти відсудила цілий бій від початку до кінця англійською. Вітаємо!",
+        back:"← Картка бою", redo:"↺ Ще раз", progressLabel:"Хід бою" }
 };
 function mt(key) {
   const L = (typeof APP_LANG !== "undefined") ? APP_LANG : "tr";
@@ -115,7 +125,7 @@ function mt(key) {
 // ─── NAV etiketini NAV_I18N'e enjekte et (menü öğesi yerelleşsin) ───────────
 (function injectMatchNav() {
   if (typeof NAV_I18N === "undefined") return;
-  ["de", "ar", "fr", "ko", "th", "nl", "it"].forEach(L => {
+  ["de", "ar", "fr", "ko", "th", "nl", "it", "el", "uk"].forEach(L => {
     if (NAV_I18N[L] && MATCH_I18N[L]) NAV_I18N[L]["sim_match"] = MATCH_I18N[L].navLabel;
   });
 })();

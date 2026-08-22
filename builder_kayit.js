@@ -507,7 +507,7 @@ let builderCheckState = "idle"; // "idle" (bekliyor) | "error" (yanlış) | "suc
 let builderCorrectPrefix = 0;   // yanlışta baştan kaç kelime doğru (yeşil gösterilir)
 
 // Dil kısayolu (yeni ipucu metinleri için)
-function bT(tr, de, ar, fr, ko, th, nl, it) {
+function bT(tr, de, ar, fr, ko, th, nl, it, el, uk) {
   if (typeof APP_LANG === 'undefined') return tr;
   if (APP_LANG === 'de') return de;
   if (APP_LANG === 'ar') return (ar != null ? ar : tr);
@@ -516,6 +516,8 @@ function bT(tr, de, ar, fr, ko, th, nl, it) {
   if (APP_LANG === 'th') return (th != null ? th : tr);
   if (APP_LANG === 'nl') return (nl != null ? nl : tr);
   if (APP_LANG === 'it') return (it != null ? it : tr);
+  if (APP_LANG === 'el') return (el != null ? el : tr);
+  if (APP_LANG === 'uk') return (uk != null ? uk : tr);
   return tr;
 }
 function builderNorm(s) { return String(s).toLowerCase().replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim(); }
@@ -592,7 +594,9 @@ const BUILDER_GROUP_KO = { Jury:'심판위원단', Equipment:'장비', Referee:'
 const BUILDER_GROUP_TH = { Jury:'คณะกรรมการ', Equipment:'อุปกรณ์', Referee:'ผู้ตัดสิน', Judge:'กรรมการให้คะแนน', Timekeeper:'ผู้จับเวลา', Announcer:'ผู้ประกาศ' };
 const BUILDER_GROUP_NL = { Jury:'Jury', Equipment:'Uitrusting', Referee:'Scheidsrechter', Judge:'Jurylid', Timekeeper:'Tijdwaarnemer', Announcer:'Omroeper' };
 const BUILDER_GROUP_IT = { Jury:'Giuria', Equipment:'Attrezzatura', Referee:'Arbitro', Judge:'Giudice', Timekeeper:'Cronometrista', Announcer:'Annunciatore' };
-function builderGroupSub(g){ if(typeof APP_LANG!=='undefined'){ if(APP_LANG==='ar' && BUILDER_GROUP_AR[g]) return BUILDER_GROUP_AR[g]; if(APP_LANG==='fr' && BUILDER_GROUP_FR[g]) return BUILDER_GROUP_FR[g]; if(APP_LANG==='ko' && BUILDER_GROUP_KO[g]) return BUILDER_GROUP_KO[g]; if(APP_LANG==='th' && BUILDER_GROUP_TH[g]) return BUILDER_GROUP_TH[g]; if(APP_LANG==='nl' && BUILDER_GROUP_NL[g]) return BUILDER_GROUP_NL[g]; if(APP_LANG==='it' && BUILDER_GROUP_IT[g]) return BUILDER_GROUP_IT[g]; } return BUILDER_GROUP_TR[g]||''; }
+const BUILDER_GROUP_EL = { Jury:'Κριτική επιτροπή', Equipment:'Εξοπλισμός', Referee:'Διαιτητής', Judge:'Πλαϊνός κριτής', Timekeeper:'Χρονομέτρης', Announcer:'Εκφωνητής' };
+const BUILDER_GROUP_UK = { Jury:'Журі', Equipment:'Спорядження', Referee:'Рефері', Judge:'Боковий суддя', Timekeeper:'Хронометрист', Announcer:'Диктор' };
+function builderGroupSub(g){ if(typeof APP_LANG!=='undefined'){ if(APP_LANG==='ar' && BUILDER_GROUP_AR[g]) return BUILDER_GROUP_AR[g]; if(APP_LANG==='fr' && BUILDER_GROUP_FR[g]) return BUILDER_GROUP_FR[g]; if(APP_LANG==='ko' && BUILDER_GROUP_KO[g]) return BUILDER_GROUP_KO[g]; if(APP_LANG==='th' && BUILDER_GROUP_TH[g]) return BUILDER_GROUP_TH[g]; if(APP_LANG==='nl' && BUILDER_GROUP_NL[g]) return BUILDER_GROUP_NL[g]; if(APP_LANG==='it' && BUILDER_GROUP_IT[g]) return BUILDER_GROUP_IT[g]; if(APP_LANG==='el' && BUILDER_GROUP_EL[g]) return BUILDER_GROUP_EL[g]; if(APP_LANG==='uk' && BUILDER_GROUP_UK[g]) return BUILDER_GROUP_UK[g]; } return BUILDER_GROUP_TR[g]||''; }
 function builderTile(o) {
   const on = !o.disabled;
   return `
@@ -645,7 +649,7 @@ function renderBuilderMenu() {
     const completed = cat.scenes.filter(s => builderCompletedScenes[`${cat.id}_${s.id}`]).length;
     return builderTile({ onclick: `builderOpenCategory(${idx})`, disabled: !on, allDone: on && completed === total,
       label: cat.label, sub: (typeof builderLabelLoc==='function') ? builderLabelLoc(cat.id, cat.labelTr) : cat.labelTr,
-      badge: on ? `${completed}/${total}` : (typeof APP_LANG!=='undefined' && APP_LANG==='ar' ? 'قريباً' : (typeof APP_LANG!=='undefined' && APP_LANG==='de' ? 'Bald' : (typeof APP_LANG!=='undefined' && APP_LANG==='fr' ? 'Bientôt' : (typeof APP_LANG!=='undefined' && APP_LANG==='ko' ? '곧 제공' : (typeof APP_LANG!=='undefined' && APP_LANG==='th' ? 'เร็ว ๆ นี้' : (typeof APP_LANG!=='undefined' && APP_LANG==='nl' ? 'Binnenkort' : (typeof APP_LANG!=='undefined' && APP_LANG==='it' ? 'Presto' : 'Yakında'))))))) });
+      badge: on ? `${completed}/${total}` : (typeof APP_LANG!=='undefined' && APP_LANG==='ar' ? 'قريباً' : (typeof APP_LANG!=='undefined' && APP_LANG==='de' ? 'Bald' : (typeof APP_LANG!=='undefined' && APP_LANG==='fr' ? 'Bientôt' : (typeof APP_LANG!=='undefined' && APP_LANG==='ko' ? '곧 제공' : (typeof APP_LANG!=='undefined' && APP_LANG==='th' ? 'เร็ว ๆ นี้' : (typeof APP_LANG!=='undefined' && APP_LANG==='nl' ? 'Binnenkort' : (typeof APP_LANG!=='undefined' && APP_LANG==='it' ? 'Presto' : (typeof APP_LANG!=='undefined' && APP_LANG==='el' ? 'Σύντομα' : (typeof APP_LANG!=='undefined' && APP_LANG==='uk' ? 'Незабаром' : 'Yakında'))))))))) });
   }).join("");
   c.innerHTML = head + back + gOpen + tiles + `</div>`;
 }
@@ -800,18 +804,18 @@ function renderBuilderScene() {
         <!-- Uyarı Mesajı (Yanlışsa) — yeşil kısım doğru, ipucu ver -->
         ${isError ? `<div style="text-align:center; font-size:12px; font-weight:600; margin-bottom:16px; color:${builderCorrectPrefix > 0 ? '#3B6D11' : '#A32D2D'};">
           ${builderCorrectPrefix > 0
-            ? bT(`İlk ${builderCorrectPrefix} kelime doğru — kırmızıdan devam et 👍`, `Die ersten ${builderCorrectPrefix} Wörter stimmen — mach beim roten Teil weiter 👍`, `أول ${builderCorrectPrefix} كلمة صحيحة — تابِع من الجزء الأحمر 👍`, `Les ${builderCorrectPrefix} premiers mots sont corrects — continue à partir de la partie rouge 👍`, `처음 ${builderCorrectPrefix}개 단어가 맞았어요 — 빨간 부분부터 이어가세요 👍`, `${builderCorrectPrefix} คำแรกถูกต้อง — ทำต่อจากส่วนสีแดง 👍`, `De eerste ${builderCorrectPrefix} woorden zijn juist — ga verder vanaf het rode deel 👍`, `Le prime ${builderCorrectPrefix} parole sono corrette — continua dalla parte rossa 👍`)
-            : bT('Henüz doğru değil — “İpucu” ile ilk kelimeyi al.', 'Noch nicht richtig — hol dir mit „Tipp“ das erste Wort.', 'ليست صحيحة بعد — استخدم «تلميح» للحصول على أول كلمة.', 'Pas encore correct — utilise « Indice » pour obtenir le premier mot.', '아직 맞지 않아요 — “힌트”로 첫 단어를 받으세요.', 'ยังไม่ถูก — ใช้ "คำใบ้" เพื่อรับคำแรก', 'Nog niet juist — gebruik "Tip" om het eerste woord te krijgen.', 'Non ancora corretto — usa "Suggerimento" per ottenere la prima parola.')}
+            ? bT(`İlk ${builderCorrectPrefix} kelime doğru — kırmızıdan devam et 👍`, `Die ersten ${builderCorrectPrefix} Wörter stimmen — mach beim roten Teil weiter 👍`, `أول ${builderCorrectPrefix} كلمة صحيحة — تابِع من الجزء الأحمر 👍`, `Les ${builderCorrectPrefix} premiers mots sont corrects — continue à partir de la partie rouge 👍`, `처음 ${builderCorrectPrefix}개 단어가 맞았어요 — 빨간 부분부터 이어가세요 👍`, `${builderCorrectPrefix} คำแรกถูกต้อง — ทำต่อจากส่วนสีแดง 👍`, `De eerste ${builderCorrectPrefix} woorden zijn juist — ga verder vanaf het rode deel 👍`, `Le prime ${builderCorrectPrefix} parole sono corrette — continua dalla parte rossa 👍`, `Οι πρώτες ${builderCorrectPrefix} λέξεις είναι σωστές — συνέχισε από το κόκκινο μέρος 👍`, `Перші ${builderCorrectPrefix} слова правильні — продовжуй із червоної частини 👍`)
+            : bT('Henüz doğru değil — “İpucu” ile ilk kelimeyi al.', 'Noch nicht richtig — hol dir mit „Tipp“ das erste Wort.', 'ليست صحيحة بعد — استخدم «تلميح» للحصول على أول كلمة.', 'Pas encore correct — utilise « Indice » pour obtenir le premier mot.', '아직 맞지 않아요 — “힌트”로 첫 단어를 받으세요.', 'ยังไม่ถูก — ใช้ "คำใบ้" เพื่อรับคำแรก', 'Nog niet juist — gebruik "Tip" om het eerste woord te krijgen.', 'Non ancora corretto — usa "Suggerimento" per ottenere la prima parola.', 'Δεν είναι σωστό ακόμη — χρησιμοποίησε την «Υπόδειξη» για να πάρεις την πρώτη λέξη.', 'Ще не правильно — візьми перше слово за допомогою «Підказки».')}
         </div>` : ""}
 
         <!-- Butonlar -->
         <div style="text-align:center; display:flex; gap:8px; justify-content:center; flex-wrap:wrap;">
           ${!isSuccess ? `
-            <button onclick="builderHint()" title="${bT('İpucu','Tipp','تلميح','Indice','힌트','คำใบ้','Tip','Suggerimento')}" style="
+            <button onclick="builderHint()" title="${bT('İpucu','Tipp','تلميح','Indice','힌트','คำใบ้','Tip','Suggerimento','Υπόδειξη','Підказка')}" style="
               padding:12px 20px; font-size:14px; font-weight:600; display:inline-flex; align-items:center; gap:6px;
               background:var(--gold-050); color:var(--gold-strong); border:1px solid var(--gold);
               border-radius:24px; cursor:pointer;
-            ">${(typeof icon==='function')?icon('bulb',{size:'0.95em'}):''} ${bT('İpucu','Tipp','تلميح','Indice','힌트','คำใบ้','Tip','Suggerimento')}</button>
+            ">${(typeof icon==='function')?icon('bulb',{size:'0.95em'}):''} ${bT('İpucu','Tipp','تلميح','Indice','힌트','คำใบ้','Tip','Suggerimento','Υπόδειξη','Підказка')}</button>
             <button onclick="builderCheck()" ${builderSelectedWords.length === 0 ? "disabled" : ""} style="
               padding:12px 32px; font-size:14px; font-weight:600;
               background:${builderSelectedWords.length === 0 ? 'var(--border)' : '#185FA5'};
