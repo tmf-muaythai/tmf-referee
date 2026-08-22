@@ -256,7 +256,7 @@ body.dark .seg > button{color:#c8d0e8}
 .home-hero-hi{font-size:11px;font-weight:800;color:var(--brand);letter-spacing:.5px;margin-bottom:5px}
 .home-hero-title{font-size:19px;font-weight:800;line-height:1.2;margin-bottom:6px;color:var(--navy)}
 .home-hero-sub{font-size:12px;color:var(--text2);line-height:1.5}
-.home-hero-img{height:240px;width:auto;max-width:200px;object-fit:contain;object-position:bottom center;flex-shrink:0;align-self:flex-end;margin-bottom:0;display:block;filter:drop-shadow(0 8px 18px rgba(13,43,78,.22))}
+.home-hero-img{height:240px;width:auto;max-width:240px;object-fit:contain;object-position:bottom center;flex-shrink:0;align-self:flex-end;margin-bottom:0;display:block;filter:drop-shadow(0 8px 18px rgba(13,43,78,.22))}
 body.dark .home-hero{background:linear-gradient(135deg,var(--navy-2),var(--navy));border-color:rgba(255,255,255,.06)}
 body.dark .home-hero-hi{color:var(--gold)}
 body.dark .home-hero-title{color:#fff}
