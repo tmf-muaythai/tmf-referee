@@ -1541,7 +1541,7 @@ function applyStaticLang(){
   const qt = document.getElementById('qr-title'); if (qt) qt.textContent = t('qrTitle');
   const qd = document.getElementById('qr-desc'); if (qd) qd.textContent = t('qrDesc');
   const qc = document.getElementById('qr-close-btn'); if (qc) qc.textContent = t('qrCloseBtn');
-  const tl = document.getElementById('talimat-link'); if (tl) tl.innerHTML = ic('clipboard') + ' ' + t('talimat');
+  const tl = document.getElementById('talimat-link'); if (tl) { tl.innerHTML = ic('clipboard') + ' ' + t('talimat'); tl.href = (APP_LANG === 'tr') ? 'https://muaythai.gov.tr/wp-content/uploads/2022/01/IFMA-Kurallari-ve-Yonetmelikler2021.pdf' : 'https://muaythai.sport/wp-content/uploads/2026/05/IFMA-Rules-and-Regulations-v3.057_110526.pdf'; tl.target = '_blank'; tl.rel = 'noopener noreferrer'; }
   const pin = document.getElementById('pwa-install-btn'); if (pin) pin.innerHTML = ic('download') + ' ' + t('install');
   // footer sabit linkleri
   document.querySelectorAll('.footer-links a, .footer-links button').forEach(el=>{
